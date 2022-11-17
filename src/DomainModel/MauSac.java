@@ -6,37 +6,15 @@ package DomainModel;
  */
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
  * @author quanl
  */
-@Entity
-@Table(name = "MauSac")
 public class MauSac implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private String id;
-
-    @Column(name = "ma_mau")
     private String ma;
-
-    @Column(name = "ten_mau")
     private String ten;
-
-    @OneToMany(mappedBy = "mauSac", fetch = FetchType.LAZY)
     private List<MauSacDong> listMauSacDongs;
 
     public MauSac(String id, String ma, String ten) {
