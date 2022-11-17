@@ -5,56 +5,28 @@
 package DomainModel;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
  * @author ADMIN
  */
-@Entity
-@Table(name = "ChucVu")
-public class ChucVu implements Serializable {
 
-    @Id
-    @Column(name = "id")
+public class ChucVu {
+
+   
     private String id;
 
-    @Column(name = "ma_chuc_vu")
     private String ma;
 
-    @Column(name = "ten_chuc_vu")
     private String ten;
 
-    @OneToMany(mappedBy = "chucVu", fetch = FetchType.LAZY)
-    private List<NhanVien> listNhanVien;
+    public ChucVu() {
+    }
 
-    public ChucVu(String id, String ma, String ten, List<NhanVien> listNhanVien) {
+    public ChucVu(String id, String ma, String ten) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
-        this.listNhanVien = listNhanVien;
-    }
-
-    public List<NhanVien> getListNhanVien() {
-        return listNhanVien;
-    }
-
-    public void setListNhanVien(List<NhanVien> listNhanVien) {
-        this.listNhanVien = listNhanVien;
-    }
-
-    @Override
-    public String toString() {
-        return "ChucVu{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + '}';
-    }
-
-    public ChucVu() {
     }
 
     public String getId() {
@@ -80,5 +52,8 @@ public class ChucVu implements Serializable {
     public void setTen(String ten) {
         this.ten = ten;
     }
+ 
+
+ 
 
 }

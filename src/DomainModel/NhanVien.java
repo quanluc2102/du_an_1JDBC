@@ -5,21 +5,51 @@
 package DomainModel;
 
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author quanl
  */
-
+@Entity
+@Table(name = "NhanVien")
 public class NhanVien implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private String id;
+
+    @Column(name = "ma_nhan_vien")
     private String ma;
+
+    @Column(name = "ten_nhan_vien")
     private String ten;
+
+    @Column(name = "ngay_sinh")
     private String ngaySinh;
+
+    @Column(name = "sdt")
     private String sdt;
+
+    @Column(name = "dia_chi")
     private String diaChi;
+
+    @ManyToOne
+    @JoinColumn(name = "id_chuc_vu", nullable = false)
     private ChucVu chucVu;
+
+    @Column(name = "mat_khau")
     private String matKhau;
+
+    @Column(name = "email")
     private String email;
 
     public NhanVien() {

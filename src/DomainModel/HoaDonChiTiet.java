@@ -4,6 +4,13 @@
  */
 package DomainModel;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  *
  * @author quanl
@@ -11,23 +18,18 @@ package DomainModel;
 public class HoaDonChiTiet {
 
     private String id;
-    private HoaDon hoaDon;
-    private ChiTietDienThoai chiTietDienThoai;
-    private BaoHanh baoHanh;
-
-    public HoaDonChiTiet(String id, HoaDon hoaDon, ChiTietDienThoai chiTietDienThoai, BaoHanh baoHanh) {
-        this.id = id;
-        this.hoaDon = hoaDon;
-        this.chiTietDienThoai = chiTietDienThoai;
-        this.baoHanh = baoHanh;
-    }
+    private String IMEI;
+    private String idHoaDon;
+    private String idBaoHanh;
 
     public HoaDonChiTiet() {
     }
 
-    @Override
-    public String toString() {
-        return "HoaDonChiTiet{" + "id=" + id + ", hoaDon=" + hoaDon + ", chiTietDienThoai=" + chiTietDienThoai + ", baoHanh=" + baoHanh + '}';
+    public HoaDonChiTiet(String id, String IMEI, String idHoaDon, String idBaoHanh) {
+        this.id = id;
+        this.IMEI = IMEI;
+        this.idHoaDon = idHoaDon;
+        this.idBaoHanh = idBaoHanh;
     }
 
     public String getId() {
@@ -38,28 +40,30 @@ public class HoaDonChiTiet {
         this.id = id;
     }
 
-    public HoaDon getHoaDon() {
-        return hoaDon;
+    public String getIMEI() {
+        return IMEI;
     }
 
-    public void setHoaDon(HoaDon hoaDon) {
-        this.hoaDon = hoaDon;
+    public void setIMEI(String IMEI) {
+        this.IMEI = IMEI;
     }
 
-    public ChiTietDienThoai getChiTietDienThoai() {
-        return chiTietDienThoai;
+    public String getIdHoaDon() {
+        return idHoaDon;
     }
 
-    public void setChiTietDienThoai(ChiTietDienThoai chiTietDienThoai) {
-        this.chiTietDienThoai = chiTietDienThoai;
+    public void setIdHoaDon(String idHoaDon) {
+        this.idHoaDon = idHoaDon;
     }
 
-    public BaoHanh getBaoHanh() {
-        return baoHanh;
+    public String getIdBaoHanh() {
+        return idBaoHanh;
     }
 
-    public void setBaoHanh(BaoHanh baoHanh) {
-        this.baoHanh = baoHanh;
+    public void setIdBaoHanh(String idBaoHanh) {
+        this.idBaoHanh = idBaoHanh;
     }
+    
+
 
 }
