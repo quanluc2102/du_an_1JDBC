@@ -4,18 +4,21 @@ package DomainModel;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author quanl
  */
+public class MauSacDong implements Serializable {
 
-public class MauSacDong {
-  private String id;
-  private String idDong;
-  private String idMauSac;
+    private String id;
+    private Dong dong;
+    private MauSac mauSac;
+    private List<ChiTietDienThoai> listChiTietDienThoais;
 
-    public MauSacDong(String id, String idDong, String idMauSac) {
+    public MauSacDong(String id, Dong dong, MauSac mauSac) {
         this.id = id;
         this.idDong = idDong;
         this.idMauSac = idMauSac;

@@ -4,26 +4,22 @@
  */
 package DomainModel;
 
+import java.io.Serializable;
 
 
 /**
  *
  * @author quanl
  */
-public class NhanVien {
-
+public class NhanVien implements Serializable {
     private String id;
-
     private String ma;
-
     private String ten;
-
-    private String idChucVu;
-
     private String ngaySinh;
-
     private String sdt;
-
+    private String diaChi;
+    private ChucVu chucVu;
+    private String matKhau;
     private String email;
 
     private String matKhau;
