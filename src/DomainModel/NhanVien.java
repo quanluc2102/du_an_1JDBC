@@ -4,80 +4,45 @@
  */
 package DomainModel;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
 
 /**
  *
  * @author quanl
  */
-@Entity
-@Table(name = "NhanVien")
-public class NhanVien implements Serializable {
+public class NhanVien {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private String id;
 
-    @Column(name = "ma_nhan_vien")
     private String ma;
 
-    @Column(name = "ten_nhan_vien")
     private String ten;
 
-    @Column(name = "ngay_sinh")
+    private String idChucVu;
+
     private String ngaySinh;
 
-    @Column(name = "sdt")
     private String sdt;
 
-    @Column(name = "dia_chi")
-    private String diaChi;
-
-    @ManyToOne
-    @JoinColumn(name = "id_chuc_vu", nullable = false)
-    private ChucVu chucVu;
-
-    @Column(name = "mat_khau")
-    private String matKhau;
-
-    @Column(name = "email")
     private String email;
 
-    public NhanVien() {
-    }
+    private String matKhau;
+    
+    private String diaChi;
 
-    public NhanVien(String id, String ma, String ten, String ngaySinh, String sdt, String diaChi, ChucVu chucVu, String matKhau, String email) {
+    public NhanVien(String id, String ma, String ten, String idChucVu, String ngaySinh, String sdt, String email, String matKhau, String diaChi) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
+        this.idChucVu = idChucVu;
         this.ngaySinh = ngaySinh;
         this.sdt = sdt;
-        this.diaChi = diaChi;
-        this.chucVu = chucVu;
+        this.email = email;
         this.matKhau = matKhau;
-        this.email = email;
+        this.diaChi = diaChi;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "NhanVien{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", ngaySinh=" + ngaySinh + ", sdt=" + sdt + ", diaChi=" + diaChi + ", idchucVu=" + chucVu + ", matKhau=" + matKhau + '}';
+    public NhanVien() {
     }
 
     public String getId() {
@@ -104,7 +69,14 @@ public class NhanVien implements Serializable {
         this.ten = ten;
     }
 
-    
+    public String getIdChucVu() {
+        return idChucVu;
+    }
+
+    public void setIdChucVu(String idChucVu) {
+        this.idChucVu = idChucVu;
+    }
+
     public String getNgaySinh() {
         return ngaySinh;
     }
@@ -121,20 +93,12 @@ public class NhanVien implements Serializable {
         this.sdt = sdt;
     }
 
-    public String getDiaChi() {
-        return diaChi;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
-    }
-
-    public ChucVu getchucVu() {
-        return chucVu;
-    }
-
-    public void setchucVu(ChucVu chucVu) {
-        this.chucVu = chucVu;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getMatKhau() {
@@ -144,7 +108,13 @@ public class NhanVien implements Serializable {
     public void setMatKhau(String matKhau) {
         this.matKhau = matKhau;
     }
- public Object[] toDataRow(){
-     return new Object[]{id,ma,ten,ngaySinh,sdt,diaChi,chucVu.getTen(),matKhau};
- }
-} 
+
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
+
+}

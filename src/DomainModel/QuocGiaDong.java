@@ -4,68 +4,39 @@ package DomainModel;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
  * @author quanl
  */
-@Entity
-@Table(name = "QuocGiaDong")
-public class QuocGiaDong implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+public class QuocGiaDong{
+
     private String id;
-
-    @Column(name = "ten_hien_thi")
+ 
+    private String idDong;
+    
+    private String idQuocGia;
+   
     private String tenHienThi;
 
-    @Column(name = "gia_ban")
-    private BigDecimal giaBan;
+   
+    private Double giaBan;
 
-    @Column(name = "gia_Nhap")
-    private BigDecimal giaNhap;
+    
+    private Double giaNhap;
 
-    @ManyToOne
-    @JoinColumn(name = "id_dong", nullable = false)
-    private Dong dong;
-
-    @ManyToOne
-    @JoinColumn(name = "id_quoc_gia", nullable = false)
-    private QuocGia quocGia;
-
-    @OneToMany(mappedBy = "quocGiaDong", fetch = FetchType.LAZY)
-    private List<ChiTietDienThoai> listChiTietDienThoais;
-
+  
     public QuocGiaDong() {
     }
 
-    @Override
-    public String toString() {
-        return "QuocGiaDong{" + "id=" + id + ", tenHienThi=" + tenHienThi + ", giaBan=" + giaBan + ", giaNhap=" + giaNhap + ", dong=" + dong + ", quocGia=" + quocGia + '}';
-    }
-
-    public QuocGiaDong(String id, String tenHienThi, BigDecimal giaBan, BigDecimal giaNhap, Dong dong, QuocGia quocGia) {
+    public QuocGiaDong(String id, String idDong, String idQuocGia, String tenHienThi, Double giaBan, Double giaNhap) {
         this.id = id;
+        this.idDong = idDong;
+        this.idQuocGia = idQuocGia;
         this.tenHienThi = tenHienThi;
         this.giaBan = giaBan;
         this.giaNhap = giaNhap;
-        this.dong = dong;
-        this.quocGia = quocGia;
     }
 
     public String getId() {
@@ -76,6 +47,22 @@ public class QuocGiaDong implements Serializable {
         this.id = id;
     }
 
+    public String getIdDong() {
+        return idDong;
+    }
+
+    public void setIdDong(String idDong) {
+        this.idDong = idDong;
+    }
+
+    public String getIdQuocGia() {
+        return idQuocGia;
+    }
+
+    public void setIdQuocGia(String idQuocGia) {
+        this.idQuocGia = idQuocGia;
+    }
+
     public String getTenHienThi() {
         return tenHienThi;
     }
@@ -84,36 +71,20 @@ public class QuocGiaDong implements Serializable {
         this.tenHienThi = tenHienThi;
     }
 
-    public BigDecimal getGiaBan() {
+    public Double getGiaBan() {
         return giaBan;
     }
 
-    public void setGiaBan(BigDecimal giaBan) {
+    public void setGiaBan(Double giaBan) {
         this.giaBan = giaBan;
     }
 
-    public BigDecimal getGiaNhap() {
+    public Double getGiaNhap() {
         return giaNhap;
     }
 
-    public void setGiaNhap(BigDecimal giaNhap) {
+    public void setGiaNhap(Double giaNhap) {
         this.giaNhap = giaNhap;
-    }
-
-    public Dong getDong() {
-        return dong;
-    }
-
-    public void setDong(Dong dong) {
-        this.dong = dong;
-    }
-
-    public QuocGia getQuocGia() {
-        return quocGia;
-    }
-
-    public void setQuocGia(QuocGia quocGia) {
-        this.quocGia = quocGia;
     }
 
 }
