@@ -4,35 +4,15 @@
  */
 package DomainModel;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 /**
  *
  * @author quanl
  */
-@Entity
-@Table(name = "HoaDonChiTiet")
 public class HoaDonChiTiet {
 
-    @Id
-    @Column(name = "id", columnDefinition = "uniqueidentifier")
     private String id;
-
-    @ManyToOne
-    @JoinColumn(name = "id_hoa_don", nullable = false)
     private HoaDon hoaDon;
-
-    @ManyToOne
-    @JoinColumn(name = "IMEI", nullable = false)
     private ChiTietDienThoai chiTietDienThoai;
-
-    @ManyToOne
-    @JoinColumn(name = "id_bao_hanh", nullable = false)
     private BaoHanh baoHanh;
 
     public HoaDonChiTiet(String id, HoaDon hoaDon, ChiTietDienThoai chiTietDienThoai, BaoHanh baoHanh) {
@@ -42,12 +22,12 @@ public class HoaDonChiTiet {
         this.baoHanh = baoHanh;
     }
 
+    public HoaDonChiTiet() {
+    }
+
     @Override
     public String toString() {
         return "HoaDonChiTiet{" + "id=" + id + ", hoaDon=" + hoaDon + ", chiTietDienThoai=" + chiTietDienThoai + ", baoHanh=" + baoHanh + '}';
-    }
-
-    public HoaDonChiTiet() {
     }
 
     public String getId() {
