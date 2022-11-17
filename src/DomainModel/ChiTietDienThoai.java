@@ -4,58 +4,28 @@
  */
 package DomainModel;
 
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import static org.hibernate.criterion.Projections.id;
-
 /**
  *
  * @author quanl
  */
-@Entity
-@Table(name = "ChiTietDienThoai")
 public class ChiTietDienThoai {
 
-    @Id
-    @Column(name = "IMEI")
     private String IMEI;
 
-    @Column(name = "moi")
+    private String idMauDong;
+    private String idQuocGiaDong;
+    private Boolean trangThai;
     private int moi;
-    @Column(name = "mo_ta")
-    private String mo_ta;
+    private String moTa;
 
-    @ManyToOne
-    @JoinColumn(name = "id_mau_dong", nullable = false)
-    private MauSacDong mauSacDong;
-
-    @ManyToOne
-    @JoinColumn(name = "id_quoc_gia_dong", nullable = false)
-    private QuocGiaDong quocGiaDong;
-    
-    @OneToMany(mappedBy = "chiTietDienThoai", fetch = FetchType.LAZY)
-    private List<HoaDonChiTiet> listHoaDonChiTiets;
-
-    public ChiTietDienThoai(String IMEI, int moi, String mo_ta, MauSacDong mauSacDong, QuocGiaDong quocGiaDong) {
+    public ChiTietDienThoai(String IMEI, String idMauDong, String idQuocGiaDong, Boolean trangThai, int moi, String moTa) {
         this.IMEI = IMEI;
+        this.idMauDong = idMauDong;
+        this.idQuocGiaDong = idQuocGiaDong;
+        this.trangThai = trangThai;
         this.moi = moi;
-        this.mo_ta = mo_ta;
-        this.mauSacDong = mauSacDong;
-        this.quocGiaDong = quocGiaDong;
+        this.moTa = moTa;
     }
-
-    @Override
-    public String toString() {
-        return "ChiTietDienThoai{" + "IMEI=" + IMEI + ", moi=" + moi + ", mo_ta=" + mo_ta + ", mauSacDong=" + mauSacDong + ", quocGiaDong=" + quocGiaDong + '}';
-    }
-    
 
     public ChiTietDienThoai() {
     }
@@ -68,6 +38,30 @@ public class ChiTietDienThoai {
         this.IMEI = IMEI;
     }
 
+    public String getIdMauDong() {
+        return idMauDong;
+    }
+
+    public void setIdMauDong(String idMauDong) {
+        this.idMauDong = idMauDong;
+    }
+
+    public String getIdQuocGiaDong() {
+        return idQuocGiaDong;
+    }
+
+    public void setIdQuocGiaDong(String idQuocGiaDong) {
+        this.idQuocGiaDong = idQuocGiaDong;
+    }
+
+    public Boolean getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(Boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+
     public int getMoi() {
         return moi;
     }
@@ -76,29 +70,12 @@ public class ChiTietDienThoai {
         this.moi = moi;
     }
 
-    public String getMo_ta() {
-        return mo_ta;
+    public String getMoTa() {
+        return moTa;
     }
 
-    public void setMo_ta(String mo_ta) {
-        this.mo_ta = mo_ta;
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
     }
 
-    public MauSacDong getMauSacDong() {
-        return mauSacDong;
-    }
-
-    public void setMauSacDong(MauSacDong mauSacDong) {
-        this.mauSacDong = mauSacDong;
-    }
-
-    public QuocGiaDong getQuocGiaDong() {
-        return quocGiaDong;
-    }
-
-    public void setQuocGiaDong(QuocGiaDong quocGiaDong) {
-        this.quocGiaDong = quocGiaDong;
-    }
-
-    
 }
