@@ -3,8 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/FPOLY_K17/FPOLY_K17/DUANMAU/DuAn1JDBC/src/DomainModel/BaoHanh.java</file>
-            <file>file:/E:/FPOLY_K17/FPOLY_K17/DUANMAU/DuAn1JDBC/src/DomainModel/ChiTietDienThoai.java</file>
+            <file>file:/F:/DuAn1JDBC/src/DomainModel/MauSacDong.java</file>
+            <file>file:/F:/DuAn1JDBC/src/DomainModel/KhachHang.java</file>
+            <file>file:/F:/DuAn1JDBC/src/View/KhachHangView.java</file>
+            <file>file:/F:/DuAn1JDBC/src/DomainModel/NhanVien.java</file>
+            <file>file:/F:/DuAn1JDBC/src/Repository/KhachHangRepository.java</file>
+            <file>file:/F:/DuAn1JDBC/src/ViewModel/KhachHangViewModel.java</file>
+            <file>file:/F:/DuAn1JDBC/src/Service/KhachHangService.java</file>
+            <file>file:/F:/DuAn1JDBC/src/Service/ServiceImpl/KhachHangServiceImpl.java</file>
         </group>
     </open-files>
 </project-private>

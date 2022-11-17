@@ -4,10 +4,24 @@
  */
 package Service;
 
+import DomainModel.KhachHang;
+import ViewModel.KhachHangViewModel;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author quanl
  */
 public interface KhachHangService {
-    
+
+    List<KhachHangViewModel> getAllKhachHang();
+
+    void showDataTable(DefaultTableModel dtm, List<KhachHangViewModel> list);
+
+    String addKhachHang(KhachHang kh);
+
+    String editKhachHang(KhachHang kh, String id);
+
+    String deleteKhachHang(String id);
 }

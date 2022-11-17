@@ -5,8 +5,9 @@
 package View;
 
 import DomainModel.KhachHang;
-//import Service.KhachHangService;
-//import Service.impl.KhachHangServiceImpl;
+import Service.KhachHangService;
+import Service.ServiceImpl.KhachHangServiceImpl;
+import ViewModel.KhachHangViewModel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -29,15 +30,16 @@ public class KhachHangView extends javax.swing.JFrame {
      */
     private DefaultTableModel dtm = new DefaultTableModel();
     private List<KhachHang> listKhachHang = new ArrayList<>();
-//    private KhachHangService service = new KhachHangServiceImpl();
+    private List<KhachHangViewModel> listKhachHangView = new ArrayList<>();
+    private KhachHangService service = new KhachHangServiceImpl();
 
     public KhachHangView() {
         initComponents();
         tbQuanLyKhachHang.setModel(dtm);
-        String header[] = {"ID", "Ten", "Ngay sinh", "So dien thoai", "Dia chi", "Email"};
+        String header[] = {"Ten", "Ngay sinh", "So dien thoai", "Dia chi", "Email"};
         dtm.setColumnIdentifiers(header);
-//        listKhachHang = service.getAllKhachHang();
-//        service.showDataTable(dtm, listKhachHang);
+        listKhachHangView = service.getAllKhachHang();
+        service.showDataTable(dtm, listKhachHangView);
     }
 
     /**
@@ -228,17 +230,17 @@ public class KhachHangView extends javax.swing.JFrame {
         java.sql.Date ngaySinh = java.sql.Date.valueOf(localDate);
         kh.setNgaySinh(ngaySinh);
         kh.setSdt(txtSDT.getText());
-//        JOptionPane.showMessageDialog(rootPane, service.add(kh));
-//        listKhachHang = service.getAllKhachHang();
-//        service.showDataTable(dtm, listKhachHang);
+        JOptionPane.showMessageDialog(rootPane, service.addKhachHang(kh));
+        listKhachHangView = service.getAllKhachHang();
+        service.showDataTable(dtm, listKhachHangView);
     }//GEN-LAST:event_btAddActionPerformed
 
     private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
         // TODO add your handling code here:
         String ID = id.getText();
-//        JOptionPane.showMessageDialog(rootPane, service.delete(ID));
-//        listKhachHang = service.getAllKhachHang();
-//        service.showDataTable(dtm, listKhachHang);
+        JOptionPane.showMessageDialog(rootPane, service.deleteKhachHang(ID));
+        listKhachHangView = service.getAllKhachHang();
+        service.showDataTable(dtm, listKhachHangView);
     }//GEN-LAST:event_btDeleteActionPerformed
 
 
@@ -253,9 +255,9 @@ public class KhachHangView extends javax.swing.JFrame {
         java.sql.Date date = java.sql.Date.valueOf(ngaySinhs);
         kh.setNgaySinh((date));
         kh.setSdt(txtSDT.getText());
-//        JOptionPane.showMessageDialog(rootPane, service.edit(kh, ID));
-//        listKhachHang = service.getAllKhachHang();
-//        service.showDataTable(dtm, listKhachHang);
+        JOptionPane.showMessageDialog(rootPane, service.editKhachHang(kh, ID));
+        listKhachHangView = service.getAllKhachHang();
+        service.showDataTable(dtm, listKhachHangView);
     }//GEN-LAST:event_btEditActionPerformed
 
     private void tbQuanLyKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQuanLyKhachHangMouseClicked
@@ -268,7 +270,7 @@ public class KhachHangView extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public void fillData(int index) {
-        KhachHang kh = listKhachHang.get(index);
+        KhachHangViewModel kh = listKhachHangView.get(index);
         id.setText(kh.getId());
         txtDiaChi.setText(kh.getDiaChi());
         txtEmail.setText(kh.getEmail());
