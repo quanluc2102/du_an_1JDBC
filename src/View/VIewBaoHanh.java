@@ -4,6 +4,14 @@
  */
 package View;
 
+import DomainModel.BaoHanh;
+import Service.ServiceImpl.BaoHanhServiceImpl;
+import ViewModel.BaoHanhViewModel;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author quanl
@@ -13,8 +21,32 @@ public class VIewBaoHanh extends javax.swing.JFrame {
     /**
      * Creates new form VIewBaoHanh
      */
+    private DefaultTableModel dtm;
+    private List<BaoHanh> listBaoHanh;
+    private BaoHanhServiceImpl baoHanhImpl = new BaoHanhServiceImpl();
+    private List<BaoHanhViewModel> listBaoHanhView;
+    
     public VIewBaoHanh() {
         initComponents();
+        listBaoHanh = new ArrayList<>();
+        listBaoHanhView = new ArrayList<>();
+        jTable1.setModel(dtm = new DefaultTableModel());
+        String[] heards = {"ID", "Thời Gian"};
+        dtm.setColumnIdentifiers(heards);
+        listBaoHanhView = baoHanhImpl.getAll();
+        baoHanhImpl.showDaTa(listBaoHanhView, dtm);
+    }
+    
+    public void fillDaTa(int index) {
+        BaoHanhViewModel baoHanh = listBaoHanhView.get(index);
+        txtID.setText(baoHanh.getId());
+        txtThoiGian.setText(baoHanh.getThoiGian());
+        if (baoHanh.isDonVi() == true) {
+            radioNgay.setSelected(true);
+        } else {
+            radioThang.setSelected(true);
+        }
+        
     }
 
     /**
@@ -26,21 +58,194 @@ public class VIewBaoHanh extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtThoiGian = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btnThem = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
+        radioThang = new javax.swing.JRadioButton();
+        radioNgay = new javax.swing.JRadioButton();
+        btnClear = new javax.swing.JButton();
+        txtID = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("ID");
+
+        jLabel2.setText("Thời Gian");
+
+        jLabel3.setText("Đơn Vị");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
+
+        btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
+
+        btnXoa.setText("Xóa ");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radioThang);
+        radioThang.setText("Tháng ");
+
+        buttonGroup1.add(radioNgay);
+        radioNgay.setText("Ngày");
+
+        btnClear.setText("Clear");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(radioThang, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(107, 107, 107)
+                                .addComponent(radioNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnThem)
+                                        .addGap(75, 75, 75)
+                                        .addComponent(btnSua)
+                                        .addGap(57, 57, 57)
+                                        .addComponent(btnXoa)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                                        .addComponent(btnClear))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(radioThang)
+                    .addComponent(radioNgay))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThem)
+                    .addComponent(btnSua)
+                    .addComponent(btnXoa)
+                    .addComponent(btnClear))
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        fillDaTa(row);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        String id = txtID.getText();
+        JOptionPane.showMessageDialog(this, baoHanhImpl.delete(id));
+        listBaoHanhView = baoHanhImpl.getAll();
+        baoHanhImpl.showDaTa(listBaoHanhView, dtm);
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        String id = txtID.getText();
+        String thoiGian = txtThoiGian.getText();
+        boolean donVi = radioThang.isSelected();
+        String isDonVi = "";
+        if (donVi == true) {
+            isDonVi = "Ngày";
+        } else {
+            isDonVi = "Tháng";
+        }
+        BaoHanh baoHanh = new BaoHanh(id, thoiGian, donVi);
+        JOptionPane.showMessageDialog(this, baoHanhImpl.add(baoHanh));
+        listBaoHanh.add(baoHanh);
+        listBaoHanhView = baoHanhImpl.getAll();
+        baoHanhImpl.showDaTa(listBaoHanhView, dtm);
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+
+        BaoHanh baoHanh = new BaoHanh();
+        String id = txtID.getText();
+        
+        baoHanh.setThoiGian(txtThoiGian.getText());
+        String donVi = "";
+        if (radioThang.isSelected() == true) {
+            baoHanh.setDonVi(false);
+        } else {
+            baoHanh.setDonVi(true);
+        }
+        
+        JOptionPane.showMessageDialog(this, baoHanhImpl.update(baoHanh, id));
+        listBaoHanhView = baoHanhImpl.getAll();
+        baoHanhImpl.showDaTa(listBaoHanhView, dtm);
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +283,19 @@ public class VIewBaoHanh extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoa;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JRadioButton radioNgay;
+    private javax.swing.JRadioButton radioThang;
+    private javax.swing.JLabel txtID;
+    private javax.swing.JTextField txtThoiGian;
     // End of variables declaration//GEN-END:variables
 }
