@@ -2,32 +2,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DomainModel;
+package ViewModel;
+
+import Repository.BanHangReponsitory;
 
 /**
  *
- * @author quanl
+ * @author ADMIN
  */
-public class ChiTietDienThoai {
-
+public class ChiTietDienThoaiViewModel {
     private String IMEI;
-
     private String idMauDong;
     private String idQuocGiaDong;
     private Boolean trangThai;
     private int moi;
     private String moTa;
-    
-    public ChiTietDienThoai(String IMEI, String idMauDong, String idQuocGiaDong, Boolean trangThai, int moi, String moTa) {
+    private BanHangReponsitory bhr=new BanHangReponsitory();
+
+    public ChiTietDienThoaiViewModel() {
+    }
+
+    public ChiTietDienThoaiViewModel(String IMEI, String idMauDong, String idQuocGiaDong, Boolean trangThai, int moi, String moTa) {
         this.IMEI = IMEI;
         this.idMauDong = idMauDong;
         this.idQuocGiaDong = idQuocGiaDong;
         this.trangThai = trangThai;
         this.moi = moi;
         this.moTa = moTa;
-    }
-
-    public ChiTietDienThoai() {
     }
 
     public String getIMEI() {
@@ -77,5 +78,27 @@ public class ChiTietDienThoai {
     public void setMoTa(String moTa) {
         this.moTa = moTa;
     }
-    
+
+    public BanHangReponsitory getBhr() {
+        return bhr;
+    }
+
+    public void setBhr(BanHangReponsitory bhr) {
+        this.bhr = bhr;
+    }
+    public String layTenSP(){
+        return bhr.layTenSP(idMauDong);
+    }
+    public String layTenDong(){
+        return bhr.layTenDong(idMauDong);
+    }
+    public int layGia(){
+        return bhr.layGia(idQuocGiaDong);
+    }
+    public String layTenMauSac(){
+        return bhr.layTenMauSac(idMauDong);
+    }
+    public Object[] toDataRowBanHangView(){
+        return new Object[]{IMEI,layTenSP(),layTenDong(),layTenMauSac(),layGia()};
+    }
 }

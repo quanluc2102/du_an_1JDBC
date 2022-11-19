@@ -4,6 +4,10 @@
  */
 package View;
 
+import Service.ServiceImpl.BanHangServiceimpl;
+import ViewModel.ChiTietDienThoaiViewModel;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +21,8 @@ private DefaultTableModel dtmDonHang=new DefaultTableModel();
 private DefaultComboBoxModel dcbmHang=new DefaultComboBoxModel();
 private DefaultComboBoxModel dcbmKhachHang=new DefaultComboBoxModel();
 private DefaultComboBoxModel dcbmMaGG=new DefaultComboBoxModel();
+private List<ChiTietDienThoaiViewModel> listDienThoai=new ArrayList<>();
+private BanHangServiceimpl bhs=new BanHangServiceimpl();
     /**
      * Creates new form BanHangView
      */
@@ -27,10 +33,12 @@ private DefaultComboBoxModel dcbmMaGG=new DefaultComboBoxModel();
         cbbKhachHangBanHang.setModel(dcbmKhachHang);
         cbbHangBanHang.setModel(dcbmHang);
         cbbMaGGBanHang.setModel(dcbmMaGG);
-        String[] header1={"Tên SP","Giá","Số lượng"};
+        String[] header1={"IMEI","Tên SP","Tên Dòng","Màu Sắc","Giá"};
         dtmSP.setColumnIdentifiers(header1);
-        String[] header2={"Tên SP","Giá","Mã bảo hành"};
+        String[] header2={"IMEI","Tên SP","Tên Dòng","Màu Sắc","Giá"};
         dtmDonHang.setColumnIdentifiers(header2);
+        bhs.getAll(listDienThoai);
+        bhs.showData(dtmSP, listDienThoai);
     }
 
     /**
