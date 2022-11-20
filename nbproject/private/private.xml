@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/haha/Desktop/ds/src/Ultilities/SQLServerConnection.java</file>
+            <file>file:/C:/Users/haha/Desktop/ds/src/Service/ServiceImpl/SanPhamServicesImpl.java</file>
+            <file>file:/C:/Users/haha/Desktop/ds/src/ViewModel/SanPhamViewModel.java</file>
             <file>file:/C:/Users/haha/Desktop/ds/src/Application/NewMain.java</file>
-            <file>file:/C:/Users/haha/Desktop/ds/src/View/ViewDienThoai.java</file>
-            <file>file:/C:/Users/haha/Desktop/ds/src/View/VIewBaoHanh.java</file>
-            <file>file:/C:/Users/haha/Desktop/ds/src/View/BanHangView.java</file>
-            <file>file:/C:/Users/haha/Desktop/ds/src/View/KhachHangView.java</file>
-            <file>file:/C:/Users/haha/Desktop/ds/src/View/ViewChucVu.java</file>
+            <file>file:/C:/Users/haha/Desktop/ds/src/Service/SanPhamServices.java</file>
+            <file>file:/C:/Users/haha/Desktop/ds/src/View/QuanLySanPhamView.java</file>
+            <file>file:/C:/Users/haha/Desktop/ds/src/Repository/SanPhamRespository.java</file>
         </group>
     </open-files>
 </project-private>
