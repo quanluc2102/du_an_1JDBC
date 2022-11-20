@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/DuAn1JDBC/src/DomainModel/MauSacDong.java</file>
-            <file>file:/F:/DuAn1JDBC/src/DomainModel/KhachHang.java</file>
-            <file>file:/F:/DuAn1JDBC/src/View/KhachHangView.java</file>
-            <file>file:/F:/DuAn1JDBC/src/DomainModel/NhanVien.java</file>
-            <file>file:/F:/DuAn1JDBC/src/Repository/KhachHangRepository.java</file>
-            <file>file:/F:/DuAn1JDBC/src/ViewModel/KhachHangViewModel.java</file>
-            <file>file:/F:/DuAn1JDBC/src/Service/KhachHangService.java</file>
-            <file>file:/F:/DuAn1JDBC/src/Service/ServiceImpl/KhachHangServiceImpl.java</file>
+            <file>file:/C:/Users/haha/Desktop/ds/src/Ultilities/SQLServerConnection.java</file>
+            <file>file:/C:/Users/haha/Desktop/ds/src/Application/NewMain.java</file>
+            <file>file:/C:/Users/haha/Desktop/ds/src/View/ViewDienThoai.java</file>
+            <file>file:/C:/Users/haha/Desktop/ds/src/View/VIewBaoHanh.java</file>
+            <file>file:/C:/Users/haha/Desktop/ds/src/View/BanHangView.java</file>
+            <file>file:/C:/Users/haha/Desktop/ds/src/View/KhachHangView.java</file>
+            <file>file:/C:/Users/haha/Desktop/ds/src/View/ViewChucVu.java</file>
         </group>
     </open-files>
 </project-private>
