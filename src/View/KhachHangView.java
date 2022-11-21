@@ -77,7 +77,6 @@ public class KhachHangView extends javax.swing.JFrame {
         txtValidate4 = new javax.swing.JLabel();
         txtValidate3 = new javax.swing.JLabel();
         txtValidate5 = new javax.swing.JLabel();
-        btSearch = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
 
@@ -144,14 +143,19 @@ public class KhachHangView extends javax.swing.JFrame {
 
         txtValidate5.setText(" ");
 
-        btSearch.setText("Search");
-        btSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSearchActionPerformed(evt);
+        jLabel8.setText("Tim theo ten");
+
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSearchKeyTyped(evt);
             }
         });
-
-        jLabel8.setText("Tim theo ten");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,13 +179,9 @@ public class KhachHangView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtValidate5, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -226,8 +226,7 @@ public class KhachHangView extends javax.swing.JFrame {
                                 .addGap(19, 19, 19)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btSearch)
-                        .addGap(18, 18, 18)
+                        .addGap(90, 90, 90)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -274,9 +273,7 @@ public class KhachHangView extends javax.swing.JFrame {
                     .addComponent(txtValidate5)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btSearch)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btAdd)
@@ -355,6 +352,7 @@ public class KhachHangView extends javax.swing.JFrame {
             kh.setNgaySinh(ngaySinh);
             txtNgaySinh.setBackground(Color.GREEN);
             conf4 = true;
+
         }
         String vadidateSDT = txtSDT.getText();
         if (txtSDT.getText().isEmpty()) {
@@ -412,9 +410,33 @@ public class KhachHangView extends javax.swing.JFrame {
         fillData(row);
     }//GEN-LAST:event_tbQuanLyKhachHangMouseClicked
 
-    private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
+    private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
         // TODO add your handling code here:
-        String name = txtSearch.getText();
+//        String name = txtSearch.getText();
+//
+//        listSearch = service.searchKhachHang(name, listKhachHangView);
+//        for (KhachHangViewModel khachHangViewModel : listSearch) {
+//            System.out.println(khachHangViewModel.toString());
+//
+//        }
+//        service.showDataTable(dtm, listSearch);
+    }//GEN-LAST:event_txtSearchKeyTyped
+
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
+        // TODO add your handling code here:
+//        String name = txtSearch.getText();
+//
+//        listSearch = service.searchKhachHang(name, listKhachHangView);
+//        for (KhachHangViewModel khachHangViewModel : listSearch) {
+//            System.out.println(khachHangViewModel.toString());
+//
+//        }
+//        service.showDataTable(dtm, listSearch);
+    }//GEN-LAST:event_txtSearchKeyPressed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // TODO add your handling code here:
+         String name = txtSearch.getText();
 
         listSearch = service.searchKhachHang(name, listKhachHangView);
         for (KhachHangViewModel khachHangViewModel : listSearch) {
@@ -422,7 +444,7 @@ public class KhachHangView extends javax.swing.JFrame {
 
         }
         service.showDataTable(dtm, listSearch);
-    }//GEN-LAST:event_btSearchActionPerformed
+    }//GEN-LAST:event_txtSearchKeyReleased
 
     /**
      * @param args the command line arguments
@@ -479,7 +501,6 @@ public class KhachHangView extends javax.swing.JFrame {
     private javax.swing.JButton btAdd;
     private javax.swing.JButton btDelete;
     private javax.swing.JButton btEdit;
-    private javax.swing.JButton btSearch;
     private javax.swing.ButtonGroup btgGender;
     private javax.swing.JLabel id;
     private javax.swing.JLabel jLabel1;
