@@ -282,18 +282,92 @@ public class BanHangReponsitory {
                 + "  join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_Dong=QuocGiaDong.id\n"
                 + "  join HoaDon on HoaDon.id=HoaDonChiTiet.id_hoa_don\n"
                 + "  where ma_hoa_don = ?";
-        BigDecimal a = null ;
+        BigDecimal a = null;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, maHD);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                a=rs.getBigDecimal(1);
+                a = rs.getBigDecimal(1);
             }
             return a;
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return null;
-        
+
+    }
+
+    public String layIDKH(String tenKH) {
+        String query = "SELECT [id]\n"
+                + "  FROM [dbo].[KhachHang]\n"
+                + "  where ten_khach_hang = ?";
+        String a = "";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, tenKH);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getString("id");
+            }
+            return a;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public String layIDNV(String maNV) {
+        String query = "SELECT [id]\n"
+                + "  FROM [dbo].[NhanVien]\n"
+                + "  where ma_nhan_vien = ?";
+        String a = "";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, maNV);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getString("id");
+            }
+            return a;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public String layIDKM(String maKM) {
+        String query = "SELECT [id]\n"
+                + "  FROM [dbo].[KhuyenMai]\n"
+                + "  where ma_khuyen_mai = ?";
+        String a = "";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, maKM);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getString("id");
+            }
+            return a;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public boolean thanhToan(String tenKH, String maNV, String maKM, String maHD) {
+        String query = "UPDATE [dbo].[HoaDon]\n"
+                + "   SET [id_nhan_vien] = ?\n"
+                + "      ,[id_khach_hang] = ?\n"
+                + "      ,[id_khuyen_mai] = ?\n"
+                + "      ,[trang_thai] = 1\n"
+                + " WHERE ma_hoa_don = ?";
+        int check = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, layIDNV(maNV));
+            ps.setObject(2, layIDKH(tenKH));
+            ps.setObject(3, layIDKM(maKM));
+            ps.setObject(4, maHD);
+            check = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
     }
 }

@@ -101,4 +101,14 @@ public class BanHangServiceimpl implements BanHangService {
     public BigDecimal layGiaHD(String maHD) {
         return bhr.layGiaTien(maHD);
     }
+
+    @Override
+    public String thanhToan(String tenKH, String maNV, String maKM, String maHD) {
+        boolean update=bhr.thanhToan(tenKH, maNV, maKM, maHD);
+        if(update==true){
+            return "Thanh toán thành công";
+        }else{
+            return "Thanh toán thất bại";
+        }
+    }
 }
