@@ -87,18 +87,12 @@ public class ChiTietDienThoaiViewModel {
         this.bhr = bhr;
     }
     public String layTenSP(){
-        return bhr.layTenSP(idMauDong);
-    }
-    public String layTenDong(){
-        return bhr.layTenDong(idMauDong);
+        return bhr.layTenSP(IMEI);
     }
     public int layGia(){
         return bhr.layGia(idQuocGiaDong);
     }
-    public String layTenMauSac(){
-        return bhr.layTenMauSac(idMauDong);
-    }
     public Object[] toDataRowBanHangView(){
-        return new Object[]{IMEI,layTenSP(),layTenDong(),layTenMauSac(),layGia()};
+        return new Object[]{IMEI,layTenSP(),layGia()};
     }
 }
