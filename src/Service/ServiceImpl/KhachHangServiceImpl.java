@@ -8,6 +8,7 @@ import DomainModel.KhachHang;
 import Repository.KhachHangRepository;
 import Service.KhachHangService;
 import ViewModel.KhachHangViewModel;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -57,6 +58,17 @@ public class KhachHangServiceImpl implements KhachHangService {
         } else {
             return "Xoa khach hang that bai";
         }
+    }
+
+    @Override
+    public List<KhachHangViewModel> searchKhachHang(String tenKhachHang, List<KhachHangViewModel> list) {
+        List<KhachHangViewModel> listSearch = new ArrayList<>();
+        for (KhachHangViewModel khachHangViewModel : list) {
+            if (khachHangViewModel.getTen().contains(tenKhachHang)) {
+                listSearch.add(khachHangViewModel);
+            }
+        }
+        return listSearch;
     }
 
 }

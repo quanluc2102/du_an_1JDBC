@@ -42,6 +42,30 @@ public class KhachHangRepository {
         return null;
     }
 
+    public List<KhachHangViewModel> searchKhachHang(String id) {
+        String query = "SELECT\n"
+                + "      id,[ten_khach_hang]\n"
+                + "      ,[ngay_sinh]\n"
+                + "      ,[sdt]\n"
+                + "      ,[email]\n"
+                + "      ,[dia_chi]\n"
+                + "  FROM [dbo].[KhachHang]"
+                + "where ten_khach_hang like ?";
+        List<KhachHangViewModel> list = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            ps.setObject(1, id);
+
+            while (rs.next()) {
+                KhachHangViewModel kh = new KhachHangViewModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                list.add(kh);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
     public Boolean addKhachHang(KhachHang kh) {
         String query = "INSERT INTO [dbo].[KhachHang]\n"
                 + "           ([ten_khach_hang]\n"

@@ -82,6 +82,12 @@ public class KhachHangViewModel {
         this.diaChi = diaChi;
     }
 
+    @Override
+    public String toString() {
+        return "KhachHangViewModel{" + "id=" + id + ", ten=" + ten + ", ngaySinh=" + ngaySinh + ", sdt=" + sdt + ", email=" + email + ", diaChi=" + diaChi + '}';
+    }
+
+    
     
     public Object[] toDataRow() {
         return new Object[]{ten, ngaySinh, sdt, diaChi, email};
