@@ -29,5 +29,9 @@ public interface BanHangService {
     String deleteHDCT(String imei,String maHD);
     String addHD();
     BigDecimal layGiaHD(String maHD);
+    BigDecimal layGiaGiamGiaPhanTram(String maHD);
+    BigDecimal layGiaGiamGiaK(String maKM);
+    BigDecimal layGiaThanhTien(BigDecimal tongTien,BigDecimal giamGia);
     String thanhToan(String tenKH, String maNV, String maKM, String maHD);
+    boolean layDonVi(String maKM);
 }

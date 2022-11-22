@@ -111,4 +111,24 @@ public class BanHangServiceimpl implements BanHangService {
             return "Thanh toán thất bại";
         }
     }
+
+    @Override
+    public BigDecimal layGiaGiamGiaPhanTram(String maHD) {
+        return bhr.layGiaGiamGiaPhantram(maHD);
+    }
+
+    @Override
+    public BigDecimal layGiaGiamGiaK(String maKM) {
+        return bhr.layGiaGiamGiaK(maKM);
+    }
+
+    @Override
+    public boolean layDonVi(String maKM) {
+        return bhr.layDonVi(maKM);
+    }
+
+    @Override
+    public BigDecimal layGiaThanhTien(BigDecimal tongTien, BigDecimal giamGia) {
+        return bhr.layThanhTien(tongTien, giamGia);
+    }
 }

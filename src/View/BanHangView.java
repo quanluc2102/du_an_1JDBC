@@ -8,6 +8,7 @@ import DomainModel.HoaDonChiTiet;
 import Service.ServiceImpl.BanHangServiceimpl;
 import ViewModel.ChiTietDienThoaiViewModel;
 import ViewModel.HoaDonChiTietViewModel;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -194,6 +195,11 @@ private BanHangServiceimpl bhs=new BanHangServiceimpl();
         jLabel10.setText("Chọn mã giảm giá");
 
         cbbMaGGBanHang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbMaGGBanHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbMaGGBanHangActionPerformed(evt);
+            }
+        });
 
         btnThanhToan.setText("Thanh toán");
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
@@ -473,10 +479,23 @@ private BanHangServiceimpl bhs=new BanHangServiceimpl();
         String maHD=String.valueOf(cbbHoaDon.getSelectedItem());
         JOptionPane.showMessageDialog(rootPane, bhs.thanhToan(tenKH, maNV, maKM, maHD));
     }//GEN-LAST:event_btnThanhToanActionPerformed
+
+    private void cbbMaGGBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMaGGBanHangActionPerformed
+        // TODO add your handling code here:
+        thayDoiTien();
+    }//GEN-LAST:event_cbbMaGGBanHangActionPerformed
     public void thayDoiTien(){
-        lbTongTien.setText(String.valueOf(bhs.layGiaHD(String.valueOf(cbbHoaDon.getSelectedItem()))));
-        lbGiamGia.setText("");
-        lbThanhTien.setText("");
+        BigDecimal tongTien=bhs.layGiaHD(String.valueOf(cbbHoaDon.getSelectedItem()));
+        BigDecimal giamGia = null ;
+        if(bhs.layDonVi(String.valueOf(cbbMaGGBanHang.getSelectedItem()))==false){
+            giamGia=bhs.layGiaGiamGiaPhanTram(String.valueOf(cbbHoaDon.getSelectedItem()));
+        }else{
+            giamGia=bhs.layGiaGiamGiaK(String.valueOf(cbbMaGGBanHang.getSelectedItem()));
+        }
+        BigDecimal thanhTien =bhs.layGiaThanhTien(tongTien, giamGia);
+        lbTongTien.setText(String.valueOf(tongTien));
+        lbGiamGia.setText(String.valueOf(giamGia));
+        lbThanhTien.setText(String.valueOf(thanhTien));
     }
     /**
      * @param args the command line arguments

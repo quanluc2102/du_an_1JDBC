@@ -297,6 +297,85 @@ public class BanHangReponsitory {
 
     }
 
+    public BigDecimal layGiaGiamGiaPhantram(String maHD) {
+        String query = "SELECT Sum(gia_ban) * (KhuyenMai.gia_giam/100)\n"
+                + "FROM [dbo].[HoaDonChiTiet]\n"
+                + "join ChiTietDienThoai on ChiTietDienThoai.IMEI=HoaDonChiTiet.IMEI \n"
+                + "join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_Dong=QuocGiaDong.id\n"
+                + "join HoaDon on HoaDon.id=HoaDonChiTiet.id_hoa_don\n"
+                + "join KhuyenMai on KhuyenMai.id = HoaDon.id_khuyen_mai\n"
+                + "where ma_hoa_don = ?\n"
+                + "group by KhuyenMai.gia_giam";
+        BigDecimal a = null;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, maHD);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getBigDecimal(1);
+            }
+            return a;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+
+    }
+
+    public BigDecimal layGiaGiamGiaK(String maKM) {
+        String query = "SELECT	KhuyenMai.gia_giam\n"
+                + "FROM KhuyenMai\n"
+                + "where ma_khuyen_mai = ?";
+        BigDecimal a = null;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, maKM);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getBigDecimal(1);
+            }
+            return a;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+
+    }
+    
+    public BigDecimal layThanhTien(BigDecimal tongTien,BigDecimal giamGia) {
+        String query = "select ? - ?";
+        BigDecimal a = null;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, tongTien);
+            ps.setObject(2, giamGia);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getBigDecimal(1);
+            }
+            return a;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+
+    }
+    
+    public boolean layDonVi(String maKM) {
+        String query = "select KhuyenMai.don_vi \n"
+                + "from KhuyenMai\n"
+                + "where ma_khuyen_mai = ?";
+        boolean a = false;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, maKM);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getBoolean(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return a;
+    }
+    
+    
     public String layIDKH(String tenKH) {
         String query = "SELECT [id]\n"
                 + "  FROM [dbo].[KhachHang]\n"
@@ -350,7 +429,7 @@ public class BanHangReponsitory {
         }
         return null;
     }
-
+    
     public boolean thanhToan(String tenKH, String maNV, String maKM, String maHD) {
         String query = "UPDATE [dbo].[HoaDon]\n"
                 + "   SET [id_nhan_vien] = ?\n"
