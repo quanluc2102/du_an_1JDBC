@@ -76,7 +76,7 @@
                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jButton2" min="-2" pref="75" max="-2" attributes="0"/>
+                                      <Component id="btnThem" min="-2" pref="75" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                                       <Component id="jButton3" max="32767" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -109,7 +109,7 @@
                                                   <Component id="txtTenDienThoai" max="32767" attributes="0"/>
                                                   <Component id="txtGiaBan" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="txtGiaNhap" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="txtTonKho" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txtSoLuongNhap" alignment="0" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -153,13 +153,13 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtTonKho" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSoLuongNhap" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="105" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnThem" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -319,6 +319,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTenDienThoai">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
@@ -358,6 +361,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="txtMoTa">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
                     <Property name="text" type="java.lang.String" value="M&#xf4; t&#x1ea3;"/>
@@ -376,20 +380,32 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtGiaBan">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtGiaNhap">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng t&#x1ed3;n"/>
+                <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng nh&#x1ead;p"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtTonKho">
+            <Component class="javax.swing.JTextField" name="txtSoLuongNhap">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="btnThem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="th&#xea;m"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton3">
               <Properties>
@@ -600,6 +616,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtHang">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="H&#xe3;ng"/>
                   </AccessibilityProperties>
@@ -608,56 +627,89 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtDong">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="D&#xf2;ng s&#x1ea3;n ph&#x1ea9;m"/>
                   </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtQuocGia">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="T&#xea;n &#x111;i&#x1ec7;n tho&#x1ea1;i"/>
                   </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtRAM">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="B&#x1ed9; nh&#x1edb; t&#x1ea1;m th&#x1edd;i"/>
                   </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtROM">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="B&#x1ed9; nh&#x1edb; trong"/>
                   </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCPU">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="CPU"/>
                   </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCamera">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Camera"/>
                   </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtManHinh">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="M&#xe0;n h&#xec;nh"/>
                   </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtPin">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="m&#xe0;u s&#x1eaf;c &#x111;i&#x1ec7;n tho&#x1ea1;i"/>
                   </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtHeDieuHanh">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="h&#x1ec7; &#x111;i&#x1ec1;u h&#xe0;nh"/>
                   </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTrongLuong">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="xu&#x1ea5;t x&#x1ee9; &#x111;i&#x1ec7;n tho&#x1ea1;i"/>
                   </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtSim">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="dung l&#x1b0;&#x1ee3;ng pin"/>
                   </AccessibilityProperties>

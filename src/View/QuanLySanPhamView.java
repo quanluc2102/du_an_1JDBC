@@ -10,7 +10,6 @@ import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
 import java.awt.Color;
 import java.awt.Image;
-import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
@@ -65,10 +64,9 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         txtHeDieuHanh.setText(tsv.getHeDieuhanh());
         txtTrongLuong.setText(tsv.getTrongLuong());
         txtSim.setText(tsv.getSim());
-        
+
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,8 +98,8 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         txtGiaBan = new javax.swing.JTextField();
         txtGiaNhap = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtTonKho = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        txtSoLuongNhap = new javax.swing.JTextField();
+        btnThem = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -246,6 +244,8 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         jLabel1.setText("Tên điện thoại");
 
+        txtTenDienThoai.setEditable(false);
+
         jLabel2.setText("Danh sách IMEI");
 
         cbbIMEI.setEditable(true);
@@ -258,6 +258,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         jButton1.setText("jButton1");
 
+        txtMoTa.setEditable(false);
         txtMoTa.setColumns(20);
         txtMoTa.setRows(5);
         txtMoTa.setText("Mô tả");
@@ -267,9 +268,20 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         jLabel4.setText("Giá nhập");
 
-        jLabel5.setText("Số lượng tồn");
+        txtGiaBan.setEditable(false);
 
-        jButton2.setText("thêm");
+        txtGiaNhap.setEditable(false);
+
+        jLabel5.setText("Số lượng nhập");
+
+        txtSoLuongNhap.setEditable(false);
+
+        btnThem.setText("thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("sửa");
 
@@ -308,11 +320,34 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         jLabel17.setText("Sim");
 
+        txtHang.setEditable(false);
         txtHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtHangActionPerformed(evt);
             }
         });
+
+        txtDong.setEditable(false);
+
+        txtQuocGia.setEditable(false);
+
+        txtRAM.setEditable(false);
+
+        txtROM.setEditable(false);
+
+        txtCPU.setEditable(false);
+
+        txtCamera.setEditable(false);
+
+        txtManHinh.setEditable(false);
+
+        txtPin.setEditable(false);
+
+        txtHeDieuHanh.setEditable(false);
+
+        txtTrongLuong.setEditable(false);
+
+        txtSim.setEditable(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -441,7 +476,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(16, 16, 16)
                                 .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
@@ -469,7 +504,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                                             .addComponent(txtTenDienThoai)
                                             .addComponent(txtGiaBan)
                                             .addComponent(txtGiaNhap)
-                                            .addComponent(txtTonKho))))
+                                            .addComponent(txtSoLuongNhap))))
                                 .addGap(0, 15, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
@@ -500,12 +535,12 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(txtTonKho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSoLuongNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
+                            .addComponent(btnThem)
                             .addComponent(jButton3)
                             .addComponent(jButton4)
                             .addComponent(jButton5))
@@ -554,29 +589,29 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         anhSanPham.setIcon(x);
         txtTenDienThoai.setText(sps.getAll().get(index).getTen());
         txtMoTa.setText(sps.getAll().get(index).getMoTa());
-        txtGiaNhap.setText(sps.getAll().get(index).getGiaNhap()+"");
-        txtGiaBan.setText(sps.getAll().get(index).getGiaBan()+"");
+        txtGiaNhap.setText(sps.getAll().get(index).getGiaNhap() + "");
+        txtGiaBan.setText(sps.getAll().get(index).getGiaBan() + "");
         loadThongSo(sps.getAll().get(index).getId());
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void cbbIMEIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbIMEIActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_cbbIMEIActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void txtHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHangActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtHangActionPerformed
 
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtTimKiemActionPerformed
 
     private void txtTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimKiemMouseClicked
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtTimKiemMouseClicked
 
     private void txtTimKiemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTimKiemFocusLost
@@ -584,13 +619,54 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             txtTimKiem.setText("Tìm kiếm");
             txtTimKiem.setForeground(Color.GRAY);
         }
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtTimKiemFocusLost
 
     private void txtTimKiemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTimKiemFocusGained
         txtTimKiem.setText("");
-        txtTimKiem.setForeground(Color.black); // TODO add your handling code here:
+        txtTimKiem.setForeground(Color.black);
     }//GEN-LAST:event_txtTimKiemFocusGained
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+
+        if (btnThem.getText() == "Lưu") {
+            btnThem.setText("Thêm");
+            txtCPU.setEditable(false);
+            txtHang.setEditable(false);
+            txtDong.setEditable(false);
+            txtCamera.setEditable(false);
+            txtQuocGia.setEditable(false);
+            txtRAM.setEditable(false);
+            txtROM.setEditable(false);
+            txtManHinh.setEditable(false);
+            txtHeDieuHanh.setEditable(false);
+            txtTrongLuong.setEditable(false);
+            txtSim.setEditable(false);
+            txtPin.setEditable(false);
+            txtTenDienThoai.setEditable(false);
+            txtGiaBan.setEditable(false);
+            txtGiaNhap.setEditable(false);
+            txtSoLuongNhap.setEditable(false);
+        } else {
+            txtCPU.setEditable(true);
+            txtHang.setEditable(true);
+            txtDong.setEditable(true);
+            txtCamera.setEditable(true);
+            txtQuocGia.setEditable(true);
+            txtRAM.setEditable(true);
+            txtROM.setEditable(true);
+            txtManHinh.setEditable(true);
+            txtHeDieuHanh.setEditable(true);
+            txtTrongLuong.setEditable(true);
+            txtSim.setEditable(true);
+            txtPin.setEditable(true);
+            txtTenDienThoai.setEditable(true);
+            txtGiaBan.setEditable(true);
+            txtGiaNhap.setEditable(true);
+            txtSoLuongNhap.setEditable(true);
+            btnThem.setText("Lưu");
+        }
+    }//GEN-LAST:event_btnThemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -636,11 +712,11 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel anhSanPham;
+    private javax.swing.JButton btnThem;
     private javax.swing.JComboBox<String> cbbIMEI;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -684,9 +760,9 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private javax.swing.JTextField txtRAM;
     private javax.swing.JTextField txtROM;
     private javax.swing.JTextField txtSim;
+    private javax.swing.JTextField txtSoLuongNhap;
     private javax.swing.JTextField txtTenDienThoai;
     private javax.swing.JTextField txtTimKiem;
-    private javax.swing.JTextField txtTonKho;
     private javax.swing.JTextField txtTrongLuong;
     // End of variables declaration//GEN-END:variables
 }
