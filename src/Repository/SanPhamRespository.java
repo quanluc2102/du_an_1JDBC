@@ -41,6 +41,7 @@ public class SanPhamRespository {
         return listSanPhamViewModelView;
     }
 
+    
     public ThongSoViewModel getAllThongSoView(String id) {
         String query = "select ten_hang, ten_dong,ten_quoc_gia, ten_dien_thoai, cpu,ram,rom,sim,man_hinh,trong_luong,camera,he_dieu_hanh,pin from Hang \n"
                 + "											join DienThoai on DienThoai.id_hang = Hang.id\n"
