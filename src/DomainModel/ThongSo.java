@@ -26,11 +26,17 @@ public class ThongSo {
     private String manHinh;
     private String trongLuong;
     private String camera;
+    private String heDieuhanh ;
 
     public ThongSo() {
     }
 
-    public ThongSo(String id, String idQuocGiaDong, String cpu, String ram, String rom, String sim, String manHinh, String trongLuong, String camera) {
+    @Override
+    public String toString() {
+        return "ThongSo{" + "id=" + id + ", idQuocGiaDong=" + idQuocGiaDong + ", cpu=" + cpu + ", ram=" + ram + ", rom=" + rom + ", sim=" + sim + ", manHinh=" + manHinh + ", trongLuong=" + trongLuong + ", camera=" + camera + ", heDieuhanh=" + heDieuhanh + '}';
+    }
+
+    public ThongSo(String id, String idQuocGiaDong, String cpu, String ram, String rom, String sim, String manHinh, String trongLuong, String camera, String heDieuhanh) {
         this.id = id;
         this.idQuocGiaDong = idQuocGiaDong;
         this.cpu = cpu;
@@ -40,6 +46,17 @@ public class ThongSo {
         this.manHinh = manHinh;
         this.trongLuong = trongLuong;
         this.camera = camera;
+        this.heDieuhanh = heDieuhanh;
+    }
+
+    
+
+    public String getHeDieuhanh() {
+        return heDieuhanh;
+    }
+
+    public void setHeDieuhanh(String heDieuhanh) {
+        this.heDieuhanh = heDieuhanh;
     }
 
     public String getId() {

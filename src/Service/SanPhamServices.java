@@ -4,7 +4,9 @@
  */
 package Service;
 
+import DomainModel.ThongSo;
 import ViewModel.SanPhamViewModel;
+import ViewModel.ThongSoViewModel;
 import java.util.List;
 
 /**
@@ -12,5 +14,13 @@ import java.util.List;
  * @author haha
  */
 public interface SanPhamServices {
+
     List<SanPhamViewModel> getAll();
+
+    ThongSoViewModel getAllThongSo(String id);
+
+    String ban(String IMEI);
+
+    List<SanPhamViewModel> timKiem(String x);
+
 }
