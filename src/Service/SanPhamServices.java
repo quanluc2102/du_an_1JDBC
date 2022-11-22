@@ -4,6 +4,8 @@
  */
 package Service;
 
+import DomainModel.ChiTietDienThoai;
+import DomainModel.Hang;
 import DomainModel.ThongSo;
 import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
@@ -22,5 +24,8 @@ public interface SanPhamServices {
     String ban(String IMEI);
 
     List<SanPhamViewModel> timKiem(String x);
+    
+    List<Hang> getHang();
+    List<String> Imei(String id);
 
 }

@@ -10,8 +10,10 @@ import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
 import java.awt.Color;
 import java.awt.Image;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author haha
  */
 public class QuanLySanPhamView extends javax.swing.JDialog {
-
+    
     DefaultComboBoxModel modelCBB;
     DefaultTableModel modelTBL;
     SanPhamServices sps = new SanPhamServicesImpl();
@@ -31,10 +33,10 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     public QuanLySanPhamView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        
         loadTable();
     }
-
+    
     private void loadTable() {
         modelTBL = (DefaultTableModel) tblSanPham.getModel();
         modelTBL.setRowCount(0);
@@ -47,9 +49,9 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             Object[] row = new Object[]{x, sp.getTen(), sp.getSoLuongCon(), sp.getLoai()};
             modelTBL.addRow(row);
         }
-
+        
     }
-
+    
     public void loadThongSo(String id) {
         ThongSoViewModel tsv = sps.getAllThongSo(id);
         txtHang.setText(tsv.getHang());
@@ -64,7 +66,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         txtHeDieuHanh.setText(tsv.getHeDieuhanh());
         txtTrongLuong.setText(tsv.getTrongLuong());
         txtSim.setText(tsv.getSim());
-
+        
     }
 
     /**
@@ -249,7 +251,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         jLabel2.setText("Danh sách IMEI");
 
         cbbIMEI.setEditable(true);
-        cbbIMEI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbIMEI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00000000000000000000000000" }));
         cbbIMEI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbIMEIActionPerformed(evt);
@@ -257,6 +259,11 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         });
 
         jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         txtMoTa.setEditable(false);
         txtMoTa.setColumns(20);
@@ -592,6 +599,11 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         txtGiaNhap.setText(sps.getAll().get(index).getGiaNhap() + "");
         txtGiaBan.setText(sps.getAll().get(index).getGiaBan() + "");
         loadThongSo(sps.getAll().get(index).getId());
+        modelCBB = (DefaultComboBoxModel) cbbIMEI.getModel();
+        modelCBB.removeAllElements();
+        System.out.println(sps.getAll().get(index).getId());
+        modelCBB.addAll(sps.Imei(sps.getAll().get(index).getId()));
+        cbbIMEI.setSelectedIndex(0);
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void cbbIMEIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbIMEIActionPerformed
@@ -628,7 +640,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     }//GEN-LAST:event_txtTimKiemFocusGained
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-
+        
         if (btnThem.getText() == "Lưu") {
             btnThem.setText("Thêm");
             txtCPU.setEditable(false);
@@ -667,6 +679,11 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             btnThem.setText("Lưu");
         }
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     String IMEI = JOptionPane.showInputDialog(this,"Nhập IMEI" ,DISPOSE_ON_CLOSE);
+        System.out.println(IMEI);// TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
