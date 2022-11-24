@@ -11,23 +11,20 @@ package DomainModel;
 public class ChiTietDienThoai {
 
     private String IMEI;
-
-    private String idMauDong;
-    private String idQuocGiaDong;
     private Boolean trangThai;
     private int moi;
     private String moTa;
-    
-    public ChiTietDienThoai(String IMEI, String idMauDong, String idQuocGiaDong, Boolean trangThai, int moi, String moTa) {
+    private String idQuocGiaDong;
+
+    public ChiTietDienThoai() {
+    }
+
+    public ChiTietDienThoai(String IMEI, Boolean trangThai, int moi, String moTa, String idQuocGiaDong) {
         this.IMEI = IMEI;
-        this.idMauDong = idMauDong;
-        this.idQuocGiaDong = idQuocGiaDong;
         this.trangThai = trangThai;
         this.moi = moi;
         this.moTa = moTa;
-    }
-
-    public ChiTietDienThoai() {
+        this.idQuocGiaDong = idQuocGiaDong;
     }
 
     public String getIMEI() {
@@ -36,22 +33,6 @@ public class ChiTietDienThoai {
 
     public void setIMEI(String IMEI) {
         this.IMEI = IMEI;
-    }
-
-    public String getIdMauDong() {
-        return idMauDong;
-    }
-
-    public void setIdMauDong(String idMauDong) {
-        this.idMauDong = idMauDong;
-    }
-
-    public String getIdQuocGiaDong() {
-        return idQuocGiaDong;
-    }
-
-    public void setIdQuocGiaDong(String idQuocGiaDong) {
-        this.idQuocGiaDong = idQuocGiaDong;
     }
 
     public Boolean getTrangThai() {
@@ -77,5 +58,15 @@ public class ChiTietDienThoai {
     public void setMoTa(String moTa) {
         this.moTa = moTa;
     }
+
+    public String getIdQuocGiaDong() {
+        return idQuocGiaDong;
+    }
+
+    public void setIdQuocGiaDong(String idQuocGiaDong) {
+        this.idQuocGiaDong = idQuocGiaDong;
+    }
+    
+    
     
 }
