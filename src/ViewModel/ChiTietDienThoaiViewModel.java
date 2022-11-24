@@ -12,23 +12,20 @@ import Repository.BanHangReponsitory;
  */
 public class ChiTietDienThoaiViewModel {
     private String IMEI;
-    private String idMauDong;
-    private String idQuocGiaDong;
     private Boolean trangThai;
     private int moi;
     private String moTa;
-    private BanHangReponsitory bhr=new BanHangReponsitory();
+    private String idQuocGiaDong;
 
     public ChiTietDienThoaiViewModel() {
     }
 
-    public ChiTietDienThoaiViewModel(String IMEI, String idMauDong, String idQuocGiaDong, Boolean trangThai, int moi, String moTa) {
+    public ChiTietDienThoaiViewModel(String IMEI, Boolean trangThai, int moi, String moTa, String idQuocGiaDong) {
         this.IMEI = IMEI;
-        this.idMauDong = idMauDong;
-        this.idQuocGiaDong = idQuocGiaDong;
         this.trangThai = trangThai;
         this.moi = moi;
         this.moTa = moTa;
+        this.idQuocGiaDong = idQuocGiaDong;
     }
 
     public String getIMEI() {
@@ -37,22 +34,6 @@ public class ChiTietDienThoaiViewModel {
 
     public void setIMEI(String IMEI) {
         this.IMEI = IMEI;
-    }
-
-    public String getIdMauDong() {
-        return idMauDong;
-    }
-
-    public void setIdMauDong(String idMauDong) {
-        this.idMauDong = idMauDong;
-    }
-
-    public String getIdQuocGiaDong() {
-        return idQuocGiaDong;
-    }
-
-    public void setIdQuocGiaDong(String idQuocGiaDong) {
-        this.idQuocGiaDong = idQuocGiaDong;
     }
 
     public Boolean getTrangThai() {
@@ -79,21 +60,11 @@ public class ChiTietDienThoaiViewModel {
         this.moTa = moTa;
     }
 
-    public BanHangReponsitory getBhr() {
-        return bhr;
+    public String getIdQuocGiaDong() {
+        return idQuocGiaDong;
     }
 
-    public void setBhr(BanHangReponsitory bhr) {
-        this.bhr = bhr;
+    public void setIdQuocGiaDong(String idQuocGiaDong) {
+        this.idQuocGiaDong = idQuocGiaDong;
     }
-    public String layTenSP(){
-        return bhr.layTenSP(IMEI);
-    }
-    public int layGia(){
-        return bhr.layGia(idQuocGiaDong);
-    }
-    public Object[] toDataRowBanHangView(){
-        return new Object[]{IMEI,layTenSP(),layGia()};
-    }
-    //tessttstststs
 }
