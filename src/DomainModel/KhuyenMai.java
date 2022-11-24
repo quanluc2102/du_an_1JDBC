@@ -10,35 +10,21 @@ import java.sql.Date;
  *
  * @author quanl
  */
-
 public class KhuyenMai {
 
-
     private String id;
-
-  
     private String ma;
-
- 
     private Date ngayBatDau;
-
-
     private Date ngayKetThuc;
-
-
     private double giaGiam;
-
-
     private boolean donVi;
-
-
     private String moTa;
-
+    private String trangThai;
 
     public KhuyenMai() {
     }
 
-    public KhuyenMai(String id, String ma, Date ngayBatDau, Date ngayKetThuc, double giaGiam, boolean donVi, String moTa) {
+    public KhuyenMai(String id, String ma, Date ngayBatDau, Date ngayKetThuc, double giaGiam, boolean donVi, String moTa, String trangThai) {
         this.id = id;
         this.ma = ma;
         this.ngayBatDau = ngayBatDau;
@@ -46,8 +32,24 @@ public class KhuyenMai {
         this.giaGiam = giaGiam;
         this.donVi = donVi;
         this.moTa = moTa;
+        this.trangThai = trangThai;
     }
 
+    public KhuyenMai(String ma, Date ngayBatDau, Date ngayKetThuc, double giaGiam, boolean donVi, String moTa, String trangThai) {
+        this.ma = ma;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
+        this.giaGiam = giaGiam;
+        this.donVi = donVi;
+        this.moTa = moTa;
+        this.trangThai = trangThai;
+    }
+
+    
+
+    
+
+  
     public String getId() {
         return id;
     }
@@ -104,5 +106,17 @@ public class KhuyenMai {
         this.moTa = moTa;
     }
 
-   
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+  
+
+    public Object[] toDataRow() {
+        return new Object[]{id, ma, ngayBatDau, ngayKetThuc, giaGiam, donVi ? "Money" : "%", moTa, trangThai};
+
+    }
 }
