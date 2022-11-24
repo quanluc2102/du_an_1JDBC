@@ -79,6 +79,8 @@ public class KhachHangView extends javax.swing.JFrame {
         txtValidate5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        cbbSearch = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,11 +88,40 @@ public class KhachHangView extends javax.swing.JFrame {
 
         jLabel2.setText("Ngay sinh");
 
+        txtNgaySinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNgaySinhActionPerformed(evt);
+            }
+        });
+        txtNgaySinh.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNgaySinhKeyPressed(evt);
+            }
+        });
+
         jLabel3.setText("Tên");
+
+        txtTen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTenKeyReleased(evt);
+            }
+        });
 
         jLabel6.setText("So dien thoai");
 
+        txtSDT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSDTKeyReleased(evt);
+            }
+        });
+
         jLabel7.setText("Email");
+
+        txtDiaChi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDiaChiKeyReleased(evt);
+            }
+        });
 
         tbQuanLyKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,6 +162,12 @@ public class KhachHangView extends javax.swing.JFrame {
             }
         });
 
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEmailKeyReleased(evt);
+            }
+        });
+
         jLabel5.setText("Dia chi");
 
         jLabel4.setText("ID:");
@@ -143,7 +180,7 @@ public class KhachHangView extends javax.swing.JFrame {
 
         txtValidate5.setText(" ");
 
-        jLabel8.setText("Tim theo ten");
+        jLabel8.setText("Tim kiem theo: ");
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -156,6 +193,15 @@ public class KhachHangView extends javax.swing.JFrame {
                 txtSearchKeyTyped(evt);
             }
         });
+
+        jButton1.setText("Clear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        cbbSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ten", "Dia Chi" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,7 +226,10 @@ public class KhachHangView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,11 +273,13 @@ public class KhachHangView extends javax.swing.JFrame {
                                     .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtValidate4, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(19, 19, 19)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,9 +322,12 @@ public class KhachHangView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtValidate5)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(cbbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btAdd)
@@ -436,15 +490,97 @@ public class KhachHangView extends javax.swing.JFrame {
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
         // TODO add your handling code here:
-         String name = txtSearch.getText();
+        if (cbbSearch.getSelectedIndex() == 0) {
+            String name = txtSearch.getText();
+            listSearch = service.searchKhachHang(name, listKhachHangView);
+            for (KhachHangViewModel khachHangViewModel : listSearch) {
+                System.out.println(khachHangViewModel.toString());
 
-        listSearch = service.searchKhachHang(name, listKhachHangView);
-        for (KhachHangViewModel khachHangViewModel : listSearch) {
-            System.out.println(khachHangViewModel.toString());
+            }
+            service.showDataTable(dtm, listSearch);
+        } else {
+            String diaChi = txtSearch.getText();
+            listSearch = service.searchKhachHangDiaChi(diaChi, listKhachHangView);
+            for (KhachHangViewModel khachHangViewModel : listSearch) {
+                System.out.println(khachHangViewModel.toString());
+
+            }
+            service.showDataTable(dtm, listSearch);
+        }
+    }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        id.setText("");
+        txtDiaChi.setText("");
+        txtEmail.setText("");
+        txtNgaySinh.setText("");
+        txtSDT.setText("");
+        txtTen.setText("");
+        txtValidate2.setText("");
+        txtValidate3.setText("");
+        txtValidate4.setText("");
+        txtValidate5.setText("");
+        txtValidateName.setText("");
+        txtDiaChi.setBackground(Color.white);
+        txtEmail.setBackground(Color.white);
+        txtNgaySinh.setBackground(Color.white);
+        txtSDT.setBackground(Color.white);
+        txtTen.setBackground(Color.white);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenKeyReleased
+        // TODO add your handling code here:
+        txtTen.setBackground(Color.white);
+        txtValidateName.setText("");
+    }//GEN-LAST:event_txtTenKeyReleased
+
+    private void txtNgaySinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgaySinhActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtNgaySinhActionPerformed
+
+    private void txtNgaySinhKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNgaySinhKeyPressed
+        // TODO add your handling code here:
+        txtNgaySinh.setBackground(Color.white);
+        txtValidate2.setText("");
+    }//GEN-LAST:event_txtNgaySinhKeyPressed
+
+    private void txtSDTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTKeyReleased
+        // TODO add your handling code here:
+        String vadidateSDT = txtSDT.getText();
+        if (!vadidateSDT.matches("(84|0[3|5|7|8|9])+([0-9]{8})\\b")) {
+            txtValidate3.setText("Sai dinh dang so dien thoai");
+            txtValidate3.setForeground(Color.red);
+            txtSDT.setBackground(Color.RED);
+        } else {
+            txtValidate3.setText("OK");
+            txtValidate3.setForeground(Color.GREEN);
+            txtSDT.setBackground(Color.GREEN);
 
         }
-        service.showDataTable(dtm, listSearch);
-    }//GEN-LAST:event_txtSearchKeyReleased
+    }//GEN-LAST:event_txtSDTKeyReleased
+
+    private void txtDiaChiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiaChiKeyReleased
+        // TODO add your handling code here:
+        txtDiaChi.setBackground(Color.white);
+        txtValidate4.setText("");
+    }//GEN-LAST:event_txtDiaChiKeyReleased
+
+    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
+        // TODO add your handling code here:
+        String validateEmail = txtEmail.getText();
+        if (!validateEmail.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            txtValidate5.setText("Sai dinh dang email (example@gmail.com)");
+            txtValidate5.setForeground(Color.red);
+            txtEmail.setBackground(Color.RED);
+        } else {
+            txtValidate5.setText("OK");
+            txtValidate5.setForeground(Color.GREEN);
+            txtEmail.setBackground(Color.GREEN);
+        }
+    }//GEN-LAST:event_txtEmailKeyReleased
 
     /**
      * @param args the command line arguments
@@ -502,7 +638,9 @@ public class KhachHangView extends javax.swing.JFrame {
     private javax.swing.JButton btDelete;
     private javax.swing.JButton btEdit;
     private javax.swing.ButtonGroup btgGender;
+    private javax.swing.JComboBox<String> cbbSearch;
     private javax.swing.JLabel id;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

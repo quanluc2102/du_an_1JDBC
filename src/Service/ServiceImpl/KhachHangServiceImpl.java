@@ -71,4 +71,15 @@ public class KhachHangServiceImpl implements KhachHangService {
         return listSearch;
     }
 
+    @Override
+    public List<KhachHangViewModel> searchKhachHangDiaChi(String diaChiKhachHang, List<KhachHangViewModel> list) {
+        List<KhachHangViewModel> listSearch = new ArrayList<>();
+        for (KhachHangViewModel khachHangViewModel : list) {
+            if (khachHangViewModel.getDiaChi().contains(diaChiKhachHang)) {
+                listSearch.add(khachHangViewModel);
+            }
+        }
+        return listSearch;
+    }
+
 }
