@@ -10,7 +10,7 @@ import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
 import java.awt.Color;
 import java.awt.Image;
-import java.util.List;
+import java.text.DecimalFormat;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author haha
  */
 public class QuanLySanPhamView extends javax.swing.JDialog {
-    
+
     DefaultComboBoxModel modelCBB;
     DefaultTableModel modelTBL;
     SanPhamServices sps = new SanPhamServicesImpl();
@@ -33,30 +33,30 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     public QuanLySanPhamView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         loadTable();
     }
-    
+
     private void loadTable() {
         modelTBL = (DefaultTableModel) tblSanPham.getModel();
         modelTBL.setRowCount(0);
         String[] title = new String[]{
-            "Ảnh", "Tên máy", "Số lượng còn", "Loại"
-        };
+            "Ảnh", "Tên máy", "Hãng", "Số lượng còn",};
         modelTBL.setColumnIdentifiers(title);
         for (SanPhamViewModel sp : sps.getAll()) {
+
             ImageIcon x = new ImageIcon(new ImageIcon("source\\" + sp.getSrcAnh()).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
-            Object[] row = new Object[]{x, sp.getTen(), sp.getSoLuongCon(), sp.getLoai()};
+            Object[] row = new Object[]{x, sp.getTen(), sp.getTenHang(), sp.getSoLuongCon()};
             modelTBL.addRow(row);
         }
-        
+
     }
-    
+
     public void loadThongSo(String id) {
         ThongSoViewModel tsv = sps.getAllThongSo(id);
         txtHang.setText(tsv.getHang());
         txtDong.setText(tsv.getDong());
-        txtQuocGia.setText(tsv.getQuocGia());
+        txtXuatXu.setText(tsv.getQuocGia());
         txtRAM.setText(tsv.getRam());
         txtROM.setText(tsv.getRom());
         txtManHinh.setText(tsv.getManHinh());
@@ -66,7 +66,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         txtHeDieuHanh.setText(tsv.getHeDieuhanh());
         txtTrongLuong.setText(tsv.getTrongLuong());
         txtSim.setText(tsv.getSim());
-        
+
     }
 
     /**
@@ -81,11 +81,11 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblSanPham = new javax.swing.JTable();
         txtTimKiem = new javax.swing.JTextField();
         jButton12 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblSanPham = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         anhSanPham = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -118,9 +118,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        txtHang = new javax.swing.JTextField();
-        txtDong = new javax.swing.JTextField();
-        txtQuocGia = new javax.swing.JTextField();
         txtRAM = new javax.swing.JTextField();
         txtROM = new javax.swing.JTextField();
         txtCPU = new javax.swing.JTextField();
@@ -130,6 +127,9 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         txtHeDieuHanh = new javax.swing.JTextField();
         txtTrongLuong = new javax.swing.JTextField();
         txtSim = new javax.swing.JTextField();
+        txtXuatXu = new javax.swing.JTextField();
+        txtDong = new javax.swing.JTextField();
+        txtHang = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -141,34 +141,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Sản phẩm đang bán"));
-
-        tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ) {
-            Class[] types = new Class [] {
-                ImageIcon.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tblSanPham.setGridColor(new java.awt.Color(255, 255, 255));
-        tblSanPham.setRowHeight(51);
-        tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblSanPhamMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblSanPham);
 
         txtTimKiem.setForeground(new java.awt.Color(102, 102, 102));
         txtTimKiem.setText("Tìm kiếm");
@@ -195,6 +167,43 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         jButton19.setText("nhoTO");
 
+        tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ) {
+            Class[] types = new Class [] {
+                ImageIcon.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblSanPham.setRowHeight(51);
+        tblSanPham.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblSanPham.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblSanPham.setSurrendersFocusOnKeystroke(true);
+        tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSanPhamMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblSanPham);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -203,11 +212,11 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane3)
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton12)
                         .addGap(26, 26, 26)
                         .addComponent(jButton19)
@@ -215,15 +224,15 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(47, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton12)
                     .addComponent(jButton19))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
 
         txtTimKiem.getAccessibleContext().setAccessibleDescription("Tìm kiếm");
@@ -327,17 +336,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         jLabel17.setText("Sim");
 
-        txtHang.setEditable(false);
-        txtHang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtHangActionPerformed(evt);
-            }
-        });
-
-        txtDong.setEditable(false);
-
-        txtQuocGia.setEditable(false);
-
         txtRAM.setEditable(false);
 
         txtROM.setEditable(false);
@@ -356,6 +354,12 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         txtSim.setEditable(false);
 
+        txtXuatXu.setEditable(false);
+
+        txtDong.setEditable(false);
+
+        txtHang.setEditable(false);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -371,12 +375,12 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtHang)
-                    .addComponent(txtDong, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                    .addComponent(txtQuocGia)
-                    .addComponent(txtRAM)
+                    .addComponent(txtRAM, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                     .addComponent(txtROM)
-                    .addComponent(txtCPU))
+                    .addComponent(txtCPU)
+                    .addComponent(txtXuatXu, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                    .addComponent(txtDong, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                    .addComponent(txtHang, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
                 .addGap(102, 102, 102)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,20 +417,20 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(txtHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCamera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCamera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(txtDong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtManHinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtManHinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
-                    .addComponent(txtQuocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtXuatXu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -452,9 +456,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        txtHang.getAccessibleContext().setAccessibleDescription("Hãng");
-        txtDong.getAccessibleContext().setAccessibleDescription("Dòng sản phẩm");
-        txtQuocGia.getAccessibleContext().setAccessibleDescription("Tên điện thoại");
         txtRAM.getAccessibleContext().setAccessibleDescription("Bộ nhớ tạm thời");
         txtROM.getAccessibleContext().setAccessibleDescription("Bộ nhớ trong");
         txtCPU.getAccessibleContext().setAccessibleDescription("CPU");
@@ -569,7 +570,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 602, Short.MAX_VALUE)
+            .addGap(0, 617, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("lịch sử thay đổi", jPanel2);
@@ -590,22 +591,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
-        index = tblSanPham.getSelectedRow();
-        ImageIcon x = new ImageIcon(new ImageIcon("source\\" + sps.getAll().get(index).getSrcAnh()).getImage().getScaledInstance(250, 250, Image.SCALE_AREA_AVERAGING));
-        anhSanPham.setIcon(x);
-        txtTenDienThoai.setText(sps.getAll().get(index).getTen());
-        txtMoTa.setText(sps.getAll().get(index).getMoTa());
-        txtGiaNhap.setText(sps.getAll().get(index).getGiaNhap() + "");
-        txtGiaBan.setText(sps.getAll().get(index).getGiaBan() + "");
-        loadThongSo(sps.getAll().get(index).getId());
-        modelCBB = (DefaultComboBoxModel) cbbIMEI.getModel();
-        modelCBB.removeAllElements();
-        System.out.println(sps.getAll().get(index).getId());
-        modelCBB.addAll(sps.Imei(sps.getAll().get(index).getId()));
-        cbbIMEI.setSelectedIndex(0);
-    }//GEN-LAST:event_tblSanPhamMouseClicked
-
     private void cbbIMEIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbIMEIActionPerformed
 
     }//GEN-LAST:event_cbbIMEIActionPerformed
@@ -613,10 +598,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
     }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void txtHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHangActionPerformed
-
-    }//GEN-LAST:event_txtHangActionPerformed
 
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
 
@@ -640,14 +621,11 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     }//GEN-LAST:event_txtTimKiemFocusGained
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        
+
         if (btnThem.getText() == "Lưu") {
             btnThem.setText("Thêm");
             txtCPU.setEditable(false);
-            txtHang.setEditable(false);
-            txtDong.setEditable(false);
             txtCamera.setEditable(false);
-            txtQuocGia.setEditable(false);
             txtRAM.setEditable(false);
             txtROM.setEditable(false);
             txtManHinh.setEditable(false);
@@ -661,10 +639,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             txtSoLuongNhap.setEditable(false);
         } else {
             txtCPU.setEditable(true);
-            txtHang.setEditable(true);
-            txtDong.setEditable(true);
             txtCamera.setEditable(true);
-            txtQuocGia.setEditable(true);
             txtRAM.setEditable(true);
             txtROM.setEditable(true);
             txtManHinh.setEditable(true);
@@ -681,9 +656,16 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     String IMEI = JOptionPane.showInputDialog(this,"Nhập IMEI" ,DISPOSE_ON_CLOSE);
+        String IMEI = JOptionPane.showInputDialog(this, "Nhập IMEI", DISPOSE_ON_CLOSE);
         System.out.println(IMEI);// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
+      index = tblSanPham.getSelectedRow();
+    SanPhamViewModel s=  sps.getAll().get(index);
+       ImageIcon x = new ImageIcon(new ImageIcon("source\\" + s.getSrcAnh()).getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT));
+       anhSanPham.setIcon(x);
+    }//GEN-LAST:event_tblSanPhamMouseClicked
 
     /**
      * @param args the command line arguments
@@ -759,8 +741,8 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tblSanPham;
     private javax.swing.JTextField txtCPU;
@@ -773,7 +755,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private javax.swing.JTextField txtManHinh;
     private javax.swing.JTextArea txtMoTa;
     private javax.swing.JTextField txtPin;
-    private javax.swing.JTextField txtQuocGia;
     private javax.swing.JTextField txtRAM;
     private javax.swing.JTextField txtROM;
     private javax.swing.JTextField txtSim;
@@ -781,5 +762,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private javax.swing.JTextField txtTenDienThoai;
     private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtTrongLuong;
+    private javax.swing.JTextField txtXuatXu;
     // End of variables declaration//GEN-END:variables
 }

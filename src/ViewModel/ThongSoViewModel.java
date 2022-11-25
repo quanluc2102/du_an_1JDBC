@@ -10,9 +10,6 @@ package ViewModel;
  */
 public class ThongSoViewModel {
 
-    private String hang;
-    private String dong;
-    private String quocGia;
     private String ten;
     private String cpu;
     private String ram;

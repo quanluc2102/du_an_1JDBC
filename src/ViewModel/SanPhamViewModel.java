@@ -13,11 +13,11 @@ public class SanPhamViewModel {
     private String id;
     private String srcAnh;
     private String ten;
+    private String tenHang;
+    
     private int soLuongCon;
-    private String loai;
     private double giaBan;
     private double giaNhap;
-    private String moTa;
 
     public String getId() {
         return id;
@@ -43,24 +43,25 @@ public class SanPhamViewModel {
         this.giaNhap = giaNhap;
     }
 
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
-    }
-
-    public SanPhamViewModel(String id, String srcAnh, String ten, int soLuongCon, String loai, double giaBan, double giaNhap, String moTa) {
+    public SanPhamViewModel(String id, String srcAnh, String ten, String tenHang, int soLuongCon, double giaBan, double giaNhap) {
         this.id = id;
         this.srcAnh = srcAnh;
         this.ten = ten;
+        this.tenHang = tenHang;
         this.soLuongCon = soLuongCon;
-        this.loai = loai;
         this.giaBan = giaBan;
         this.giaNhap = giaNhap;
-        this.moTa = moTa;
     }
+
+    public String getTenHang() {
+        return tenHang;
+    }
+
+    public void setTenHang(String tenHang) {
+        this.tenHang = tenHang;
+    }
+
+ 
 
 
 
@@ -69,8 +70,10 @@ public class SanPhamViewModel {
 
     @Override
     public String toString() {
-        return "SanPhamViewModel{" + "srcAnh=" + srcAnh + ", ten=" + ten + ", soLuongCon=" + soLuongCon + ", loai=" + loai + '}';
+        return "SanPhamViewModel{" + "id=" + id + ", srcAnh=" + srcAnh + ", ten=" + ten + ", soLuongCon=" + soLuongCon + ", giaBan=" + giaBan + ", giaNhap=" + giaNhap + '}';
     }
+
+   
 
     public String getSrcAnh() {
         return srcAnh;
@@ -96,12 +99,5 @@ public class SanPhamViewModel {
         this.soLuongCon = soLuongCon;
     }
 
-    public String getLoai() {
-        return loai;
-    }
-
-    public void setLoai(String loai) {
-        this.loai = loai;
-    }
-
+ 
 }

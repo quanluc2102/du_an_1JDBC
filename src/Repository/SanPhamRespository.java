@@ -4,9 +4,7 @@
  */
 package Repository;
 
-import DomainModel.ChiTietDienThoai;
-import DomainModel.Hang;
-import DomainModel.ThongSo;
+import DomainModel.HeDieuHanh;
 import Ultilities.SQLServerConnection;
 import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
@@ -23,27 +21,13 @@ import java.util.List;
  */
 public class SanPhamRespository {
 
-    public List<Hang> getHang() {
-        String query = "select * from hang ";
-        List<Hang> hangList = new ArrayList<>();
-        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Hang h = new Hang(rs.getString(1), rs.getString(2), rs.getString(3));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace(System.out);
-        }
-        return hangList;
-    }
-     public List<String> getIMEI(String id) {
+    public List<String> getIMEI(String id) {
         String query = " select IMEI from chitietdienthoai where id_quoc_gia_dong = ? and trang_thai= 1";
         List<String> hangList = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-             ps.setObject(1,id );
+            ps.setObject(1, id);
             ResultSet rs = ps.executeQuery();
-           
+
             while (rs.next()) {
                 hangList.add(rs.getString(1));
             }
@@ -55,16 +39,20 @@ public class SanPhamRespository {
     }
 
     public List<SanPhamViewModel> getAll() {
-        String query = "select QuocGiaDong.id ,anh ,ten_hien_thi,COUNT(IMEI),moi,gia_ban,gia_nhap from QuocGiaDong join ChiTietDienThoai on QuocGiaDong.id = ChiTietDienThoai.id_quoc_gia_Dong\n"
-                + "                where trang_thai ='true'\n"
-                + "                group by anh ,ten_hien_thi,moi, QuocGiaDong.id,gia_ban,gia_nhap ";
+        String query = "select QuocGiaDong.id ,anh,ten_dien_thoai+' '+ ten_dong as tenmay,ten_hang,COUNT(ChiTietDienThoai.IMEI)as soluong,gia_ban,gia_nhap from QuocGiaDong\n"
+                + "               						join ChiTietDienThoai on QuocGiaDong.id = ChiTietDienThoai.id_quoc_gia_Dong\n"
+                + "               						join Dong on dong.id = QuocGiaDong.id_dong \n"
+                + "               						join DienThoai on DienThoai.id = Dong.id_dien_thoai \n"
+                + "									join Hang on Hang.id = DienThoai.id_hang\n"
+                + "                                    where ChiTietDienThoai.trang_thai =1 \n"
+                + "                                     group by anh, QuocGiaDong.id,gia_ban,gia_nhap,ten_dien_thoai+' '+ ten_dong,ten_hang";
         List<SanPhamViewModel> listSanPhamViewModelView = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
-                SanPhamViewModel sp = new SanPhamViewModel(rs.getString(1), rs.getString(2),
-                        rs.getString(3), rs.getInt(4), rs.getInt(5) == 100 ? "Mới" : "Cũ", rs.getDouble(6), rs.getDouble(7), "");
+                SanPhamViewModel sp = new SanPhamViewModel(rs.getString(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getInt(5),
+                        rs.getDouble(6), rs.getDouble(7));
                 listSanPhamViewModelView.add(sp);
             }
 
@@ -75,13 +63,21 @@ public class SanPhamRespository {
     }
 
     public ThongSoViewModel getAllThongSoView(String id) {
-        String query = "select ten_hang, ten_dong,ten_quoc_gia, ten_dien_thoai, cpu,ram,rom,sim,man_hinh,trong_luong,camera,he_dieu_hanh,pin from Hang \n"
-                + "											join DienThoai on DienThoai.id_hang = Hang.id\n"
-                + "											join Dong on Dong.id_dien_thoai  = DienThoai.id\n"
-                + "											join QuocGiaDong on dong.id = QuocGiaDong.id_dong\n"
-                + "											join QuocGia on QuocGia.id = QuocGiaDong.id_quoc_gia\n"
-                + "											join ThongSo on ThongSo.id_quoc_gia_dong = QuocGiaDong.id\n"
-                + "where QuocGiaDong.id = ?";
+        String query = "SELECT dbo.BoNho.so_luong_ram, dbo.BoNho.so_Luong_rom, dbo.ManHinh.loai_man_hinh, dbo.ManHinh.kich_thuoc, dbo.PIN.dung_luong, dbo.CPU.ten_CPU, dbo.HeDieuHanh.ten_he_dieu_hanh\n"
+                + "FROM     dbo.BoNho INNER JOIN\n"
+                + "                  dbo.CamBien ON dbo.BoNho.id = dbo.CamBien.id INNER JOIN\n"
+                + "                  dbo.Camera ON dbo.CamBien.id_camera = dbo.Camera.id INNER JOIN\n"
+                + "                  dbo.CPU ON dbo.BoNho.id = dbo.CPU.id INNER JOIN\n"
+                + "                  dbo.HeDieuHanh ON dbo.BoNho.id = dbo.HeDieuHanh.id INNER JOIN\n"
+                + "                  dbo.KetNoi ON dbo.BoNho.id = dbo.KetNoi.id INNER JOIN\n"
+                + "                  dbo.ManHinh ON dbo.BoNho.id = dbo.ManHinh.id INNER JOIN\n"
+                + "                  dbo.MauSac ON dbo.BoNho.id = dbo.MauSac.id INNER JOIN\n"
+                + "                  dbo.ThietKe ON dbo.BoNho.id = dbo.ThietKe.id INNER JOIN\n"
+                + "                  dbo.ThongSo ON dbo.BoNho.id = dbo.ThongSo.id_bo_nho AND dbo.Camera.id = dbo.ThongSo.id_camera_truoc AND dbo.Camera.id = dbo.ThongSo.id_camera_sau AND dbo.CPU.id = dbo.ThongSo.id_CPU AND \n"
+                + "                  dbo.HeDieuHanh.id = dbo.ThongSo.id_he_dieu_hanh AND dbo.KetNoi.id = dbo.ThongSo.id_ket_noi AND dbo.ManHinh.id = dbo.ThongSo.id_man_hinh AND dbo.MauSac.id = dbo.ThongSo.id_mau AND \n"
+                + "                  dbo.ThietKe.id = dbo.ThongSo.id_thiet_ke INNER JOIN\n"
+                + "                  dbo.TienIch ON dbo.ThongSo.id_tien_ich = dbo.TienIch.id INNER JOIN\n"
+                + "                  dbo.PIN ON dbo.BoNho.id = dbo.PIN.id";
         ThongSoViewModel sp = new ThongSoViewModel();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, id);
@@ -128,9 +124,26 @@ public class SanPhamRespository {
         return sp > 0;
     }
 
+    public List<HeDieuHanh> getHDH() {
+        String query = "select * from HeDieuHanh ";
+        List<HeDieuHanh> ls = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                HeDieuHanh sp = new HeDieuHanh(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+                ls.add(sp);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return ls;
+    }
+
     public static void main(String[] args) {
-        for (SanPhamViewModel thongSoViewModel : new SanPhamRespository().getAll()) {
-            System.out.println(thongSoViewModel.toString());
+        for (SanPhamViewModel x : new SanPhamRespository().getAll()) {
+            System.out.println(x.toString());
         }
     }
 }

@@ -11,22 +11,27 @@ import Repository.BanHangReponsitory;
  * @author ADMIN
  */
 public class ChiTietDienThoaiViewModel {
+
     private String IMEI;
     private Boolean trangThai;
-    private int moi;
     private String moTa;
     private String idQuocGiaDong;
 
     public ChiTietDienThoaiViewModel() {
     }
 
-    public ChiTietDienThoaiViewModel(String IMEI, Boolean trangThai, int moi, String moTa, String idQuocGiaDong) {
+    public ChiTietDienThoaiViewModel(String IMEI, Boolean trangThai, String moTa, String idQuocGiaDong) {
         this.IMEI = IMEI;
         this.trangThai = trangThai;
-        this.moi = moi;
         this.moTa = moTa;
         this.idQuocGiaDong = idQuocGiaDong;
     }
+
+    @Override
+    public String toString() {
+        return "ChiTietDienThoaiViewModel{" + "IMEI=" + IMEI + ", trangThai=" + trangThai + ", moTa=" + moTa + ", idQuocGiaDong=" + idQuocGiaDong + '}';
+    }
+    
 
     public String getIMEI() {
         return IMEI;
@@ -44,13 +49,6 @@ public class ChiTietDienThoaiViewModel {
         this.trangThai = trangThai;
     }
 
-    public int getMoi() {
-        return moi;
-    }
-
-    public void setMoi(int moi) {
-        this.moi = moi;
-    }
 
     public String getMoTa() {
         return moTa;

@@ -6,6 +6,7 @@ package Service.ServiceImpl;
 
 import DomainModel.ChiTietDienThoai;
 import DomainModel.Hang;
+import DomainModel.HeDieuHanh;
 import DomainModel.ThongSo;
 import Repository.SanPhamRespository;
 import Service.SanPhamServices;
@@ -51,14 +52,17 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     }
 
-    @Override
-    public List<Hang> getHang() {
-        return new SanPhamRespository().getHang();
-    }
-
+  
     @Override
     public List<String> Imei(String id) {
         return new SanPhamRespository().getIMEI(id);
+    }
+
+  
+
+    @Override
+    public List<HeDieuHanh> getHDH() {
+        return new SanPhamRespository().getHDH();
     }
 
 }
