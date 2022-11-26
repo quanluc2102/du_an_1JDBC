@@ -98,5 +98,8 @@ public class HoaDon {
 
     public HoaDon() {
     }
-
+    
+    public Object[] toDataRowBanHang(){
+        return new Object[]{maHoaDon};
+    }
 }
