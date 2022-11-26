@@ -7,7 +7,9 @@ package View.SanPham;
 import DomainModel.HeDieuHanh;
 import Service.SanPhamServices;
 import Service.ServiceImpl.SanPhamServicesImpl;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,32 +17,47 @@ import javax.swing.table.DefaultTableModel;
  * @author haha
  */
 public class ViewHeDieuHanh extends javax.swing.JDialog {
-    DefaultTableModel tbl ;
+
+    DefaultTableModel tbl;
     int index = 0;
     int tblIndex = 0;
     SanPhamServices sps = new SanPhamServicesImpl();
+    DefaultComboBoxModel modelcbb;
+    List<String> lsTrangThai = new ArrayList<>();
+
     /**
      * Creates new form HeDieuHanh
      */
-    public ViewHeDieuHanh(java.awt.Frame parent, boolean modal,String id) {
+    public ViewHeDieuHanh(java.awt.Frame parent, boolean modal, String id) {
         super(parent, modal);
         initComponents();
-        loadTable();
+
+        loadx();
         loadDataToTable(sps.getHDH());
+
     }
-    private void loadTable(){
-         tbl = (DefaultTableModel) tbl1.getModel();
-        String[]  title = {"Tên hệ điều hành","Phiên bản", "Trạng thái"};
+
+    private void loadx() {
+
+        tbl = (DefaultTableModel) tbl1.getModel();
+        String[] title = {"Tên hệ điều hành", "Phiên bản", "Trạng thái"};
         tbl.setColumnIdentifiers(title);
+        modelcbb = (DefaultComboBoxModel) cbbTrangThai.getModel();
+        modelcbb.removeAllElements();
+        lsTrangThai.add("không cập nhật");
+        lsTrangThai.add("còn cập nhật");
+        lsTrangThai.add("không hỗ trợ");
+        modelcbb.addAll(lsTrangThai);
+
     }
-    private void loadDataToTable(List<HeDieuHanh> h){
+
+    private void loadDataToTable(List<HeDieuHanh> h) {
         tbl.setRowCount(0);
         for (HeDieuHanh x : h) {
-            Object[] row = new Object[]{x.getTenHDH(),x.getPhienBan(),x.getTrangThai()==1?"Còn cập nhật":"Hết cập nhật"};
+            Object[] row = new Object[]{x.getTenHDH(), x.getPhienBan(), x.getTrangThai() == 1 ? "Còn cập nhật" : "Hết cập nhật"};
             tbl.addRow(row);
         }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,10 +70,20 @@ public class ViewHeDieuHanh extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        txtTen = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtPhienBan = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        cbbTrangThai = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Quản lý hãng");
+        setTitle("Quản lý hệ điều hành");
 
+        tbl1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tbl1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -67,8 +94,90 @@ public class ViewHeDieuHanh extends javax.swing.JDialog {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl1);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
+
+        jButton1.setText("Thêm");
+
+        jButton2.setText("Sửa");
+
+        txtTen.setEditable(false);
+        txtTen.setText("ANDroid");
+
+        jLabel1.setText("Tên");
+
+        jLabel2.setText("Phiên bản");
+
+        txtPhienBan.setEditable(false);
+        txtPhienBan.setText("ANDroid");
+
+        jLabel3.setText("Trạng thái");
+
+        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(txtTen))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPhienBan, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                            .addComponent(cbbTrangThai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtPhienBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,19 +185,31 @@ public class ViewHeDieuHanh extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl1MouseClicked
+     int index = tbl1.getSelectedRow();
+    HeDieuHanh hdh = sps.getHDH().get(index);
+    txtPhienBan.setText(hdh.getPhienBan());
+    txtTen.setText(hdh.getTenHDH());
+    cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
+    }//GEN-LAST:event_tbl1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -121,7 +242,7 @@ public class ViewHeDieuHanh extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ViewHeDieuHanh dialog = new ViewHeDieuHanh(new javax.swing.JFrame(), true,"");
+                ViewHeDieuHanh dialog = new ViewHeDieuHanh(new javax.swing.JFrame(), true, "");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -134,7 +255,16 @@ public class ViewHeDieuHanh extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbbTrangThai;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl1;
+    private javax.swing.JTextField txtPhienBan;
+    private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
 }

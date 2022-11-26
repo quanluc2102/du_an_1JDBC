@@ -54,7 +54,7 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
   
     @Override
-    public List<String> Imei(String id) {
+    public List<String> getImei(String id) {
         return new SanPhamRespository().getIMEI(id);
     }
 

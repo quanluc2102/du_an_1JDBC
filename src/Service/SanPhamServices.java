@@ -25,9 +25,8 @@ public interface SanPhamServices {
     String ban(String IMEI);
 
     List<SanPhamViewModel> timKiem(String x);
-
  
-    List<String> Imei(String id);
+    List<String> getImei(String id);
     
     List<HeDieuHanh> getHDH();
 

@@ -10,80 +10,88 @@ package ViewModel;
  */
 public class ThongSoViewModel {
 
-    private String ten;
     private String cpu;
     private String ram;
     private String rom;
-    private String sim;
-    private String manHinh;
-    private String trongLuong;
-    private String camera;
+    private String mauSac;
     private String heDieuhanh;
+    private String manHinh;
     private String pin;
+    private String sim;
+    private String matTruoc;
+    private String matLung;
+    private String baoMat;
+    private String xuatXu;
+    private String camTruoc;
+    private String camSau;
 
-    public String getPin() {
-        return pin;
-    }
-
-    public void setPin(String pin) {
-        this.pin = pin;
-    }
-
-    public ThongSoViewModel(String hang, String dong, String quocGia, String ten, String cpu, String ram, String rom, String sim, String manHinh, String trongLuong, String camera, String heDieuhanh, String pin) {
-        this.hang = hang;
-        this.dong = dong;
-        this.quocGia = quocGia;
-        this.ten = ten;
+    public ThongSoViewModel(String cpu, String ram, String rom, String mauSac, String heDieuhanh, String manHinh, String pin, String sim, String matTruoc, String matLung, String baoMat, String xuatXu) {
         this.cpu = cpu;
         this.ram = ram;
         this.rom = rom;
-        this.sim = sim;
-        this.manHinh = manHinh;
-        this.trongLuong = trongLuong;
-        this.camera = camera;
+        this.mauSac = mauSac;
         this.heDieuhanh = heDieuhanh;
+        this.manHinh = manHinh;
         this.pin = pin;
+        this.sim = sim;
+        this.matTruoc = matTruoc;
+        this.matLung = matLung;
+        this.baoMat = baoMat;
+        this.xuatXu = xuatXu;
     }
     
-  
-    public ThongSoViewModel() {
+
+   
+
+    public String getXuatXu() {
+        return xuatXu;
     }
+
+    public void setXuatXu(String xuatXu) {
+        this.xuatXu = xuatXu;
+    }
+
+    public String getCamTruoc() {
+        return camTruoc;
+    }
+
+    public void setCamTruoc(String camTruoc) {
+        this.camTruoc = camTruoc;
+    }
+
+    public String getCamSau() {
+        return camSau;
+    }
+
+    public void setCamSau(String camSau) {
+        this.camSau = camSau;
+    }
+
+    public ThongSoViewModel(String cpu, String ram, String rom, String mauSac, String heDieuhanh, String manHinh, String pin, String sim, String matTruoc, String matLung, String baoMat, String xuatXu, String camTruoc, String camSau) {
+        this.cpu = cpu;
+        this.ram = ram;
+        this.rom = rom;
+        this.mauSac = mauSac;
+        this.heDieuhanh = heDieuhanh;
+        this.manHinh = manHinh;
+        this.pin = pin;
+        this.sim = sim;
+        this.matTruoc = matTruoc;
+        this.matLung = matLung;
+        this.baoMat = baoMat;
+        this.xuatXu = xuatXu;
+        this.camTruoc = camTruoc;
+        this.camSau = camSau;
+    }
+
+ 
 
     @Override
     public String toString() {
-        return "ThongSoViewModel{" + "hang=" + hang + ", dong=" + dong + ", quocGia=" + quocGia + ", ten=" + ten + ", cpu=" + cpu + ", ram=" + ram + ", rom=" + rom + ", sim=" + sim + ", manHinh=" + manHinh + ", trongLuong=" + trongLuong + ", camera=" + camera + ", heDieuhanh=" + heDieuhanh + '}';
+        return "ThongSoViewModel{" + "cpu=" + cpu + ", ram=" + ram + ", rom=" + rom + ", mauSac=" + mauSac + ", heDieuhanh=" + heDieuhanh + ", manHinh=" + manHinh + ", pin=" + pin + ", sim=" + sim + ", matTruoc=" + matTruoc + ", matLung=" + matLung + ", baoMat=" + baoMat + '}';
     }
 
-    public String getHang() {
-        return hang;
-    }
-
-    public void setHang(String hang) {
-        this.hang = hang;
-    }
-
-    public String getDong() {
-        return dong;
-    }
-
-    public void setDong(String dong) {
-        this.dong = dong;
-    }
-
-    public String getQuocGia() {
-        return quocGia;
-    }
-
-    public void setQuocGia(String quocGia) {
-        this.quocGia = quocGia;
-    }
-
-    public String getTen() {
-        return ten;
-    }
-
-    public void setTen(String ten) {
-        this.ten = ten;
+    public ThongSoViewModel() {
     }
 
     public String getCpu() {
@@ -110,36 +118,12 @@ public class ThongSoViewModel {
         this.rom = rom;
     }
 
-    public String getSim() {
-        return sim;
+    public String getMauSac() {
+        return mauSac;
     }
 
-    public void setSim(String sim) {
-        this.sim = sim;
-    }
-
-    public String getManHinh() {
-        return manHinh;
-    }
-
-    public void setManHinh(String manHinh) {
-        this.manHinh = manHinh;
-    }
-
-    public String getTrongLuong() {
-        return trongLuong;
-    }
-
-    public void setTrongLuong(String trongLuong) {
-        this.trongLuong = trongLuong;
-    }
-
-    public String getCamera() {
-        return camera;
-    }
-
-    public void setCamera(String camera) {
-        this.camera = camera;
+    public void setMauSac(String mauSac) {
+        this.mauSac = mauSac;
     }
 
     public String getHeDieuhanh() {
@@ -150,4 +134,53 @@ public class ThongSoViewModel {
         this.heDieuhanh = heDieuhanh;
     }
 
+    public String getManHinh() {
+        return manHinh;
+    }
+
+    public void setManHinh(String manHinh) {
+        this.manHinh = manHinh;
+    }
+
+    public String getPin() {
+        return pin;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
+    }
+
+    public String getSim() {
+        return sim;
+    }
+
+    public void setSim(String sim) {
+        this.sim = sim;
+    }
+
+    public String getMatTruoc() {
+        return matTruoc;
+    }
+
+    public void setMatTruoc(String matTruoc) {
+        this.matTruoc = matTruoc;
+    }
+
+    public String getMatLung() {
+        return matLung;
+    }
+
+    public void setMatLung(String matLung) {
+        this.matLung = matLung;
+    }
+
+    public String getBaoMat() {
+        return baoMat;
+    }
+
+    public void setBaoMat(String baoMat) {
+        this.baoMat = baoMat;
+    }
+
+    
 }

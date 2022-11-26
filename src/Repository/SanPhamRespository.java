@@ -51,7 +51,7 @@ public class SanPhamRespository {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
-                SanPhamViewModel sp = new SanPhamViewModel(rs.getString(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getInt(5),
+                SanPhamViewModel sp = new SanPhamViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),
                         rs.getDouble(6), rs.getDouble(7));
                 listSanPhamViewModelView.add(sp);
             }
@@ -63,29 +63,28 @@ public class SanPhamRespository {
     }
 
     public ThongSoViewModel getAllThongSoView(String id) {
-        String query = "SELECT dbo.BoNho.so_luong_ram, dbo.BoNho.so_Luong_rom, dbo.ManHinh.loai_man_hinh, dbo.ManHinh.kich_thuoc, dbo.PIN.dung_luong, dbo.CPU.ten_CPU, dbo.HeDieuHanh.ten_he_dieu_hanh\n"
-                + "FROM     dbo.BoNho INNER JOIN\n"
-                + "                  dbo.CamBien ON dbo.BoNho.id = dbo.CamBien.id INNER JOIN\n"
-                + "                  dbo.Camera ON dbo.CamBien.id_camera = dbo.Camera.id INNER JOIN\n"
-                + "                  dbo.CPU ON dbo.BoNho.id = dbo.CPU.id INNER JOIN\n"
-                + "                  dbo.HeDieuHanh ON dbo.BoNho.id = dbo.HeDieuHanh.id INNER JOIN\n"
-                + "                  dbo.KetNoi ON dbo.BoNho.id = dbo.KetNoi.id INNER JOIN\n"
-                + "                  dbo.ManHinh ON dbo.BoNho.id = dbo.ManHinh.id INNER JOIN\n"
-                + "                  dbo.MauSac ON dbo.BoNho.id = dbo.MauSac.id INNER JOIN\n"
-                + "                  dbo.ThietKe ON dbo.BoNho.id = dbo.ThietKe.id INNER JOIN\n"
-                + "                  dbo.ThongSo ON dbo.BoNho.id = dbo.ThongSo.id_bo_nho AND dbo.Camera.id = dbo.ThongSo.id_camera_truoc AND dbo.Camera.id = dbo.ThongSo.id_camera_sau AND dbo.CPU.id = dbo.ThongSo.id_CPU AND \n"
-                + "                  dbo.HeDieuHanh.id = dbo.ThongSo.id_he_dieu_hanh AND dbo.KetNoi.id = dbo.ThongSo.id_ket_noi AND dbo.ManHinh.id = dbo.ThongSo.id_man_hinh AND dbo.MauSac.id = dbo.ThongSo.id_mau AND \n"
-                + "                  dbo.ThietKe.id = dbo.ThongSo.id_thiet_ke INNER JOIN\n"
-                + "                  dbo.TienIch ON dbo.ThongSo.id_tien_ich = dbo.TienIch.id INNER JOIN\n"
-                + "                  dbo.PIN ON dbo.BoNho.id = dbo.PIN.id";
+        String query = "select ten_CPU ,so_luong_ram  , so_Luong_rom , ten_mau,ten_he_dieu_hanh+' '+phien_ban,loai_man_hinh+' '+kich_thuoc ,\n"
+                + "dung_luong+' '+loai_pin ,  sim+' '+ho_tro_mang,mat_truoc,mat_lung,bao_mat,ten_quoc_gia\n"
+                + "									from ThongSo join PIN on PIN.id = ThongSo.id_pin\n"
+                + "									join CPU on CPU.id = ThongSo.id_CPU\n"
+                + "									join BoNho on BoNho.id = ThongSo.id_bo_nho\n"
+                + "									join MauSac on MauSac.id = ThongSo.id_mau\n"
+                + "									join HeDieuHanh on HeDieuHanh.id = ThongSo.id_he_dieu_hanh\n"
+                + "									join ManHinh on ManHinh.id = ThongSo.id_man_hinh\n"
+                + "									join KetNoi on KetNoi.id = ThongSo.id_ket_noi\n"
+                + "									join ThietKe on ThietKe.id = ThongSo.id_thiet_ke\n"
+                + "									join TienIch on TienIch.id = ThongSo.id_tien_ich\n"
+                + "									join QuocGiaDong on QuocGiaDong.id = ThongSo.id_dong\n"
+                + "									join QuocGia on QuocGia.id = QuocGiaDong.id_quoc_gia\n"
+                + "\n"
+                + "									where thongso.id_dong = ?";
         ThongSoViewModel sp = new ThongSoViewModel();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                sp = new ThongSoViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
-                        rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13));
-
+                sp = new ThongSoViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12));
             }
 
         } catch (SQLException e) {
