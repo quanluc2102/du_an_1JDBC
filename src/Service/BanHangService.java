@@ -5,8 +5,10 @@
 package Service;
 
 import DomainModel.ChiTietDienThoai;
+import DomainModel.HoaDon;
 import DomainModel.HoaDonChiTiet;
 import ViewModel.ChiTietDienThoaiViewModel;
+import ViewModel.DienThoaiViewModel;
 import ViewModel.HoaDonChiTietViewModel;
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,14 +19,16 @@ import javax.swing.table.DefaultTableModel;
  * @author ADMIN
  */
 public interface BanHangService {
-    void getAll(List<ChiTietDienThoaiViewModel> list);
-    void showData(DefaultTableModel dtm,List<ChiTietDienThoaiViewModel> list);
+    void getAll(List<DienThoaiViewModel> list);
+    void showData(DefaultTableModel dtm,List<DienThoaiViewModel> list);
     void getMaHD(List<String> list);
     void getHDCT(List<HoaDonChiTietViewModel> list,String idHD);
     void showDataHoaDon(DefaultTableModel dtm,List<HoaDonChiTietViewModel> list);
     void getTenKH(List<String> list);
     void getMaNV(List<String> list);
     void getMaGG(List<String> list);
+    void getAllHoaDonChuaThanhToan(List<HoaDon> list);
+    void showDataHoaDonChuaThanhToan(DefaultTableModel dtm,List<HoaDon> list);
     String addVaoHDCT(String imei,String maHD);
     String deleteHDCT(String imei,String maHD);
     String addHD();

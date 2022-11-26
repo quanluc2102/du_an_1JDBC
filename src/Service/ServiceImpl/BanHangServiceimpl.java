@@ -5,9 +5,11 @@
 package Service.ServiceImpl;
 
 import DomainModel.ChiTietDienThoai;
+import DomainModel.HoaDon;
 import Repository.BanHangReponsitory;
 import Service.BanHangService;
 import ViewModel.ChiTietDienThoaiViewModel;
+import ViewModel.DienThoaiViewModel;
 import ViewModel.HoaDonChiTietViewModel;
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,15 +24,15 @@ public class BanHangServiceimpl implements BanHangService {
     BanHangReponsitory bhr = new BanHangReponsitory();
 
     @Override
-    public void getAll(List<ChiTietDienThoaiViewModel> list) {
+    public void getAll(List<DienThoaiViewModel> list) {
         list.addAll(bhr.getAll());
     }
 
     @Override
-    public void showData(DefaultTableModel dtm, List<ChiTietDienThoaiViewModel> list) {
+    public void showData(DefaultTableModel dtm, List<DienThoaiViewModel> list) {
         dtm.setRowCount(0);
-        for (ChiTietDienThoaiViewModel a : list) {
-            dtm.addRow(a.toDataRowBanHangView());
+        for (DienThoaiViewModel a : list) {
+            dtm.addRow(a.toDataRow());
         }
     }
 
@@ -89,9 +91,10 @@ public class BanHangServiceimpl implements BanHangService {
 
     @Override
     public String addHD() {
+        String maHDThem=bhr.maHD();
         boolean add=bhr.addHoaDon();
         if(add==true){
-            return "Thêm thành công";
+            return "Thêm thành công " + maHDThem;
         }else{
             return "Thêm thất bại";
         }
@@ -130,5 +133,18 @@ public class BanHangServiceimpl implements BanHangService {
     @Override
     public BigDecimal layGiaThanhTien(BigDecimal tongTien, BigDecimal giamGia) {
         return bhr.layThanhTien(tongTien, giamGia);
+    }
+
+    @Override
+    public void getAllHoaDonChuaThanhToan(List<HoaDon> list) {
+        list.addAll(bhr.getAllHoaDonChuaThanhToan());
+    }
+
+    @Override
+    public void showDataHoaDonChuaThanhToan(DefaultTableModel dtm, List<HoaDon> list) {
+        dtm.setRowCount(0);
+        for(HoaDon a:list){
+            dtm.addRow(a.toDataRowBanHang());
+        }
     }
 }

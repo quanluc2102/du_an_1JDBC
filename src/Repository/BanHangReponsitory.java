@@ -9,7 +9,9 @@ import DomainModel.HoaDon;
 import DomainModel.HoaDonChiTiet;
 import Ultilities.SQLServerConnection;
 import ViewModel.ChiTietDienThoaiViewModel;
+import ViewModel.DienThoaiViewModel;
 import ViewModel.HoaDonChiTietViewModel;
+import ViewModel.ViewModelHoaDon;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -25,19 +27,26 @@ import java.sql.SQLException;
  */
 public class BanHangReponsitory {
 
-    public List<ChiTietDienThoaiViewModel> getAll() {
-        String query = "SELECT [IMEI]\n"
-                + "      ,[id_mau_Dong]\n"
-                + "      ,[id_quoc_gia_Dong]\n"
-                + "      ,[trang_thai]\n"
-                + "      ,[moi]\n"
-                + "      ,[mo_ta]\n"
-                + "  FROM [dbo].[ChiTietDienThoai]";
-        List<ChiTietDienThoaiViewModel> list = new ArrayList<>();
+    public List<DienThoaiViewModel> getAll() {
+        String query = "SELECT DienThoai.[id]\n"
+                + "      ,[ma_dien_thoai]\n"
+                + "      ,[ten_dien_thoai]\n"
+                + "      ,[id_hang]\n"
+                + "      ,DienThoai.[trang_thai]\n"
+                + "  FROM [dbo].[DienThoai]\n"
+                + "  join Dong on Dong.id_dien_thoai = DienThoai.id\n"
+                + "join QuocGiaDong on QuocGiaDong.id_dong = Dong.id\n"
+                + "join ChiTietDienThoai on QuocGiaDong.id=ChiTietDienThoai.id_quoc_gia_dong\n"
+                + "group by DienThoai.[id]\n"
+                + "      ,[ma_dien_thoai]\n"
+                + "      ,[ten_dien_thoai]\n"
+                + "      ,[id_hang]\n"
+                + "      ,DienThoai.[trang_thai]";
+        List<DienThoaiViewModel> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ChiTietDienThoaiViewModel a = new ChiTietDienThoaiViewModel(rs.getString("IMEI"), rs.getString("id_mau_Dong"), rs.getString("id_quoc_gia_Dong"), rs.getBoolean("trang_thai"), rs.getInt("moi"), rs.getString("mo_ta"));
+                DienThoaiViewModel a = new DienThoaiViewModel(rs.getString("id"), rs.getString("ma_dien_thoai"), rs.getString("ten_dien_thoai"), rs.getString("id_hang"), rs.getInt("trang_thai"));
                 list.add(a);
             }
             return list;
@@ -47,32 +56,17 @@ public class BanHangReponsitory {
         return null;
     }
 
-    public String layTenSP(String imei) {
-        String query = "SELECT [ten_hien_thi]\n"
-                + "  FROM [dbo].[QuocGiaDong]\n"
-                + "  join ChiTietDienThoai on ChiTietDienThoai.id_quoc_gia_Dong=QuocGiaDong.id\n"
-                + "  where IMEI = ?";
-        String a = "";
-        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, imei);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                a = rs.getString(1);
-            }
-            return a;
-        } catch (SQLException e) {
-            e.printStackTrace(System.out);
-        }
-        return null;
-    }
-
-    public int layGia(String idQuocGiaDong) {
-        String query = "Select QuocGiaDong.gia_ban from QuocGiaDong \n"
-                + "join ChiTietDienThoai on ChiTietDienThoai.id_quoc_gia_Dong=QuocGiaDong.id\n"
-                + "where ChiTietDienThoai.id_quoc_gia_Dong = ?";
+    public int layGia(String maDT) {
+        String query = "select gia_ban\n"
+                + "from DienThoai \n"
+                + "join Dong on DienThoai.id = Dong.id_dien_thoai\n"
+                + "join QuocGiaDong on QuocGiaDong.id_dong = Dong.id\n"
+                + "join ChiTietDienThoai on ChiTietDienThoai.id_quoc_gia_dong=QuocGiaDong.id\n"
+                + "where DienThoai.ma_dien_thoai = ?\n"
+                + "group by gia_ban";
         int a = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, idQuocGiaDong);
+            ps.setObject(1, maDT);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 a = rs.getInt(1);
@@ -105,7 +99,7 @@ public class BanHangReponsitory {
 
     public List<String> getAllMaHoaDon() {
         String query = "SELECT [ma_hoa_don]\n"
-                + "  FROM [dbo].[HoaDon]";
+                + "  FROM [dbo].[HoaDon]\n";
         List<String> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
@@ -339,8 +333,8 @@ public class BanHangReponsitory {
         return null;
 
     }
-    
-    public BigDecimal layThanhTien(BigDecimal tongTien,BigDecimal giamGia) {
+
+    public BigDecimal layThanhTien(BigDecimal tongTien, BigDecimal giamGia) {
         String query = "select ? - ?";
         BigDecimal a = null;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
@@ -357,7 +351,7 @@ public class BanHangReponsitory {
         return null;
 
     }
-    
+
     public boolean layDonVi(String maKM) {
         String query = "select KhuyenMai.don_vi \n"
                 + "from KhuyenMai\n"
@@ -374,8 +368,7 @@ public class BanHangReponsitory {
         }
         return a;
     }
-    
-    
+
     public String layIDKH(String tenKH) {
         String query = "SELECT [id]\n"
                 + "  FROM [dbo].[KhachHang]\n"
@@ -429,7 +422,7 @@ public class BanHangReponsitory {
         }
         return null;
     }
-    
+
     public boolean thanhToan(String tenKH, String maNV, String maKM, String maHD) {
         String query = "UPDATE [dbo].[HoaDon]\n"
                 + "   SET [id_nhan_vien] = ?\n"
@@ -448,5 +441,52 @@ public class BanHangReponsitory {
             e.printStackTrace(System.out);
         }
         return check > 0;
+    }
+
+    public String layTenDong(String maDT) {
+        String query = "select ten_dien_thoai+' '+ ten_dong as ten\n"
+                + "from DienThoai \n"
+                + "join Dong on DienThoai.id = Dong.id_dien_thoai\n"
+                + "join QuocGiaDong on QuocGiaDong.id_dong = Dong.id\n"
+                + "join ChiTietDienThoai on ChiTietDienThoai.id_quoc_gia_dong=QuocGiaDong.id\n"
+                + "where DienThoai.ma_dien_thoai = ? \n"
+                + "group by ten_dien_thoai,ten_dong";
+        String a = "";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, maDT);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getString(1);
+            }
+            return a;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public List<HoaDon> getAllHoaDonChuaThanhToan() {
+        String query = "SELECT [id]\n"
+                + "      ,[ma_hoa_don]\n"
+                + "      ,[ngay_tao]\n"
+                + "      ,[id_nhan_vien]\n"
+                + "      ,[id_khach_hang]\n"
+                + "      ,[id_khuyen_mai]\n"
+                + "      ,[mo_ta]\n"
+                + "      ,[trang_thai]\n"
+                + "  FROM [dbo].[HoaDon]\n"
+                + "  where trang_thai = 0";
+        List<HoaDon> list = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                HoaDon a = new HoaDon(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
+                list.add(a);
+            }
+            return list;
+        } catch (SQLException s) {
+            s.printStackTrace(System.out);
+        }
+        return null;
     }
 }
