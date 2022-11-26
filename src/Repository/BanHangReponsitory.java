@@ -489,4 +489,27 @@ public class BanHangReponsitory {
         }
         return null;
     }
+
+    public List<String> layIMEITheoMaDT(String maDT) {
+        String query = "SELECT [IMEI]\n"
+                + "  FROM [dbo].[ChiTietDienThoai]\n"
+                + "  join QuocGiaDong on QuocGiaDong.id=ChiTietDienThoai.id_quoc_gia_dong\n"
+                + "  join Dong on dong.id=QuocGiaDong.id_dong\n"
+                + "  join DienThoai on DienThoai.id = Dong.id_dien_thoai\n"
+                + "  where ma_dien_thoai = ? and ChiTietDienThoai.trang_thai=1";
+        List<String> list=new ArrayList<>();
+        String a="";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, maDT);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getString(1);
+                list.add(a);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
 }

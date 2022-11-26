@@ -147,4 +147,16 @@ public class BanHangServiceimpl implements BanHangService {
             dtm.addRow(a.toDataRowBanHang());
         }
     }
+
+    @Override
+    public void sapXepHoaDon(List<HoaDon> list) {
+        list.sort((o1,o2)->{
+            return o1.getMaHoaDon().compareTo(o2.getMaHoaDon());
+        });
+    }
+
+    @Override
+    public void getIMEI(List<String> list,String maDT) {
+        list.addAll(bhr.layIMEITheoMaDT(maDT));
+    }
 }

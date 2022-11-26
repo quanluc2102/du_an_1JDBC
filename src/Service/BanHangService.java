@@ -38,4 +38,6 @@ public interface BanHangService {
     BigDecimal layGiaThanhTien(BigDecimal tongTien,BigDecimal giamGia);
     String thanhToan(String tenKH, String maNV, String maKM, String maHD);
     boolean layDonVi(String maKM);
+    void sapXepHoaDon(List<HoaDon> list);
+    void getIMEI(List<String> list,String maDT);
 }
