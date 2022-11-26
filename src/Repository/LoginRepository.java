@@ -36,13 +36,15 @@ public class LoginRepository {
         return null;
 
     }
-        public static void main(String[] args) {
+
+    public static void main(String[] args) {
         List<LoginViewModel> l = new LoginRepository().getAll();
         for (LoginViewModel nhanVien : l) {
             System.out.println(nhanVien.toString());
         }
     }
-                public boolean addNV(NhanVien nv) {
+
+    public boolean addNV(NhanVien nv) {
         int check = 0;
         try ( Connection conn = new SQLServerConnection().getConnection()) {
             String query = "INSERT INTO [dbo].[NhanVien]\n"

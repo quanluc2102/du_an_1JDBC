@@ -121,9 +121,16 @@ public class NhanVienView {
     public String toString() {
         return "NhanVienView{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", idChucVu=" + idChucVu + ", tenChucVu=" + tenChucVu + ", ngaySinh=" + ngaySinh + ", sdt=" + sdt + ", email=" + email + ", diaChi=" + diaChi + ", matKhau=" + matKhau + ", trangThai=" + trangThai + '}';
     }
+    public String tentrangThai(int trangThai){
+        if (trangThai==0) {
+           return "Đã nghỉ";
+        } else {
+            return "Đang làm";
+        }
+    }
 
     public Object[] toData(){
-        return new Object[]{id,ma,ten,idChucVu,tenChucVu,ngaySinh,sdt,email,diaChi,matKhau};
+        return new Object[]{id,ma,ten,idChucVu,tenChucVu,ngaySinh,sdt,email,diaChi,matKhau,tentrangThai(trangThai)};
     }
     
     
