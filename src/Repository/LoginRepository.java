@@ -42,4 +42,40 @@ public class LoginRepository {
             System.out.println(nhanVien.toString());
         }
     }
+                public boolean addNV(NhanVien nv) {
+        int check = 0;
+        try ( Connection conn = new SQLServerConnection().getConnection()) {
+            String query = "INSERT INTO [dbo].[NhanVien]\n"
+                    + "           ([ma_nhan_vien]\n"
+                    + "           ,[ten_nhan_vien]\n"
+                    + "           ,[ngay_sinh]\n"
+                    + "           ,[sdt]\n"
+                    + "           ,[email]\n"
+                    + "           ,[dia_chi]\n"
+                    + "           ,[mat_khau])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement ps = conn.prepareCall(query);
+            ps.setObject(1, nv.getMa());
+            ps.setObject(2, nv.getTen());
+            ps.setObject(3, nv.getNgaySinh());
+            ps.setObject(4, nv.getSdt());
+            ps.setObject(5, nv.getEmail());
+            ps.setObject(6, nv.getDiaChi());
+            ps.setObject(7, nv.getMatKhau());
+
+            check = ps.executeUpdate();
+            return check > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return check < 0;
+        }
+
+    }
 }

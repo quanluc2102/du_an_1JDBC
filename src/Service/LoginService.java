@@ -4,6 +4,7 @@
  */
 package Service;
 
+import DomainModel.NhanVien;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ public interface LoginService {
         String login(String username, String pass);
         List<String> ChucVuCBB();
         List<String> IDChucVu();
+        String dangKi(NhanVien nv);
         
     
 }

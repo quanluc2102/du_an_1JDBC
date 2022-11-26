@@ -5,6 +5,7 @@
 package Service.ServiceImpl;
 
 import DomainModel.ChucVu;
+import DomainModel.NhanVien;
 import Repository.ChucVuRepository;
 import Repository.LoginRepository;
 import Service.LoginService;
@@ -51,7 +52,18 @@ public class LoginImpl implements LoginService{
             cbb.add(chucVu.getId());
         }
         return cbb;
-    }    }
+    }
+
+    @Override
+    public String dangKi(NhanVien nv) {
+ LoginRepository nva = new LoginRepository();
+        if (nva.addNV(nv)) {
+            return "them thanh cong";
+        }
+
+        return "them that bai";    }    
+}
+ 
         
 
   
