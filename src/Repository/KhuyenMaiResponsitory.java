@@ -6,6 +6,7 @@ package Repository;
 
 import DomainModel.KhuyenMai;
 import Ultilities.SQLServerConnection;
+import ViewModel.KhuyenMaiVeiwModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -19,7 +20,7 @@ import java.sql.SQLException;
  */
 public class KhuyenMaiResponsitory {
 
-    public List<KhuyenMai> getAll() {
+    public List<KhuyenMaiVeiwModel> getAll() {
         String query = "SELECT [id]\n"
                 + "      ,[ma_khuyen_mai]\n"
                 + "      ,[ngay_bat_dau]\n"
@@ -29,24 +30,23 @@ public class KhuyenMaiResponsitory {
                 + "      ,[mo_ta]\n"
                 + "      ,[trang_thai]\n"
                 + "  FROM [dbo].[KhuyenMai]";
-        List<KhuyenMai> list = new ArrayList<>();
+        List<KhuyenMaiVeiwModel> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                KhuyenMai chiTietSP = new KhuyenMai(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getDouble(5), rs.getBoolean(6), rs.getString(7), rs.getString(8));
-                list.add(chiTietSP);
+                KhuyenMaiVeiwModel km = new KhuyenMaiVeiwModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getDouble(5), rs.getBoolean(6), rs.getString(7), rs.getInt(8));
+                list.add(km);
             }
-            return list;
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
-        return null;
+        return list;
     }
 
-    public boolean add(KhuyenMai km) {
+    public boolean add(KhuyenMaiVeiwModel km) {
         String query = "INSERT INTO [dbo].[KhuyenMai]\n"
-                + "           ([id]\n"
-                + "           ,[ma_khuyen_mai]\n"
+                + "           ([ma_khuyen_mai]\n"
                 + "           ,[ngay_bat_dau]\n"
                 + "           ,[ngay_ket_thuc]\n"
                 + "           ,[gia_giam]\n"
@@ -54,17 +54,17 @@ public class KhuyenMaiResponsitory {
                 + "           ,[mo_ta]\n"
                 + "           ,[trang_thai])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,?,?,?,?)";
+                + "           (?,?,?,?,?,?,?)";
         int check = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, km.getId());
-            ps.setObject(2, km.getMa());
-            ps.setObject(3, km.getNgayBatDau());
-            ps.setObject(4, km.getNgayKetThuc());
-            ps.setObject(5, km.getGiaGiam());
-            ps.setObject(6, km.isDonVi());
-            ps.setObject(7, km.getMoTa());
-            ps.setObject(8, km.getTrangThai());
+
+            ps.setObject(1, km.getMa());
+            ps.setObject(2, km.getNgayBatDau());
+            ps.setObject(3, km.getNgayKetThuc());
+            ps.setObject(4, km.getGiaGiam());
+            ps.setObject(5, km.isDonVi());
+            ps.setObject(6, km.getMoTa());
+            ps.setObject(7, km.getTrangThai());
             check = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
@@ -85,10 +85,9 @@ public class KhuyenMaiResponsitory {
         return check > 0;
     }
 
-    public boolean update(KhuyenMai km, String idKM) {
+    public boolean update(KhuyenMaiVeiwModel km, String idKM) {
         String query = "UPDATE [dbo].[KhuyenMai]\n"
-                + "   SET [id] = ?\n"
-                + "      ,[ma_khuyen_mai] =?\n"
+                + "   SET [ma_khuyen_mai] =?\n"
                 + "      ,[ngay_bat_dau] = ?\n"
                 + "      ,[ngay_ket_thuc] = ?\n"
                 + "      ,[gia_giam] = ?\n"
@@ -98,19 +97,22 @@ public class KhuyenMaiResponsitory {
                 + " WHERE id = ?";
         int check = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, km.getId());
-            ps.setObject(2, km.getMa());
-            ps.setObject(3, km.getNgayBatDau());
-            ps.setObject(4, km.getNgayKetThuc());
-            ps.setObject(5, km.getGiaGiam());
-            ps.setObject(6, km.isDonVi());
-            ps.setObject(7, km.getMoTa());
-            ps.setObject(8, km.getTrangThai());
-            ps.setObject(9, idKM);
+            ps.setObject(1, km.getMa());
+            ps.setObject(2, km.getNgayBatDau());
+            ps.setObject(3, km.getNgayKetThuc());
+            ps.setObject(4, km.getGiaGiam());
+            ps.setObject(5, km.isDonVi());
+            ps.setObject(6, km.getMoTa());
+            ps.setObject(7, km.getTrangThai());
+            ps.setObject(8, idKM);
             check = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return check > 0;
+    }
+
+    public static void main(String[] args) {
+
     }
 }

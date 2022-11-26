@@ -8,6 +8,7 @@ import DomainModel.KhuyenMai;
 import Service.KhuyenMaiService;
 import Service.ServiceImpl.KhachHangServiceImpl;
 import Service.ServiceImpl.KhuyenMaiServiceimpl;
+import ViewModel.KhuyenMaiVeiwModel;
 import java.security.PrivilegedExceptionAction;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,10 +28,10 @@ import javax.swing.table.DefaultTableModel;
  * @author togia
  */
 public class VeiwKhuyenMai extends javax.swing.JFrame {
-    
+
     private DefaultTableModel dtm = new DefaultTableModel();
     private DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
-    private List<KhuyenMai> list = new ArrayList<>();
+    private List<KhuyenMaiVeiwModel> list = new ArrayList<>();
     private List<String> listcombobox = new ArrayList<>();
     private KhuyenMaiService service = new KhuyenMaiServiceimpl();
 
@@ -49,31 +50,31 @@ public class VeiwKhuyenMai extends javax.swing.JFrame {
         dcbm.addAll(listcombobox);
         dcbm.setSelectedItem("Sắp diễn ra");
         service.getAll(list);
-        
+
     }
-    
-    public void showdataTable(List<KhuyenMai> list) {
+
+    public void showdataTable(List<KhuyenMaiVeiwModel> list) {
         dtm.setRowCount(0);
-        for (KhuyenMai km : list) {
+        for (KhuyenMaiVeiwModel km : list) {
             dtm.addRow(km.toDataRow());
         }
     }
-    
+
     public void fillData(int index) {
-        KhuyenMai km = list.get(index);
+        KhuyenMaiVeiwModel km = list.get(index);
         lbID.setText(km.getId());
         txtNgayKT.setText(String.valueOf(km.getNgayBatDau()));
         txtNgayBD.setText(String.valueOf(km.getNgayKetThuc()));
         txtMaKM.setText(km.getMa());
         txtMoTa.setText(km.getMoTa());
         txtGiaGiam.setText(String.valueOf(km.getGiaGiam()));
-        cbbTrangThai.setSelectedItem(list.get(index).getTrangThai());     
-         if (km.isDonVi() == true) {
+        cbbTrangThai.setSelectedItem(list.get(index).getTrangThai());
+        if (km.isDonVi() == true) {
             radioPhanTram.setSelected(true);
         } else {
             radioTruTien.setSelected(true);
         }
-        
+
     }
 
     /**
@@ -408,13 +409,21 @@ public class VeiwKhuyenMai extends javax.swing.JFrame {
 
     private void btEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditActionPerformed
         int row = jTable1.getSelectedRow();
-        KhuyenMai kh = new KhuyenMai();
+        KhuyenMaiVeiwModel kh = new KhuyenMaiVeiwModel();
         String maSua = list.get(row).getMa();
         String ma = txtMaKM.getText();
         String moTa = txtMoTa.getText();
         boolean donVi = radioTruTien.isSelected();
         Double giaGiam = Double.valueOf(txtGiaGiam.getText());
-        String trangThai = (String) cbbTrangThai.getSelectedItem();
+        int trangThai = 0;
+        if (cbbTrangThai.getSelectedItem() == "Đang diễn ra") {
+            trangThai = 0;
+
+        } else if (cbbTrangThai.getSelectedItem() == "Sắp diễn ra") {
+            trangThai = 1;
+        } else {
+            trangThai = 2;
+        }
         String ngayBD = txtNgayBD.getText();
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate1 = LocalDate.parse(ngayBD, formatter1);
@@ -425,7 +434,7 @@ public class VeiwKhuyenMai extends javax.swing.JFrame {
         LocalDate localDate2 = LocalDate.parse(ngayKT, formatter2);
         java.sql.Date ngayKTs = java.sql.Date.valueOf(localDate2);
         kh.setNgayKetThuc(ngayKTs);
-        KhuyenMai km = new KhuyenMai(ma, ngayBDs, ngayKTs, giaGiam, donVi, moTa, trangThai);
+        KhuyenMaiVeiwModel km = new KhuyenMaiVeiwModel(ma, ngayBDs, ngayKTs, giaGiam, donVi, moTa, trangThai);
         JOptionPane.showMessageDialog(this, service.update(maSua, km));
         list.removeAll(list);
         service.getAll(list);
@@ -449,18 +458,25 @@ public class VeiwKhuyenMai extends javax.swing.JFrame {
     }//GEN-LAST:event_btClearActionPerformed
 
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
-        List<KhuyenMai> listSearch = new KhuyenMaiServiceimpl().timTheoTen(list, txtMaKM.getText());
+        List<KhuyenMaiVeiwModel> listSearch = new KhuyenMaiServiceimpl().timTheoMa(list, txtMaKM.getText());
         showdataTable(listSearch);
     }//GEN-LAST:event_btSearchActionPerformed
 
     private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
-        KhuyenMai kh = new KhuyenMai();
-        String id = lbID.getText();
+        KhuyenMaiVeiwModel kh = new KhuyenMaiVeiwModel();
         String ma = txtMaKM.getText();
         String moTa = txtMoTa.getText();
         boolean donVi = radioTruTien.isSelected();
         Double giaGiam = Double.valueOf(txtGiaGiam.getText());
-        String trangThai = (String) cbbTrangThai.getSelectedItem();
+        int trangThai = 0;
+        if (cbbTrangThai.getSelectedItem() == "Đang diễn ra") {
+            trangThai = 0;
+
+        } else if (cbbTrangThai.getSelectedItem() == "Sắp diễn ra") {
+            trangThai = 1;
+        } else {
+            trangThai = 2;
+        }
         String ngayBD = txtNgayBD.getText();
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate1 = LocalDate.parse(ngayBD, formatter1);
@@ -471,8 +487,8 @@ public class VeiwKhuyenMai extends javax.swing.JFrame {
         LocalDate localDate2 = LocalDate.parse(ngayKT, formatter2);
         java.sql.Date ngayKTs = java.sql.Date.valueOf(localDate2);
         kh.setNgayKetThuc(ngayKTs);
-        KhuyenMai km = new KhuyenMai(ma, ngayBDs, ngayKTs, giaGiam, donVi, moTa, trangThai);
-        JOptionPane.showMessageDialog(rootPane, service.add(kh));
+        KhuyenMaiVeiwModel km = new KhuyenMaiVeiwModel(ma, ngayBDs, ngayKTs, giaGiam, donVi, moTa, trangThai);
+        JOptionPane.showMessageDialog(rootPane, service.add(km));
         list.removeAll(list);
         service.getAll(list);
         showdataTable(list);
@@ -488,17 +504,17 @@ public class VeiwKhuyenMai extends javax.swing.JFrame {
     }//GEN-LAST:event_btTatCaActionPerformed
 
     private void btDangDienRaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDangDienRaActionPerformed
-        List<KhuyenMai> listShowDangDienRa = new KhuyenMaiServiceimpl().listShowDangDienRa(list);
+        List<KhuyenMaiVeiwModel> listShowDangDienRa = new KhuyenMaiServiceimpl().listShowDangDienRa(list);
         showdataTable(listShowDangDienRa);
     }//GEN-LAST:event_btDangDienRaActionPerformed
 
     private void btSapDienRaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSapDienRaActionPerformed
-        List<KhuyenMai> listShowSapDienRa = new KhuyenMaiServiceimpl().listShowSapDienRa(list);
+        List<KhuyenMaiVeiwModel> listShowSapDienRa = new KhuyenMaiServiceimpl().listShowSapDienRa(list);
         showdataTable(listShowSapDienRa);
     }//GEN-LAST:event_btSapDienRaActionPerformed
 
     private void btDaKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDaKTActionPerformed
-        List<KhuyenMai> listShowDaKT = new KhuyenMaiServiceimpl().listShowDaKT(list);
+        List<KhuyenMaiVeiwModel> listShowDaKT = new KhuyenMaiServiceimpl().listShowDaKT(list);
         showdataTable(listShowDaKT);
     }//GEN-LAST:event_btDaKTActionPerformed
 
@@ -531,6 +547,22 @@ public class VeiwKhuyenMai extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(VeiwKhuyenMai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

@@ -5,6 +5,7 @@
 package Service;
 
 import DomainModel.KhuyenMai;
+import ViewModel.KhuyenMaiVeiwModel;
 import java.util.List;
 
 /**
@@ -13,19 +14,19 @@ import java.util.List;
  */
 public interface KhuyenMaiService {
 
-    void getAll(List<KhuyenMai> list);
+    void getAll(List<KhuyenMaiVeiwModel> list);
 
-    String add(KhuyenMai km);
+    String add(KhuyenMaiVeiwModel km);
 
     String delete(String idKM);
 
-    String update(String idKM, KhuyenMai km);
+    String update(String idKM, KhuyenMaiVeiwModel km);
 
-    List<KhuyenMai> timTheoTen(List<KhuyenMai> listKMs, String name);
+    List<KhuyenMaiVeiwModel> timTheoMa(List<KhuyenMaiVeiwModel> listKMs, String name);
 
-    List<KhuyenMai> listShowDangDienRa(List<KhuyenMai> listKhuyenMais);
+    List<KhuyenMaiVeiwModel> listShowDangDienRa(List<KhuyenMaiVeiwModel> listKhuyenMais);
 
-    List<KhuyenMai> listShowSapDienRa(List<KhuyenMai> listKhuyenMais);
+    List<KhuyenMaiVeiwModel> listShowSapDienRa(List<KhuyenMaiVeiwModel> listKhuyenMais);
 
-    List<KhuyenMai> listShowDaKT(List<KhuyenMai> listKhuyenMais);
+    List<KhuyenMaiVeiwModel> listShowDaKT(List<KhuyenMaiVeiwModel> listKhuyenMais);
 }

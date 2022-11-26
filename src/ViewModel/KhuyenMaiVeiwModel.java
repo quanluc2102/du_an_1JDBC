@@ -2,17 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DomainModel;
+package ViewModel;
 
 import java.sql.Date;
 
 /**
  *
- * @author quanl
+ * @author togia
  */
-public class KhuyenMai {
-
-    private String id;
+public class KhuyenMaiVeiwModel {
+     private String id;
     private String ma;
     private Date ngayBatDau;
     private Date ngayKetThuc;
@@ -21,10 +20,10 @@ public class KhuyenMai {
     private String moTa;
     private int trangThai;
 
-    public KhuyenMai() {
+    public KhuyenMaiVeiwModel() {
     }
 
-    public KhuyenMai(String id, String ma, Date ngayBatDau, Date ngayKetThuc, double giaGiam, boolean donVi, String moTa, int trangThai) {
+    public KhuyenMaiVeiwModel(String id, String ma, Date ngayBatDau, Date ngayKetThuc, double giaGiam, boolean donVi, String moTa, int trangThai) {
         this.id = id;
         this.ma = ma;
         this.ngayBatDau = ngayBatDau;
@@ -35,7 +34,7 @@ public class KhuyenMai {
         this.trangThai = trangThai;
     }
 
-    public KhuyenMai(String ma, Date ngayBatDau, Date ngayKetThuc, double giaGiam, boolean donVi, String moTa, int trangThai) {
+    public KhuyenMaiVeiwModel(String ma, Date ngayBatDau, Date ngayKetThuc, double giaGiam, boolean donVi, String moTa, int trangThai) {
         this.ma = ma;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;
@@ -45,14 +44,7 @@ public class KhuyenMai {
         this.trangThai = trangThai;
     }
 
-   
-
   
-
-    
-
-    
-
   
     public String getId() {
         return id;

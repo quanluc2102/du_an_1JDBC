@@ -7,6 +7,7 @@ package Service.ServiceImpl;
 import DomainModel.KhuyenMai;
 import Repository.KhuyenMaiResponsitory;
 import Service.KhuyenMaiService;
+import ViewModel.KhuyenMaiVeiwModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     private KhuyenMaiResponsitory rs = new KhuyenMaiResponsitory();
 
     @Override
-    public String add(KhuyenMai km) {
+    public String add(KhuyenMaiVeiwModel km) {
         boolean add = rs.add(km);
         if (add == true) {
             return "Thêm thành công";
@@ -40,13 +41,13 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public void getAll(List<KhuyenMai> list) {
+    public void getAll(List<KhuyenMaiVeiwModel> list) {
         list.addAll(rs.getAll());
 
     }
 
     @Override
-    public String update(String idKM, KhuyenMai km) {
+    public String update(String idKM, KhuyenMaiVeiwModel km) {
         boolean update = rs.update(km, idKM);
         if (update == true) {
             return "Sửa thành công";
@@ -56,9 +57,9 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public List<KhuyenMai> timTheoTen(List<KhuyenMai> listKMs, String ma) {
-        List<KhuyenMai> listSearch = new ArrayList<>();
-        for (KhuyenMai km : listKMs) {
+    public List<KhuyenMaiVeiwModel> timTheoMa(List<KhuyenMaiVeiwModel> listKMs, String ma) {
+        List<KhuyenMaiVeiwModel> listSearch = new ArrayList<>();
+        for (KhuyenMaiVeiwModel km : listKMs) {
             if (km.getMa().contains(ma)) {
                 listSearch.add(km);
             }
@@ -67,10 +68,10 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public List<KhuyenMai> listShowDangDienRa(List<KhuyenMai> listKhuyenMais) {
-        List<KhuyenMai> listShowDangDienRa = new ArrayList<>();
-        for (KhuyenMai KM :listKhuyenMais) {
-            if (KM.getTrangThai().equals("Dang dien ra")) {
+    public List<KhuyenMaiVeiwModel> listShowDangDienRa(List<KhuyenMaiVeiwModel> listKhuyenMais) {
+        List<KhuyenMaiVeiwModel> listShowDangDienRa = new ArrayList<>();
+        for (KhuyenMaiVeiwModel KM : listKhuyenMais) {
+            if (KM.getTrangThai() == 0) {
                 listShowDangDienRa.add(KM);
             }
         }
@@ -78,25 +79,25 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public List<KhuyenMai> listShowSapDienRa(List<KhuyenMai> listKhuyenMais) {
-        List<KhuyenMai> listShowSapDienRa = new ArrayList<>();
-        for (KhuyenMai KM :listKhuyenMais) {
-            if (KM.getTrangThai().equals("Sap dien ra")) {
-                listShowSapDienRa .add(KM);
+    public List<KhuyenMaiVeiwModel> listShowSapDienRa(List<KhuyenMaiVeiwModel> listKhuyenMais) {
+        List<KhuyenMaiVeiwModel> listShowSapDienRa = new ArrayList<>();
+        for (KhuyenMaiVeiwModel KM : listKhuyenMais) {
+            if (KM.getTrangThai() == 1) {
+                listShowSapDienRa.add(KM);
             }
         }
-        return listShowSapDienRa ;
+        return listShowSapDienRa;
     }
 
     @Override
-    public List<KhuyenMai> listShowDaKT(List<KhuyenMai> listKhuyenMais) {
-       List<KhuyenMai> listShowDaKT = new ArrayList<>();
-        for (KhuyenMai KM :listKhuyenMais) {
-            if (KM.getTrangThai().equals("Da ket thuc")) {
+    public List<KhuyenMaiVeiwModel> listShowDaKT(List<KhuyenMaiVeiwModel> listKhuyenMais) {
+        List<KhuyenMaiVeiwModel> listShowDaKT = new ArrayList<>();
+        for (KhuyenMaiVeiwModel KM : listKhuyenMais) {
+            if (KM.getTrangThai() == 2) {
                 listShowDaKT.add(KM);
             }
         }
-        return listShowDaKT ;
+        return listShowDaKT;
     }
 
 }
