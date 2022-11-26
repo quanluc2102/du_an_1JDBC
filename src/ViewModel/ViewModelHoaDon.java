@@ -193,5 +193,8 @@ public class ViewModelHoaDon {
     public Object[] dataRow() {
         return new Object[]{maHD, tenNV, tenKH, maKM, IMEI, ngayTao, tongTien, trangThaiHoaDon(trangThai), thoiGianBH + " " + DonViThoiGianBaoHanh(donViBH)};
     }
-
+    
+    public Object[] toDataRowBanHang(){
+        return new Object[]{maHD};
+    }
 }
