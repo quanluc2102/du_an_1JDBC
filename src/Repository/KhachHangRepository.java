@@ -21,16 +21,46 @@ import java.util.List;
  */
 public class KhachHangRepository {
 
-    public List<KhachHangViewModel> getAllKhachHang() {
-        String query = "SELECT\n"
-                + "      id,[ten_khach_hang]\n"
+    public List<KhachHangViewModel> getAllKhachHang1() {
+        String query = "SELECT [id]\n"
+                + "      ,[ten_khach_hang]\n"
                 + "      ,[ngay_sinh]\n"
                 + "      ,[sdt]\n"
                 + "      ,[email]\n"
                 + "      ,[dia_chi]\n"
-                + "  FROM [dbo].[KhachHang]";
+                + "      ,[trang_thai]\n"
+                + "  FROM [dbo].[KhachHang]\n";
+
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
+
+            List<KhachHangViewModel> list = new ArrayList<>();
+            while (rs.next()) {
+                KhachHangViewModel kh = new KhachHangViewModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                list.add(kh);
+            }
+            return list;
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public List<KhachHangViewModel> getAllKhachHang(int rowOffset) {
+        String query = "SELECT [id]\n"
+                + "      ,[ten_khach_hang]\n"
+                + "      ,[ngay_sinh]\n"
+                + "      ,[sdt]\n"
+                + "      ,[email]\n"
+                + "      ,[dia_chi]\n"
+                + "      ,[trang_thai]\n"
+                + "  FROM [dbo].[KhachHang]\n"
+                + "  order by id\n"
+                + "  offset ? rows\n"
+                + "  fetch next 5 rows only  ";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, rowOffset);
+            ResultSet rs = ps.executeQuery();
+
             List<KhachHangViewModel> list = new ArrayList<>();
             while (rs.next()) {
                 KhachHangViewModel kh = new KhachHangViewModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5), rs.getString(6));
@@ -55,6 +85,30 @@ public class KhachHangRepository {
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             ps.setObject(1, id);
+
+            while (rs.next()) {
+                KhachHangViewModel kh = new KhachHangViewModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                list.add(kh);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<KhachHangViewModel> searchKhachHangdiaChi(String id) {
+        String query = "SELECT\n"
+                + "      id,[ten_khach_hang]\n"
+                + "      ,[ngay_sinh]\n"
+                + "      ,[sdt]\n"
+                + "      ,[email]\n"
+                + "      ,[dia_chi]\n"
+                + "  FROM [dbo].[KhachHang]"
+                + "where dia_chi like ?";
+        List<KhachHangViewModel> list = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, id);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 KhachHangViewModel kh = new KhachHangViewModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5), rs.getString(6));
@@ -129,5 +183,11 @@ public class KhachHangRepository {
             e.printStackTrace(System.out);
         }
         return check > 0;
+    }
+
+    public static void main(String[] args) {
+        KhachHangRepository repository = new KhachHangRepository();
+        List<KhachHangViewModel> list = repository.getAllKhachHang1();
+        list.subList(0, 3);
     }
 }

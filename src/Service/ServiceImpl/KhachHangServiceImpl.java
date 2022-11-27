@@ -17,14 +17,15 @@ import javax.swing.table.DefaultTableModel;
  * @author quanl
  */
 public class KhachHangServiceImpl implements KhachHangService {
-
+    
     KhachHangRepository repo = new KhachHangRepository();
-
+    
     @Override
-    public List<KhachHangViewModel> getAllKhachHang() {
-        return repo.getAllKhachHang();
+    public List<KhachHangViewModel> getAllKhachHang(int rowOffset) {
+        
+        return repo.getAllKhachHang(rowOffset);
     }
-
+    
     @Override
     public void showDataTable(DefaultTableModel dtm, List<KhachHangViewModel> list) {
         dtm.setRowCount(0);
@@ -32,7 +33,7 @@ public class KhachHangServiceImpl implements KhachHangService {
             dtm.addRow(khachHangViewModel.toDataRow());
         }
     }
-
+    
     @Override
     public String addKhachHang(KhachHang kh) {
         if (repo.addKhachHang(kh)) {
@@ -41,7 +42,7 @@ public class KhachHangServiceImpl implements KhachHangService {
             return "Them khach hang that bai";
         }
     }
-
+    
     @Override
     public String editKhachHang(KhachHang kh, String id) {
         if (repo.editKhachHang(kh, id)) {
@@ -50,7 +51,7 @@ public class KhachHangServiceImpl implements KhachHangService {
             return "Sua khach hang that bai";
         }
     }
-
+    
     @Override
     public String deleteKhachHang(String id) {
         if (repo.deleteKhachHang(id)) {
@@ -59,7 +60,7 @@ public class KhachHangServiceImpl implements KhachHangService {
             return "Xoa khach hang that bai";
         }
     }
-
+    
     @Override
     public List<KhachHangViewModel> searchKhachHang(String tenKhachHang, List<KhachHangViewModel> list) {
         List<KhachHangViewModel> listSearch = new ArrayList<>();
@@ -70,16 +71,17 @@ public class KhachHangServiceImpl implements KhachHangService {
         }
         return listSearch;
     }
-
+    
     @Override
     public List<KhachHangViewModel> searchKhachHangDiaChi(String diaChiKhachHang, List<KhachHangViewModel> list) {
         List<KhachHangViewModel> listSearch = new ArrayList<>();
-        for (KhachHangViewModel khachHangViewModel : list) {
-            if (khachHangViewModel.getDiaChi().contains(diaChiKhachHang)) {
-                listSearch.add(khachHangViewModel);
-            }
-        }
+        listSearch = repo.searchKhachHangdiaChi(diaChiKhachHang);
         return listSearch;
     }
-
+    
+    @Override
+    public List<KhachHangViewModel> getAllKhachHang1() {
+        return repo.getAllKhachHang1();
+    }
+    
 }

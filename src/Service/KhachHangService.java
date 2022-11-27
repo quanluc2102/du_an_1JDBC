@@ -15,7 +15,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public interface KhachHangService {
 
-    List<KhachHangViewModel> getAllKhachHang();
+    List<KhachHangViewModel> getAllKhachHang(int rowOffset);
+
+    List<KhachHangViewModel> getAllKhachHang1();
 
     List<KhachHangViewModel> searchKhachHang(String tenKhachHang, List<KhachHangViewModel> list);
 
