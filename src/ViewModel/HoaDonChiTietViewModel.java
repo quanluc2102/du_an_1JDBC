@@ -15,18 +15,26 @@ public class HoaDonChiTietViewModel {
     private String id;
     private String IMEI;
     private String idHoaDon;
-    private String idBaoHanh;
+    private String trangThai;
     private BanHangReponsitory bhr=new BanHangReponsitory();
             
     public HoaDonChiTietViewModel() {
     }
 
-    public HoaDonChiTietViewModel(String id, String IMEI, String idHoaDon, String idBaoHanh) {
+    public HoaDonChiTietViewModel(String id, String IMEI, String idHoaDon, String trangThai) {
         this.id = id;
         this.IMEI = IMEI;
         this.idHoaDon = idHoaDon;
-        this.idBaoHanh = idBaoHanh;
+        this.trangThai = trangThai;
     }
+
+    public HoaDonChiTietViewModel(String IMEI, String idHoaDon, String trangThai) {
+        this.IMEI = IMEI;
+        this.idHoaDon = idHoaDon;
+        this.trangThai = trangThai;
+    }
+
+    
 
     public HoaDonChiTietViewModel(String IMEI, String idHoaDon) {
         this.IMEI = IMEI;
@@ -57,12 +65,12 @@ public class HoaDonChiTietViewModel {
         this.idHoaDon = idHoaDon;
     }
 
-    public String getIdBaoHanh() {
-        return idBaoHanh;
+    public String getTrangThai() {
+        return trangThai;
     }
 
-    public void setIdBaoHanh(String idBaoHanh) {
-        this.idBaoHanh = idBaoHanh;
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
     }
     
     public String layTenSP(){

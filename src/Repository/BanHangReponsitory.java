@@ -80,9 +80,9 @@ public class BanHangReponsitory {
 
     public int layGiaHoaDon(String imei) {
         String query = "SELECT [gia_ban]\n"
-                + "  FROM [dbo].[QuocGiaDong]\n"
-                + "  join ChiTietDienThoai on ChiTietDienThoai.id_quoc_gia_Dong=QuocGiaDong.id\n"
-                + "  where ChiTietDienThoai.IMEI = ?";
+                + "FROM [dbo].[QuocGiaDong]\n"
+                + "join ChiTietDienThoai on ChiTietDienThoai.id_quoc_gia_Dong=QuocGiaDong.id\n"
+                + "where ChiTietDienThoai.IMEI = ? ";
         int a = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, imei);
@@ -117,16 +117,16 @@ public class BanHangReponsitory {
         String query = "SELECT HoaDonChiTiet.[id]\n"
                 + "      ,[IMEI]\n"
                 + "      ,[id_hoa_don]\n"
-                + "      ,[id_bao_hanh]\n"
+                + "      ,HoaDonChiTiet.[trang_thai]\n"
                 + "  FROM [dbo].[HoaDonChiTiet]\n"
-                + "  join HoaDon on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
-                + "  where ma_hoa_don = ?";
+                + "  join HoaDon on HoaDon.id=HoaDonChiTiet.id_hoa_don\n"
+                + "  where ma_hoa_don= ?";
         List<HoaDonChiTietViewModel> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, maHD);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                HoaDonChiTietViewModel a = new HoaDonChiTietViewModel(rs.getString("id"), rs.getString("IMEI"), rs.getString("id_hoa_don"), rs.getString("id_bao_hanh"));
+                HoaDonChiTietViewModel a = new HoaDonChiTietViewModel(rs.getString("id"), rs.getString("IMEI"), rs.getString("id_hoa_don"), rs.getString("trang_thai"));
                 list.add(a);
             }
             return list;
@@ -269,29 +269,29 @@ public class BanHangReponsitory {
         return "HD" + j;
     }
 
-    public BigDecimal layGiaTien(String maHD) {
+    public int layGiaTien(String maHD) {
         String query = "SELECT	Sum(gia_ban)\n"
                 + "  FROM [dbo].[HoaDonChiTiet]\n"
                 + "  join ChiTietDienThoai on ChiTietDienThoai.IMEI=HoaDonChiTiet.IMEI\n"
                 + "  join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_Dong=QuocGiaDong.id\n"
                 + "  join HoaDon on HoaDon.id=HoaDonChiTiet.id_hoa_don\n"
                 + "  where ma_hoa_don = ?";
-        BigDecimal a = null;
+        int a = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, maHD);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                a = rs.getBigDecimal(1);
+                a = rs.getInt(1);
             }
             return a;
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
-        return null;
+        return 0;
 
     }
 
-    public BigDecimal layGiaGiamGiaPhantram(String maHD) {
+    public int layGiaGiamGiaPhantram(String maHD) {
         String query = "SELECT Sum(gia_ban) * (KhuyenMai.gia_giam/100)\n"
                 + "FROM [dbo].[HoaDonChiTiet]\n"
                 + "join ChiTietDienThoai on ChiTietDienThoai.IMEI=HoaDonChiTiet.IMEI \n"
@@ -300,55 +300,55 @@ public class BanHangReponsitory {
                 + "join KhuyenMai on KhuyenMai.id = HoaDon.id_khuyen_mai\n"
                 + "where ma_hoa_don = ?\n"
                 + "group by KhuyenMai.gia_giam";
-        BigDecimal a = null;
+        int a = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, maHD);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                a = rs.getBigDecimal(1);
+                a = rs.getInt(1);
             }
             return a;
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
-        return null;
+        return 0;
 
     }
 
-    public BigDecimal layGiaGiamGiaK(String maKM) {
+    public int layGiaGiamGiaK(String maKM) {
         String query = "SELECT	KhuyenMai.gia_giam\n"
                 + "FROM KhuyenMai\n"
                 + "where ma_khuyen_mai = ?";
-        BigDecimal a = null;
+        int a = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, maKM);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                a = rs.getBigDecimal(1);
+                a = rs.getInt(1);
             }
             return a;
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
-        return null;
+        return 0;
 
     }
 
-    public BigDecimal layThanhTien(BigDecimal tongTien, BigDecimal giamGia) {
+    public int layThanhTien(int tongTien, int giamGia) {
         String query = "select ? - ?";
-        BigDecimal a = null;
+        int a = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, tongTien);
             ps.setObject(2, giamGia);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                a = rs.getBigDecimal(1);
+                a = rs.getInt(1);
             }
             return a;
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
-        return null;
+        return 0;
 
     }
 
@@ -497,8 +497,8 @@ public class BanHangReponsitory {
                 + "  join Dong on dong.id=QuocGiaDong.id_dong\n"
                 + "  join DienThoai on DienThoai.id = Dong.id_dien_thoai\n"
                 + "  where ma_dien_thoai = ? and ChiTietDienThoai.trang_thai=1";
-        List<String> list=new ArrayList<>();
-        String a="";
+        List<String> list = new ArrayList<>();
+        String a = "";
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, maDT);
             ResultSet rs = ps.executeQuery();
@@ -507,6 +507,27 @@ public class BanHangReponsitory {
                 list.add(a);
             }
             return list;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public String layTenSP(String imei) {
+        String query = "select ten_dien_thoai+' '+ ten_dong as ten\n"
+                + "from DienThoai \n"
+                + "join Dong on DienThoai.id = Dong.id_dien_thoai\n"
+                + "join QuocGiaDong on QuocGiaDong.id_dong = Dong.id\n"
+                + "join ChiTietDienThoai on ChiTietDienThoai.id_quoc_gia_dong=QuocGiaDong.id\n"
+                + "where ChiTietDienThoai.IMEI= ?";
+        String a = "";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, imei);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getString(1);
+            }
+            return a;
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }

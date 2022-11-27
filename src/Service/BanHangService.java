@@ -10,7 +10,6 @@ import DomainModel.HoaDonChiTiet;
 import ViewModel.ChiTietDienThoaiViewModel;
 import ViewModel.DienThoaiViewModel;
 import ViewModel.HoaDonChiTietViewModel;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,25 +18,46 @@ import javax.swing.table.DefaultTableModel;
  * @author ADMIN
  */
 public interface BanHangService {
+
     void getAll(List<DienThoaiViewModel> list);
-    void showData(DefaultTableModel dtm,List<DienThoaiViewModel> list);
+
+    void showData(DefaultTableModel dtm, List<DienThoaiViewModel> list);
+
     void getMaHD(List<String> list);
-    void getHDCT(List<HoaDonChiTietViewModel> list,String idHD);
-    void showDataHoaDon(DefaultTableModel dtm,List<HoaDonChiTietViewModel> list);
+
+    void getHDCT(List<HoaDonChiTietViewModel> list, String maHD);
+
+    void showDataHoaDon(DefaultTableModel dtm, List<HoaDonChiTietViewModel> list);
+
     void getTenKH(List<String> list);
+
     void getMaNV(List<String> list);
+
     void getMaGG(List<String> list);
+
     void getAllHoaDonChuaThanhToan(List<HoaDon> list);
-    void showDataHoaDonChuaThanhToan(DefaultTableModel dtm,List<HoaDon> list);
-    String addVaoHDCT(String imei,String maHD);
-    String deleteHDCT(String imei,String maHD);
+
+    void showDataHoaDonChuaThanhToan(DefaultTableModel dtm, List<HoaDon> list);
+
+    void addVaoHDCT(String imei, String maHD);
+
+    void deleteHDCT(String imei, String maHD);
+
     String addHD();
-    BigDecimal layGiaHD(String maHD);
-    BigDecimal layGiaGiamGiaPhanTram(String maHD);
-    BigDecimal layGiaGiamGiaK(String maKM);
-    BigDecimal layGiaThanhTien(BigDecimal tongTien,BigDecimal giamGia);
+
+    int layGiaHD(String maHD);
+
+    int layGiaGiamGiaPhanTram(String maHD);
+
+    int layGiaGiamGiaK(String maKM);
+
+    int layGiaThanhTien(int tongTien, int giamGia);
+
     String thanhToan(String tenKH, String maNV, String maKM, String maHD);
+
     boolean layDonVi(String maKM);
+
     void sapXepHoaDon(List<HoaDon> list);
-    void getIMEI(List<String> list,String maDT);
+
+    void getIMEI(List<String> list, String maDT);
 }

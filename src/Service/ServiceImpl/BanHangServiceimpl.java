@@ -11,7 +11,6 @@ import Service.BanHangService;
 import ViewModel.ChiTietDienThoaiViewModel;
 import ViewModel.DienThoaiViewModel;
 import ViewModel.HoaDonChiTietViewModel;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,8 +41,8 @@ public class BanHangServiceimpl implements BanHangService {
     }
 
     @Override
-    public void getHDCT(List<HoaDonChiTietViewModel> list, String idHD) {
-        list.addAll(bhr.getAllHoaDon(idHD));
+    public void getHDCT(List<HoaDonChiTietViewModel> list, String maHD) {
+        list.addAll(bhr.getAllHoaDon(maHD));
     }
 
     @Override
@@ -70,23 +69,13 @@ public class BanHangServiceimpl implements BanHangService {
     }
 
     @Override
-    public String addVaoHDCT(String imei, String maHD) {
-        boolean add=bhr.addVaoHoaDonCT(imei, maHD);
-        if(add==true){
-            return "Thêm thanh công";
-        }else{
-            return "Thêm thất bại";
-        }
+    public void addVaoHDCT(String imei, String maHD) {
+        bhr.addVaoHoaDonCT(imei, maHD);  
     }
 
     @Override
-    public String deleteHDCT(String imei, String maHD) {
-        boolean delete=bhr.deleteHoaDonCT(imei, maHD);
-        if(delete==true){
-            return "Xóa thanh công";
-        }else{
-            return "Xóa thất bại";
-        }
+    public void deleteHDCT(String imei, String maHD) {
+        bhr.deleteHoaDonCT(imei, maHD);
     }
 
     @Override
@@ -101,7 +90,7 @@ public class BanHangServiceimpl implements BanHangService {
     }
 
     @Override
-    public BigDecimal layGiaHD(String maHD) {
+    public int layGiaHD(String maHD) {
         return bhr.layGiaTien(maHD);
     }
 
@@ -116,12 +105,12 @@ public class BanHangServiceimpl implements BanHangService {
     }
 
     @Override
-    public BigDecimal layGiaGiamGiaPhanTram(String maHD) {
+    public int layGiaGiamGiaPhanTram(String maHD) {
         return bhr.layGiaGiamGiaPhantram(maHD);
     }
 
     @Override
-    public BigDecimal layGiaGiamGiaK(String maKM) {
+    public int layGiaGiamGiaK(String maKM) {
         return bhr.layGiaGiamGiaK(maKM);
     }
 
@@ -131,7 +120,7 @@ public class BanHangServiceimpl implements BanHangService {
     }
 
     @Override
-    public BigDecimal layGiaThanhTien(BigDecimal tongTien, BigDecimal giamGia) {
+    public int layGiaThanhTien(int tongTien, int giamGia) {
         return bhr.layThanhTien(tongTien, giamGia);
     }
 

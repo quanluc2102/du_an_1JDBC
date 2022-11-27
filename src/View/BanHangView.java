@@ -486,7 +486,10 @@ private BanHangServiceimpl bhs=new BanHangServiceimpl();
 
     private void btnXoaKhoiHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKhoiHoaDonActionPerformed
         // TODO add your handling code here:
-        
+        int row=tbDonHangBanHang.getSelectedRow();
+        int row1=tbHoaDonChuaThanhToan.getSelectedRow();
+        bhs.deleteHDCT(listHoaDonCT.get(row).getIMEI(), listHoaDonChuaThanhToan.get(row1).getMaHoaDon());
+        resetHoaDonChiTiet(listHoaDonChuaThanhToan.get(row1).getMaHoaDon());
     }//GEN-LAST:event_btnXoaKhoiHoaDonActionPerformed
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
@@ -499,6 +502,13 @@ private BanHangServiceimpl bhs=new BanHangServiceimpl();
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
+        
+        int row=tbHoaDonChuaThanhToan.getSelectedRow();
+        String tenKH=String.valueOf(cbbKhachHangBanHang.getSelectedItem());
+        String maNV=String.valueOf(cbbMaNhanVien.getSelectedItem());
+        String maKM=String.valueOf(cbbMaGGBanHang.getSelectedItem());
+        JOptionPane.showMessageDialog(rootPane, bhs.thanhToan(tenKH, maNV, maKM, listHoaDonChuaThanhToan.get(row).getMaHoaDon()));
+        resetHoaDonChuaThanhToan();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void cbbMaGGBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMaGGBanHangActionPerformed
@@ -511,26 +521,32 @@ private BanHangServiceimpl bhs=new BanHangServiceimpl();
         int row=tbHoaDonChuaThanhToan.getSelectedRow();
         HoaDon a=listHoaDonChuaThanhToan.get(row);
         lbmaHDDuocChon.setText(a.getMaHoaDon());
+        bhs.getHDCT(listHoaDonCT,a.getMaHoaDon());
+        bhs.showDataHoaDon(dtmDonHang, listHoaDonCT);
+        resetHoaDonChiTiet(listHoaDonChuaThanhToan.get(row).getMaHoaDon());
     }//GEN-LAST:event_tbHoaDonChuaThanhToanMouseClicked
 
     private void tbSanPhamBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSanPhamBanHangMouseClicked
         // TODO add your handling code here:
         int row=tbSanPhamBanHang.getSelectedRow();
+        int row1=tbHoaDonChuaThanhToan.getSelectedRow();
         ChonIMEIView detail1 = new ChonIMEIView(this, rootPaneCheckingEnabled, listDienThoai.get(row).getMaDienThoai());
         detail1.setVisible(true);
         lbIMEIDaChon.setText(detail1.layIMEI());
-        
+        bhs.addVaoHDCT(lbIMEIDaChon.getText(), listHoaDonChuaThanhToan.get(row1).getMaHoaDon());
+        resetHoaDonChiTiet(listHoaDonChuaThanhToan.get(row1).getMaHoaDon());
     }//GEN-LAST:event_tbSanPhamBanHangMouseClicked
     public void thayDoiTien(){
+        
     }
     public void resetSanPhamChiTiet(){
         listDienThoai.removeAll(listDienThoai);
         bhs.getAll(listDienThoai);
         bhs.showData(dtmSP, listDienThoai);
     }
-    public void resetHoaDonChiTiet(String idHD){
+    public void resetHoaDonChiTiet(String maHD){
         listHoaDonCT.removeAll(listHoaDonCT);
-        bhs.getHDCT(listHoaDonCT, idHD);
+        bhs.getHDCT(listHoaDonCT, maHD);
         bhs.showDataHoaDon(dtmDonHang, listHoaDonCT);
     }
     public void resetHoaDonChuaThanhToan(){
