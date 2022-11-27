@@ -100,4 +100,9 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
         return listShowDaKT;
     }
 
+    @Override
+    public List<KhuyenMaiVeiwModel> sget() {
+        return rs.getAll();
+    }
+
 }

@@ -13,7 +13,8 @@ import java.util.List;
  * @author togia
  */
 public interface KhuyenMaiService {
-
+    List<KhuyenMaiVeiwModel> sget();
+    
     void getAll(List<KhuyenMaiVeiwModel> list);
 
     String add(KhuyenMaiVeiwModel km);
