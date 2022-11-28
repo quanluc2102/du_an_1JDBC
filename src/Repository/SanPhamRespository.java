@@ -108,13 +108,34 @@ public class SanPhamRespository {
         return sp > 0;
     }
 
-    public boolean ThemSanPham(String IMEI) {
-        String query = "update ChiTietDienThoai\n"
-                + "set trang_thai = 0\n"
-                + "where IMEI =?";
+    public boolean ThemHDH(HeDieuHanh hdh) {
+        String query = "insert into HeDieuHanh(ten_he_dieu_hanh,phien_ban,trang_thai)\n"
+                + "values(?,?,?)";
         int sp = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, IMEI);
+            ps.setObject(1, hdh.getTenHDH());
+            ps.setObject(2, hdh.getPhienBan());
+            ps.setObject(3, hdh.getTrangThai());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public boolean SuaHDH(HeDieuHanh hdh) {
+        String query = "UPDATE [dbo].[HeDieuHanh]\n"
+                + "   SET [ten_he_dieu_hanh] =?\n"
+                + "      ,[phien_ban] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + " WHERE id = ?";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getTenHDH());
+            ps.setObject(2, hdh.getPhienBan());
+            ps.setObject(3, hdh.getTrangThai());
+            ps.setObject(4, hdh.getId());
             sp = ps.executeUpdate();
 
         } catch (SQLException e) {

@@ -10,6 +10,7 @@ import Service.ServiceImpl.SanPhamServicesImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -71,8 +72,8 @@ public class ViewHeDieuHanh extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
         txtTen = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -114,9 +115,19 @@ public class ViewHeDieuHanh extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
 
-        jButton1.setText("Thêm");
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Sửa");
+        btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         txtTen.setEditable(false);
         txtTen.setText("ANDroid");
@@ -137,9 +148,9 @@ public class ViewHeDieuHanh extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addComponent(btnThem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btnSua)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -175,8 +186,8 @@ public class ViewHeDieuHanh extends javax.swing.JDialog {
                     .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)))
+                    .addComponent(btnThem)
+                    .addComponent(btnSua)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,12 +215,54 @@ public class ViewHeDieuHanh extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl1MouseClicked
-     int index = tbl1.getSelectedRow();
-    HeDieuHanh hdh = sps.getHDH().get(index);
-    txtPhienBan.setText(hdh.getPhienBan());
-    txtTen.setText(hdh.getTenHDH());
-    cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
+        int index = tbl1.getSelectedRow();
+        HeDieuHanh hdh = sps.getHDH().get(index);
+        txtPhienBan.setText(hdh.getPhienBan());
+        txtTen.setText(hdh.getTenHDH());
+        cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
     }//GEN-LAST:event_tbl1MouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+
+        if (btnThem.getText() == "Lưu") {
+            if (txtPhienBan.getText().isBlank() || txtTen.getText().isBlank()) {
+                System.out.println("them khong dc");
+            } else {
+                HeDieuHanh hdh = new HeDieuHanh("", txtTen.getText(), txtPhienBan.getText(), cbbTrangThai.getSelectedIndex());
+                JOptionPane.showMessageDialog(this, sps.addHDH(hdh));
+                loadDataToTable(sps.getHDH());
+                btnThem.setText("Thêm");
+            }
+        } else {
+            txtPhienBan.setText("");
+            txtTen.setText("");
+            txtPhienBan.setEditable(true);// TODO add your handling code here:
+            txtTen.setEditable(true);
+            cbbTrangThai.setSelectedIndex(1);
+        }
+        btnThem.setText("Lưu");
+
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        index = tbl1.getSelectedRow();
+        String id = sps.getAll().get(index).getId();
+        if (btnSua.getText() == "Lưu") {
+            if (txtPhienBan.getText().isBlank() || txtTen.getText().isBlank()) {
+                System.out.println("them khong dc");
+            } else {
+                HeDieuHanh hdh = new HeDieuHanh(id, txtTen.getText(), txtPhienBan.getText(), cbbTrangThai.getSelectedIndex());
+                JOptionPane.showMessageDialog(this, sps.suaHDH(hdh));
+                loadDataToTable(sps.getHDH());
+                btnSua.setText("Sửa");
+            }
+        } else {
+            txtPhienBan.setEditable(true);// TODO add your handling code here:
+            txtTen.setEditable(true);
+            cbbTrangThai.setSelectedIndex(1);
+        }
+        btnSua.setText("Lưu");
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,9 +308,9 @@ public class ViewHeDieuHanh extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnThem;
     private javax.swing.JComboBox<String> cbbTrangThai;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -30,4 +30,6 @@ public interface SanPhamServices {
     
     List<HeDieuHanh> getHDH();
 
+    String addHDH(HeDieuHanh hdh);
+    String suaHDH(HeDieuHanh hdh);
 }

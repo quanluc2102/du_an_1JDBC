@@ -7,10 +7,6 @@ package View;
 import DomainModel.NhanVien;
 import Service.LoginService;
 import Service.ServiceImpl.LoginImpl;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**

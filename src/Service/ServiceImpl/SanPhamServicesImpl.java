@@ -52,17 +52,31 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     }
 
-  
     @Override
     public List<String> getImei(String id) {
         return new SanPhamRespository().getIMEI(id);
     }
 
-  
-
     @Override
     public List<HeDieuHanh> getHDH() {
         return new SanPhamRespository().getHDH();
     }
+
+    @Override
+    public String addHDH(HeDieuHanh hdh) {
+        if (new SanPhamRespository().ThemHDH(hdh)) {
+            return "them thanh cong";
+        }
+
+        return "Them khong thanh cong";
+    }
+
+    @Override
+    public String suaHDH(HeDieuHanh hdh) {
+if (new SanPhamRespository().ThemHDH(hdh)) {
+            return "sua thanh cong";
+        }
+
+        return "sua khong thanh cong";    }
 
 }

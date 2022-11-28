@@ -21,7 +21,9 @@ import javax.swing.table.DefaultTableModel;
  * @author haha
  */
 public class QuanLySanPhamView extends javax.swing.JDialog {
-    
+
+    int trang = 0;
+    int trangs = 0;
     DefaultComboBoxModel modelCBB;
     DefaultTableModel modelTBL;
     SanPhamServices sps = new SanPhamServicesImpl();
@@ -34,27 +36,33 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         modelCBB = (DefaultComboBoxModel) cbbIMEI.getModel();
+        trangs = sps.getAll().size() / 4;
+        if (sps.getAll().size()%4!=0) {
+            trangs+=1;
+        }
         loadTable();
+
     }
-    
+
     private void loadTable() {
+        lblSoTrang.setText("/" + trangs);
         modelTBL = (DefaultTableModel) tblSanPham.getModel();
         modelTBL.setRowCount(0);
         String[] title = new String[]{
             "Ảnh", "Tên máy", "Hãng", "Số lượng còn",};
         modelTBL.setColumnIdentifiers(title);
+
         for (SanPhamViewModel sp : sps.getAll()) {
-            
             ImageIcon x = new ImageIcon(new ImageIcon("source\\" + sp.getSrcAnh()).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
             Object[] row = new Object[]{x, sp.getTen(), sp.getTenHang(), sp.getSoLuongCon()};
             modelTBL.addRow(row);
         }
-        
+
     }
-    
+
     public void loadThongSo(String id) {
         ThongSoViewModel t = sps.getAllThongSo(id);
-        
+
         txtCpu.setText(t.getCpu());
         txtRam.setText(t.getRam());
         txtManHinh.setText(t.getManHinh());
@@ -67,7 +75,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         txtSim.setText(t.getSim());
         txtMauSac.setText(t.getMauSac());
         txtXuatXu.setText(t.getXuatXu());
-        
+
     }
 
     /**
@@ -786,16 +794,16 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     }//GEN-LAST:event_txtTimKiemFocusGained
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        
+
         if (btnThem.getText() == "Lưu") {
             btnThem.setText("Thêm");
-            
+
             txtTenDienThoai.setEditable(false);
             txtGiaBan.setEditable(false);
             txtGiaNhap.setEditable(false);
             txtSoLuongNhap.setEditable(false);
         } else {
-            
+
             txtTenDienThoai.setEditable(true);
             txtGiaBan.setEditable(true);
             txtGiaNhap.setEditable(true);
@@ -818,7 +826,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         txtGiaBan.setText(df.format(s.getGiaBan()));
         txtGiaNhap.setText(df.format(s.getGiaNhap()));
         txtTenDienThoai.setText(s.getTen());
-        
+
         modelCBB.removeAllElements();
         modelCBB.addAll(sps.getImei(s.getId()));
         cbbIMEI.setSelectedIndex(0);
