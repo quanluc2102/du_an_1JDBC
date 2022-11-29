@@ -19,9 +19,9 @@ public interface KhachHangService {
 
     List<KhachHangViewModel> getAllKhachHang1();
 
-    List<KhachHangViewModel> searchKhachHang(String tenKhachHang, List<KhachHangViewModel> list);
+    List<KhachHangViewModel> searchKhachHang(String tenKhachHang);
 
-    List<KhachHangViewModel> searchKhachHangDiaChi(String diaChiKhachHang, List<KhachHangViewModel> list);
+    List<KhachHangViewModel> searchKhachHangDiaChi(String diaChiKhachHang);
 
     void showDataTable(DefaultTableModel dtm, List<KhachHangViewModel> list);
 

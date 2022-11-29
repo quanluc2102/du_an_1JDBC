@@ -80,11 +80,11 @@ public class KhachHangRepository {
                 + "      ,[email]\n"
                 + "      ,[dia_chi]\n"
                 + "  FROM [dbo].[KhachHang]"
-                + "where ten_khach_hang like ?";
+                + "where ten_khach_hang like '%?%'";
         List<KhachHangViewModel> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            ResultSet rs = ps.executeQuery();
             ps.setObject(1, id);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 KhachHangViewModel kh = new KhachHangViewModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5), rs.getString(6));
@@ -106,8 +106,9 @@ public class KhachHangRepository {
                 + "  FROM [dbo].[KhachHang]"
                 + "where dia_chi like ?";
         List<KhachHangViewModel> list = new ArrayList<>();
+        String a = "%" + id + "%";
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setObject(1, id);
+            ps.setObject(1, a);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
