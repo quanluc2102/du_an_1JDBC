@@ -12,10 +12,13 @@ import java.util.List;
  * @author buiti
  */
 public interface LoginService {
-        String login(String username, String pass);
-        List<String> ChucVuCBB();
-        List<String> IDChucVu();
-        String dangKi(NhanVien nv);
-        
-    
+
+    String login(String username, String pass);
+
+    List<String> ChucVuCBB();
+
+    List<String> IDChucVu();
+
+    String dangKi(NhanVien nv);
+
 }

@@ -46,6 +46,14 @@ public class NhanVienView {
         this.id = id;
     }
 
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
     public String getMa() {
         return ma;
     }

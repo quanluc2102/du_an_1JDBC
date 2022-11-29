@@ -4,6 +4,7 @@
  */
 package Repository;
 
+import DomainModel.NhanVien;
 import Ultilities.SQLServerConnection;
 import ViewModel.LoginViewModel;
 import ViewModel.NhanVienView;
@@ -45,5 +46,54 @@ public class NhanVienRepository {
         for (NhanVienView nhanVien : l) {
             System.out.println(nhanVien.toString());
         }
+    }
+      public boolean chuyenTTNV(String id) {
+        String query = "UPDATE [dbo].[NhanVien]\n"
+                + "   SET[id_chuc_vu] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + " WHERE id = ?";
+        int check = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, null);
+            ps.setObject(2, "0");
+            ps.setObject(3, id);
+
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+    public boolean updateSVDiem(NhanVien sv, String ma) {
+        String query = "UPDATE [dbo].[NhanVien]\n"
+                + "   SET [ma_nhan_vien] = ?\n"
+                + "      ,[ten_nhan_vien] = ?\n"
+                + "      ,[id_chuc_vu] = ?\n"
+                + "      ,[ngay_sinh] = ?\n"
+                + "      ,[sdt] = ?\n"
+                + "      ,[email] = ?\n"
+                + "      ,[dia_chi] = ?\n"
+                + "      ,[mat_khau] = ?\n"
+                + ",[trang_thai] = ?"
+                + " WHERE  id = ?";
+        int check = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+
+            ps.setObject(1, sv.getMa());
+            ps.setObject(2, sv.getTen());
+            ps.setObject(3, sv.getIdChucVu());
+            ps.setObject(4, sv.getNgaySinh());
+            ps.setObject(5, sv.getSdt());
+            ps.setObject(6, sv.getEmail());
+            ps.setObject(7, sv.getDiaChi());
+            ps.setObject(8, sv.getMatKhau());
+            ps.setObject(9, sv.getTrangThai());
+            ps.setObject(10, ma);
+            check = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
     }
 }
