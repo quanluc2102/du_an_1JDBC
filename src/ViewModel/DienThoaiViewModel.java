@@ -72,7 +72,7 @@ public class DienThoaiViewModel {
         return bhr.layTenDong(maDienThoai);
     }
     
-    public int layGia(){
+    public Integer layGia(){
         return bhr.layGia(maDienThoai);
     }
     

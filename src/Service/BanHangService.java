@@ -60,4 +60,10 @@ public interface BanHangService {
     void sapXepHoaDon(List<HoaDon> list);
 
     void getIMEI(List<String> list, String maDT);
+    
+    String themThongTinVaoHD(String tenKH, String maNV, String maHD);
+    
+    void sapXepTheoGiaTangDan(List<DienThoaiViewModel> list);
+    
+    void sapXepTheoGiaGiamDan(List<DienThoaiViewModel> list);
 }

@@ -148,4 +148,28 @@ public class BanHangServiceimpl implements BanHangService {
     public void getIMEI(List<String> list,String maDT) {
         list.addAll(bhr.layIMEITheoMaDT(maDT));
     }
+
+    @Override
+    public String themThongTinVaoHD(String tenKH, String maNV, String maHD) {
+        boolean update=bhr.themThongTinVaoHoaDon(tenKH, maNV, maHD);
+        if(update==true){
+            return "Thêm thông tin thành công";
+        }else{
+            return "Thêm thông tin thất bại";
+        }
+    }
+
+    @Override
+    public void sapXepTheoGiaTangDan(List<DienThoaiViewModel> list) {
+        list.sort((o1,o2)->{
+            return o1.layGia().compareTo(o2.layGia());
+        });
+    }
+
+    @Override
+    public void sapXepTheoGiaGiamDan(List<DienThoaiViewModel> list) {
+        list.sort((o1,o2)->{
+            return o2.layGia().compareTo(o1.layGia());
+        });
+    }
 }

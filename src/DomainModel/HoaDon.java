@@ -4,6 +4,7 @@
  */
 package DomainModel;
 
+import Repository.BanHangReponsitory;
 import java.sql.Date;
 
 /**
@@ -20,7 +21,8 @@ public class HoaDon {
     private String idKhuyenMai;   
     private String moTa;
     private int trangThai;
-
+    private BanHangReponsitory bhr = new BanHangReponsitory();
+    
     public String getId() {
         return id;
     }
@@ -97,6 +99,14 @@ public class HoaDon {
     }
 
     public HoaDon() {
+    }
+    
+    public String layTenKH(){
+        return bhr.layTenKH(idKhachHang);
+    }
+    
+    public String layMaNV(){
+        return bhr.layMaNV(idNhanVien);
     }
     
     public Object[] toDataRowBanHang(){

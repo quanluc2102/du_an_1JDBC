@@ -290,7 +290,7 @@ public class BanHangReponsitory {
 
     }
 
-    public int layGiaGiamGiaPhantram(int giaTien,String maKM) {
+    public int layGiaGiamGiaPhantram(int giaTien, String maKM) {
         String query = "Select ? * (KhuyenMai.gia_giam / 100) from KhuyenMai\n"
                 + "where ma_khuyen_mai = ?";
         int a = 0;
@@ -520,6 +520,59 @@ public class BanHangReponsitory {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 a = rs.getString(1);
+            }
+            return a;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public boolean themThongTinVaoHoaDon(String tenKH, String maNV, String maHD) {
+        String query = "UPDATE [dbo].[HoaDon]\n"
+                + "   SET [id_nhan_vien] = ?\n"
+                + "      ,[id_khach_hang] = ?\n"
+                + " WHERE ma_hoa_don = ?";
+        int check = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, layIDNV(maNV));
+            ps.setObject(2, layIDKH(tenKH));
+            ps.setObject(3, maHD);
+            check = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+    public String layTenKH(String idKH) {
+        String query = "SELECT [ten_khach_hang]\n"
+                + "  FROM [dbo].[KhachHang]\n"
+                + "  where id = ?";
+        String a = "";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, idKH);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getString("ten_khach_hang");
+            }
+            return a;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public String layMaNV(String idNV) {
+        String query = "SELECT [ma_nhan_vien]\n"
+                + "  FROM [dbo].[NhanVien]\n"
+                + "  where id = ?";
+        String a = "";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, idNV);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getString("ma_nhan_vien");
             }
             return a;
         } catch (SQLException e) {
