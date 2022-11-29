@@ -4,11 +4,11 @@
  */
 package Service.ServiceImpl;
 
-import DomainModel.ChiTietDienThoai;
-import DomainModel.Hang;
 import DomainModel.HeDieuHanh;
-import DomainModel.ThongSo;
+import DomainModel.Pin;
+import DomainModel.ThietKe;
 import Repository.SanPhamRespository;
+import Repository.ThongSoReponsitory;
 import Service.SanPhamServices;
 import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
@@ -73,10 +73,53 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public String suaHDH(HeDieuHanh hdh) {
-if (new SanPhamRespository().ThemHDH(hdh)) {
+        if (new SanPhamRespository().ThemHDH(hdh)) {
             return "sua thanh cong";
         }
 
-        return "sua khong thanh cong";    }
+        return "sua khong thanh cong";
+    }
+
+    @Override
+    public List<Pin> getPin() {
+        return new ThongSoReponsitory().getPin();
+    }
+
+    @Override
+    public String addPin(Pin hdh) {
+        if (new ThongSoReponsitory().ThemHDH(hdh)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
+    @Override
+    public String suaPin(Pin hdh) {
+        if (new ThongSoReponsitory().SuaHDH(hdh)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
+    @Override
+    public List<ThietKe> getTK() {
+        return new ThongSoReponsitory().getThietKe();
+    }
+
+    @Override
+    public String addTK(ThietKe tk) {
+        if (new ThongSoReponsitory().ThemThietKe(tk)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
+    @Override
+    public String suaTK(ThietKe tk) {
+        if (new ThongSoReponsitory().SuaThietKe(tk)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
 
 }

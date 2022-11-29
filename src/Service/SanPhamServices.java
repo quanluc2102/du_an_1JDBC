@@ -4,10 +4,9 @@
  */
 package Service;
 
-import DomainModel.ChiTietDienThoai;
-import DomainModel.Hang;
 import DomainModel.HeDieuHanh;
-import DomainModel.ThongSo;
+import DomainModel.Pin;
+import DomainModel.ThietKe;
 import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
 import java.util.List;
@@ -25,11 +24,25 @@ public interface SanPhamServices {
     String ban(String IMEI);
 
     List<SanPhamViewModel> timKiem(String x);
- 
+
     List<String> getImei(String id);
-    
+
     List<HeDieuHanh> getHDH();
 
     String addHDH(HeDieuHanh hdh);
+
     String suaHDH(HeDieuHanh hdh);
+
+    List<Pin> getPin();
+
+    String addPin(Pin hdh);
+
+    String suaPin(Pin hdh);
+
+    List<ThietKe> getTK();
+
+    String addTK(ThietKe tk);
+
+    String suaTK(ThietKe tk);
+
 }
