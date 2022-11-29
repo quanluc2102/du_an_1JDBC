@@ -4,6 +4,7 @@
  */
 package Service.ServiceImpl;
 
+import DomainModel.BoNho;
 import DomainModel.HeDieuHanh;
 import DomainModel.Pin;
 import DomainModel.ThietKe;
@@ -117,6 +118,27 @@ public class SanPhamServicesImpl implements SanPhamServices {
     @Override
     public String suaTK(ThietKe tk) {
         if (new ThongSoReponsitory().SuaThietKe(tk)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
+    @Override
+    public List<BoNho> getBN() {
+        return new ThongSoReponsitory().getBN();
+    }
+
+    @Override
+    public String addBN(BoNho tk) {
+        if (new ThongSoReponsitory().ThemBN(tk)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
+    @Override
+    public String suaBN(BoNho tk) {
+        if (new ThongSoReponsitory().SuaBN(tk)) {
             return "OK";
         }
         return "FAIL";

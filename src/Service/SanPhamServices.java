@@ -4,6 +4,7 @@
  */
 package Service;
 
+import DomainModel.BoNho;
 import DomainModel.HeDieuHanh;
 import DomainModel.Pin;
 import DomainModel.ThietKe;
@@ -44,5 +45,11 @@ public interface SanPhamServices {
     String addTK(ThietKe tk);
 
     String suaTK(ThietKe tk);
+    
+    List<BoNho> getBN();
+
+    String addBN(BoNho tk);
+
+    String suaBN(BoNho tk);
 
 }
