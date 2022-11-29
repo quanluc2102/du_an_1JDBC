@@ -105,8 +105,8 @@ public class BanHangServiceimpl implements BanHangService {
     }
 
     @Override
-    public int layGiaGiamGiaPhanTram(String maHD) {
-        return bhr.layGiaGiamGiaPhantram(maHD);
+    public int layGiaGiamGiaPhanTram(int giaTien,String maKM) {
+        return bhr.layGiaGiamGiaPhantram(giaTien, maKM);
     }
 
     @Override

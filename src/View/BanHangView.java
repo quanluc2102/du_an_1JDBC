@@ -490,6 +490,7 @@ private BanHangServiceimpl bhs=new BanHangServiceimpl();
         int row1=tbHoaDonChuaThanhToan.getSelectedRow();
         bhs.deleteHDCT(listHoaDonCT.get(row).getIMEI(), listHoaDonChuaThanhToan.get(row1).getMaHoaDon());
         resetHoaDonChiTiet(listHoaDonChuaThanhToan.get(row1).getMaHoaDon());
+        thayDoiTien();
     }//GEN-LAST:event_btnXoaKhoiHoaDonActionPerformed
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
@@ -524,6 +525,7 @@ private BanHangServiceimpl bhs=new BanHangServiceimpl();
         bhs.getHDCT(listHoaDonCT,a.getMaHoaDon());
         bhs.showDataHoaDon(dtmDonHang, listHoaDonCT);
         resetHoaDonChiTiet(listHoaDonChuaThanhToan.get(row).getMaHoaDon());
+        thayDoiTien();
     }//GEN-LAST:event_tbHoaDonChuaThanhToanMouseClicked
 
     private void tbSanPhamBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSanPhamBanHangMouseClicked
@@ -535,8 +537,23 @@ private BanHangServiceimpl bhs=new BanHangServiceimpl();
         lbIMEIDaChon.setText(detail1.layIMEI());
         bhs.addVaoHDCT(lbIMEIDaChon.getText(), listHoaDonChuaThanhToan.get(row1).getMaHoaDon());
         resetHoaDonChiTiet(listHoaDonChuaThanhToan.get(row1).getMaHoaDon());
+        thayDoiTien();
     }//GEN-LAST:event_tbSanPhamBanHangMouseClicked
     public void thayDoiTien(){
+        String maHD=lbmaHDDuocChon.getText();
+        String maGG=String.valueOf(cbbMaGGBanHang.getSelectedItem());
+        int tongTien=bhs.layGiaHD(maHD);
+        int giamGia = 0 ;
+        
+        if(bhs.layDonVi(maGG)==true){
+            giamGia=bhs.layGiaGiamGiaK(maGG);
+        }else if(bhs.layDonVi(maGG)==false){
+            giamGia=bhs.layGiaGiamGiaPhanTram(tongTien, maGG);
+        }
+        int thanhTien=bhs.layGiaThanhTien(tongTien, giamGia);
+        lbTongTien.setText(String.valueOf(tongTien));
+        lbGiamGia.setText(String.valueOf(giamGia));
+        lbThanhTien.setText(String.valueOf(thanhTien));
         
     }
     public void resetSanPhamChiTiet(){

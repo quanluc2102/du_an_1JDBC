@@ -270,12 +270,11 @@ public class BanHangReponsitory {
     }
 
     public int layGiaTien(String maHD) {
-        String query = "SELECT	Sum(gia_ban)\n"
-                + "  FROM [dbo].[HoaDonChiTiet]\n"
-                + "  join ChiTietDienThoai on ChiTietDienThoai.IMEI=HoaDonChiTiet.IMEI\n"
-                + "  join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_Dong=QuocGiaDong.id\n"
-                + "  join HoaDon on HoaDon.id=HoaDonChiTiet.id_hoa_don\n"
-                + "  where ma_hoa_don = ?";
+        String query = "Select SUM(gia_ban) from QuocGiaDong\n"
+                + "join ChiTietDienThoai on QuocGiaDong.id=ChiTietDienThoai.id_quoc_gia_dong\n"
+                + "join HoaDonChiTiet on ChiTietDienThoai.IMEI=HoaDonChiTiet.IMEI\n"
+                + "join HoaDon on HoaDon.id=HoaDonChiTiet.id_hoa_don\n"
+                + "where ma_hoa_don = ?";
         int a = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, maHD);
@@ -291,18 +290,13 @@ public class BanHangReponsitory {
 
     }
 
-    public int layGiaGiamGiaPhantram(String maHD) {
-        String query = "SELECT Sum(gia_ban) * (KhuyenMai.gia_giam/100)\n"
-                + "FROM [dbo].[HoaDonChiTiet]\n"
-                + "join ChiTietDienThoai on ChiTietDienThoai.IMEI=HoaDonChiTiet.IMEI \n"
-                + "join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_Dong=QuocGiaDong.id\n"
-                + "join HoaDon on HoaDon.id=HoaDonChiTiet.id_hoa_don\n"
-                + "join KhuyenMai on KhuyenMai.id = HoaDon.id_khuyen_mai\n"
-                + "where ma_hoa_don = ?\n"
-                + "group by KhuyenMai.gia_giam";
+    public int layGiaGiamGiaPhantram(int giaTien,String maKM) {
+        String query = "Select ? * (KhuyenMai.gia_giam / 100) from KhuyenMai\n"
+                + "where ma_khuyen_mai = ?";
         int a = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, maHD);
+            ps.setObject(1, giaTien);
+            ps.setObject(2, maKM);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 a = rs.getInt(1);

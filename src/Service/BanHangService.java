@@ -47,7 +47,7 @@ public interface BanHangService {
 
     int layGiaHD(String maHD);
 
-    int layGiaGiamGiaPhanTram(String maHD);
+    int layGiaGiamGiaPhanTram(int giaTien,String maKM);
 
     int layGiaGiamGiaK(String maKM);
 
