@@ -41,13 +41,74 @@ public class NhanVienRepository {
 
     }
 
+    public List<NhanVien> getAlls() {
+        List<NhanVien> ls = new ArrayList<>();
+        try ( Connection conn = new SQLServerConnection().getConnection()) {
+            String query = "SELECT  * from nhanvien";
+            PreparedStatement ps = conn.prepareCall(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ls.add(new NhanVien(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10)));
+            }
+            return ls;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    public boolean addNV(NhanVien nv) {
+        int check = 0;
+        try ( Connection conn = new SQLServerConnection().getConnection()) {
+            String query = "INSERT INTO [dbo].[NhanVien]\n"
+                    + "           ([ma_nhan_vien]\n"
+                    + "           ,[ten_nhan_vien]\n"
+                    + "           ,[id_chuc_vu]\n"
+                    + "           ,[ngay_sinh]\n"
+                    + "           ,[sdt]\n"
+                    + "           ,[email]\n"
+                    + "           ,[dia_chi]\n"
+                    + "           ,[mat_khau]\n"
+                    + "           ,[trang_thai])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement ps = conn.prepareCall(query);
+            ps.setObject(1, nv.getMa());
+            ps.setObject(2, nv.getTen());
+            ps.setObject(3,nv.getIdChucVu());
+            ps.setObject(4, nv.getNgaySinh());
+            ps.setObject(5, nv.getSdt());
+            ps.setObject(6, nv.getEmail());
+            ps.setObject(7, nv.getDiaChi());
+            ps.setObject(8, nv.getMatKhau());
+            ps.setObject(9, nv.getTrangThai());
+
+            check = ps.executeUpdate();
+            return check > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return check < 0;
+        }
+
+    }
+
     public static void main(String[] args) {
         List<NhanVienView> l = new NhanVienRepository().getAll();
         for (NhanVienView nhanVien : l) {
             System.out.println(nhanVien.toString());
         }
     }
-      public boolean chuyenTTNV(String id) {
+
+    public boolean chuyenTTNV(String id) {
         String query = "UPDATE [dbo].[NhanVien]\n"
                 + "   SET[id_chuc_vu] = ?\n"
                 + "      ,[trang_thai] = ?\n"
@@ -65,7 +126,7 @@ public class NhanVienRepository {
         return check > 0;
     }
 
-    public boolean updateSVDiem(NhanVien sv, String ma) {
+    public boolean updateSVDiem(NhanVien sv, String id) {
         String query = "UPDATE [dbo].[NhanVien]\n"
                 + "   SET [ma_nhan_vien] = ?\n"
                 + "      ,[ten_nhan_vien] = ?\n"
@@ -89,7 +150,7 @@ public class NhanVienRepository {
             ps.setObject(7, sv.getDiaChi());
             ps.setObject(8, sv.getMatKhau());
             ps.setObject(9, sv.getTrangThai());
-            ps.setObject(10, ma);
+            ps.setObject(10, id);
             check = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace(System.out);

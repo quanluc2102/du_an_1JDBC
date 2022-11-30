@@ -61,8 +61,8 @@ public class NhanVienServiceImpl implements NhanVienService {
 
     @Override
     public String dangKi(NhanVien nv) {
-        LoginRepository nva = new LoginRepository();
-        if (nva.addNV(nv)) {
+        
+        if (Nvrp.addNV(nv)) {
             return "them thanh cong";
         }
 
@@ -87,6 +87,11 @@ public class NhanVienServiceImpl implements NhanVienService {
         } else {
             return "Cập nhật thất bại";
         }
+    }
+
+    @Override
+    public List<NhanVien> getAlls() {
+        return new NhanVienRepository().getAlls();
     }
 
 }

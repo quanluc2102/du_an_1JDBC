@@ -17,6 +17,8 @@ public interface NhanVienService {
 
     List<NhanVienView> getAll();
 
+    List<NhanVien> getAlls();
+
     void showData(DefaultTableModel dtm, List<NhanVienView> list);
 
     List<String> ChucVuCBB();
@@ -25,7 +27,7 @@ public interface NhanVienService {
 
     String dangKi(NhanVien nv);
 
-    String update(NhanVien nv, String id);
+    String update(NhanVien nv,String id);
 
     String chuyenTTNV(String id);
 }
