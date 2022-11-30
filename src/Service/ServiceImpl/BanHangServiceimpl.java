@@ -172,4 +172,9 @@ public class BanHangServiceimpl implements BanHangService {
             return o2.layGia().compareTo(o1.layGia());
         });
     }
+
+    @Override
+    public void timTen(List<DienThoaiViewModel> list, String ten) {
+        list.addAll(bhr.timKiemTheoTen(ten));
+    }
 }

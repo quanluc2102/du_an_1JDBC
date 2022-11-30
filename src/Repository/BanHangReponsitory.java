@@ -580,4 +580,36 @@ public class BanHangReponsitory {
         }
         return null;
     }
+    
+    public List<DienThoaiViewModel> timKiemTheoTen(String ten) {
+        String query = "SELECT DienThoai.[id]\n" +
+"                      ,[ma_dien_thoai]\n" +
+"                      ,[ten_dien_thoai]\n" +
+"                      ,[id_hang]\n" +
+"                      ,DienThoai.[trang_thai]\n" +
+"                 FROM [dbo].[DienThoai]\n" +
+"                 join Dong on Dong.id_dien_thoai = DienThoai.id\n" +
+"                join QuocGiaDong on QuocGiaDong.id_dong = Dong.id\n" +
+"                join ChiTietDienThoai on QuocGiaDong.id=ChiTietDienThoai.id_quoc_gia_dong\n" +
+"				where ten_dien_thoai like ?\n" +
+"                group by DienThoai.[id] \n" +
+"                     ,[ma_dien_thoai]\n" +
+"                     ,[ten_dien_thoai]\n" +
+"                    ,[id_hang]\n" +
+"                     ,DienThoai.[trang_thai]";
+        List<DienThoaiViewModel> list = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            String tenTim="%"+ten+"%";
+            ps.setObject(1, tenTim);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                DienThoaiViewModel a = new DienThoaiViewModel(rs.getString("id"), rs.getString("ma_dien_thoai"), rs.getString("ten_dien_thoai"), rs.getString("id_hang"), rs.getInt("trang_thai"));
+                list.add(a);
+            }
+            return list;
+        } catch (SQLException s) {
+            s.printStackTrace(System.out);
+        }
+        return null;
+    }
 }
