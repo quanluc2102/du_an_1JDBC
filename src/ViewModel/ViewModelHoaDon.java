@@ -12,186 +12,110 @@ import java.util.Date;
  */
 public class ViewModelHoaDon {
 
-    String idHD;
-    String maHD;
-    String tenNV;
-    String tenKH;
-    String maKM;
-    String IMEI;
-    Date ngayTao;
-    Float tongTien;
-    int trangThai;
-    int thoiGianBH;
-    int donViBH;
-
-    String BHHoanChinh;
-
-    public ViewModelHoaDon(String idHD, String maHD, String tenNV, String tenKH, String maKM, String IMEI, Date ngayTao, Float tongTien, int trangThai, int thoiGianBH, int donViBH, String BHHoanChinh) {
-        this.idHD = idHD;
-        this.maHD = maHD;
-        this.tenNV = tenNV;
-        this.tenKH = tenKH;
-        this.maKM = maKM;
-        this.IMEI = IMEI;
-        this.ngayTao = ngayTao;
-        this.tongTien = tongTien;
-        this.trangThai = trangThai;
-        this.thoiGianBH = thoiGianBH;
-        this.donViBH = donViBH;
-        this.BHHoanChinh = BHHoanChinh;
-    }
-
-    public ViewModelHoaDon(String idHD, String maHD, String tenNV, String tenKH, String maKM, String IMEI, Date ngayTao, Float tongTien, int trangThai, int thoiGianBH, int donViBH) {
-        this.idHD = idHD;
-        this.maHD = maHD;
-        this.tenNV = tenNV;
-        this.tenKH = tenKH;
-        this.maKM = maKM;
-        this.IMEI = IMEI;
-        this.ngayTao = ngayTao;
-        this.tongTien = tongTien;
-        this.trangThai = trangThai;
-        this.thoiGianBH = thoiGianBH;
-        this.donViBH = donViBH;
-    }
-
-    public ViewModelHoaDon(String maHD, String tenNV, String tenKH, String maKM, String IMEI, Date ngayTao, Float tongTien, int trangThai, int thoiGianBH, int donViBH, String BHHoanChinh) {
-        this.maHD = maHD;
-        this.tenNV = tenNV;
-        this.tenKH = tenKH;
-        this.maKM = maKM;
-        this.IMEI = IMEI;
-        this.ngayTao = ngayTao;
-        this.tongTien = tongTien;
-        this.trangThai = trangThai;
-        this.thoiGianBH = thoiGianBH;
-        this.donViBH = donViBH;
-        this.BHHoanChinh = BHHoanChinh;
-    }
-
-    public ViewModelHoaDon(String maHD, String tenNV, String tenKH, String maKM, String IMEI, Date ngayTao, Float tongTien, int trangThai, int thoiGianBH, int donViBH) {
-        this.maHD = maHD;
-        this.tenNV = tenNV;
-        this.tenKH = tenKH;
-        this.maKM = maKM;
-        this.IMEI = IMEI;
-        this.ngayTao = ngayTao;
-        this.tongTien = tongTien;
-        this.trangThai = trangThai;
-        this.thoiGianBH = thoiGianBH;
-        this.donViBH = donViBH;
-    }
+    String MaHD;
+    String TenNV;
+    String TenKH;
+    String NgayTao;
+    String MaKhuyenMai;
+    int TrangThai;
+    int TongSoSP;
+    float GiaGiam;
+    float tongTien;
 
     public ViewModelHoaDon() {
     }
 
-    public String getIdHD() {
-        return idHD;
-    }
-
-    public void setIdHD(String idHD) {
-        this.idHD = idHD;
-    }
-
-    public String getMaHD() {
-        return maHD;
-    }
-
-    public void setMaHD(String maHD) {
-        this.maHD = maHD;
-    }
-
-    public String getTenNV() {
-        return tenNV;
-    }
-
-    public void setTenNV(String tenNV) {
-        this.tenNV = tenNV;
-    }
-
-    public String getTenKH() {
-        return tenKH;
-    }
-
-    public void setTenKH(String tenKH) {
-        this.tenKH = tenKH;
-    }
-
-    public String getTienKM() {
-        return maKM;
-    }
-
-    public void setTienKM(String maKM) {
-        this.maKM = maKM;
-    }
-
-    public String getIMEI() {
-        return IMEI;
-    }
-
-    public void setIMEI(String IMEI) {
-        this.IMEI = IMEI;
-    }
-
-    public Date getNgayTao() {
-        return ngayTao;
-    }
-
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
-    }
-
-    public Float getTongTien() {
-        return tongTien;
-    }
-
-    public void setTongTien(Float tongTien) {
+    public ViewModelHoaDon(String MaHD, String TenNV, String TenKH, String NgayTao, String MaKhuyenMai, int TrangThai, int TongSoSP, float GiaGiam, float tongTien) {
+        this.MaHD = MaHD;
+        this.TenNV = TenNV;
+        this.TenKH = TenKH;
+        this.NgayTao = NgayTao;
+        this.MaKhuyenMai = MaKhuyenMai;
+        this.TrangThai = TrangThai;
+        this.TongSoSP = TongSoSP;
+        this.GiaGiam = GiaGiam;
         this.tongTien = tongTien;
     }
 
+    public String getMaHD() {
+        return MaHD;
+    }
+
+    public void setMaHD(String MaHD) {
+        this.MaHD = MaHD;
+    }
+
+    public String getTenNV() {
+        return TenNV;
+    }
+
+    public void setTenNV(String TenNV) {
+        this.TenNV = TenNV;
+    }
+
+    public String getTenKH() {
+        return TenKH;
+    }
+
+    public void setTenKH(String TenKH) {
+        this.TenKH = TenKH;
+    }
+
+    public String getNgayTao() {
+        return NgayTao;
+    }
+
+    public void setNgayTao(String NgayTao) {
+        this.NgayTao = NgayTao;
+    }
+
+    public String getMaKhuyenMai() {
+        return MaKhuyenMai;
+    }
+
+    public void setMaKhuyenMai(String MaKhuyenMai) {
+        this.MaKhuyenMai = MaKhuyenMai;
+    }
+
     public int getTrangThai() {
-        return trangThai;
+        return TrangThai;
     }
 
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
+    public void setTrangThai(int TrangThai) {
+        this.TrangThai = TrangThai;
     }
 
-    public int getThoiGianBH() {
-        return thoiGianBH;
+    public int getTongSoSP() {
+        return TongSoSP;
     }
 
-    public void setThoiGianBH(int thoiGianBH) {
-        this.thoiGianBH = thoiGianBH;
+    public void setTongSoSP(int TongSoSP) {
+        this.TongSoSP = TongSoSP;
     }
 
-    public int getDonViBH() {
-        return donViBH;
+    public float getGiaGiam() {
+        return GiaGiam;
     }
 
-    public void setDonViBH(int donViBH) {
-        this.donViBH = donViBH;
+    public void setGiaGiam(float GiaGiam) {
+        this.GiaGiam = GiaGiam;
     }
 
-    public String getBHHoanChinh() {
-        return BHHoanChinh;
+    public float getTongTien() {
+        return tongTien;
     }
 
-    public void setBHHoanChinh(String BHHoanChinh) {
-        this.BHHoanChinh = BHHoanChinh;
+    public void setTongTien(float tongTien) {
+        this.tongTien = tongTien;
     }
 
-    public String trangThaiHoaDon(int trangThai) {
-        return trangThai == 0 ? "Chua thanh toan" : "Da thanh toan";
+    public String trangthai(int TrangThai) {
+        String st = "";
+        st = (TrangThai == 0) ? "Chưa Thanh Toán" : "Đã Thanh Toán";
+        return st;
     }
-
-    public String DonViThoiGianBaoHanh(int donViBH) {
-        return donViBH == 0 ? "Ngày" : "Tháng";
-    }
-    
 
     public Object[] dataRow() {
-        return new Object[]{maHD, tenNV, tenKH, maKM, IMEI, ngayTao, tongTien, trangThaiHoaDon(trangThai), thoiGianBH + " " + DonViThoiGianBaoHanh(donViBH)};
+        return new Object[]{MaHD, TenNV, TenKH, NgayTao, MaKhuyenMai, tongTien, trangthai(TrangThai),TongSoSP};
     }
-    
 }

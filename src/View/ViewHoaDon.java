@@ -36,11 +36,12 @@ public class ViewHoaDon extends javax.swing.JFrame {
             ccbSapXep.addElement(string);
         }
 
-        String[] heaaderHoaDon = {"Mã HD", "Tên NV", "Tên KH", "Ngày Tạo", "Mã Khuyến Mại", "Tổng Tiền", "Trạng Thái"};
+        String[] heaaderHoaDon = {"Mã HD", "Tên NV", "Tên KH", "Ngày Tạo", "Mã Khuyến Mại", "Tổng Tiền", "Trạng Thái","Tổng số SP"};
         tableHoaDon.setColumnIdentifiers(heaaderHoaDon);
-        String[] headerSanPham = {"Mã DT", "Mã HD ", "Tên SP", "Hãng", "Dòng"};
+        String[] headerSanPham = {"Mã DT", "Mã HD ", "Tên SP", "Hãng", "Dòng","Độ Mới","Mô tả"};
         tableSanPhamHD.setColumnIdentifiers(headerSanPham);
 
+        
     }
 
     /**
@@ -88,13 +89,13 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
         tlbHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã HĐ", "Tên NV", "Tên KH", "Ngày Tạo", "Mã Khuyến Mại", "Tổng Tiền", "Trạng Thái"
+                "Mã HĐ", "Tên NV", "Tên KH", "Ngày Tạo", "Mã Khuyến Mại", "Tổng Tiền", "Trạng Thái", "Title 8"
             }
         ));
         jScrollPane1.setViewportView(tlbHoaDon);
@@ -109,13 +110,13 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
         tlbSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã ĐT", "Mã HĐ", "Tên SP", "Hãng", "Dòng", "Giá Bán"
+                "Mã ĐT", "Mã HĐ", "Tên SP", "Hãng", "Dòng", "Giá Bán", "Độ Mới", "Mô Tả"
             }
         ));
         jScrollPane2.setViewportView(tlbSanPham);
