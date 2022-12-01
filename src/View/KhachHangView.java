@@ -463,6 +463,10 @@ public class KhachHangView extends javax.swing.JFrame {
             txtValidateName.setText("Khong duoc bo trong ten");
             txtValidateName.setForeground(Color.red);
             txtTen.setBackground(Color.red);
+        } else if (!txtTen.getText().matches("^[A-Z a-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]{1,150}+$")) {
+            txtValidateName.setText("Tên không duoc chua so");
+            txtValidateName.setForeground(Color.red);
+            txtTen.setBackground(Color.red);
         } else {
             txtValidateName.setText("OK");
             txtValidateName.setForeground(Color.GREEN);
@@ -697,7 +701,7 @@ public class KhachHangView extends javax.swing.JFrame {
         if (txtSearch.getText().isEmpty()) {
             index++;
             rowOffset += 5;
-            if (rowOffset > service.getAllKhachHang1().size()) {
+            if (rowOffset > service.getAllKhachHang1().size()-1) {
                 rowOffset = 0;
                 index = 0;
             }
@@ -821,15 +825,15 @@ public class KhachHangView extends javax.swing.JFrame {
         if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
             index = o;        // TODO add your handling code here:
             int c = service.getAllKhachHang1().size() % fetch;
-            rowOffset = service.getAllKhachHang1().size() - c;
+            rowOffset = service.getAllKhachHang1().size() -  c;
             listKhachHangView = service.getAllKhachHang(rowOffset);
             service.showDataTable(dtm, listKhachHangView);
             loadSoTrang();
         } else {
             if (cbbSearch.getSelectedIndex() == 0) {
                 // TODO add your handling code here:
-                int c = listSearch.size() % fetch;
-                index = c;
+                int c = listSearchTen.size() / fetch;
+                index = listSearchTen.size() / fetch;
                 rowOffset = service.searchKhachHang(name, rowOffset).size() - c;
                 listSearchTen = service.searchKhachHang(name, rowOffset);
                 service.showDataTable(dtm, listSearchTen);
@@ -837,7 +841,7 @@ public class KhachHangView extends javax.swing.JFrame {
 
             } else {
                 // TODO add your handling code here:
-                int c = listSearch.size() % fetch;
+                int c = listSearchDiaChi.size() / fetch;
                 index = c;
                 rowOffset = service.searchKhachHangDiaChi(name, rowOffset).size() - c;
                 listSearchDiaChi = service.searchKhachHangDiaChi(name, rowOffset);

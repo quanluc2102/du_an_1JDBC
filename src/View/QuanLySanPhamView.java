@@ -44,7 +44,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     DefaultTableModel modelTBL;
     SanPhamServices sps = new SanPhamServicesImpl();
     int index;
-    List<String> mei =new ArrayList<>();
+    List<String> mei = new ArrayList<>();
 
     /**
      * Creates new form QuanLySanPhamView
@@ -900,7 +900,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         ssca c = new ssca(new javax.swing.JFrame(), true, "");
+        ssca c = new ssca(new javax.swing.JFrame(), true, "");
         this.setVisible(false);
         c.setVisible(true);
         this.setVisible(true);  // TODO add your handling code here:
