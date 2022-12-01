@@ -4,7 +4,7 @@
  */
 package View.SanPham;
 
-import DomainModel.MauSac;
+import DomainModel.ManHinh;
 import Service.SanPhamServices;
 import Service.ServiceImpl.SanPhamServicesImpl;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author haha
  */
-public class ViewMauSac extends javax.swing.JDialog {
+public class ViewManHinh extends javax.swing.JDialog {
 
     DefaultTableModel tbl;
     int index = 0;
@@ -27,35 +27,35 @@ public class ViewMauSac extends javax.swing.JDialog {
     List<String> lsTrangThai = new ArrayList<>();
 
     /**
-     * Creates new form MauSac
+     * Creates new form ManHinh
      */
-    public ViewMauSac(java.awt.Frame parent, boolean modal, String id) {
+    public ViewManHinh(java.awt.Frame parent, boolean modal, String id) {
         super(parent, modal);
         initComponents();
 
         loadx();
-        loadDataToTable(sps.getMauSacs());
+        loadDataToTable(sps.getHM());
 
     }
 
     private void loadx() {
 
         tbl = (DefaultTableModel) tbl1.getModel();
-        String[] title = {"Mã màu", "Tên màu"};
+        String[] title = {"Kích thước", "loại", "kiểu dáng", "công nghệ đi kèm"};
         tbl.setColumnIdentifiers(title);
         modelcbb = (DefaultComboBoxModel) cbbTrangThai.getModel();
         modelcbb.removeAllElements();
-        lsTrangThai.add("không cập nhật");
-        lsTrangThai.add("còn cập nhật");
+        lsTrangThai.add("không có");
+        lsTrangThai.add("còn ");
         lsTrangThai.add("không hỗ trợ");
         modelcbb.addAll(lsTrangThai);
 
     }
 
-    private void loadDataToTable(List<MauSac> h) {
+    private void loadDataToTable(List<ManHinh> h) {
         tbl.setRowCount(0);
-        for (MauSac x : h) {
-            Object[] row = new Object[]{x.getMa(), x.getTen()};
+        for (ManHinh x : h) {
+            Object[] row = new Object[]{x.getKichThuoc(), x.getLoai(), x.getKieu(), x.getCongNghe() + " " + x.getTangSoQuet()};
             tbl.addRow(row);
         }
     }
@@ -74,12 +74,20 @@ public class ViewMauSac extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
-        txtMa = new javax.swing.JTextField();
+        txtKT = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtTen = new javax.swing.JTextField();
+        txtLoai = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cbbTrangThai = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        txtKieu = new javax.swing.JTextField();
+        txtTSQ = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtCN = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtDPG = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý hệ điều hành");
@@ -129,42 +137,66 @@ public class ViewMauSac extends javax.swing.JDialog {
             }
         });
 
-        txtMa.setEditable(false);
+        txtKT.setEditable(false);
 
-        jLabel1.setText("Mã");
+        jLabel1.setText("Kích thước");
 
-        jLabel2.setText("Tên");
+        jLabel2.setText("Loại");
 
-        txtTen.setEditable(false);
+        txtLoai.setEditable(false);
 
         jLabel3.setText("Trạng thái");
 
         cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel4.setText("Kiểu dáng");
+
+        txtKieu.setEditable(false);
+
+        txtTSQ.setEditable(false);
+
+        jLabel5.setText("tầng số quét");
+
+        txtCN.setEditable(false);
+
+        jLabel6.setText("Công nghệ");
+
+        jLabel7.setText("Độ phân giải");
+
+        txtDPG.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(btnThem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSua)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(txtMa))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(12, 12, 12)
+                        .addComponent(cbbTrangThai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnThem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSua)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                            .addComponent(cbbTrangThai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDPG)
+                            .addComponent(txtTSQ)
+                            .addComponent(txtLoai, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                            .addComponent(txtKT)
+                            .addComponent(txtKieu)
+                            .addComponent(txtCN, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -172,13 +204,29 @@ public class ViewMauSac extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtKT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtKieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtTSQ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtCN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtDPG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -214,29 +262,36 @@ public class ViewMauSac extends javax.swing.JDialog {
 
     private void tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl1MouseClicked
         int index = tbl1.getSelectedRow();
-        MauSac hdh = sps.getMauSacs().get(index);
-        txtTen.setText(hdh.getTen());
-        txtMa.setText(hdh.getMa());
+        ManHinh hdh = sps.getHM().get(index);
+        txtLoai.setText(hdh.getKichThuoc());
+        txtKT.setText(hdh.getKichThuoc());
+
+        txtKieu.setText(hdh.getKieu());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
     }//GEN-LAST:event_tbl1MouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
 
         if (btnThem.getText() == "Lưu") {
-            if (txtTen.getText().isBlank() || txtMa.getText().isBlank()) {
+            if (txtLoai.getText().isBlank() || txtKT.getText().isBlank() || txtKieu.getText().isBlank()) {
                 System.out.println("them khong dc");
             } else {
-                MauSac hdh = new MauSac("", txtMa.getText(), txtTen.getText(), cbbTrangThai.getSelectedIndex());
-                JOptionPane.showMessageDialog(this, sps.addMauSac(hdh));
-                loadDataToTable(sps.getMauSacs());
                 btnThem.setText("Thêm");
+                ManHinh hdh = new ManHinh("", txtLoai.getText(), txtKieu.getText(), txtTSQ.getText(), txtDPG.getText(), txtKT.getText(), txtCN.getText(), cbbTrangThai.getSelectedIndex());
+                JOptionPane.showMessageDialog(this, sps.addHM(hdh));
+                loadDataToTable(sps.getHM());
+
             }
         } else {
-            txtTen.setText("");
-            txtMa.setText("");
-            txtTen.setEditable(true);// TODO add your handling code here:
-            txtMa.setEditable(true);
-            cbbTrangThai.setSelectedIndex(1);
+            txtLoai.setText("");
+            txtKT.setText("");
+
+            txtKieu.setText("");
+            txtLoai.setEditable(true);
+            txtKT.setEditable(true);
+            txtKieu.setEditable(true);
+
+            cbbTrangThai.setSelectedIndex(0);
         }
         btnThem.setText("Lưu");
 
@@ -246,17 +301,20 @@ public class ViewMauSac extends javax.swing.JDialog {
         index = tbl1.getSelectedRow();
         String id = sps.getAll().get(index).getId();
         if (btnSua.getText() == "Lưu") {
-            if (txtTen.getText().isBlank() || txtMa.getText().isBlank()) {
+            if (txtLoai.getText().isBlank() || txtKT.getText().isBlank() || txtKieu.getText().isBlank()) {
                 System.out.println("them khong dc");
             } else {
-                MauSac hdh = new MauSac(id, txtMa.getText(), txtTen.getText(), cbbTrangThai.getSelectedIndex());
-                JOptionPane.showMessageDialog(this, sps.suaMauSac(hdh));
-                loadDataToTable(sps.getMauSacs());
                 btnSua.setText("Sửa");
+                ManHinh hdh = new ManHinh("", txtLoai.getText(), txtKieu.getText(), txtTSQ.getText(), txtDPG.getText(), txtKT.getText(), txtCN.getText(), cbbTrangThai.getSelectedIndex());
+                JOptionPane.showMessageDialog(this, sps.suaHM(hdh));
+                loadDataToTable(sps.getHM());
+
             }
         } else {
-            txtTen.setEditable(true);// TODO add your handling code here:
-            txtMa.setEditable(true);
+            txtLoai.setEditable(true);
+            txtKT.setEditable(true);
+            txtKieu.setEditable(true);
+
             cbbTrangThai.setSelectedIndex(1);
         }
         btnSua.setText("Lưu");
@@ -279,14 +337,74 @@ public class ViewMauSac extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewMauSac.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewManHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewMauSac.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewManHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewMauSac.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewManHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewMauSac.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewManHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -295,7 +413,7 @@ public class ViewMauSac extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ViewMauSac dialog = new ViewMauSac(new javax.swing.JFrame(), true, "");
+                ViewManHinh dialog = new ViewManHinh(new javax.swing.JFrame(), true, "");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -314,10 +432,18 @@ public class ViewMauSac extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl1;
-    private javax.swing.JTextField txtMa;
-    private javax.swing.JTextField txtTen;
+    private javax.swing.JTextField txtCN;
+    private javax.swing.JTextField txtDPG;
+    private javax.swing.JTextField txtKT;
+    private javax.swing.JTextField txtKieu;
+    private javax.swing.JTextField txtLoai;
+    private javax.swing.JTextField txtTSQ;
     // End of variables declaration//GEN-END:variables
 }

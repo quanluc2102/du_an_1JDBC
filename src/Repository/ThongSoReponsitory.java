@@ -6,8 +6,11 @@ package Repository;
 
 import DomainModel.BoNho;
 import DomainModel.Cpu;
+import DomainModel.ManHinh;
+import DomainModel.MauSac;
 import DomainModel.Pin;
 import DomainModel.ThietKe;
+import DomainModel.TienIch;
 import Ultilities.SQLServerConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -285,8 +288,204 @@ public class ThongSoReponsitory {
         return ls;
     }
 
+    public boolean ThemMau(MauSac hdh) {
+        String query = "INSERT INTO [dbo].[MauSac]\n"
+                + "           ([ma_mau]\n"
+                + "           ,[ten_mau]\n"
+                + "           ,[trang_thai])\n"
+                + "     VALUES\n"
+                + "           (?,?,?)";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getMa());
+            ps.setObject(2, hdh.getTen());
+
+            ps.setObject(3, hdh.getTrangThai());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public boolean SuaMau(MauSac hdh) {
+        String query = "UPDATE [dbo].[MauSac]\n"
+                + "   SET [ma_mau] = ?\n"
+                + "      ,[ten_mau] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + " WHERE id =?";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getMa());
+            ps.setObject(2, hdh.getTen());
+
+            ps.setObject(3, hdh.getTrangThai());
+            ps.setObject(4, hdh.getId());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public List<MauSac> getMau() {
+        String query = "select * from MauSac where trang_thai != 0";
+        List<MauSac> ls = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                MauSac sp = new MauSac(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+
+                ls.add(sp);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return ls;
+    }
+
+    public boolean ThemTi(TienIch hdh) {
+        String query = "INSERT INTO [dbo].[TienIch]\n"
+                + "           ([bao_mat]\n"
+                + "           ,[khang_nuoc]\n"
+                + "           ,[dac_biet]\n"
+                + "           ,[trang_thai])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?)";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getBaoMat());
+            ps.setObject(2, hdh.getKhangNuoc());
+            ps.setObject(3, hdh.getDacBiet());
+            ps.setObject(4, hdh.getTrangThai());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public boolean SuaTi(TienIch hdh) {
+        String query = "UPDATE [dbo].[TienIch]\n"
+                + "   SET [bao_mat] = ?\n"
+                + "      ,[khang_nuoc] =?\n"
+                + "      ,[dac_biet] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + " WHERE id =?";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getBaoMat());
+            ps.setObject(2, hdh.getKhangNuoc());
+            ps.setObject(3, hdh.getDacBiet());
+            ps.setObject(4, hdh.getTrangThai());
+            ps.setObject(5, hdh.getId());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public List<TienIch> getTi() {
+        String query = "select * from TienIch where trang_thai != 0";
+        List<TienIch> ls = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                TienIch sp = new TienIch(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(4));
+
+                ls.add(sp);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return ls;
+    }
+
+    public boolean ThemMH(ManHinh hdh) {
+        String query = "INSERT INTO [dbo].[ManHinh]\n"
+                + "           ([loai_man_hinh]\n"
+                + "           ,[kieu_man_hinh]\n"
+                + "           ,[tang_so_quet]\n"
+                + "           ,[do_phan_giai]\n"
+                + "           ,[kich_thuoc]\n"
+                + "           ,[cong_nghe_di_kem]\n"
+                + "           ,[trang_thai])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,?,?)";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getLoai());
+            ps.setObject(2, hdh.getKieu());
+            ps.setObject(3, hdh.getTangSoQuet());
+            ps.setObject(4, hdh.getDoPhanGiai());
+            ps.setObject(5, hdh.getKichThuoc());
+            ps.setObject(6, hdh.getCongNghe());
+            ps.setObject(7, hdh.getTrangThai());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public boolean SuaMH(ManHinh hdh) {
+        String query = "UPDATE [dbo].[ManHinh]\n"
+                + "   SET [loai_man_hinh] = ?\n"
+                + "      ,[kieu_man_hinh] = ?\n"
+                + "      ,[tang_so_quet] = ?\n"
+                + "      ,[do_phan_giai] = ?\n"
+                + "      ,[kich_thuoc] = ?\n"
+                + "      ,[cong_nghe_di_kem] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + " WHERE id =?";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getLoai());
+            ps.setObject(2, hdh.getKieu());
+            ps.setObject(3, hdh.getTangSoQuet());
+            ps.setObject(4, hdh.getDoPhanGiai());
+            ps.setObject(5, hdh.getKichThuoc());
+            ps.setObject(6, hdh.getCongNghe());
+            ps.setObject(7, hdh.getTrangThai());
+            ps.setObject(8, hdh.getId());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public List<ManHinh> getMH() {
+        String query = "select * from ManHinh where trang_thai != 0";
+        List<ManHinh> ls = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                ManHinh sp = new ManHinh(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
+
+                ls.add(sp);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return ls;
+    }
+
     public static void main(String[] args) {
-        for (Cpu cpu : new ThongSoReponsitory().getCpu()) {
+        for (TienIch cpu : new ThongSoReponsitory().getTi()) {
             System.out.println(cpu.toString());
         }
     }

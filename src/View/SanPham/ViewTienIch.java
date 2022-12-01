@@ -4,7 +4,7 @@
  */
 package View.SanPham;
 
-import DomainModel.MauSac;
+import DomainModel.TienIch;
 import Service.SanPhamServices;
 import Service.ServiceImpl.SanPhamServicesImpl;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author haha
  */
-public class ViewMauSac extends javax.swing.JDialog {
+public class ViewTienIch extends javax.swing.JDialog {
 
     DefaultTableModel tbl;
     int index = 0;
@@ -27,35 +27,35 @@ public class ViewMauSac extends javax.swing.JDialog {
     List<String> lsTrangThai = new ArrayList<>();
 
     /**
-     * Creates new form MauSac
+     * Creates new form TienIch
      */
-    public ViewMauSac(java.awt.Frame parent, boolean modal, String id) {
+    public ViewTienIch(java.awt.Frame parent, boolean modal, String id) {
         super(parent, modal);
         initComponents();
 
         loadx();
-        loadDataToTable(sps.getMauSacs());
+        loadDataToTable(sps.getTI());
 
     }
 
     private void loadx() {
 
         tbl = (DefaultTableModel) tbl1.getModel();
-        String[] title = {"Mã màu", "Tên màu"};
+        String[] title = {"Bảo mật", "Kháng nước", "đặc biệt"};
         tbl.setColumnIdentifiers(title);
         modelcbb = (DefaultComboBoxModel) cbbTrangThai.getModel();
         modelcbb.removeAllElements();
-        lsTrangThai.add("không cập nhật");
-        lsTrangThai.add("còn cập nhật");
+        lsTrangThai.add("không có");
+        lsTrangThai.add("còn ");
         lsTrangThai.add("không hỗ trợ");
         modelcbb.addAll(lsTrangThai);
 
     }
 
-    private void loadDataToTable(List<MauSac> h) {
+    private void loadDataToTable(List<TienIch> h) {
         tbl.setRowCount(0);
-        for (MauSac x : h) {
-            Object[] row = new Object[]{x.getMa(), x.getTen()};
+        for (TienIch x : h) {
+            Object[] row = new Object[]{x.getBaoMat(), x.getKhangNuoc(), x.getDacBiet()};
             tbl.addRow(row);
         }
     }
@@ -74,12 +74,14 @@ public class ViewMauSac extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
-        txtMa = new javax.swing.JTextField();
+        txtBM = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtTen = new javax.swing.JTextField();
+        txtKN = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cbbTrangThai = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        txtDB = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý hệ điều hành");
@@ -129,42 +131,52 @@ public class ViewMauSac extends javax.swing.JDialog {
             }
         });
 
-        txtMa.setEditable(false);
+        txtBM.setEditable(false);
 
-        jLabel1.setText("Mã");
+        jLabel1.setText("Bảo mật");
 
-        jLabel2.setText("Tên");
+        jLabel2.setText("Kháng nước");
 
-        txtTen.setEditable(false);
+        txtKN.setEditable(false);
 
         jLabel3.setText("Trạng thái");
 
         cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel4.setText("Đặc biệt");
+
+        txtDB.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(btnThem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSua)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(txtMa))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(12, 12, 12)
+                        .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                            .addComponent(cbbTrangThai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtKN, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                                    .addComponent(txtBM)
+                                    .addComponent(txtDB)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(12, 12, 12)
+                                .addComponent(cbbTrangThai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnThem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSua)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -172,13 +184,17 @@ public class ViewMauSac extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtKN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtDB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -214,29 +230,36 @@ public class ViewMauSac extends javax.swing.JDialog {
 
     private void tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl1MouseClicked
         int index = tbl1.getSelectedRow();
-        MauSac hdh = sps.getMauSacs().get(index);
-        txtTen.setText(hdh.getTen());
-        txtMa.setText(hdh.getMa());
+        TienIch hdh = sps.getTI().get(index);
+        txtKN.setText(hdh.getKhangNuoc());
+        txtBM.setText(hdh.getBaoMat());
+      
+        txtDB.setText(hdh.getDacBiet());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
     }//GEN-LAST:event_tbl1MouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
 
         if (btnThem.getText() == "Lưu") {
-            if (txtTen.getText().isBlank() || txtMa.getText().isBlank()) {
+            if (txtKN.getText().isBlank() || txtBM.getText().isBlank() || txtDB.getText().isBlank()) {
                 System.out.println("them khong dc");
             } else {
-                MauSac hdh = new MauSac("", txtMa.getText(), txtTen.getText(), cbbTrangThai.getSelectedIndex());
-                JOptionPane.showMessageDialog(this, sps.addMauSac(hdh));
-                loadDataToTable(sps.getMauSacs());
                 btnThem.setText("Thêm");
+                TienIch hdh = new TienIch("", txtBM.getText(), txtKN.getText(), txtDB.getText(), cbbTrangThai.getSelectedIndex());
+                JOptionPane.showMessageDialog(this, sps.addTI(hdh));
+                loadDataToTable(sps.getTI());
+
             }
         } else {
-            txtTen.setText("");
-            txtMa.setText("");
-            txtTen.setEditable(true);// TODO add your handling code here:
-            txtMa.setEditable(true);
-            cbbTrangThai.setSelectedIndex(1);
+            txtKN.setText("");
+            txtBM.setText("");
+     
+            txtDB.setText("");
+            txtKN.setEditable(true);
+            txtBM.setEditable(true);
+            txtDB.setEditable(true);
+         
+            cbbTrangThai.setSelectedIndex(0);
         }
         btnThem.setText("Lưu");
 
@@ -246,17 +269,20 @@ public class ViewMauSac extends javax.swing.JDialog {
         index = tbl1.getSelectedRow();
         String id = sps.getAll().get(index).getId();
         if (btnSua.getText() == "Lưu") {
-            if (txtTen.getText().isBlank() || txtMa.getText().isBlank()) {
+            if (txtKN.getText().isBlank() || txtBM.getText().isBlank() || txtDB.getText().isBlank()) {
                 System.out.println("them khong dc");
             } else {
-                MauSac hdh = new MauSac(id, txtMa.getText(), txtTen.getText(), cbbTrangThai.getSelectedIndex());
-                JOptionPane.showMessageDialog(this, sps.suaMauSac(hdh));
-                loadDataToTable(sps.getMauSacs());
                 btnSua.setText("Sửa");
+                TienIch hdh = new TienIch(id, txtBM.getText(), txtKN.getText(), txtDB.getText(), cbbTrangThai.getSelectedIndex());
+                JOptionPane.showMessageDialog(this, sps.suaTI(hdh));
+                loadDataToTable(sps.getTI());
+
             }
         } else {
-            txtTen.setEditable(true);// TODO add your handling code here:
-            txtMa.setEditable(true);
+            txtKN.setEditable(true);
+            txtBM.setEditable(true);
+            txtDB.setEditable(true);
+       
             cbbTrangThai.setSelectedIndex(1);
         }
         btnSua.setText("Lưu");
@@ -279,14 +305,42 @@ public class ViewMauSac extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewMauSac.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewTienIch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewMauSac.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewTienIch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewMauSac.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewTienIch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewMauSac.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewTienIch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -295,7 +349,7 @@ public class ViewMauSac extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ViewMauSac dialog = new ViewMauSac(new javax.swing.JFrame(), true, "");
+                ViewTienIch dialog = new ViewTienIch(new javax.swing.JFrame(), true, "");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -314,10 +368,12 @@ public class ViewMauSac extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl1;
-    private javax.swing.JTextField txtMa;
-    private javax.swing.JTextField txtTen;
+    private javax.swing.JTextField txtBM;
+    private javax.swing.JTextField txtDB;
+    private javax.swing.JTextField txtKN;
     // End of variables declaration//GEN-END:variables
 }

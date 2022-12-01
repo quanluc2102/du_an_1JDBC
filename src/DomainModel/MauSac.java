@@ -21,6 +21,17 @@ public class MauSac {
 
 
     private String ten;
+    private int trangThai;
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+    
+    
 
     @Override
     public String toString() {
@@ -52,14 +63,15 @@ public class MauSac {
         this.ten = ten;
     }
 
-
-    public MauSac(String id, String ma, String ten) {
+    public MauSac(String id, String ma, String ten, int trangThai) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
-        
+        this.trangThai = trangThai;
     }
 
+    
+   
     public MauSac() {
     }
 

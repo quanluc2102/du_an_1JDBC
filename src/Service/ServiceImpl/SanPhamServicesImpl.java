@@ -7,8 +7,11 @@ package Service.ServiceImpl;
 import DomainModel.BoNho;
 import DomainModel.Cpu;
 import DomainModel.HeDieuHanh;
+import DomainModel.ManHinh;
+import DomainModel.MauSac;
 import DomainModel.Pin;
 import DomainModel.ThietKe;
+import DomainModel.TienIch;
 import Repository.SanPhamRespository;
 import Repository.ThongSoReponsitory;
 import Service.SanPhamServices;
@@ -152,7 +155,7 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public String addCPU(Cpu tk) {
-        if (new ThongSoReponsitory().SuaCPU(tk)) {
+        if (new ThongSoReponsitory().ThemCPU(tk)) {
             return "OK";
         }
         return "FAIL";
@@ -165,5 +168,66 @@ public class SanPhamServicesImpl implements SanPhamServices {
         }
         return "FAIL";
     }
+
+    @Override
+    public List<MauSac> getMauSacs() {
+        return new ThongSoReponsitory().getMau();
+    }
+
+    @Override
+    public String addMauSac(MauSac tk) {
+        if (new ThongSoReponsitory().ThemMau(tk)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
+    @Override
+    public String suaMauSac(MauSac tk) {
+        if (new ThongSoReponsitory().SuaMau(tk)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
+    @Override
+    public List<TienIch> getTI() {
+        return new ThongSoReponsitory().getTi();
+    }
+
+    @Override
+    public String addTI(TienIch tk) {
+        if (new ThongSoReponsitory().ThemTi(tk)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
+    @Override
+    public String suaTI(TienIch tk) {
+        if (new ThongSoReponsitory().SuaTi(tk)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
+    @Override
+    public List<ManHinh> getHM() {
+        return new ThongSoReponsitory().getMH();
+    }
+
+    @Override
+    public String addHM(ManHinh tk) {
+  if (new ThongSoReponsitory().SuaMH(tk)) {
+            return "OK";
+        }
+        return "FAIL";    }
+
+    @Override
+    public String suaHM(ManHinh tk) {
+  if (new ThongSoReponsitory().ThemMH(tk)) {
+            return "OK";
+        }
+        return "FAIL";    }
 
 }
