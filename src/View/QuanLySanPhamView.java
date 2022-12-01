@@ -10,9 +10,12 @@ import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
 import java.awt.Color;
 import java.awt.Image;
+import java.io.File;
 import java.text.DecimalFormat;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  * @author haha
  */
 public class QuanLySanPhamView extends javax.swing.JDialog {
-
+    String srcAnh="";
     int trang = 0;
     int trangs = 0;
     DefaultComboBoxModel modelCBB;
@@ -167,6 +170,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý sản phẩm");
         setAlwaysOnTop(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -298,6 +302,12 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        anhSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                anhSanPhamMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -818,18 +828,39 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         index = tblSanPham.getSelectedRow();
         SanPhamViewModel s = sps.getAll().get(index);
-        ImageIcon x = new ImageIcon(new ImageIcon("source\\" + s.getSrcAnh()).getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT));
+        if (s.getSrcAnh()!= null) {
+            ImageIcon x = new ImageIcon(new ImageIcon("source\\" + s.getSrcAnh()).getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT));
         anhSanPham.setIcon(x);
+        }else{
+            anhSanPham.setText("Không có ảnh sản phẩm");
+        }
         DecimalFormat df = new DecimalFormat("###,###,###,###");
         txtGiaBan.setText(df.format(s.getGiaBan()));
         txtGiaNhap.setText(df.format(s.getGiaNhap()));
         txtTenDienThoai.setText(s.getTen());
-
         modelCBB.removeAllElements();
         modelCBB.addAll(sps.getImei(s.getId()));
         cbbIMEI.setSelectedIndex(0);
         loadThongSo(s.getId());
     }//GEN-LAST:event_tblSanPhamMouseClicked
+
+    private void anhSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anhSanPhamMouseClicked
+        try {
+            JFileChooser jfc = new JFileChooser("C:\\Users\\haha\\Desktop\\ds\\source");
+            this.setVisible(false);
+            jfc.showOpenDialog(null);
+            File file   = jfc.getSelectedFile();
+            srcAnh = file.getPath();
+            System.out.println(srcAnh);
+            Image im = ImageIO.read(file);
+            anhSanPham.setText("");
+            anhSanPham.setIcon(new ImageIcon(im.getScaledInstance(250, 250, Image.SCALE_DEFAULT)));
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        this.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_anhSanPhamMouseClicked
 
     /**
      * @param args the command line arguments

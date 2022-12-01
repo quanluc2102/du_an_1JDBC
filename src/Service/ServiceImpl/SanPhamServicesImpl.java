@@ -5,6 +5,7 @@
 package Service.ServiceImpl;
 
 import DomainModel.BoNho;
+import DomainModel.Cpu;
 import DomainModel.HeDieuHanh;
 import DomainModel.Pin;
 import DomainModel.ThietKe;
@@ -139,6 +140,27 @@ public class SanPhamServicesImpl implements SanPhamServices {
     @Override
     public String suaBN(BoNho tk) {
         if (new ThongSoReponsitory().SuaBN(tk)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
+    @Override
+    public List<Cpu> getCPU() {
+        return new ThongSoReponsitory().getCpu();
+    }
+
+    @Override
+    public String addCPU(Cpu tk) {
+        if (new ThongSoReponsitory().SuaCPU(tk)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
+    @Override
+    public String suaCPU(Cpu tk) {
+        if (new ThongSoReponsitory().SuaCPU(tk)) {
             return "OK";
         }
         return "FAIL";

@@ -5,6 +5,7 @@
 package Repository;
 
 import DomainModel.BoNho;
+import DomainModel.Cpu;
 import DomainModel.Pin;
 import DomainModel.ThietKe;
 import Ultilities.SQLServerConnection;
@@ -180,8 +181,7 @@ public class ThongSoReponsitory {
                 + "      ,[so_Luong_rom] = ?\n"
                 + "      ,[the_nho] = ?\n"
                 + "      ,[trang_thai] = ?\n"
-                + " WHERE id =?\n"
-                ;
+                + " WHERE id =?\n";
         int sp = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, hdh.getRAM());
@@ -214,7 +214,80 @@ public class ThongSoReponsitory {
         return ls;
     }
 
-    public static void main(String[] args) {
+    public boolean ThemCPU(Cpu hdh) {
+        String query = "INSERT INTO [dbo].[CPU]\n"
+                + "           ([ten_CPU]\n"
+                + "           ,[GPU]\n"
+                + "           ,[loai]\n"
+                + "           ,[hang_cpu]\n"
+                + "           ,[tien_trinh]\n"
+                + "           ,[trang_thai])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,?)";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getCPU());
+            ps.setObject(2, hdh.getGPU());
+            ps.setObject(3, hdh.getLoai());
+            ps.setObject(5, hdh.getTienTrinh());
+            ps.setObject(4, hdh.getHang());
+            ps.setObject(6, hdh.getTrangThai());
+            sp = ps.executeUpdate();
 
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public boolean SuaCPU(Cpu hdh) {
+        String query = "UPDATE [dbo].[CPU]\n"
+                + "   SET [ten_CPU] = ?\n"
+                + "      ,[GPU] = ?\n"
+                + "      ,[loai] = ?\n"
+                + "      ,[hang_cpu] = ?\n"
+                + "      ,[tien_trinh] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + " WHERE <id =?";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getCPU());
+            ps.setObject(2, hdh.getGPU());
+            ps.setObject(3, hdh.getLoai());
+            ps.setObject(5, hdh.getTienTrinh());
+            ps.setObject(4, hdh.getHang());
+            ps.setObject(6, hdh.getTrangThai());
+            ps.setObject(7, hdh.getId());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public List<Cpu> getCpu() {
+        String query = "select * from CPU where trang_thai != 0";
+        List<Cpu> ls = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                Cpu sp = new Cpu(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getString(6), rs.getInt(7));
+
+                ls.add(sp);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return ls;
+    }
+
+    public static void main(String[] args) {
+        for (Cpu cpu : new ThongSoReponsitory().getCpu()) {
+            System.out.println(cpu.toString());
+        }
     }
 }

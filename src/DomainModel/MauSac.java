@@ -22,6 +22,12 @@ public class MauSac {
 
     private String ten;
 
+    @Override
+    public String toString() {
+        return "MauSac{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + '}';
+    }
+    
+
     public String getId() {
         return id;
     }
