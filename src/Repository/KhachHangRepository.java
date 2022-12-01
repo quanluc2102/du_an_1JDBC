@@ -72,7 +72,7 @@ public class KhachHangRepository {
         return null;
     }
 
-    public List<KhachHangViewModel> searchKhachHang(String id) {
+    public List<KhachHangViewModel> searchKhachHang(String id, int rowOffset) {
         String query = "SELECT\n"
                 + "      id,[ten_khach_hang]\n"
                 + "      ,[ngay_sinh]\n"
@@ -80,10 +80,15 @@ public class KhachHangRepository {
                 + "      ,[email]\n"
                 + "      ,[dia_chi]\n"
                 + "  FROM [dbo].[KhachHang]"
-                + "where ten_khach_hang like '%?%'";
+                + "where ten_khach_hang like ?"
+                + "  order by id\n"
+                + "  offset ? rows\n"
+                + "  fetch next 5 rows only  ";
         List<KhachHangViewModel> list = new ArrayList<>();
+        String a = "%" + id + "%";
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setObject(1, id);
+            ps.setObject(1, a);
+            ps.setObject(2, rowOffset);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -96,7 +101,7 @@ public class KhachHangRepository {
         return list;
     }
 
-    public List<KhachHangViewModel> searchKhachHangdiaChi(String id) {
+    public List<KhachHangViewModel> searchKhachHangdiaChi(String id, int rowOffset) {
         String query = "SELECT\n"
                 + "      id,[ten_khach_hang]\n"
                 + "      ,[ngay_sinh]\n"
@@ -104,11 +109,15 @@ public class KhachHangRepository {
                 + "      ,[email]\n"
                 + "      ,[dia_chi]\n"
                 + "  FROM [dbo].[KhachHang]"
-                + "where dia_chi like ?";
+                + "where dia_chi like ?"
+                + "  order by id\n"
+                + "  offset ? rows\n"
+                + "  fetch next 5 rows only  ";
         List<KhachHangViewModel> list = new ArrayList<>();
         String a = "%" + id + "%";
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, a);
+            ps.setObject(2, rowOffset);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

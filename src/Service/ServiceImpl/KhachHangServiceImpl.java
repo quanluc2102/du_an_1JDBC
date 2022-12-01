@@ -62,16 +62,16 @@ public class KhachHangServiceImpl implements KhachHangService {
     }
 
     @Override
-    public List<KhachHangViewModel> searchKhachHang(String tenKhachHang) {
+    public List<KhachHangViewModel> searchKhachHang(String tenKhachHang, int rowOffset) {
         List<KhachHangViewModel> listSearch = new ArrayList<>();
-        listSearch = repo.searchKhachHang(tenKhachHang);
+        listSearch = repo.searchKhachHang(tenKhachHang, rowOffset);
         return listSearch;
     }
 
     @Override
-    public List<KhachHangViewModel> searchKhachHangDiaChi(String diaChiKhachHang) {
+    public List<KhachHangViewModel> searchKhachHangDiaChi(String diaChiKhachHang, int rowOffset) {
         List<KhachHangViewModel> listSearch = new ArrayList<>();
-        listSearch = repo.searchKhachHangdiaChi(diaChiKhachHang);
+        listSearch = repo.searchKhachHangdiaChi(diaChiKhachHang, rowOffset);
 
         return listSearch;
     }

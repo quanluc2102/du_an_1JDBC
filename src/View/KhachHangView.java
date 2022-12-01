@@ -30,7 +30,9 @@ public class KhachHangView extends javax.swing.JFrame {
     private DefaultTableModel dtm = new DefaultTableModel();
     private List<KhachHang> listKhachHang = new ArrayList<>();
     private List<KhachHangViewModel> listKhachHangView = new ArrayList<>();
+    private List<KhachHangViewModel> listKhachHangView1 = new ArrayList<>();
     private List<KhachHangViewModel> listSearchTen = new ArrayList<>();
+    private List<KhachHangViewModel> listSearch = new ArrayList<>();
     private List<KhachHangViewModel> listSearchDiaChi = new ArrayList<>();
     private KhachHangService service = new KhachHangServiceImpl();
     int rowOffset = 0;
@@ -48,11 +50,11 @@ public class KhachHangView extends javax.swing.JFrame {
         service.showDataTable(dtm, listKhachHangView);
         System.out.println(rowOffset);
         o = service.getAllKhachHang1().size() / fetch;
-        lbls.setText((index + 1) + "/" + (o + 1) + "");
+        loadSoTrang();
     }
 
     private void loadSoTrang() {
-        lbls.setText((index + 1) + "/" + (o + 1) + "");
+        lbls.setText(index + 1 + "");
     }
 
     /**
@@ -68,7 +70,6 @@ public class KhachHangView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btAdd = new javax.swing.JButton();
         btEdit = new javax.swing.JButton();
-        btDelete = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -99,6 +100,7 @@ public class KhachHangView extends javax.swing.JFrame {
         btBackFirst = new javax.swing.JButton();
         btBackEnd = new javax.swing.JButton();
         lbls = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,13 +118,6 @@ public class KhachHangView extends javax.swing.JFrame {
         btEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btEditActionPerformed(evt);
-            }
-        });
-
-        btDelete.setText("Xoa");
-        btDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btDeleteActionPerformed(evt);
             }
         });
 
@@ -297,20 +292,9 @@ public class KhachHangView extends javax.swing.JFrame {
 
         cbbSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ten", "Dia Chi" }));
 
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSearchKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSearchKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtSearchKeyTyped(evt);
             }
         });
 
@@ -362,6 +346,8 @@ public class KhachHangView extends javax.swing.JFrame {
 
         lbls.setText("jLabel9");
 
+        jLabel9.setText("Trang: ");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -370,9 +356,10 @@ public class KhachHangView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbls, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addComponent(btBackFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btBack)
@@ -402,17 +389,16 @@ public class KhachHangView extends javax.swing.JFrame {
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btNext)
-                            .addComponent(btBack)
-                            .addComponent(btBackFirst)
-                            .addComponent(btBackEnd)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(lbls)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btNext)
+                        .addComponent(btBack)
+                        .addComponent(btBackFirst)
+                        .addComponent(btBackEnd))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbls)
+                        .addComponent(jLabel9)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -429,11 +415,9 @@ public class KhachHangView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btAdd)
-                                .addGap(41, 41, 41)
+                                .addGap(105, 105, 105)
                                 .addComponent(btEdit)
-                                .addGap(37, 37, 37)
-                                .addComponent(btDelete)
-                                .addGap(40, 40, 40)
+                                .addGap(85, 85, 85)
                                 .addComponent(jButton1))
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -455,7 +439,6 @@ public class KhachHangView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btAdd)
                             .addComponent(btEdit)
-                            .addComponent(btDelete)
                             .addComponent(jButton1))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -560,14 +543,6 @@ public class KhachHangView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btAddActionPerformed
 
-    private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
-        // TODO add your handling code here:
-        String ID = id.getText();
-        JOptionPane.showMessageDialog(rootPane, service.deleteKhachHang(ID));
-        listKhachHangView = service.getAllKhachHang(rowOffset);
-        service.showDataTable(dtm, listKhachHangView);
-    }//GEN-LAST:event_btDeleteActionPerformed
-
 
     private void btEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditActionPerformed
         // TODO add your handling code here:
@@ -596,55 +571,33 @@ public class KhachHangView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbQuanLyKhachHangMouseClicked
 
-    private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
-        // TODO add your handling code here:
-//        String name = txtSearch.getText();
-//
-//        listSearch = service.searchKhachHang(name, listKhachHangView);
-//        for (KhachHangViewModel khachHangViewModel : listSearch) {
-//            System.out.println(khachHangViewModel.toString());
-//
-//        }
-//        service.showDataTable(dtm, listSearch);
-    }//GEN-LAST:event_txtSearchKeyTyped
-
-    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
-        // TODO add your handling code here:
-//        String name = txtSearch.getText();
-//
-//        listSearch = service.searchKhachHang(name, listKhachHangView);
-//        for (KhachHangViewModel khachHangViewModel : listSearch) {
-//            System.out.println(khachHangViewModel.toString());
-//
-//        }
-//        service.showDataTable(dtm, listSearch);
-    }//GEN-LAST:event_txtSearchKeyPressed
-
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
         // TODO add your handling code here:
         if (cbbSearch.getSelectedIndex() == 0) {
             name = txtSearch.getText();
-            listSearchTen = service.searchKhachHang(name);
+            listSearchTen = service.searchKhachHang(name, rowOffset);
+            listSearch = service.searchKhachHang(name, rowOffset);
             for (KhachHangViewModel khachHangViewModel : listSearchTen) {
                 System.out.println(khachHangViewModel.toString());
 
             }
             try {
-                service.showDataTable(dtm, listSearchTen.subList(0, 5));
+                service.showDataTable(dtm, listSearchTen);
             } catch (Exception e) {
                 service.showDataTable(dtm, listSearchTen);
             }
 
         }
         if (cbbSearch.getSelectedIndex() == 1) {
-            String diaChi = txtSearch.getText();
-            listSearchDiaChi = service.searchKhachHangDiaChi(diaChi);
+            name = txtSearch.getText();
+            listSearchDiaChi = service.searchKhachHangDiaChi(name, rowOffset);
+            listSearch = service.searchKhachHangDiaChi(name, rowOffset);
             for (KhachHangViewModel khachHangViewModel : listSearchDiaChi) {
                 System.out.println(khachHangViewModel.toString());
 
             }
             try {
-                service.showDataTable(dtm, listSearchDiaChi.subList(0, 5));
+                service.showDataTable(dtm, listSearchDiaChi);
             } catch (Exception e) {
                 service.showDataTable(dtm, listSearchDiaChi);
             }
@@ -653,7 +606,13 @@ public class KhachHangView extends javax.swing.JFrame {
         if (txtSearch.getText().isEmpty()) {
             listKhachHangView = service.getAllKhachHang(rowOffset);
             service.showDataTable(dtm, listKhachHangView);
+            int o = listKhachHang.size() % fetch;
+            int index = 0;
+            loadSoTrang();
         }
+//        int o = listSearch.size() % fetch;
+//        int index = 0;
+//        lbls.setText((index + 1) + "/" + (o + 1) + "");
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -730,11 +689,11 @@ public class KhachHangView extends javax.swing.JFrame {
             txtEmail.setBackground(Color.GREEN);
         }
     }//GEN-LAST:event_txtEmailKeyReleased
-
+    int st = 0;
+    int end = 5;
     private void btNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextActionPerformed
         // TODO add your handling code here:
-        int st = 0;
-        int end = 5;
+
         if (txtSearch.getText().isEmpty()) {
             index++;
             rowOffset += 5;
@@ -749,69 +708,145 @@ public class KhachHangView extends javax.swing.JFrame {
 
             if (cbbSearch.getSelectedIndex() == 0) {
                 index++;
-                st += 5;
-                end += 5;
                 rowOffset += 5;
                 if (rowOffset > listSearchTen.size()) {
                     rowOffset = 0;
                     index = 0;
-                    st = 0;
-                    end = 0;
+
                 }
 
-                service.showDataTable(dtm, listSearchTen.subList(st, end));
+                service.showDataTable(dtm, service.searchKhachHang(name, rowOffset));
                 loadSoTrang();
             } else {
                 index++;
                 rowOffset += 5;
-                st += 5;
-                end += 5;
+
                 if (rowOffset > listSearchDiaChi.size()) {
                     rowOffset = 0;
                     index = 0;
-                    st = 0;
-                    end = 0;
+
                 }
 
-                service.showDataTable(dtm, listSearchDiaChi.subList(st, end));
+                service.showDataTable(dtm, service.searchKhachHangDiaChi(name, rowOffset));
                 loadSoTrang();
             }
         }
     }//GEN-LAST:event_btNextActionPerformed
 
     private void btBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackActionPerformed
-        index--;        // TODO add your handling code here:
-        rowOffset -= 5;
-        if (rowOffset < 0) {
-            int c = service.getAllKhachHang1().size() % fetch;
-            rowOffset = service.getAllKhachHang1().size() - c;
-            index = o;
+//        index = ;
+
+        if (txtSearch.getText().isEmpty()) {
+            index--;
+            rowOffset -= 5;
+            if (rowOffset < 0) {
+                int c = service.getAllKhachHang1().size() % fetch;
+                rowOffset = service.getAllKhachHang1().size() - c;
+                index = o;
+            }
+            listKhachHangView = service.getAllKhachHang(rowOffset);
+            service.showDataTable(dtm, listKhachHangView);
+            loadSoTrang();
+        } else {
+
+            if (cbbSearch.getSelectedIndex() == 0) {
+                index--;
+                rowOffset -= 5;
+                if (rowOffset < 0) {
+                    int c = listSearch.size() % fetch;
+                    rowOffset = listSearch.size() - c;
+                    index = o;
+
+                }
+
+                service.showDataTable(dtm, service.searchKhachHang(name, rowOffset));
+                loadSoTrang();
+            } else {
+                index--;
+                rowOffset -= 5;
+
+                if (rowOffset < 0) {
+                    int c = listSearch.size() % fetch;
+                    rowOffset = listSearch.size() - c;
+                    index = o;
+
+                }
+
+                service.showDataTable(dtm, service.searchKhachHangDiaChi(name, rowOffset));
+                loadSoTrang();
+            }
         }
-        listKhachHangView = service.getAllKhachHang(rowOffset);
-        service.showDataTable(dtm, listKhachHangView);
-        loadSoTrang();
+//        index--;        // TODO add your handling code here:
+//        rowOffset -= 5;
+//        if (rowOffset < 0) {
+//            int c = service.getAllKhachHang1().size() % fetch;
+//            rowOffset = service.getAllKhachHang1().size() - c;
+//            index = o;
+//        }
+//        listKhachHangView = service.getAllKhachHang(rowOffset);
+//        service.showDataTable(dtm, listKhachHangView);
+//        loadSoTrang();
     }//GEN-LAST:event_btBackActionPerformed
 
     private void btBackFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackFirstActionPerformed
-        index = 0;        // TODO add your handling code here:
-        rowOffset = 0;
-        listKhachHangView = service.getAllKhachHang(rowOffset);
-        service.showDataTable(dtm, listKhachHangView);
-        loadSoTrang();
+
+        if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
+            index = 0;        // TODO add your handling code here:
+            int c = service.getAllKhachHang1().size() % fetch;
+            rowOffset = 0;
+            listKhachHangView = service.getAllKhachHang(rowOffset);
+            service.showDataTable(dtm, listKhachHangView);
+            loadSoTrang();
+        } else {
+            if (cbbSearch.getSelectedIndex() == 0) {
+                index = 0;        // TODO add your handling code here:
+                rowOffset = 0;
+                listSearchTen = service.searchKhachHang(name, rowOffset);
+                service.showDataTable(dtm, listSearchTen);
+                loadSoTrang();
+            } else {
+                index = 0;        // TODO add your handling code here:
+                rowOffset = 0;
+                listSearchDiaChi = service.searchKhachHangDiaChi(name, rowOffset);
+                service.showDataTable(dtm, listSearchDiaChi);
+                loadSoTrang();
+            }
+        }
+
+
     }//GEN-LAST:event_btBackFirstActionPerformed
 
     private void btBackEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackEndActionPerformed
-        index = o;        // TODO add your handling code here:
-        int c = service.getAllKhachHang1().size() % fetch;
-        rowOffset = service.getAllKhachHang1().size() - c;
-        listKhachHangView = service.getAllKhachHang(rowOffset);
-        service.showDataTable(dtm, listKhachHangView);
-        loadSoTrang();
-    }//GEN-LAST:event_btBackEndActionPerformed
 
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
+        if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
+            index = o;        // TODO add your handling code here:
+            int c = service.getAllKhachHang1().size() % fetch;
+            rowOffset = service.getAllKhachHang1().size() - c;
+            listKhachHangView = service.getAllKhachHang(rowOffset);
+            service.showDataTable(dtm, listKhachHangView);
+            loadSoTrang();
+        } else {
+            if (cbbSearch.getSelectedIndex() == 0) {
+                // TODO add your handling code here:
+                int c = listSearch.size() % fetch;
+                index = c;
+                rowOffset = service.searchKhachHang(name, rowOffset).size() - c;
+                listSearchTen = service.searchKhachHang(name, rowOffset);
+                service.showDataTable(dtm, listSearchTen);
+                loadSoTrang();
+
+            } else {
+                // TODO add your handling code here:
+                int c = listSearch.size() % fetch;
+                index = c;
+                rowOffset = service.searchKhachHangDiaChi(name, rowOffset).size() - c;
+                listSearchDiaChi = service.searchKhachHangDiaChi(name, rowOffset);
+                service.showDataTable(dtm, listSearchDiaChi);
+                loadSoTrang();
+            }
+        }
+
+    }//GEN-LAST:event_btBackEndActionPerformed
 
     /**
      * @param args the command line arguments
@@ -882,7 +917,6 @@ public class KhachHangView extends javax.swing.JFrame {
     private javax.swing.JButton btBack;
     private javax.swing.JButton btBackEnd;
     private javax.swing.JButton btBackFirst;
-    private javax.swing.JButton btDelete;
     private javax.swing.JButton btEdit;
     private javax.swing.JButton btNext;
     private javax.swing.ButtonGroup btgGender;
@@ -897,6 +931,7 @@ public class KhachHangView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
