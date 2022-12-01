@@ -580,26 +580,26 @@ public class BanHangReponsitory {
         }
         return null;
     }
-    
+
     public List<DienThoaiViewModel> timKiemTheoTen(String ten) {
-        String query = "SELECT DienThoai.[id]\n" +
-"                      ,[ma_dien_thoai]\n" +
-"                      ,[ten_dien_thoai]\n" +
-"                      ,[id_hang]\n" +
-"                      ,DienThoai.[trang_thai]\n" +
-"                 FROM [dbo].[DienThoai]\n" +
-"                 join Dong on Dong.id_dien_thoai = DienThoai.id\n" +
-"                join QuocGiaDong on QuocGiaDong.id_dong = Dong.id\n" +
-"                join ChiTietDienThoai on QuocGiaDong.id=ChiTietDienThoai.id_quoc_gia_dong\n" +
-"				where ten_dien_thoai like ?\n" +
-"                group by DienThoai.[id] \n" +
-"                     ,[ma_dien_thoai]\n" +
-"                     ,[ten_dien_thoai]\n" +
-"                    ,[id_hang]\n" +
-"                     ,DienThoai.[trang_thai]";
+        String query = "SELECT DienThoai.[id]\n"
+                + "                      ,[ma_dien_thoai]\n"
+                + "                      ,[ten_dien_thoai]\n"
+                + "                      ,[id_hang]\n"
+                + "                      ,DienThoai.[trang_thai]\n"
+                + "                 FROM [dbo].[DienThoai]\n"
+                + "                 join Dong on Dong.id_dien_thoai = DienThoai.id\n"
+                + "                join QuocGiaDong on QuocGiaDong.id_dong = Dong.id\n"
+                + "                join ChiTietDienThoai on QuocGiaDong.id=ChiTietDienThoai.id_quoc_gia_dong\n"
+                + "				where ten_dien_thoai like ?\n"
+                + "                group by DienThoai.[id] \n"
+                + "                     ,[ma_dien_thoai]\n"
+                + "                     ,[ten_dien_thoai]\n"
+                + "                    ,[id_hang]\n"
+                + "                     ,DienThoai.[trang_thai]";
         List<DienThoaiViewModel> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            String tenTim="%"+ten+"%";
+            String tenTim = "%" + ten + "%";
             ps.setObject(1, tenTim);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -611,5 +611,19 @@ public class BanHangReponsitory {
             s.printStackTrace(System.out);
         }
         return null;
+    }
+
+    public boolean updateTrangThaiChiTietDienThoai(String imei) {
+        String query = "UPDATE [dbo].[ChiTietDienThoai]\n"
+                + "   SET [trang_thai] = 0\n"
+                + " WHERE IMEI = ?";
+        int check = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, imei);
+            check = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
     }
 }

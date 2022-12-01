@@ -68,4 +68,6 @@ public interface BanHangService {
     void sapXepTheoGiaGiamDan(List<DienThoaiViewModel> list);
     
     void timTen(List<DienThoaiViewModel> list,String ten);
+    
+    void thayDoiTrangThaiDienThoai(String imei);
 }

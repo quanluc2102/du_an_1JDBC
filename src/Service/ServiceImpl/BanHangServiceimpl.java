@@ -177,4 +177,9 @@ public class BanHangServiceimpl implements BanHangService {
     public void timTen(List<DienThoaiViewModel> list, String ten) {
         list.addAll(bhr.timKiemTheoTen(ten));
     }
+
+    @Override
+    public void thayDoiTrangThaiDienThoai(String imei) {
+        bhr.updateTrangThaiChiTietDienThoai(imei);
+    }
 }

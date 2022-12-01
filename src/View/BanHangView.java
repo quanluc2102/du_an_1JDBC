@@ -535,7 +535,12 @@ public class BanHangView extends javax.swing.JFrame {
         String tenKH = String.valueOf(cbbKhachHangBanHang.getSelectedItem());
         String maNV = String.valueOf(cbbMaNhanVien.getSelectedItem());
         String maKM = String.valueOf(cbbMaGGBanHang.getSelectedItem());
-        JOptionPane.showMessageDialog(rootPane, bhs.thanhToan(tenKH, maNV, maKM, lbmaHDDuocChon.getText()));
+        JOptionPane.showMessageDialog(rootPane, bhs.thanhToan(tenKH, maNV, maKM, listHoaDonChuaThanhToan.get(row).getMaHoaDon()));
+        listHoaDonCT.removeAll(listHoaDonCT);
+        bhs.getHDCT(listHoaDonCT, lbmaHDDuocChon.getText());
+        for(HoaDonChiTietViewModel a:listHoaDonCT){
+            bhs.thayDoiTrangThaiDienThoai(a.getIMEI());
+        }
         resetHoaDonChuaThanhToan();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
