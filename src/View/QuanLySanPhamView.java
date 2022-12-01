@@ -6,12 +6,24 @@ package View;
 
 import Service.SanPhamServices;
 import Service.ServiceImpl.SanPhamServicesImpl;
+import View.SanPham.ViewBoNho;
+import View.SanPham.ViewCPU;
+import View.SanPham.ViewHeDieuHanh;
+import View.SanPham.ViewKetNoi;
+import View.SanPham.ViewManHinh;
+import View.SanPham.ViewMauSac;
+import View.SanPham.ViewPin;
+import View.SanPham.ViewThietKe;
+import View.SanPham.ViewTienIch;
+import View.SanPham.ssca;
 import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -24,13 +36,15 @@ import javax.swing.table.DefaultTableModel;
  * @author haha
  */
 public class QuanLySanPhamView extends javax.swing.JDialog {
-    String srcAnh="";
+
+    String srcAnh = "";
     int trang = 0;
     int trangs = 0;
     DefaultComboBoxModel modelCBB;
     DefaultTableModel modelTBL;
     SanPhamServices sps = new SanPhamServicesImpl();
     int index;
+    List<String> mei =new ArrayList<>();
 
     /**
      * Creates new form QuanLySanPhamView
@@ -40,8 +54,8 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         initComponents();
         modelCBB = (DefaultComboBoxModel) cbbIMEI.getModel();
         trangs = sps.getAll().size() / 4;
-        if (sps.getAll().size()%4!=0) {
-            trangs+=1;
+        if (sps.getAll().size() % 4 != 0) {
+            trangs += 1;
         }
         loadTable();
 
@@ -452,32 +466,97 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         jLabel31.setText("Bảo mật");
 
         jButton14.setText("jButton14");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         jButton15.setText("jButton14");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         jButton16.setText("jButton14");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         jButton17.setText("jButton14");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
 
         jButton18.setText("jButton14");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
 
         jButton20.setText("jButton14");
 
         jButton21.setText("jButton14");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
 
         jButton22.setText("jButton14");
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
 
         jButton23.setText("jButton14");
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
 
         jButton24.setText("jButton14");
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
 
         jButton25.setText("jButton14");
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
 
         jButton26.setText("jButton14");
+        jButton26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton26ActionPerformed(evt);
+            }
+        });
 
         jButton27.setText("jButton14");
+        jButton27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton27ActionPerformed(evt);
+            }
+        });
 
         jButton28.setText("jButton14");
+        jButton28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton28ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -821,17 +900,19 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String IMEI = JOptionPane.showInputDialog(this, "Nhập IMEI", DISPOSE_ON_CLOSE);
-        System.out.println(IMEI);// TODO add your handling code here:
+         ssca c = new ssca(new javax.swing.JFrame(), true, "");
+        this.setVisible(false);
+        c.setVisible(true);
+        this.setVisible(true);  // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         index = tblSanPham.getSelectedRow();
         SanPhamViewModel s = sps.getAll().get(index);
-        if (s.getSrcAnh()!= null) {
+        if (s.getSrcAnh() != null) {
             ImageIcon x = new ImageIcon(new ImageIcon("source\\" + s.getSrcAnh()).getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT));
-        anhSanPham.setIcon(x);
-        }else{
+            anhSanPham.setIcon(x);
+        } else {
             anhSanPham.setText("Không có ảnh sản phẩm");
         }
         DecimalFormat df = new DecimalFormat("###,###,###,###");
@@ -849,7 +930,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             JFileChooser jfc = new JFileChooser("C:\\Users\\haha\\Desktop\\ds\\source");
             this.setVisible(false);
             jfc.showOpenDialog(null);
-            File file   = jfc.getSelectedFile();
+            File file = jfc.getSelectedFile();
             srcAnh = file.getPath();
             System.out.println(srcAnh);
             Image im = ImageIO.read(file);
@@ -861,6 +942,83 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         this.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_anhSanPhamMouseClicked
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        ViewCPU c = new ViewCPU(new javax.swing.JFrame(), true, "");
+        this.setVisible(false);
+        c.setVisible(true);
+        this.setVisible(true);
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        ViewBoNho c = new ViewBoNho(new javax.swing.JFrame(), true, "");
+        this.setVisible(false);
+        c.setVisible(true);
+        this.setVisible(true);    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        ViewBoNho c = new ViewBoNho(new javax.swing.JFrame(), true, "");
+        this.setVisible(false);
+        c.setVisible(true);
+        this.setVisible(true);     }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        ViewHeDieuHanh c = new ViewHeDieuHanh(new javax.swing.JFrame(), true, "");
+        this.setVisible(false);
+        c.setVisible(true);
+        this.setVisible(true);     }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        ViewMauSac c = new ViewMauSac(new javax.swing.JFrame(), true, "");
+        this.setVisible(false);
+        c.setVisible(true);
+        this.setVisible(true);     }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        ViewManHinh c = new ViewManHinh(new javax.swing.JFrame(), true, "");
+        this.setVisible(false);
+        c.setVisible(true);
+        this.setVisible(true);     }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        ViewPin c = new ViewPin(new javax.swing.JFrame(), true, "");
+        this.setVisible(false);
+        c.setVisible(true);
+        this.setVisible(true);     }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
+        ViewKetNoi c = new ViewKetNoi(new javax.swing.JFrame(), true, "");
+        this.setVisible(false);
+        c.setVisible(true);
+        this.setVisible(true);  // TODO add your handling code here:
+    }//GEN-LAST:event_jButton26ActionPerformed
+
+    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
+        ViewTienIch c = new ViewTienIch(new javax.swing.JFrame(), true, "");
+        this.setVisible(false);
+        c.setVisible(true);
+        this.setVisible(true);     }//GEN-LAST:event_jButton28ActionPerformed
+
+    private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
+        ViewThietKe c = new ViewThietKe(new javax.swing.JFrame(), true, "");
+        this.setVisible(false);
+        c.setVisible(true);
+        this.setVisible(true);     }//GEN-LAST:event_jButton27ActionPerformed
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        ViewThietKe c = new ViewThietKe(new javax.swing.JFrame(), true, "");
+        this.setVisible(false);
+        c.setVisible(true);
+        this.setVisible(true);    // TODO add your handling code here:
+    }//GEN-LAST:event_jButton22ActionPerformed
 
     /**
      * @param args the command line arguments
