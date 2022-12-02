@@ -15,7 +15,7 @@ import View.SanPham.ViewMauSac;
 import View.SanPham.ViewPin;
 import View.SanPham.ViewThietKe;
 import View.SanPham.ViewTienIch;
-import View.SanPham.ssca;
+import View.SanPham.ViewIMEIexcel;
 import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
 import java.awt.Color;
@@ -28,7 +28,6 @@ import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -77,7 +76,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
     }
 
-    public void loadThongSo(String id) {
+    private void loadThongSo(String id) {
         ThongSoViewModel t = sps.getAllThongSo(id);
 
         txtCpu.setText(t.getCpu());
@@ -94,6 +93,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         txtXuatXu.setText(t.getXuatXu());
 
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,7 +123,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         txtTenDienThoai = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         cbbIMEI = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btnAddImei = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtMoTa = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
@@ -350,10 +350,10 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddImei.setText("jButton1");
+        btnAddImei.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddImeiActionPerformed(evt);
             }
         });
 
@@ -769,7 +769,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(cbbIMEI, 0, 212, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnAddImei, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtTenDienThoai)
                                     .addComponent(txtGiaBan)
                                     .addComponent(txtGiaNhap)
@@ -791,7 +791,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(cbbIMEI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
+                            .addComponent(btnAddImei))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -899,12 +899,17 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ssca c = new ssca(new javax.swing.JFrame(), true, "");
-        this.setVisible(false);
+    private void btnAddImeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddImeiActionPerformed
+        ViewIMEIexcel c = new ViewIMEIexcel(new javax.swing.JFrame(), true);        
+        this.setVisible(false);  
         c.setVisible(true);
+        modelCBB.removeAllElements();
+        mei = c.allIMEI();
+        modelCBB.addAll(mei);
+        cbbIMEI.setSelectedIndex(0);
+        c.setVisible(false);
         this.setVisible(true);  // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAddImeiActionPerformed
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         index = tblSanPham.getSelectedRow();
@@ -1064,9 +1069,9 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel anhSanPham;
+    private javax.swing.JButton btnAddImei;
     private javax.swing.JButton btnThem;
     private javax.swing.JComboBox<String> cbbIMEI;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
