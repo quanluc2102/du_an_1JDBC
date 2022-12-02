@@ -4,6 +4,7 @@
  */
 package Service;
 
+import ViewModel.VIewModelSanPhamHoaDon;
 import ViewModel.ViewModelHoaDon;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -14,21 +15,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public interface HoaDonIpml {
 
-    void getAll(List<ViewModelHoaDon> list);
+    List<ViewModelHoaDon> getAll(List<ViewModelHoaDon> list);
+
+    List<ViewModelHoaDon> getAll5Rows(int rowOfSet);
+
+    List<ViewModelHoaDon> searchHoaDon(String mahd, int rowOfSet);
+
+    List<ViewModelHoaDon> giaCaoXuongThap(int rowOfSet);
+
+    List<ViewModelHoaDon> giaThapLenCao(int rowOfSet);
+
+    List<VIewModelSanPhamHoaDon> getAllSp(String mahd);
 
     void showData(List<ViewModelHoaDon> list, DefaultTableModel dtm);
+    
+    void showData1(List<VIewModelSanPhamHoaDon> list, DefaultTableModel dtm);
 
-    List<ViewModelHoaDon> search(String maHD);
-
-    void giaCaoxuongThap(List<ViewModelHoaDon> list);
-
-    void giaThapLenCao(List<ViewModelHoaDon> list);
-
-    String thanhToan(String tenKH, String maNV, String maKM, String maHD);
-
-    void getTenKH(List<String> list);
-
-    void getMaNV(List<String> list);
-
-    void getMaGG(List<String> list);
 }
