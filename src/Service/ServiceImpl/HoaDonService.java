@@ -6,6 +6,7 @@ package Service.ServiceImpl;
 
 import Service.HoaDonIpml;
 import Repository.HoaDonRespository;
+import ViewModel.VIewModelSanPhamHoaDon;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -16,12 +17,12 @@ import ViewModel.ViewModelHoaDon;
  * @author PC
  */
 public class HoaDonService implements HoaDonIpml {
-
+    
     @Override
-    public void getAll(List<ViewModelHoaDon> list) {
-        list.addAll(new HoaDonRespository().getAll());
+    public List<ViewModelHoaDon> getAll(List<ViewModelHoaDon> list) {
+        return new HoaDonRespository().getAllHoaDon();
     }
-
+    
     @Override
     public void showData(List<ViewModelHoaDon> list, DefaultTableModel dtm) {
         dtm.setRowCount(0);
@@ -29,48 +30,43 @@ public class HoaDonService implements HoaDonIpml {
             dtm.addRow(viewModelHoaDon.dataRow());
         }
     }
-
+    
     @Override
-    public List<ViewModelHoaDon> search(String maHD) {
-        List<ViewModelHoaDon> list = new HoaDonRespository().searchHoaDon(maHD);
-        return list;
+    public List<ViewModelHoaDon> getAll5Rows(int rowOfSet) {
+        
+        return new HoaDonRespository().getAllHoaDon5Rows(rowOfSet);
     }
-
+    
     @Override
-    public void giaCaoxuongThap(List<ViewModelHoaDon> list) {
-        list.addAll(new HoaDonRespository().giaCaoXuongThap());
-
+    public List<ViewModelHoaDon> searchHoaDon(String mahd, int rowOfSet) {
+        
+        List<ViewModelHoaDon> listSearch = new ArrayList<>();
+        listSearch = new HoaDonRespository().searchHoaDon(mahd, rowOfSet);
+        return listSearch;
     }
-
+    
     @Override
-    public void giaThapLenCao(List<ViewModelHoaDon> list) {
-        list.addAll(new HoaDonRespository().giaThapLenCao());
-
+    public List<ViewModelHoaDon> giaCaoXuongThap(int rowOfSet) {
+        return new HoaDonRespository().giaCaoXuongThap(rowOfSet);
     }
-
+    
     @Override
-    public String thanhToan(String tenKH, String maNV, String maKM, String maHD) {
-        boolean update = new HoaDonRespository().thanhToan(tenKH, maNV, maKM, maHD);
-        if (update == true) {
-            return "Thanh toán thành công";
-        } else {
-            return "Thanh toán thất bại";
+    public List<ViewModelHoaDon> giaThapLenCao(int rowOfSet) {
+        return new HoaDonRespository().giaThapLenCao(rowOfSet);
+        
+    }
+    
+    @Override
+    public List<VIewModelSanPhamHoaDon> getAllSp(String mahd) {
+        return new HoaDonRespository().getAllSanPham(mahd);
+    }
+    
+    @Override
+    public void showData1(List<VIewModelSanPhamHoaDon> list, DefaultTableModel dtm) {
+        dtm.setRowCount(0);
+        for (VIewModelSanPhamHoaDon vIewModelSanPhamHoaDon : list) {
+            dtm.addRow(vIewModelSanPhamHoaDon.dataRowSPHoaDon());
         }
-    }
-
-    @Override
-    public void getTenKH(List<String> list) {
-        list.addAll(new HoaDonRespository().getAllKH());
-    }
-
-    @Override
-    public void getMaNV(List<String> list) {
-        list.addAll(new HoaDonRespository().getAllMaNV());
-    }
-
-    @Override
-    public void getMaGG(List<String> list) {
-        list.addAll(new HoaDonRespository().getAllMaGG());
     }
     
 }
