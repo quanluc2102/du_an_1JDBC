@@ -118,7 +118,7 @@ public class HoaDonRespository {
     public List<ViewModelHoaDon> giaCaoXuongThap(int rowOfset) {
         String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
                 + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam,\n"
-                + "(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(ChiTietDienThoai.IMEI) as 'Tong so San pham'\n"
+                + "(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
                 + "from HoaDon left join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
                 + "left join KhachHang on HoaDon.id_khach_hang = KhachHang.id \n"
                 + "full join HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
@@ -151,7 +151,7 @@ public class HoaDonRespository {
     public List<ViewModelHoaDon> giaThapLenCao(int rowOfSet) {
         String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
                 + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam,\n"
-                + "(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(ChiTietDienThoai.IMEI) as 'Tong so San pham'\n"
+                + "(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
                 + "from HoaDon left join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
                 + "left join KhachHang on HoaDon.id_khach_hang = KhachHang.id \n"
                 + "full join HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
@@ -185,7 +185,7 @@ public class HoaDonRespository {
 
         String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
                 + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam,\n"
-                + "(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(ChiTietDienThoai.IMEI) as 'Tong so San pham'\n"
+                + "(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
                 + "from HoaDon left join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
                 + "left join KhachHang on HoaDon.id_khach_hang = KhachHang.id \n"
                 + "full join HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
