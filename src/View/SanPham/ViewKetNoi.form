@@ -62,11 +62,14 @@
               </Border>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
+              <Table columnCount="7" rowCount="4">
                 <Column editable="false" title="Title 1" type="java.lang.Object"/>
                 <Column editable="false" title="Title 2" type="java.lang.Object"/>
                 <Column editable="false" title="Title 3" type="java.lang.Object"/>
                 <Column editable="false" title="Title 4" type="java.lang.Object"/>
+                <Column editable="false" title="Title 5" type="java.lang.Object"/>
+                <Column editable="false" title="Title 6" type="java.lang.Object"/>
+                <Column editable="false" title="Title 7" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="selectionMode" type="int" value="0"/>
@@ -110,19 +113,21 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtDPG" max="32767" attributes="0"/>
-                              <Component id="txtTSQ" max="32767" attributes="0"/>
-                              <Component id="txtLoai" pref="164" max="32767" attributes="0"/>
-                              <Component id="txtKT" max="32767" attributes="0"/>
-                              <Component id="txtKieu" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtCN" alignment="1" max="32767" attributes="0"/>
+                              <Component id="txtGPS" max="32767" attributes="0"/>
+                              <Component id="txtBLU" max="32767" attributes="0"/>
+                              <Component id="txtHTM" max="32767" attributes="0"/>
+                              <Component id="txtHongNgoai" pref="165" max="32767" attributes="0"/>
+                              <Component id="txtSim" max="32767" attributes="0"/>
+                              <Component id="txtJack" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtWifi" alignment="1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -135,40 +140,45 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtKT" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtSim" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtLoai" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtHongNgoai" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtKieu" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtJack" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtTSQ" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtHTM" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCN" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtWifi" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDPG" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtBLU" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtGPS" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbbTrangThai" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnThem" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnSua" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -194,22 +204,22 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSuaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtKT">
+        <Component class="javax.swing.JTextField" name="txtSim">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="K&#xed;ch th&#x1b0;&#x1edb;c"/>
+            <Property name="text" type="java.lang.String" value="SIM"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i"/>
+            <Property name="text" type="java.lang.String" value="H&#x1ed3;ng ngo&#x1ea1;i"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtLoai">
+        <Component class="javax.swing.JTextField" name="txtHongNgoai">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
@@ -236,42 +246,52 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ki&#x1ec3;u d&#xe1;ng"/>
+            <Property name="text" type="java.lang.String" value="jack tai nghe"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtKieu">
+        <Component class="javax.swing.JTextField" name="txtJack">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtTSQ">
+        <Component class="javax.swing.JTextField" name="txtHTM">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="t&#x1ea7;ng s&#x1ed1; qu&#xe9;t"/>
+            <Property name="text" type="java.lang.String" value="H&#x1ed7; tr&#x1ee3; m&#x1ea1;ng"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCN">
+        <Component class="javax.swing.JTextField" name="txtWifi">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="C&#xf4;ng ngh&#x1ec7;"/>
+            <Property name="text" type="java.lang.String" value="Wifi"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x1ed9; ph&#xe2;n gi&#x1ea3;i"/>
+            <Property name="text" type="java.lang.String" value="Blutooth"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDPG">
+        <Component class="javax.swing.JTextField" name="txtBLU">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtGPS">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel8">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="GPS"/>
           </Properties>
         </Component>
       </SubComponents>

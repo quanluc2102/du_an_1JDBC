@@ -4,7 +4,6 @@ package DomainModel;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author buiti
@@ -14,42 +13,92 @@ public class ThongSo {
     private String id;
 
     private String idQuocGiaDong;
+    private String heDieuhanh;
 
     private String cpu;
 
-    private String ram;
+    private String boNho;
 
-    private String rom;
+    private String pin;
 
-    private String sim;
+    private String ketNoi;
 
     private String manHinh;
-    private String trongLuong;
+    private String thietKe;
     private String camera;
-    private String heDieuhanh ;
+    private String tienIch;
+    private String mauSac;
 
     public ThongSo() {
     }
 
-    @Override
-    public String toString() {
-        return "ThongSo{" + "id=" + id + ", idQuocGiaDong=" + idQuocGiaDong + ", cpu=" + cpu + ", ram=" + ram + ", rom=" + rom + ", sim=" + sim + ", manHinh=" + manHinh + ", trongLuong=" + trongLuong + ", camera=" + camera + ", heDieuhanh=" + heDieuhanh + '}';
-    }
+   
 
-    public ThongSo(String id, String idQuocGiaDong, String cpu, String ram, String rom, String sim, String manHinh, String trongLuong, String camera, String heDieuhanh) {
+    public ThongSo(String id, String idQuocGiaDong, String heDieuhanh, String cpu, String boNho, String pin, String ketNoi, String manHinh, String thietKe, String camera, String tienIch, String mauSac) {
         this.id = id;
         this.idQuocGiaDong = idQuocGiaDong;
-        this.cpu = cpu;
-        this.ram = ram;
-        this.rom = rom;
-        this.sim = sim;
-        this.manHinh = manHinh;
-        this.trongLuong = trongLuong;
-        this.camera = camera;
         this.heDieuhanh = heDieuhanh;
+        this.cpu = cpu;
+        this.boNho = boNho;
+        this.pin = pin;
+        this.ketNoi = ketNoi;
+        this.manHinh = manHinh;
+        this.thietKe = thietKe;
+        this.camera = camera;
+        this.tienIch = tienIch;
+        this.mauSac = mauSac;
+    }
+    
+
+    public String getBoNho() {
+        return boNho;
     }
 
-    
+    public void setBoNho(String boNho) {
+        this.boNho = boNho;
+    }
+
+    public String getPin() {
+        return pin;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
+    }
+
+    public String getKetNoi() {
+        return ketNoi;
+    }
+
+    public void setKetNoi(String ketNoi) {
+        this.ketNoi = ketNoi;
+    }
+
+    public String getThietKe() {
+        return thietKe;
+    }
+
+    public void setThietKe(String thietKe) {
+        this.thietKe = thietKe;
+    }
+
+    public String getTienIch() {
+        return tienIch;
+    }
+
+    public void setTienIch(String tienIch) {
+        this.tienIch = tienIch;
+    }
+
+    public String getMauSac() {
+        return mauSac;
+    }
+
+    public void setMauSac(String mauSac) {
+        this.mauSac = mauSac;
+    }
+
+   
 
     public String getHeDieuhanh() {
         return heDieuhanh;
@@ -83,29 +132,7 @@ public class ThongSo {
         this.cpu = cpu;
     }
 
-    public String getRam() {
-        return ram;
-    }
 
-    public void setRam(String ram) {
-        this.ram = ram;
-    }
-
-    public String getRom() {
-        return rom;
-    }
-
-    public void setRom(String rom) {
-        this.rom = rom;
-    }
-
-    public String getSim() {
-        return sim;
-    }
-
-    public void setSim(String sim) {
-        this.sim = sim;
-    }
 
     public String getManHinh() {
         return manHinh;
@@ -115,13 +142,6 @@ public class ThongSo {
         this.manHinh = manHinh;
     }
 
-    public String getTrongLuong() {
-        return trongLuong;
-    }
-
-    public void setTrongLuong(String trongLuong) {
-        this.trongLuong = trongLuong;
-    }
 
     public String getCamera() {
         return camera;
@@ -130,6 +150,5 @@ public class ThongSo {
     public void setCamera(String camera) {
         this.camera = camera;
     }
-    
 
 }

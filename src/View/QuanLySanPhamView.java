@@ -6,7 +6,16 @@ package View;
 
 import Service.SanPhamServices;
 import Service.ServiceImpl.SanPhamServicesImpl;
+import View.SanPham.ViewBoNho;
+import View.SanPham.ViewCPU;
+import View.SanPham.ViewHeDieuHanh;
 import View.SanPham.ViewIMEIexcel;
+import View.SanPham.ViewKetNoi;
+import View.SanPham.ViewManHinh;
+import View.SanPham.ViewMauSac;
+import View.SanPham.ViewPin;
+import View.SanPham.ViewThietKe;
+import View.SanPham.ViewTienIch;
 import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
 import ViewModel.vts;
@@ -27,7 +36,7 @@ import javax.swing.table.DefaultTableModel;
  * @author haha
  */
 public class QuanLySanPhamView extends javax.swing.JDialog {
-
+    
     String srcAnh = "";
     int trang = 0;
     int trangs = 0;
@@ -37,6 +46,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     DefaultTableModel modelTBL;
     DefaultTableModel modelTT;
     SanPhamServices sps = new SanPhamServicesImpl();
+    List<SanPhamViewModel> ls = new ArrayList<>();
     int index;
     List<String> mei = new ArrayList<>();
 
@@ -50,21 +60,21 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         modelcbb1 = (DefaultComboBoxModel) cbbHang.getModel();
         modelcbb2 = (DefaultComboBoxModel) cbbDong.getModel();
         modelTT = (DefaultTableModel) tblThongTin.getModel();
-        loadTable();
-
+        loadTable(sps.getAll());
+        
         loadCBB();
 
     }
 
-    private void loadTable() {
-        lblSoTrang.setText("/" + trangs);
+    private void loadTable(List<SanPhamViewModel> spsa) {
+        ls = spsa;
         modelTBL = (DefaultTableModel) tblSanPham.getModel();
         modelTBL.setRowCount(0);
         String[] title = new String[]{
             "Ảnh", "Tên máy", "Hãng", "Số lượng còn",};
         modelTBL.setColumnIdentifiers(title);
 
-        for (SanPhamViewModel sp : sps.getAll()) {
+        for (SanPhamViewModel sp : spsa) {
             ImageIcon x = new ImageIcon(new ImageIcon("source\\" + sp.getSrcAnh()).getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
             Object[] row = new Object[]{x, sp.getTen(), sp.getTenHang(), sp.getSoLuongCon()};
             modelTBL.addRow(row);
@@ -186,6 +196,8 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblThongTin = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý sản phẩm");
@@ -216,6 +228,11 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimKiemActionPerformed(evt);
+            }
+        });
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
             }
         });
 
@@ -360,6 +377,8 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         jLabel8.setText("Độ mới");
+
+        txtDoMoi.setEditable(false);
 
         btnThem.setText("thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -513,6 +532,11 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         });
         tblThongTin.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblThongTin.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblThongTin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblThongTinMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblThongTin);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -568,15 +592,34 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Sản phẩm đang bán", jPanel1);
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1209, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 658, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(270, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("lịch sử thay đổi", jPanel2);
@@ -660,7 +703,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         index = tblSanPham.getSelectedRow();
-        SanPhamViewModel s = sps.getAll().get(index);
+        SanPhamViewModel s = ls.get(index);
         modelcbb1.setSelectedItem(s.getTenHang());
         modelcbb2.setSelectedItem(s.getTenDong());
 
@@ -711,6 +754,63 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_cbbIMEIItemStateChanged
+
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        loadTable(sps.getTimKiemSanPham(txtTimKiem.getText()));
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
+    private void tblThongTinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblThongTinMouseClicked
+        int i = tblThongTin.getSelectedRow();
+        index = tblSanPham.getSelectedRow();
+        SanPhamViewModel s = ls.get(index);
+        if (i >= 0 && i <= 3) {
+            ViewBoNho v = new ViewBoNho(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getBoNhoID());
+            v.setVisible(true);
+
+        }else
+        if (i >= 4 && i <= 8) {
+            ViewCPU v = new ViewCPU(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getCPUID());
+            v.setVisible(true);
+
+        }else
+        if (i >= 9 && i <= 14) {
+            ViewPin v = new ViewPin(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getPinID());
+            v.setVisible(true);
+
+        }else
+        if (i >= 15 && i <= 17) {
+            ViewHeDieuHanh v = new ViewHeDieuHanh(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getHDHID());
+            v.setVisible(true);
+
+        }else
+        if (i >= 18 && i <= 22) {
+            ViewThietKe v = new ViewThietKe(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getThietKeID());
+            v.setVisible(true);
+
+        }else
+        if (i >= 23 && i <= 29) {
+            ViewManHinh v = new ViewManHinh(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getManHinhID());
+            v.setVisible(true);
+
+        }else
+        if (i >= 30 && i <= 37) {
+            ViewKetNoi v = new ViewKetNoi(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getKetNoiID());
+            v.setVisible(true);
+
+        }else
+        if (i >= 37 && i <= 39) {
+            ViewMauSac v = new ViewMauSac(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getMauSacID());
+            v.setVisible(true);
+
+        }else
+        if (i >= 40 && i <= 44) {
+            ViewTienIch v = new ViewTienIch(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getTienIchID());
+            v.setVisible(true);
+
+        }
+
+
+    }//GEN-LAST:event_tblThongTinMouseClicked
 
     /**
      * @param args the command line arguments
@@ -784,8 +884,10 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblSoTrang;
     private javax.swing.JTable tblSanPham;
     private javax.swing.JTable tblThongTin;

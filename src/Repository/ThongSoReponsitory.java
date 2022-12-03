@@ -6,6 +6,7 @@ package Repository;
 
 import DomainModel.BoNho;
 import DomainModel.Cpu;
+import DomainModel.KetNoi;
 import DomainModel.ManHinh;
 import DomainModel.MauSac;
 import DomainModel.Pin;
@@ -484,8 +485,87 @@ public class ThongSoReponsitory {
         return ls;
     }
 
+    public boolean ThemKN(KetNoi hdh) {
+        String query = "INSERT INTO [dbo].[KetNoi]\n"
+                + "           ([sim]\n"
+                + "           ,[hong_ngoai]\n"
+                + "           ,[jack35]\n"
+                + "           ,[ho_tro_mang]\n"
+                + "           ,[wifi]\n"
+                + "           ,[blutooth]\n"
+                + "           ,[GPS]\n"
+                + "           ,[trang_thai])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,?,?,?)";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getSim());
+            ps.setObject(2, hdh.getHongNgoai());
+            ps.setObject(3, hdh.getJackTaiNghe());
+            ps.setObject(4, hdh.getHoTroMang());
+            ps.setObject(5, hdh.getWifi());
+            ps.setObject(6, hdh.getBlutooth());
+            ps.setObject(7, hdh.getGPS());
+            ps.setObject(8, hdh.getTrangThai());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public boolean SuaKN(KetNoi hdh) {
+        String query = "UPDATE [dbo].[KetNoi]\n"
+                + "   SET [sim] = ?\n"
+                + "      ,[hong_ngoai] = ?\n"
+                + "      ,[jack35] = ?\n"
+                + "      ,[ho_tro_mang] = ?\n"
+                + "      ,[wifi] = ?\n"
+                + "      ,[blutooth] = ?\n"
+                + "      ,[GPS] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + " WHERE id =?";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getSim());
+            ps.setObject(2, hdh.getHongNgoai());
+            ps.setObject(3, hdh.getJackTaiNghe());
+            ps.setObject(4, hdh.getHoTroMang());
+            ps.setObject(5, hdh.getWifi());
+            ps.setObject(6, hdh.getBlutooth());
+            ps.setObject(7, hdh.getGPS());
+            ps.setObject(8, hdh.getTrangThai());
+            ps.setObject(9, hdh.getId());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public List<KetNoi> getKN() {
+        String query = "select * from KetNoi where trang_thai != 0";
+        List<KetNoi> ls = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                KetNoi sp = new KetNoi(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9));
+
+                ls.add(sp);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return ls;
+    }
+
     public static void main(String[] args) {
-        for (TienIch cpu : new ThongSoReponsitory().getTi()) {
+        for (KetNoi cpu : new ThongSoReponsitory().getKN()) {
             System.out.println(cpu.toString());
         }
     }

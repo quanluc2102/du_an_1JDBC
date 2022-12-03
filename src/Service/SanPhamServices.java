@@ -7,6 +7,7 @@ package Service;
 import DomainModel.BoNho;
 import DomainModel.Cpu;
 import DomainModel.HeDieuHanh;
+import DomainModel.KetNoi;
 import DomainModel.ManHinh;
 import DomainModel.MauSac;
 import DomainModel.Pin;
@@ -23,6 +24,8 @@ import java.util.List;
 public interface SanPhamServices {
 
     List<SanPhamViewModel> getAll();
+
+    List<SanPhamViewModel> getTimKiemSanPham(String tk);
 
     ThongSoViewModel getAllThongSo(String id);
 
@@ -61,27 +64,35 @@ public interface SanPhamServices {
     String addCPU(Cpu tk);
 
     String suaCPU(Cpu tk);
-    
+
     List<MauSac> getMauSacs();
 
     String addMauSac(MauSac tk);
 
     String suaMauSac(MauSac tk);
-    
+
     List<TienIch> getTI();
 
     String addTI(TienIch tk);
 
     String suaTI(TienIch tk);
-    
+
     List<ManHinh> getHM();
 
     String addHM(ManHinh tk);
 
     String suaHM(ManHinh tk);
-    
+
+    List<KetNoi> getKN();
+
+    String addKN(KetNoi tk);
+
+    String suaKN(KetNoi tk);
+
     List<String> getHang();
+
     List<String> getDong();
+
     int moi(String imei);
 
 }

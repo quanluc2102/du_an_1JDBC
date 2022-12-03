@@ -7,6 +7,7 @@ package Service.ServiceImpl;
 import DomainModel.BoNho;
 import DomainModel.Cpu;
 import DomainModel.HeDieuHanh;
+import DomainModel.KetNoi;
 import DomainModel.ManHinh;
 import DomainModel.MauSac;
 import DomainModel.Pin;
@@ -246,5 +247,37 @@ public class SanPhamServicesImpl implements SanPhamServices {
     public int moi(String imei) {
         return new SanPhamRespository().getMoi(imei);
     }
+
+    @Override
+    public List<SanPhamViewModel> getTimKiemSanPham(String tk) {
+        List<SanPhamViewModel> s = new ArrayList<>();
+        for (SanPhamViewModel c : new SanPhamRespository().getAll()) {
+            if (c.getTen().contains(tk) || c.getTenDong().contains(tk) || c.getTenHang().contains(tk)) {
+                s.add(c);
+            }
+        }
+
+        return s;
+
+    }
+
+    @Override
+    public List<KetNoi> getKN() {
+return new ThongSoReponsitory().getKN();}
+
+    @Override
+    public String addKN(KetNoi tk) {
+        if (new ThongSoReponsitory().ThemKN(tk)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
+    @Override
+    public String suaKN(KetNoi tk) {
+if (new ThongSoReponsitory().SuaKN(tk)) {
+            return "OK";
+        }
+        return "FAIL";    }
 
 }
