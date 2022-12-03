@@ -37,6 +37,9 @@ public class ViewHeDieuHanh extends javax.swing.JDialog {
         loadDataToTable(sps.getHDH());
 
     }
+     public String id() {
+        return sps.getHDH().get(index).getId();
+    }
 
     private void loadx() {
 

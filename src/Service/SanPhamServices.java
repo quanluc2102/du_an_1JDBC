@@ -12,6 +12,7 @@ import DomainModel.ManHinh;
 import DomainModel.MauSac;
 import DomainModel.Pin;
 import DomainModel.ThietKe;
+import DomainModel.ThongSo;
 import DomainModel.TienIch;
 import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
@@ -38,6 +39,8 @@ public interface SanPhamServices {
     List<HeDieuHanh> getHDH();
 
     String addHDH(HeDieuHanh hdh);
+
+    String addDT(ThongSo ts);
 
     String suaHDH(HeDieuHanh hdh);
 
@@ -92,6 +95,8 @@ public interface SanPhamServices {
     List<String> getHang();
 
     List<String> getDong();
+
+    List<String> getQG();
 
     int moi(String imei);
 

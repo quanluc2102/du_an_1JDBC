@@ -37,6 +37,9 @@ public class ViewMauSac extends javax.swing.JDialog {
         loadDataToTable(sps.getMauSacs());
 
     }
+     public String id() {
+        return sps.getMauSacs().get(index).getId();
+    }
 
     private void loadx() {
 

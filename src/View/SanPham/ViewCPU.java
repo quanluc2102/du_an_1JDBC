@@ -39,6 +39,9 @@ public class ViewCPU extends javax.swing.JDialog {
         loadDataToTable(sps.getCPU());
         
     }
+     public String id() {
+        return sps.getCPU().get(index).getId();
+    }
     
     private void loadx() {
         

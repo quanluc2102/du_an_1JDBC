@@ -12,6 +12,7 @@ import DomainModel.ManHinh;
 import DomainModel.MauSac;
 import DomainModel.Pin;
 import DomainModel.ThietKe;
+import DomainModel.ThongSo;
 import DomainModel.TienIch;
 import Repository.SanPhamRespository;
 import Repository.ThongSoReponsitory;
@@ -263,7 +264,8 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public List<KetNoi> getKN() {
-return new ThongSoReponsitory().getKN();}
+        return new ThongSoReponsitory().getKN();
+    }
 
     @Override
     public String addKN(KetNoi tk) {
@@ -275,9 +277,23 @@ return new ThongSoReponsitory().getKN();}
 
     @Override
     public String suaKN(KetNoi tk) {
-if (new ThongSoReponsitory().SuaKN(tk)) {
+        if (new ThongSoReponsitory().SuaKN(tk)) {
             return "OK";
         }
-        return "FAIL";    }
+        return "FAIL";
+    }
+
+    @Override
+    public String addDT(ThongSo ts) {
+        if (new SanPhamRespository().ThemDienThoai(ts)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
+    @Override
+    public List<String> getQG() {
+        return new SanPhamRespository().getQuocGia();
+    }
 
 }

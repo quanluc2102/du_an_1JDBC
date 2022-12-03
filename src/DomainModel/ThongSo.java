@@ -25,7 +25,6 @@ public class ThongSo {
 
     private String manHinh;
     private String thietKe;
-    private String camera;
     private String tienIch;
     private String mauSac;
 
@@ -34,7 +33,7 @@ public class ThongSo {
 
    
 
-    public ThongSo(String id, String idQuocGiaDong, String heDieuhanh, String cpu, String boNho, String pin, String ketNoi, String manHinh, String thietKe, String camera, String tienIch, String mauSac) {
+    public ThongSo(String id, String idQuocGiaDong, String heDieuhanh, String cpu, String boNho, String pin, String ketNoi, String manHinh, String thietKe, String tienIch, String mauSac) {
         this.id = id;
         this.idQuocGiaDong = idQuocGiaDong;
         this.heDieuhanh = heDieuhanh;
@@ -44,7 +43,6 @@ public class ThongSo {
         this.ketNoi = ketNoi;
         this.manHinh = manHinh;
         this.thietKe = thietKe;
-        this.camera = camera;
         this.tienIch = tienIch;
         this.mauSac = mauSac;
     }
@@ -143,12 +141,5 @@ public class ThongSo {
     }
 
 
-    public String getCamera() {
-        return camera;
-    }
-
-    public void setCamera(String camera) {
-        this.camera = camera;
-    }
 
 }

@@ -37,6 +37,9 @@ public class ViewManHinh extends javax.swing.JDialog {
         loadDataToTable(sps.getHM());
 
     }
+     public String id() {
+        return sps.getHM().get(index).getId();
+    }
 
     private void loadx() {
 

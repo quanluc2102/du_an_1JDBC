@@ -19,6 +19,16 @@ public class QuocGia{
     private String ma;
 
     private String ten;
+    private int trangThai;
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+    
 
     public String getId() {
         return id;
@@ -47,10 +57,13 @@ public class QuocGia{
     public QuocGia() {
     }
 
-    public QuocGia(String id, String ma, String ten) {
+    public QuocGia(String id, String ma, String ten, int trangThai) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
+        this.trangThai = trangThai;
     }
+
+  
 
 }

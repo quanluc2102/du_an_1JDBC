@@ -38,6 +38,9 @@ public class ViewPin extends javax.swing.JDialog {
         loadDataToTable(sps.getPin());
 
     }
+     public String id() {
+        return sps.getPin().get(index).getId();
+    }
 
     private void loadx() {
 

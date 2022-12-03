@@ -5,6 +5,7 @@
 package Repository;
 
 import DomainModel.HeDieuHanh;
+import DomainModel.ThongSo;
 import Ultilities.SQLServerConnection;
 import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
@@ -20,95 +21,114 @@ import java.util.List;
  * @author haha
  */
 public class SanPhamRespository {
-    
+
     public int getMoi(String imei) {
         String query = " select moi from chitietdienthoai where imei =? ";
-        int moi =0;
+        int moi = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, imei);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 moi = rs.getInt(1);
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return moi;
     }
+
     public List<String> getHang() {
         String query = " select ten_hang from hang ";
         List<String> hang = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 hang.add(rs.getString(1));
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return hang;
     }
+
+    public List<String> getQuocGia() {
+        String query = " select ten_quoc_gia from quocGia ";
+        List<String> hang = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                hang.add(rs.getString(1));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return hang;
+    }
+
     public List<String> getDong() {
         String query = " select ten_dong from Dong ";
         List<String> hang = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 hang.add(rs.getString(1));
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return hang;
     }
-    
+
     public List<String> getIMEI(String id) {
         String query = " select IMEI from chitietdienthoai where id_quoc_gia_dong = ? and trang_thai= 1";
         List<String> hangList = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, id);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 hangList.add(rs.getString(1));
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return hangList;
     }
-    
+
     public List<SanPhamViewModel> getAll() {
-        String query = "select QuocGiaDong.id ,anh,ten_dien_thoai+' '+ ten_dong as tenmay,ten_hang,ten_dong,COUNT(ChiTietDienThoai.IMEI)as soluong,gia_ban,gia_nhap from QuocGiaDong\n"
-                + "                             						join ChiTietDienThoai on QuocGiaDong.id = ChiTietDienThoai.id_quoc_gia_Dong\n"
-                + "                             						join Dong on dong.id = QuocGiaDong.id_dong \n"
-                + "                             						join DienThoai on DienThoai.id = Dong.id_dien_thoai \n"
-                + "             						join Hang on Hang.id = DienThoai.id_hang\n"
-                + "                                                  where ChiTietDienThoai.trang_thai =1 \n"
-                + "                                                   group by anh, QuocGiaDong.id,gia_ban,gia_nhap,ten_dien_thoai+' '+ ten_dong,ten_hang,ten_dong";
+        String query = "select QuocGiaDong.id ,anh,ten_dien_thoai+' '+ ten_dong as tenmay,ten_hang,ten_dong,ten_quoc_gia,COUNT(ChiTietDienThoai.IMEI)as soluong,gia_ban,gia_nhap from QuocGiaDong \n"
+                + "                                              						join ChiTietDienThoai on QuocGiaDong.id = ChiTietDienThoai.id_quoc_gia_Dong \n"
+                + "                                              						join Dong on dong.id = QuocGiaDong.id_dong  \n"
+                + "                                              						join DienThoai on DienThoai.id = Dong.id_dien_thoai  \n"
+                + "                              										join Hang on Hang.id = DienThoai.id_hang \n"
+                + "																	join QuocGia on QuocGia.id = QuocGiaDong.id_quoc_gia\n"
+                + "             where ChiTietDienThoai.trang_thai =1  \n"
+                + "             group by anh, QuocGiaDong.id,gia_ban,gia_nhap,ten_dien_thoai+' '+ ten_dong,ten_hang,ten_dong,ten_quoc_gia";
         List<SanPhamViewModel> listSanPhamViewModelView = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                
-                SanPhamViewModel sp = new SanPhamViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6),
-                        rs.getDouble(7), rs.getDouble(8));
+
+                SanPhamViewModel sp = new SanPhamViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7),
+                        rs.getDouble(8), rs.getDouble(9));
                 listSanPhamViewModelView.add(sp);
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return listSanPhamViewModelView;
     }
-    
+
     public ThongSoViewModel getAllThongSoView(String id) {
         String queryx = "SELECT BoNho.id, BoNho.so_luong_ram, BoNho.so_Luong_rom, BoNho.the_nho, CPU.id AS Expr1, CPU.ten_CPU, CPU.GPU, CPU.loai, CPU.hang_cpu, CPU.tien_trinh, PIN.id AS Expr2, \n"
                 + "                  PIN.dung_luong, PIN.loai_pin, PIN.sac, PIN.dac_biet, HeDieuHanh.id AS Expr3, HeDieuHanh.ten_he_dieu_hanh, HeDieuHanh.phien_ban, ThietKe.id AS Expr4, ThietKe.mat_truoc, ThietKe.mat_lung, \n"
@@ -140,13 +160,13 @@ public class SanPhamRespository {
                         rs.getString(31), rs.getString(32), rs.getString(33), rs.getString(34), rs.getString(35), rs.getString(36), rs.getString(37),
                         rs.getString(38), rs.getString(39), rs.getString(40), rs.getString(41), rs.getString(42), rs.getString(43), rs.getString(44), rs.getString(45));
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return sp;
     }
-    
+
     public boolean ban(String IMEI) {
         String query = "update ChiTietDienThoai\n"
                 + "set trang_thai = 0\n"
@@ -155,13 +175,13 @@ public class SanPhamRespository {
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, IMEI);
             sp = ps.executeUpdate();
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return sp > 0;
     }
-    
+
     public boolean ThemHDH(HeDieuHanh hdh) {
         String query = "insert into HeDieuHanh(ten_he_dieu_hanh,phien_ban,trang_thai)\n"
                 + "values(?,?,?)";
@@ -171,13 +191,13 @@ public class SanPhamRespository {
             ps.setObject(2, hdh.getPhienBan());
             ps.setObject(3, hdh.getTrangThai());
             sp = ps.executeUpdate();
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return sp > 0;
     }
-    
+
     public boolean SuaHDH(HeDieuHanh hdh) {
         String query = "UPDATE [dbo].[HeDieuHanh]\n"
                 + "   SET [ten_he_dieu_hanh] =?\n"
@@ -191,33 +211,69 @@ public class SanPhamRespository {
             ps.setObject(3, hdh.getTrangThai());
             ps.setObject(4, hdh.getId());
             sp = ps.executeUpdate();
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return sp > 0;
     }
-    
+
+    public boolean ThemDienThoai(ThongSo ts) {
+        String query = "INSERT INTO [dbo].[ThongSo]\n"
+                + "           ([id_dong]\n"
+                + "           ,[id_tien_ich]\n"
+                + "           ,[id_mau]\n"
+                + "           ,[id_bo_nho]\n"
+                + "           ,[id_he_dieu_hanh]\n"
+                + "           ,[id_man_hinh]\n"
+                + "           ,[id_CPU]\n"
+                + "           ,[id_ket_noi]\n"
+                + "           ,[id_thiet_ke]\n"
+                + "           ,[trang_thai]\n"
+                + "           ,[id_pin])\n"
+                + "     VALUES\n"
+                + "           (?,? ,? ,? ,? ,? ,? ,? ,?,?,? )";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ts.getIdQuocGiaDong());
+            ps.setObject(2, ts.getTienIch());
+            ps.setObject(3, ts.getMauSac());
+            ps.setObject(4, ts.getBoNho());
+            ps.setObject(5, ts.getHeDieuhanh());
+            ps.setObject(6, ts.getManHinh());
+            ps.setObject(7, ts.getCpu());
+            ps.setObject(8, ts.getKetNoi());
+            ps.setObject(9, ts.getThietKe());
+            ps.setObject(10, 1);
+            ps.setObject(9, ts.getPin());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
     public List<HeDieuHanh> getHDH() {
         String query = "select * from HeDieuHanh ";
         List<HeDieuHanh> ls = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                
+
                 HeDieuHanh sp = new HeDieuHanh(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
                 ls.add(sp);
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return ls;
     }
-    
+
     public static void main(String[] args) {
         String id = "27560504-d668-427a-8f60-5585c5d0937d";
         System.out.println(new SanPhamRespository().getAllThongSoView(id).toString());
-        
+
     }
 }

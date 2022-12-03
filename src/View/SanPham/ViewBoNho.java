@@ -39,6 +39,10 @@ public class ViewBoNho extends javax.swing.JDialog {
 
     }
 
+    public String id() {
+        return sps.getBN().get(index).getId();
+    }
+
     private void loadx() {
 
         tbl = (DefaultTableModel) tbl1.getModel();

@@ -37,6 +37,9 @@ public class ViewTienIch extends javax.swing.JDialog {
         loadDataToTable(sps.getTI());
 
     }
+     public String id() {
+        return sps.getTI().get(index).getId();
+    }
 
     private void loadx() {
 
