@@ -6,7 +6,7 @@ package Repository;
 
 import DomainModel.KhuyenMai;
 import Ultilities.SQLServerConnection;
-import ViewModel.KhuyenMaiVeiwModel;
+import ViewModel.KhuyenMaiViewModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -20,7 +20,7 @@ import java.sql.SQLException;
  */
 public class KhuyenMaiResponsitory {
 
-    public List<KhuyenMaiVeiwModel> getAll() {
+    public List<KhuyenMaiViewModel> getAll() {
         String query = "SELECT [id]\n"
                 + "      ,[ma_khuyen_mai]\n"
                 + "      ,[ngay_bat_dau]\n"
@@ -30,11 +30,11 @@ public class KhuyenMaiResponsitory {
                 + "      ,[mo_ta]\n"
                 + "      ,[trang_thai]\n"
                 + "  FROM [dbo].[KhuyenMai]";
-        List<KhuyenMaiVeiwModel> list = new ArrayList<>();
+        List<KhuyenMaiViewModel> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                KhuyenMaiVeiwModel km = new KhuyenMaiVeiwModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getDouble(5), rs.getBoolean(6), rs.getString(7), rs.getInt(8));
+                KhuyenMaiViewModel km = new KhuyenMaiViewModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getDouble(5), rs.getBoolean(6), rs.getString(7), rs.getInt(8));
                 list.add(km);
             }
 
@@ -44,7 +44,7 @@ public class KhuyenMaiResponsitory {
         return list;
     }
 
-    public boolean add(KhuyenMaiVeiwModel km) {
+    public boolean add(KhuyenMaiViewModel km) {
         String query = "INSERT INTO [dbo].[KhuyenMai]\n"
                 + "           ([ma_khuyen_mai]\n"
                 + "           ,[ngay_bat_dau]\n"
@@ -85,7 +85,7 @@ public class KhuyenMaiResponsitory {
         return check > 0;
     }
 
-    public boolean update(KhuyenMaiVeiwModel km, String idKM) {
+    public boolean update(KhuyenMaiViewModel km, String idKM) {
         String query = "UPDATE [dbo].[KhuyenMai]\n"
                 + "   SET [ma_khuyen_mai] =?\n"
                 + "      ,[ngay_bat_dau] = ?\n"
@@ -112,7 +112,5 @@ public class KhuyenMaiResponsitory {
         return check > 0;
     }
 
-    public static void main(String[] args) {
-
-    }
+    
 }

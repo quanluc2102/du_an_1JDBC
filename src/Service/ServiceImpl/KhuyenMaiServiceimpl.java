@@ -7,7 +7,7 @@ package Service.ServiceImpl;
 import DomainModel.KhuyenMai;
 import Repository.KhuyenMaiResponsitory;
 import Service.KhuyenMaiService;
-import ViewModel.KhuyenMaiVeiwModel;
+import ViewModel.KhuyenMaiViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +20,14 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     private KhuyenMaiResponsitory rs = new KhuyenMaiResponsitory();
 
     @Override
-    public String add(KhuyenMaiVeiwModel km) {
+    public String add(KhuyenMaiViewModel km) {
+        if (km.getMa().isEmpty()) {
+            return "Mã tìm kiếm không được để trống ";
+        }
+        if (km.getMoTa().isEmpty()) {
+            return "Mô tả không được để trống";
+        }
+
         boolean add = rs.add(km);
         if (add == true) {
             return "Thêm thành công";
@@ -41,13 +48,13 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public void getAll(List<KhuyenMaiVeiwModel> list) {
+    public void getAll(List<KhuyenMaiViewModel> list) {
         list.addAll(rs.getAll());
 
     }
 
     @Override
-    public String update(String idKM, KhuyenMaiVeiwModel km) {
+    public String update(String idKM, KhuyenMaiViewModel km) {
         boolean update = rs.update(km, idKM);
         if (update == true) {
             return "Sửa thành công";
@@ -57,20 +64,22 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public List<KhuyenMaiVeiwModel> timTheoMa(List<KhuyenMaiVeiwModel> listKMs, String ma) {
-        List<KhuyenMaiVeiwModel> listSearch = new ArrayList<>();
-        for (KhuyenMaiVeiwModel km : listKMs) {
+    public List<KhuyenMaiViewModel> timTheoMa(List<KhuyenMaiViewModel> listKMs, String ma) {
+        List<KhuyenMaiViewModel> listSearch = new ArrayList<>();
+        for (KhuyenMaiViewModel km : listKMs) {
             if (km.getMa().contains(ma)) {
                 listSearch.add(km);
             }
+
         }
+
         return listSearch;
     }
 
     @Override
-    public List<KhuyenMaiVeiwModel> listShowDangDienRa(List<KhuyenMaiVeiwModel> listKhuyenMais) {
-        List<KhuyenMaiVeiwModel> listShowDangDienRa = new ArrayList<>();
-        for (KhuyenMaiVeiwModel KM : listKhuyenMais) {
+    public List<KhuyenMaiViewModel> listShowDangDienRa(List<KhuyenMaiViewModel> listKhuyenMais) {
+        List<KhuyenMaiViewModel> listShowDangDienRa = new ArrayList<>();
+        for (KhuyenMaiViewModel KM : listKhuyenMais) {
             if (KM.getTrangThai() == 0) {
                 listShowDangDienRa.add(KM);
             }
@@ -79,9 +88,9 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public List<KhuyenMaiVeiwModel> listShowSapDienRa(List<KhuyenMaiVeiwModel> listKhuyenMais) {
-        List<KhuyenMaiVeiwModel> listShowSapDienRa = new ArrayList<>();
-        for (KhuyenMaiVeiwModel KM : listKhuyenMais) {
+    public List<KhuyenMaiViewModel> listShowSapDienRa(List<KhuyenMaiViewModel> listKhuyenMais) {
+        List<KhuyenMaiViewModel> listShowSapDienRa = new ArrayList<>();
+        for (KhuyenMaiViewModel KM : listKhuyenMais) {
             if (KM.getTrangThai() == 1) {
                 listShowSapDienRa.add(KM);
             }
@@ -90,19 +99,27 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public List<KhuyenMaiVeiwModel> listShowDaKT(List<KhuyenMaiVeiwModel> listKhuyenMais) {
-        List<KhuyenMaiVeiwModel> listShowDaKT = new ArrayList<>();
-        for (KhuyenMaiVeiwModel KM : listKhuyenMais) {
+    public List<KhuyenMaiViewModel> listShowDaKT(List<KhuyenMaiViewModel> listKhuyenMais) {
+        List<KhuyenMaiViewModel> listShowDaKT = new ArrayList<>();
+        for (KhuyenMaiViewModel KM : listKhuyenMais) {
             if (KM.getTrangThai() == 2) {
                 listShowDaKT.add(KM);
             }
+
         }
         return listShowDaKT;
     }
 
     @Override
-    public List<KhuyenMaiVeiwModel> sget() {
+    public List<KhuyenMaiViewModel> sget() {
         return rs.getAll();
+    }
+
+    @Override
+    public void sapXep(List<KhuyenMaiViewModel> list) {
+        list.sort((o1, o2) -> {
+            return o1.getGiaGiam().compareTo(o2.getGiaGiam());
+        });
     }
 
 }

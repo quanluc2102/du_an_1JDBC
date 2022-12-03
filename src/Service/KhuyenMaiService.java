@@ -5,7 +5,7 @@
 package Service;
 
 import DomainModel.KhuyenMai;
-import ViewModel.KhuyenMaiVeiwModel;
+import ViewModel.KhuyenMaiViewModel;
 import java.util.List;
 
 /**
@@ -13,21 +13,24 @@ import java.util.List;
  * @author togia
  */
 public interface KhuyenMaiService {
-    List<KhuyenMaiVeiwModel> sget();
-    
-    void getAll(List<KhuyenMaiVeiwModel> list);
 
-    String add(KhuyenMaiVeiwModel km);
+    List<KhuyenMaiViewModel> sget();
+
+    void getAll(List<KhuyenMaiViewModel> list);
+
+    String add(KhuyenMaiViewModel km);
 
     String delete(String idKM);
 
-    String update(String idKM, KhuyenMaiVeiwModel km);
+    String update(String idKM, KhuyenMaiViewModel km);
 
-    List<KhuyenMaiVeiwModel> timTheoMa(List<KhuyenMaiVeiwModel> listKMs, String name);
+    List<KhuyenMaiViewModel> timTheoMa(List<KhuyenMaiViewModel> listKMs, String name);
 
-    List<KhuyenMaiVeiwModel> listShowDangDienRa(List<KhuyenMaiVeiwModel> listKhuyenMais);
+    List<KhuyenMaiViewModel> listShowDangDienRa(List<KhuyenMaiViewModel> listKhuyenMais);
 
-    List<KhuyenMaiVeiwModel> listShowSapDienRa(List<KhuyenMaiVeiwModel> listKhuyenMais);
+    List<KhuyenMaiViewModel> listShowSapDienRa(List<KhuyenMaiViewModel> listKhuyenMais);
 
-    List<KhuyenMaiVeiwModel> listShowDaKT(List<KhuyenMaiVeiwModel> listKhuyenMais);
+    List<KhuyenMaiViewModel> listShowDaKT(List<KhuyenMaiViewModel> listKhuyenMais);
+
+    void sapXep(List<KhuyenMaiViewModel> list);
 }
