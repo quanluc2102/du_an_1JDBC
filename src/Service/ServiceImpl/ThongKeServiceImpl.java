@@ -20,23 +20,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ThongKeServiceImpl implements ThongKeService {
     
-    KhachHangRepository repo = new KhachHangRepository();
+   
     ThongKeRespository thongKeRopo = new ThongKeRespository();
     
-    @Override
-    public List<KhachHangViewModel> getAllKhachHang(int rowOffset) {
-        
-        return repo.getAllKhachHang(rowOffset);
-    }
+   
     
-    @Override
-    public void showDaTaTable(DefaultTableModel dtm, List<KhachHangViewModel> list) {
-        dtm.setRowCount(0);
-        for (KhachHangViewModel x : list) {
-            dtm.addRow(x.toDataRow());
-        }
-    }
-    
+   
     @Override
     public List<ThongKeViewModel> getLisst() {
         return thongKeRopo.getLisstTK();
@@ -70,5 +59,19 @@ public class ThongKeServiceImpl implements ThongKeService {
         listSearch = thongKeRopo.searchThang(Thang);
         return listSearch;
     }
-
+    
+    @Override
+    public List<ThongKeViewModel> searchNam(String Nam, List<ThongKeViewModel> listNam) {
+        List<ThongKeViewModel> listSearch = new ArrayList<>();
+        listSearch = thongKeRopo.searchNam(Nam);
+        return listSearch;
+    }
+    
+    @Override
+    public List<ThongKeViewModel> searchNgayThangNam(String NTN, List<ThongKeViewModel> listNTN) {
+        List<ThongKeViewModel> listSearch = new ArrayList<>();
+        listSearch = thongKeRopo.searchNTN(NTN);
+        return listSearch;
+    }
+    
 }

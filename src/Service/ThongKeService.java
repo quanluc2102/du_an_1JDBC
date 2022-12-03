@@ -17,9 +17,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public interface ThongKeService {
 
-    List<KhachHangViewModel> getAllKhachHang(int rowOffset);
+   
 
-    void showDaTaTable(DefaultTableModel dtm, List<KhachHangViewModel> list);
+
 
     List<HoaDon> searchTheoNgay(String ngay);
 
@@ -31,6 +31,8 @@ public interface ThongKeService {
 
     List<ThongKeViewModel> searchThang(String Thang, List<ThongKeViewModel> listTKK);
 
-//    List<String> Day();
+    List<ThongKeViewModel> searchNam(String Nam, List<ThongKeViewModel> listNam);
+
+    List<ThongKeViewModel> searchNgayThangNam(String NTN, List<ThongKeViewModel> listNTN);
 
 }

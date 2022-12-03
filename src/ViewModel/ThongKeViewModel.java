@@ -20,8 +20,23 @@ public class ThongKeViewModel {
     private double giaGiam;
     private Double giaNhap;
 //    private Boolean trangThai;
+    private int ngay;
+    private int thang;
+    private int nam;
 
     public ThongKeViewModel() {
+    }
+
+    public ThongKeViewModel(String Imei, String maHD, Date ngayTao, Double giaBan, double giaGiam, Double giaNhap, int ngay, int thang, int nam) {
+        this.Imei = Imei;
+        this.maHD = maHD;
+        this.ngayTao = ngayTao;
+        this.giaBan = giaBan;
+        this.giaGiam = giaGiam;
+        this.giaNhap = giaNhap;
+        this.ngay = ngay;
+        this.thang = thang;
+        this.nam = nam;
     }
 
     public ThongKeViewModel(String Imei, String maHD, Date ngayTao, Double giaBan, double giaGiam, Double giaNhap) {
@@ -81,6 +96,30 @@ public class ThongKeViewModel {
         this.giaNhap = giaNhap;
     }
 
+    public int getNgay() {
+        return ngay;
+    }
+
+    public void setNgay(int ngay) {
+        this.ngay = ngay;
+    }
+
+    public int getThang() {
+        return thang;
+    }
+
+    public void setThang(int thang) {
+        this.thang = thang;
+    }
+
+    public int getNam() {
+        return nam;
+    }
+
+    public void setNam(int nam) {
+        this.nam = nam;
+    }
+
 //    public String trangThai() {
 //
 //        if (trangThai == true) {
@@ -107,8 +146,21 @@ public class ThongKeViewModel {
     public Double lai() {
         Double lai;
 
-        return lai = giaBan - giaNhap-giaGiam();
+        return lai = giaBan - giaNhap - giaGiam();
     }
+
+//    public boolean hopLe() {
+//
+//        int[] ngayMax = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+//        if (nam % 4 == 0) {
+//            ngayMax[2] = 29;
+//        }
+//        if (ngay > ngayMax[thang]) {
+//            return false;
+//        }
+//
+//        return true;
+//    }
 
     public Object[] toDaTaRow() {
         DecimalFormat df = new DecimalFormat("###,###,###,###");
