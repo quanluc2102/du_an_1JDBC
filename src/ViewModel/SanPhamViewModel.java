@@ -14,10 +14,12 @@ public class SanPhamViewModel {
     private String srcAnh;
     private String ten;
     private String tenHang;
-    
+    private String tenDong;
     private int soLuongCon;
     private double giaBan;
     private double giaNhap;
+   
+    
 
     public String getId() {
         return id;
@@ -43,15 +45,31 @@ public class SanPhamViewModel {
         this.giaNhap = giaNhap;
     }
 
-    public SanPhamViewModel(String id, String srcAnh, String ten, String tenHang, int soLuongCon, double giaBan, double giaNhap) {
+    public SanPhamViewModel(String id, String srcAnh, String ten, String tenHang, String tenDong, int soLuongCon, double giaBan, double giaNhap) {
         this.id = id;
         this.srcAnh = srcAnh;
         this.ten = ten;
         this.tenHang = tenHang;
+        this.tenDong = tenDong;
         this.soLuongCon = soLuongCon;
         this.giaBan = giaBan;
         this.giaNhap = giaNhap;
+       
     }
+
+    public String getTenDong() {
+        return tenDong;
+    }
+
+    public void setTenDong(String tenDong) {
+        this.tenDong = tenDong;
+    }
+
+   
+
+   
+
+ 
 
     public String getTenHang() {
         return tenHang;

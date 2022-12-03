@@ -218,16 +218,33 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public String addHM(ManHinh tk) {
-  if (new ThongSoReponsitory().SuaMH(tk)) {
+        if (new ThongSoReponsitory().SuaMH(tk)) {
             return "OK";
         }
-        return "FAIL";    }
+        return "FAIL";
+    }
 
     @Override
     public String suaHM(ManHinh tk) {
-  if (new ThongSoReponsitory().ThemMH(tk)) {
+        if (new ThongSoReponsitory().ThemMH(tk)) {
             return "OK";
         }
-        return "FAIL";    }
+        return "FAIL";
+    }
+
+    @Override
+    public List<String> getHang() {
+        return new SanPhamRespository().getHang();
+    }
+
+    @Override
+    public List<String> getDong() {
+        return new SanPhamRespository().getDong();
+    }
+
+    @Override
+    public int moi(String imei) {
+        return new SanPhamRespository().getMoi(imei);
+    }
 
 }

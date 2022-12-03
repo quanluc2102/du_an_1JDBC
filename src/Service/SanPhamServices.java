@@ -79,5 +79,9 @@ public interface SanPhamServices {
     String addHM(ManHinh tk);
 
     String suaHM(ManHinh tk);
+    
+    List<String> getHang();
+    List<String> getDong();
+    int moi(String imei);
 
 }
