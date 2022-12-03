@@ -47,12 +47,14 @@ public class DangKyView extends javax.swing.JFrame {
         if (txtMaNV.getText().isEmpty()) {
             txtRPMa.setText("Mã không được để Trống");
             txtRPMa.setForeground(Color.red);
+            txtMaNV.setBackground(Color.yellow);
         } else if (txtMaNV.getText().matches("/^[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]*$/")) {
             txtRPMa.setText("Mã không được chứa kí tự đặc biệt");
             txtRPMa.setForeground(Color.red);
             txtMaNV.setBackground(Color.yellow);
         } else {
             txtRPMa.setText("*");
+            txtMaNV.setBackground(Color.white);
             txtRPMa.setForeground(Color.green);
             nv.setMa(txtMaNV.getText());
             conf1 = true;
@@ -60,12 +62,14 @@ public class DangKyView extends javax.swing.JFrame {
         if (txtTenNV.getText().isEmpty()) {
             txtRPTen.setText("Tên không được để Trống");
             txtRPTen.setForeground(Color.red);
-        } else if (!txtTenNV.getText().matches("^[A-Z a-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]{1,150}+$")) {
+            txtTenNV.setBackground(Color.yellow);
+       } else if (!txtTenNV.getText().matches("^[A-Z a-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]{1,150}+$")) {
             txtRPTen.setText("Tên không được số hoặc kí tự");
             txtRPTen.setForeground(Color.red);
             txtTenNV.setBackground(Color.yellow);
         } else {
             txtRPTen.setText("*");
+            txtTenNV.setBackground(Color.white);
             txtRPTen.setForeground(Color.green);
             nv.setTen(txtTenNV.getText());
             conf2 = true;
@@ -80,6 +84,7 @@ public class DangKyView extends javax.swing.JFrame {
             txtNgaySinhNV.setBackground(Color.yellow);
         } else {
             txtRPNgaySinh.setText("*");
+            txtNgaySinhNV.setBackground(Color.white);
             txtRPNgaySinh.setForeground(Color.green);
             nv.setNgaySinh(txtNgaySinhNV.getText());
             conf3 = true;
@@ -107,6 +112,7 @@ if (txtDiaChiNV.getText().isEmpty()) {
             txtEmail.setBackground(Color.yellow);
         } else {
             txtRPEmail.setText("*");
+            txtEmail.setBackground(Color.white);
             txtRPEmail.setForeground(Color.GREEN);
             nv.setEmail(txtEmail.getText());
             conf5 = true;
@@ -123,16 +129,19 @@ if (txtDiaChiNV.getText().isEmpty()) {
         } else {
             txtRPSDT.setText("*");
             txtRPSDT.setForeground(Color.GREEN);
+            txtSDT.setBackground(Color.white);
             nv.setSdt(txtSDT.getText());
             conf6 = true;
         }
         if(txtPass.getText().isEmpty()){
             txtRPMatKhau.setText("Mật khậu đang trống");
             txtRPMatKhau.setForeground(Color.yellow);
+            txtPass.setBackground(Color.yellow);
         }else {
             txtRPMatKhau.setText("*");
             txtRPMatKhau.setForeground(Color.GREEN);
             nv.setSdt(txtSDT.getText());
+            txtPass.setBackground(Color.white);
             conf7 = true;
         }
 //        nv.setEmail(txtEmail.getText());
@@ -235,20 +244,6 @@ if (conf1 == true && conf2 == true && conf3 == true && conf4 == true && conf5 ==
 
         jLabel4.setText("Email");
 
-        txtRPMa.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-
-        txtRPTen.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-
-        txtRPDiaChi.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-
-        txtRPSDT.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-
-        txtRPNgaySinh.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-
-        txtRPEmail.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-
-        txtRPMatKhau.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -276,25 +271,26 @@ if (conf1 == true && conf2 == true && conf3 == true && conf4 == true && conf5 ==
                             .addComponent(jLabel4)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnDangKy, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(txtTenNV, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(txtNgaySinhNV, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(txtDiaChiNV, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(txtSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(txtRPMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtRPTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtRPNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtRPDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtRPSDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtRPEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtRPMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnDangKy, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                .addComponent(txtTenNV, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                .addComponent(txtNgaySinhNV, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                .addComponent(txtDiaChiNV, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                .addComponent(txtSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                .addComponent(txtRPMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtRPTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtRPDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtRPSDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtRPEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtRPMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtRPNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(113, 113, 113)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

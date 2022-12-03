@@ -218,12 +218,13 @@ public class login extends javax.swing.JFrame {
                 nvv.setVisible(true);
             }
             if (thongBao.contains("QL")) {
-                TrangChuQuanLyView ql = new TrangChuQuanLyView(this, true);
+                TrangChuQuanLyView ql = new TrangChuQuanLyView(txtID.getText());
                 ql.setVisible(true);
             }
             this.dispose();
         } 
         }
+        
     
     }//GEN-LAST:event_btnLoginActionPerformed
 
