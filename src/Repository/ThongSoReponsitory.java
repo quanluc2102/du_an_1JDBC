@@ -13,6 +13,7 @@ import DomainModel.Pin;
 import DomainModel.ThietKe;
 import DomainModel.TienIch;
 import Ultilities.SQLServerConnection;
+import ViewModel.CameraModelView;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -554,6 +555,44 @@ public class ThongSoReponsitory {
 
                 KetNoi sp = new KetNoi(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
                         rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9));
+
+                ls.add(sp);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return ls;
+    }
+
+    public List<CameraModelView> getCMD() {
+        String query = "select cam_bien,khau_do, chuc_nang,max_zoom,quay_video from Camera join CamBien on CamBien.id = Camera.id_cam_bien";
+        List<CameraModelView> ls = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                CameraModelView sp = new CameraModelView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+
+                ls.add(sp);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return ls;
+    }
+
+    public List<CameraModelView> get1CMD(String id) {
+        String query = "select cam_bien,khau_do, chuc_nang,max_zoom,quay_video from Camera join CamBien on CamBien.id = Camera.id_cam_bien\n"
+                + "where id_thong_so = ?";
+        List<CameraModelView> ls = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                CameraModelView sp = new CameraModelView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
 
                 ls.add(sp);
             }

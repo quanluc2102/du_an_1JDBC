@@ -162,7 +162,7 @@ public class SanPhamRespository {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace(System.out);
+         //   e.printStackTrace(System.out);
         }
         return sp;
     }
