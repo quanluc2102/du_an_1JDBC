@@ -46,6 +46,8 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         dtm.setColumnIdentifiers(header);
         listNV = impl.getAll();
         txtLayMa.setText(a);
+
+        listNV = impl.getAllNhanVienSearch(rowOffset);
         impl.showData(dtm, listNV);
         addCbb();
     }
@@ -181,17 +183,15 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
 //        nv.setDiaChi(txtDiaChiNV.getText());
 //        nv.setSdt(txtSDT.getText());
 
-
 //        System.out.println(nv.toString());
 //        JOptionPane.showMessageDialog(rootPane, impl.dangKi(nv));
-
         if (conf1 == true && conf2 == true && conf3 == true && conf4 == true && conf5 == true && conf6 == true && conf7 == true && conf8 == true) {
-                    nv.setMatKhau(txtPass.getText());
+            nv.setMatKhau(txtPass.getText());
             JOptionPane.showMessageDialog(rootPane, impl.dangKi(nv));
             System.out.println(nv.toString());
             System.out.println(impl.dangKi(nv));
-                    listNV = impl.getAll();
-        impl.showData(dtm,listNV);
+            listNV = impl.getAll();
+            impl.showData(dtm, listNV);
         }
 //        
     }
@@ -845,7 +845,17 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void btnDangKy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKy1ActionPerformed
-        
+
+        name = txtSearch.getText();
+        listNVSearch = impl.searchNhanVien(name, rowOffset);
+        if (txtSearch.getText().isEmpty()) {
+            listNV = impl.getAllNhanVienSearch(rowOffset);
+            int o = listNV.size() % fetch;
+            int index = 0;
+            impl.showData(dtm, listNV);
+        }
+
+
     }//GEN-LAST:event_btnDangKy1ActionPerformed
 
     private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
@@ -886,15 +896,15 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel3MouseExited
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-       name = txtSearch.getText();
-       listNVSearch = impl.searchNhanVien(name, rowOffset);
+        name = txtSearch.getText();
+        listNVSearch = impl.searchNhanVien(name, rowOffset);
         if (txtSearch.getText().isEmpty()) {
             listNV = impl.getAllNhanVienSearch(rowOffset);
             int o = listNV.size() % fetch;
             int index = 0;
-        impl.showData(dtm, listNV);
+            impl.showData(dtm, listNV);
         }
-       
+
     }//GEN-LAST:event_txtSearchKeyReleased
     public void setColor(JPanel p) {
         p.setBackground(new Color(255, 105, 0));
