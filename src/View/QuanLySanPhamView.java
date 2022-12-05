@@ -897,8 +897,11 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        TrangChuQuanLyView s = new TrangChuQuanLyView(); 
-        s.setVisible(true);
+        TrangChuQuanLyView s = new TrangChuQuanLyView(""); 
+        TrangChuQuanLyView x = new TrangChuQuanLyView(s.takemaNV()); 
+        
+        
+        x.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
