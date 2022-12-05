@@ -24,17 +24,18 @@ public class HoaDonRespository {
 
     public List<ViewModelHoaDon> getAllHoaDon() {
 
-        String query = "select distinct HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
+        String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
                 + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam,\n"
-                + "(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(ChiTietDienThoai.IMEI) as 'Tong so San pham'\n"
-                + "from HoaDon left join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
-                + "left join KhachHang on HoaDon.id_khach_hang = KhachHang.id \n"
+                + "(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
+                + "from HoaDon  full join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
+                + "full join KhachHang on HoaDon.id_khach_hang = KhachHang.id \n"
                 + "full join HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
                 + "full join ChiTietDienThoai on HoaDonChiTiet.IMEI = ChiTietDienThoai.IMEI\n"
                 + "full join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_dong = QuocGiaDong.id\n"
-                + "left join KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id\n"
-                + "group by HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
-                + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam";
+                + "full join KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id \n"
+                + "group by HoaDon.id, HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
+                + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam\n"
+                + "order by  HoaDon.ma_hoa_don";
         List<ViewModelHoaDon> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
@@ -95,11 +96,13 @@ public class HoaDonRespository {
                 + "full join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_dong = QuocGiaDong.id\n"
                 + "full join Dong on QuocGiaDong.id_dong = Dong.id\n"
                 + "full join DienThoai on Dong.id_dien_thoai = DienThoai.id\n"
-                + "full join Hang on DienThoai.id_hang = Hang.id where HoaDon.ma_hoa_don like ?";
+                + "full join Hang on DienThoai.id_hang = Hang.id where HoaDon.ma_hoa_don like ?\n"
+                + "order by DienThoai.ma_dien_thoai";
 
         List<VIewModelSanPhamHoaDon> list = new ArrayList<>();
+        String a = "%" + mahd + "%";
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareCall(query);) {
-            ps.setObject(1, mahd);
+            ps.setObject(1, a);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
@@ -115,24 +118,22 @@ public class HoaDonRespository {
         return null;
     }
 
-    public List<ViewModelHoaDon> giaCaoXuongThap(int rowOfset) {
+    public List<ViewModelHoaDon> giaCaoXuongThap() {
         String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
-                + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam,\n"
-                + "(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
-                + "from HoaDon left join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
-                + "left join KhachHang on HoaDon.id_khach_hang = KhachHang.id \n"
-                + "full join HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
-                + "full join ChiTietDienThoai on HoaDonChiTiet.IMEI = ChiTietDienThoai.IMEI\n"
-                + "full join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_dong = QuocGiaDong.id\n"
-                + "left join KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id \n"
-                + "group by HoaDon.id,HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
-                + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam\n"
-                + "order by HoaDon.id,(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) desc\n"
-                + "offset ? rows fetch next 5 rows only";
+                + "                HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam,\n"
+                + "                (sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
+                + "                from HoaDon full join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
+                + "                full join KhachHang on HoaDon.id_khach_hang = KhachHang.id \n"
+                + "                full join HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
+                + "                full join ChiTietDienThoai on HoaDonChiTiet.IMEI = ChiTietDienThoai.IMEI\n"
+                + "                full join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_dong = QuocGiaDong.id\n"
+                + "                full join KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id\n"
+                + "                group by HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
+                + "                HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam\n"
+                + "                order by (sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) desc";
 
         List<ViewModelHoaDon> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, rowOfset);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 ViewModelHoaDon hd = new ViewModelHoaDon(rs.getString("ma_hoa_don"), rs.getString("ten_nhan_vien"),
@@ -148,24 +149,22 @@ public class HoaDonRespository {
         return null;
     }
 
-    public List<ViewModelHoaDon> giaThapLenCao(int rowOfSet) {
+    public List<ViewModelHoaDon> giaThapLenCao() {
         String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
-                + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam,\n"
-                + "(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
-                + "from HoaDon left join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
-                + "left join KhachHang on HoaDon.id_khach_hang = KhachHang.id \n"
-                + "full join HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
-                + "full join ChiTietDienThoai on HoaDonChiTiet.IMEI = ChiTietDienThoai.IMEI\n"
-                + "full join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_dong = QuocGiaDong.id\n"
-                + "left join KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id \n"
-                + "group by HoaDon.id,HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
-                + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam\n"
-                + "order by HoaDon.id,(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) asc\n"
-                + "offset ? rows fetch next 5 rows only ";
+                + "                HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam,\n"
+                + "                (sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
+                + "                from HoaDon full join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
+                + "                full join KhachHang on HoaDon.id_khach_hang = KhachHang.id \n"
+                + "                full join HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
+                + "                full join ChiTietDienThoai on HoaDonChiTiet.IMEI = ChiTietDienThoai.IMEI\n"
+                + "                full join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_dong = QuocGiaDong.id\n"
+                + "                full join KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id\n"
+                + "                group by HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
+                + "                HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam\n"
+                + "                order by (sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) desc";
         List<ViewModelHoaDon> list = new ArrayList<>();
 
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, rowOfSet);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 ViewModelHoaDon hd = new ViewModelHoaDon(rs.getString("ma_hoa_don"), rs.getString("ten_nhan_vien"),
@@ -181,7 +180,7 @@ public class HoaDonRespository {
         return null;
     }
 
-    public List<ViewModelHoaDon> searchHoaDon(String mahd, int rowOfSet) {
+    public List<ViewModelHoaDon> searchHoaDon(String mahd) {
 
         String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
                 + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam,\n"
@@ -195,14 +194,12 @@ public class HoaDonRespository {
                 + "where HoaDon.ma_hoa_don like ?\n"
                 + "group by HoaDon.id,HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
                 + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam\n"
-                + "order by HoaDon.id\n"
-                + "offset ? rows fetch next 5 rows only";
+                + "order by HoaDon.ma_hoa_don\n";
 
         List<ViewModelHoaDon> listSearch = new ArrayList<>();
         String a = "%" + mahd + "%";
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareCall(query);) {
             ps.setObject(1, a);
-            ps.setObject(2, rowOfSet);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -213,6 +210,72 @@ public class HoaDonRespository {
                 listSearch.add(hd);
             }
             return listSearch;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<ViewModelHoaDon> searchHoaDonTheoTenKH(String name) {
+        String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
+                + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam,\n"
+                + "(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
+                + "from HoaDon  full join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
+                + "full join KhachHang on HoaDon.id_khach_hang = KhachHang.id \n"
+                + "full join HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
+                + "full join ChiTietDienThoai on HoaDonChiTiet.IMEI = ChiTietDienThoai.IMEI\n"
+                + "full join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_dong = QuocGiaDong.id\n"
+                + "full join KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id \n"
+                + "where KhachHang.ten_khach_hang like ?\n"
+                + "group by HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
+                + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam";
+
+        List<ViewModelHoaDon> list = new ArrayList<>();
+        String a = "%" + name + "%";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, a);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ViewModelHoaDon hd = new ViewModelHoaDon(rs.getString("ma_hoa_don"), rs.getString("ten_nhan_vien"),
+                        rs.getString("ten_khach_hang"), rs.getString("ngay_tao"),
+                        rs.getString("ma_khuyen_mai"), rs.getInt("trang_thai"),
+                        rs.getInt("Tong so San pham"), rs.getFloat("gia_giam"), rs.getFloat("Tong Tien"));
+                list.add(hd);
+            }
+            return list;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<ViewModelHoaDon> searchHoaDonTheoTenNV(String name) {
+        String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
+                + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam,\n"
+                + "(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
+                + "from HoaDon  full join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
+                + "full join KhachHang on HoaDon.id_khach_hang = KhachHang.id \n"
+                + "full join HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
+                + "full join ChiTietDienThoai on HoaDonChiTiet.IMEI = ChiTietDienThoai.IMEI\n"
+                + "full join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_dong = QuocGiaDong.id\n"
+                + "full join KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id \n"
+                + "where NhanVien.ten_nhan_vien like ?\n"
+                + "group by HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
+                + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam";
+
+        List<ViewModelHoaDon> list = new ArrayList<>();
+        String a = "%" + name + "%";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, a);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ViewModelHoaDon hd = new ViewModelHoaDon(rs.getString("ma_hoa_don"), rs.getString("ten_nhan_vien"),
+                        rs.getString("ten_khach_hang"), rs.getString("ngay_tao"),
+                        rs.getString("ma_khuyen_mai"), rs.getInt("trang_thai"),
+                        rs.getInt("Tong so San pham"), rs.getFloat("gia_giam"), rs.getFloat("Tong Tien"));
+                list.add(hd);
+            }
+            return list;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

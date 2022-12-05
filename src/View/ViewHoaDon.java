@@ -20,26 +20,29 @@ public class ViewHoaDon extends javax.swing.JFrame {
     
     private DefaultTableModel tableHoaDon = new DefaultTableModel();
     private DefaultTableModel tableSanPhamHD = new DefaultTableModel();
+    private DefaultComboBoxModel ccbTim = new DefaultComboBoxModel();
     private DefaultComboBoxModel ccbSapXep = new DefaultComboBoxModel();
     private List<ViewModelHoaDon> listGetAll = new ArrayList<>();
-    private List<ViewModelHoaDon> listGetAll5Rows = new ArrayList<>();
-    private List<ViewModelHoaDon> listGetCaoXuongThap = new ArrayList<>();
-    private List<ViewModelHoaDon> listGetThapLenCao = new ArrayList<>();
+    private List<ViewModelHoaDon> listNV = new ArrayList<>();
+    private List<ViewModelHoaDon> listKH = new ArrayList<>();
+    private List<ViewModelHoaDon> listHD = new ArrayList<>();
     private List<ViewModelHoaDon> listSearch = new ArrayList<>();
+    private List<ViewModelHoaDon> listSort = new ArrayList<>();
+    private List<String> ccbFind = new ArrayList<>();
     private List<VIewModelSanPhamHoaDon> listGetSP = new ArrayList<>();
     private List<String> ccb = new ArrayList<>();
     private HoaDonService sv = new HoaDonService();
-    int index = 0;
-    int rowOfSet = 0;
-    int fecth = 5;
-    int o = 0;
-    String mahd = "";
+    String name = "";
+    private List<ViewModelHoaDon> searchHD = new ArrayList<>();
+    private List<ViewModelHoaDon> searchNV = new ArrayList<>();
+    private List<ViewModelHoaDon> searchKH = new ArrayList<>();
     
     public ViewHoaDon() {
         initComponents();
         tlbHoaDon.setModel(tableHoaDon);
         tlbSanPham.setModel(tableSanPhamHD);
         ccbLoc.setModel(ccbSapXep);
+        ccb1.setModel(ccbTim);
         ccb.add("Không");
         ccb.add("Theo giá từ cao xuống thấp");
         ccb.add("Theo giá từ thấp lên cao");
@@ -48,21 +51,21 @@ public class ViewHoaDon extends javax.swing.JFrame {
             ccbSapXep.addElement(string);
         }
         
+        ccbFind.add("Mã Hóa Đơn");
+        ccbFind.add("Tên Khách Hàng");
+        ccbFind.add("Tên Nhân Viên");
+        for (String string : ccbFind) {
+            ccbTim.addElement(string);
+        }
+        
         String[] heaaderHoaDon = {"Mã HD", "Tên NV", "Tên KH", "Ngày Tạo", "Mã Khuyến Mại", "Tổng Tiền", "Trạng Thái", "Tổng số SP"};
         tableHoaDon.setColumnIdentifiers(heaaderHoaDon);
         String[] headerSanPham = {"Mã DT", "Mã HD ", "Tên SP", "Hãng", "Dòng", "Độ Mới", "Mô tả"};
         tableSanPhamHD.setColumnIdentifiers(headerSanPham);
         
-        listGetAll = sv.getAll5Rows(rowOfSet);
+        listGetAll = sv.getAll(listGetAll);
         sv.showData(listGetAll, tableHoaDon);
-        System.out.println(rowOfSet);
-        o = sv.getAll(listGetAll).size() / fecth;
-        loadTrang();
         
-    }
-    
-    private void loadTrang() {
-        SoTrang.setText(index + 1 + "");
     }
 
     /**
@@ -84,15 +87,11 @@ public class ViewHoaDon extends javax.swing.JFrame {
         radioDaThanhToan = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tlbHoaDon = new javax.swing.JTable();
-        btnVeDau = new javax.swing.JButton();
-        btnXuong = new javax.swing.JButton();
-        btnLen = new javax.swing.JButton();
-        btnVeCuoi = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tlbSanPham = new javax.swing.JTable();
         btnLoc = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        SoTrang = new javax.swing.JLabel();
+        btnDong = new javax.swing.JButton();
+        ccb1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,8 +113,18 @@ public class ViewHoaDon extends javax.swing.JFrame {
         jLabel7.setText("Trạng Thái:");
 
         radioChuaThanhToan.setText("Chưa thanh toán");
+        radioChuaThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioChuaThanhToanActionPerformed(evt);
+            }
+        });
 
         radioDaThanhToan.setText("Đã thanh toán");
+        radioDaThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioDaThanhToanActionPerformed(evt);
+            }
+        });
 
         tlbHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,14 +144,6 @@ public class ViewHoaDon extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tlbHoaDon);
 
-        btnVeDau.setText("|<");
-
-        btnXuong.setText(">>");
-
-        btnLen.setText("<<");
-
-        btnVeCuoi.setText(">|");
-
         tlbSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -157,10 +158,20 @@ public class ViewHoaDon extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tlbSanPham);
 
         btnLoc.setText("Lọc");
+        btnLoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLocActionPerformed(evt);
+            }
+        });
 
-        jLabel4.setText("Trang:");
+        btnDong.setText("Đóng");
+        btnDong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDongActionPerformed(evt);
+            }
+        });
 
-        SoTrang.setText("jLabel5");
+        ccb1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,16 +184,20 @@ public class ViewHoaDon extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel2))
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(radioChuaThanhToan)
                         .addGap(135, 135, 135)
-                        .addComponent(radioDaThanhToan))
-                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(radioDaThanhToan)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ccb1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)))
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(ccbLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,21 +206,11 @@ public class ViewHoaDon extends javax.swing.JFrame {
                 .addGap(25, 25, 25))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVeDau)
-                        .addGap(54, 54, 54)
-                        .addComponent(btnXuong)
-                        .addGap(48, 48, 48)
-                        .addComponent(btnLen)
-                        .addGap(51, 51, 51)
-                        .addComponent(btnVeCuoi)
-                        .addGap(125, 125, 125)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(SoTrang))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDong, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -218,7 +223,8 @@ public class ViewHoaDon extends javax.swing.JFrame {
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(ccbLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLoc))
+                    .addComponent(btnLoc)
+                    .addComponent(ccb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -226,17 +232,11 @@ public class ViewHoaDon extends javax.swing.JFrame {
                     .addComponent(radioDaThanhToan))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVeDau)
-                    .addComponent(btnXuong)
-                    .addComponent(btnLen)
-                    .addComponent(btnVeCuoi)
-                    .addComponent(jLabel4)
-                    .addComponent(SoTrang))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnDong)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -245,20 +245,85 @@ public class ViewHoaDon extends javax.swing.JFrame {
     private void tlbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tlbHoaDonMouseClicked
         // TODO add your handling code here:
         int row = tlbHoaDon.getSelectedRow();
-        mahd = listGetAll5Rows.get(row).getMaHD();
-        
+        String mahd = listGetAll.get(row).getMaHD();
         listGetSP = sv.getAllSp(mahd);
-        sv.showData1(listGetSP, tableSanPhamHD);
+        sv.showData1(listGetSP, tableHoaDon);
+
     }//GEN-LAST:event_tlbHoaDonMouseClicked
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         // TODO add your handling code here:
-        String search = txtTimKiem.getText();
-        listSearch = sv.searchHoaDon(mahd, rowOfSet);
-        sv.showData(listSearch, tableHoaDon);
+        if (ccb1.getSelectedIndex() == 0) {
+            name = txtTimKiem.getText();
+            listHD = sv.searchHoaDon(name);
+            listSearch = sv.searchHoaDon(name);
+            sv.showData(listHD, tableHoaDon);
+            
+        }
+        if (ccb1.getSelectedIndex() == 1) {
+            name = txtTimKiem.getText();
+            listKH = sv.searchTenKH(name);
+            listSearch = sv.searchTenKH(name);
+            sv.showData(listKH, tableHoaDon);
+        }
+        
+        if (ccb1.getSelectedIndex() == 2) {
+            name = txtTimKiem.getText();
+            listNV = sv.searchTenNV(name);
+            listSearch = sv.searchTenNV(name);
+            sv.showData(listNV, tableHoaDon);
+        }
+        
+        if (txtTimKiem.getText().isEmpty()) {
+            listGetAll = sv.getAll(listNV);
+            sv.showData(listGetAll, tableHoaDon);
+        }
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
-    
+    private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnDongActionPerformed
+
+    private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
+        // TODO add your handling code here:
+        if (ccbLoc.getSelectedIndex() == 0) {
+            listGetAll = sv.getAll(listGetAll);
+            sv.showData(listGetAll, tableHoaDon);
+        }
+        if (ccbLoc.getSelectedIndex() == 1) {
+            listGetAll = sv.giaCaoXuongThap();
+            sv.showData(listGetAll, tableHoaDon);
+        }
+        if (ccbLoc.getSelectedIndex() == 2) {
+            listGetAll = sv.giaThapLenCao();
+            sv.showData(listGetAll, tableHoaDon);
+        }
+    }//GEN-LAST:event_btnLocActionPerformed
+
+    private void radioChuaThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioChuaThanhToanActionPerformed
+        // TODO add your handling code here:
+        radioDaThanhToan.setSelected(false);
+        for (ViewModelHoaDon viewModelHoaDon : listGetAll) {
+            if (viewModelHoaDon.getTrangThai() == 0) {
+                listSort.add(viewModelHoaDon);
+            }
+        }
+        
+        sv.showData(listSort, tableHoaDon);
+    }//GEN-LAST:event_radioChuaThanhToanActionPerformed
+
+    private void radioDaThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioDaThanhToanActionPerformed
+        // TODO add your handling code here:
+        radioChuaThanhToan.setSelected(false);
+        for (ViewModelHoaDon viewModelHoaDon : listGetAll) {
+            if (viewModelHoaDon.getTrangThai() == 1) {
+                listSort.add(viewModelHoaDon);
+            }
+        }
+        sv.showData(listSort, tableHoaDon);
+    }//GEN-LAST:event_radioDaThanhToanActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -295,17 +360,13 @@ public class ViewHoaDon extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel SoTrang;
-    private javax.swing.JButton btnLen;
+    private javax.swing.JButton btnDong;
     private javax.swing.JButton btnLoc;
-    private javax.swing.JButton btnVeCuoi;
-    private javax.swing.JButton btnVeDau;
-    private javax.swing.JButton btnXuong;
+    private javax.swing.JComboBox<String> ccb1;
     private javax.swing.JComboBox<String> ccbLoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

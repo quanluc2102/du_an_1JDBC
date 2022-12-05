@@ -19,11 +19,15 @@ public interface HoaDonIpml {
 
     List<ViewModelHoaDon> getAll5Rows(int rowOfSet);
 
-    List<ViewModelHoaDon> searchHoaDon(String mahd, int rowOfSet);
+    List<ViewModelHoaDon> searchHoaDon(String mahd);
+    
+    List<ViewModelHoaDon> searchTenNV(String name);
+    
+    List<ViewModelHoaDon> searchTenKH(String name);
 
-    List<ViewModelHoaDon> giaCaoXuongThap(int rowOfSet);
+    List<ViewModelHoaDon> giaCaoXuongThap();
 
-    List<ViewModelHoaDon> giaThapLenCao(int rowOfSet);
+    List<ViewModelHoaDon> giaThapLenCao();
 
     List<VIewModelSanPhamHoaDon> getAllSp(String mahd);
 

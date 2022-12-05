@@ -17,12 +17,12 @@ import ViewModel.ViewModelHoaDon;
  * @author PC
  */
 public class HoaDonService implements HoaDonIpml {
-    
+
     @Override
     public List<ViewModelHoaDon> getAll(List<ViewModelHoaDon> list) {
         return new HoaDonRespository().getAllHoaDon();
     }
-    
+
     @Override
     public void showData(List<ViewModelHoaDon> list, DefaultTableModel dtm) {
         dtm.setRowCount(0);
@@ -30,37 +30,37 @@ public class HoaDonService implements HoaDonIpml {
             dtm.addRow(viewModelHoaDon.dataRow());
         }
     }
-    
+
     @Override
     public List<ViewModelHoaDon> getAll5Rows(int rowOfSet) {
-        
+
         return new HoaDonRespository().getAllHoaDon5Rows(rowOfSet);
     }
-    
+
     @Override
-    public List<ViewModelHoaDon> searchHoaDon(String mahd, int rowOfSet) {
-        
+    public List<ViewModelHoaDon> searchHoaDon(String mahd) {
+
         List<ViewModelHoaDon> listSearch = new ArrayList<>();
-        listSearch = new HoaDonRespository().searchHoaDon(mahd, rowOfSet);
+        listSearch = new HoaDonRespository().searchHoaDon(mahd);
         return listSearch;
     }
-    
+
     @Override
-    public List<ViewModelHoaDon> giaCaoXuongThap(int rowOfSet) {
-        return new HoaDonRespository().giaCaoXuongThap(rowOfSet);
+    public List<ViewModelHoaDon> giaCaoXuongThap() {
+        return new HoaDonRespository().giaCaoXuongThap();
     }
-    
+
     @Override
-    public List<ViewModelHoaDon> giaThapLenCao(int rowOfSet) {
-        return new HoaDonRespository().giaThapLenCao(rowOfSet);
-        
+    public List<ViewModelHoaDon> giaThapLenCao() {
+        return new HoaDonRespository().giaThapLenCao();
+
     }
-    
+
     @Override
     public List<VIewModelSanPhamHoaDon> getAllSp(String mahd) {
         return new HoaDonRespository().getAllSanPham(mahd);
     }
-    
+
     @Override
     public void showData1(List<VIewModelSanPhamHoaDon> list, DefaultTableModel dtm) {
         dtm.setRowCount(0);
@@ -68,5 +68,19 @@ public class HoaDonService implements HoaDonIpml {
             dtm.addRow(vIewModelSanPhamHoaDon.dataRowSPHoaDon());
         }
     }
-    
+
+    @Override
+    public List<ViewModelHoaDon> searchTenNV(String name) {
+        List<ViewModelHoaDon> list = new ArrayList<>();
+        list = new HoaDonRespository().searchHoaDonTheoTenNV(name);
+        return list;
+    }
+
+    @Override
+    public List<ViewModelHoaDon> searchTenKH(String name) {
+        List<ViewModelHoaDon> list = new ArrayList<>();
+        list = new HoaDonRespository().searchHoaDonTheoTenKH(name);
+        return list;
+    }
+
 }
