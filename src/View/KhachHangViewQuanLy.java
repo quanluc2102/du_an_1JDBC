@@ -715,7 +715,7 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
         if (txtSearch.getText().isEmpty()) {
             index++;
             rowOffset += 5;
-            if (rowOffset > service.getAllKhachHang1().size()-1) {
+            if (rowOffset > service.getAllKhachHang1().size() - 1) {
                 rowOffset = 0;
                 index = 0;
             }
@@ -839,7 +839,7 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
         if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
             index = o;        // TODO add your handling code here:
             int c = service.getAllKhachHang1().size() % fetch;
-            rowOffset = service.getAllKhachHang1().size() -  c;
+            rowOffset = service.getAllKhachHang1().size() - c;
             listKhachHangView = service.getAllKhachHang(rowOffset);
             service.showDataTable(dtm, listKhachHangView);
             loadSoTrang();
@@ -868,8 +868,9 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        TrangChuQuanLyView s = new TrangChuQuanLyView(s.takemaNV()); 
-        s.setVisible(true);
+        TrangChuQuanLyView s = new TrangChuQuanLyView("");
+        TrangChuQuanLyView x = new TrangChuQuanLyView(s.takemaNV());
+        x.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
