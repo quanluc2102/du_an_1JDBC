@@ -243,6 +243,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         return "";
 
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -289,6 +290,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         btnQG = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtMaDT = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblThongTin = new javax.swing.JTable();
@@ -478,7 +480,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         jPanel4.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 211, 75, 52));
 
         jButton3.setText("sửa");
-        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 211, 87, 52));
+        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 80, 52));
 
         jButton4.setText("xóa");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -486,7 +488,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(253, 211, 76, -1));
+        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 76, 50));
 
         jButton5.setText("Chi tiết");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -494,7 +496,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(347, 211, 110, 50));
+        jPanel4.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 80, 50));
 
         btnHang.setText("jButton1");
         btnHang.setEnabled(false);
@@ -525,6 +527,14 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         txtMaDT.setEditable(false);
         jPanel4.add(txtMaDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 90, -1));
+
+        jButton1.setText("Trang Chủ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 100, 50));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin sản phẩm"));
 
@@ -627,15 +637,15 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(622, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Thống kê sản phẩm", jPanel2);
@@ -885,6 +895,13 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnQGActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        TrangChuQuanLyView s = new TrangChuQuanLyView(); 
+        s.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -938,6 +955,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbbHang;
     private javax.swing.JComboBox<String> cbbIMEI;
     private javax.swing.JComboBox<String> cbbQuocGia;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

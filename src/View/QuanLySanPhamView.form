@@ -441,7 +441,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="138" y="211" width="87" height="52"/>
+                      <AbsoluteConstraints x="100" y="210" width="80" height="52"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -454,7 +454,7 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="253" y="211" width="76" height="-1"/>
+                      <AbsoluteConstraints x="190" y="210" width="76" height="50"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -467,7 +467,7 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="347" y="211" width="110" height="50"/>
+                      <AbsoluteConstraints x="270" y="210" width="80" height="50"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -558,6 +558,19 @@
                     </Constraint>
                   </Constraints>
                 </Component>
+                <Component class="javax.swing.JButton" name="jButton1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Trang Ch&#x1ee7;"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="360" y="210" width="100" height="50"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel5">
@@ -634,8 +647,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="1132" max="-2" attributes="0"/>
-                      <EmptySpace pref="65" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="575" max="-2" attributes="0"/>
+                      <EmptySpace pref="622" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -643,8 +656,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="375" max="-2" attributes="0"/>
-                      <EmptySpace pref="270" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" pref="632" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
