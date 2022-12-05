@@ -94,4 +94,18 @@ public class NhanVienServiceImpl implements NhanVienService {
         return new NhanVienRepository().getAlls();
     }
 
+    @Override
+    public List<NhanVienView> searchNhanVien(String tenNhanVien, int rowOffset) {
+        List<NhanVienView> listSearch = new ArrayList<>();
+        listSearch = Nvrp.searchNhanVien(tenNhanVien, rowOffset);
+        return listSearch;
+    }
+
+    @Override
+    public List<NhanVienView> getAllNhanVienSearch(int rowOffset) {
+    return  Nvrp.getAllNhanVienSearch(rowOffset);
+    }
+
+
+
 }

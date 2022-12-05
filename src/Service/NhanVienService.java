@@ -30,4 +30,8 @@ public interface NhanVienService {
     String update(NhanVien nv,String id);
 
     String chuyenTTNV(String id);
+    
+    List<NhanVienView> getAllNhanVienSearch(int rowOffset);
+    
+    List<NhanVienView> searchNhanVien(String tenNhanVien, int rowOffset);
 }

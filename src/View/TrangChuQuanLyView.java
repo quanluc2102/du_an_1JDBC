@@ -31,9 +31,13 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
      */
     private DefaultTableModel dtm = new DefaultTableModel();
     private List<NhanVienView> listNV = new ArrayList<>();
+    private List<NhanVienView> listNVSearch = new ArrayList<>();
     private NhanVienService impl = new NhanVienServiceImpl();
     private DefaultComboBoxModel modelccbCV;
     List<String> idCV = impl.IDChucVu();
+    int rowOffset = 0;
+    String name = "";
+    int fetch = 5;
 
     public TrangChuQuanLyView(String a) {
         initComponents();
@@ -260,7 +264,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         txtRPEmail = new javax.swing.JLabel();
         txtRPMatKhau = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         btnDangKy1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -525,10 +529,15 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         jLabel12.setForeground(new java.awt.Color(255, 51, 51));
         jLabel12.setText("Se");
 
-        jTextField1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 204, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(255, 0, 51), new java.awt.Color(255, 51, 0)));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 204, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(255, 0, 51), new java.awt.Color(255, 51, 0)));
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtSearchActionPerformed(evt);
+            }
+        });
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
             }
         });
 
@@ -557,7 +566,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDangKy1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -579,7 +588,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnDangKy1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -831,12 +840,12 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         System.out.println(id);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtSearchActionPerformed
 
     private void btnDangKy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKy1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnDangKy1ActionPerformed
 
     private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
@@ -875,6 +884,18 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseExited
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+       name = txtSearch.getText();
+       listNVSearch = impl.searchNhanVien(name, rowOffset);
+        if (txtSearch.getText().isEmpty()) {
+            listNV = impl.getAllNhanVienSearch(rowOffset);
+            int o = listNV.size() % fetch;
+            int index = 0;
+        impl.showData(dtm, listNV);
+        }
+       
+    }//GEN-LAST:event_txtSearchKeyReleased
     public void setColor(JPanel p) {
         p.setBackground(new Color(255, 105, 0));
     }
@@ -918,7 +939,6 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel panel1;
     private javax.swing.JPanel panel2;
     private javax.swing.JPanel panel3;
@@ -939,6 +959,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
     private javax.swing.JLabel txtRPSDT;
     private javax.swing.JLabel txtRPTen;
     private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtTenNV;
     // End of variables declaration//GEN-END:variables
 

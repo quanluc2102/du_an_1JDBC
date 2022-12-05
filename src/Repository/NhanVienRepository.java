@@ -84,7 +84,7 @@ public class NhanVienRepository {
             PreparedStatement ps = conn.prepareCall(query);
             ps.setObject(1, nv.getMa());
             ps.setObject(2, nv.getTen());
-            ps.setObject(3,nv.getIdChucVu());
+            ps.setObject(3, nv.getIdChucVu());
             ps.setObject(4, nv.getNgaySinh());
             ps.setObject(5, nv.getSdt());
             ps.setObject(6, nv.getEmail());
@@ -156,5 +156,49 @@ public class NhanVienRepository {
             e.printStackTrace(System.out);
         }
         return check > 0;
+    }
+
+    public List<NhanVienView> searchNhanVien(String id, int rowOffset) {
+        String query = "select NhanVien.id,ma_nhan_vien,ten_nhan_vien,id_chuc_vu,ten_chuc_vu,ngay_sinh,sdt,email,dia_chi,mat_khau,NhanVien.trang_thai  \n"
+                + "from NhanVien left join ChucVu on NhanVien.id_chuc_vu = ChucVu.id where ten_nhan_vien like ? \n"
+                + "order by id\n"
+                + "offset ? rows\n"
+                + "fetch next 5 rows only";
+        List<NhanVienView> list = new ArrayList<>();
+        String a = "%" + id + "%";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, a);
+            ps.setObject(2, rowOffset);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                NhanVienView nv = new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11));
+                list.add(nv);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<NhanVienView> getAllNhanVienSearch(int rowOffset) {
+        String query = "select NhanVien.id,ma_nhan_vien,ten_nhan_vien,id_chuc_vu,ten_chuc_vu,ngay_sinh,sdt,email,dia_chi,mat_khau,NhanVien.trang_thai  \n"
+                + "from NhanVien left join ChucVu on NhanVien.id_chuc_vu = ChucVu.id\n"
+                + "order by id\n"
+                + "offset ? rows\n"
+                + "fetch next 5 rows only";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, rowOffset);
+            ResultSet rs = ps.executeQuery();
+
+            List<NhanVienView> list = new ArrayList<>();
+            while (rs.next()) {
+                NhanVienView kh = new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11));
+                list.add(kh);
+            }
+            return list;
+        } catch (Exception e) {
+        }
+        return null;
     }
 }
