@@ -4,7 +4,7 @@
  */
 package View;
 
-import Service.ServiceImpl.HoaDonService;
+import Service.ServiceImpl.HoaDonImpl;
 import ViewModel.VIewModelSanPhamHoaDon;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,55 +17,44 @@ import ViewModel.ViewModelHoaDon;
  * @author PC
  */
 public class ViewHoaDon extends javax.swing.JFrame {
-    
+
     private DefaultTableModel tableHoaDon = new DefaultTableModel();
     private DefaultTableModel tableSanPhamHD = new DefaultTableModel();
     private DefaultComboBoxModel ccbTim = new DefaultComboBoxModel();
     private DefaultComboBoxModel ccbSapXep = new DefaultComboBoxModel();
     private List<ViewModelHoaDon> listGetAll = new ArrayList<>();
-    private List<ViewModelHoaDon> listNV = new ArrayList<>();
-    private List<ViewModelHoaDon> listKH = new ArrayList<>();
-    private List<ViewModelHoaDon> listHD = new ArrayList<>();
     private List<ViewModelHoaDon> listSearch = new ArrayList<>();
     private List<ViewModelHoaDon> listSort = new ArrayList<>();
     private List<String> ccbFind = new ArrayList<>();
     private List<VIewModelSanPhamHoaDon> listGetSP = new ArrayList<>();
     private List<String> ccb = new ArrayList<>();
-    private HoaDonService sv = new HoaDonService();
+    private HoaDonImpl sv = new HoaDonImpl();
     String name = "";
-    private List<ViewModelHoaDon> searchHD = new ArrayList<>();
-    private List<ViewModelHoaDon> searchNV = new ArrayList<>();
-    private List<ViewModelHoaDon> searchKH = new ArrayList<>();
-    
+    int TrangThai = 0;
+
     public ViewHoaDon() {
         initComponents();
         tlbHoaDon.setModel(tableHoaDon);
         tlbSanPham.setModel(tableSanPhamHD);
         ccbLoc.setModel(ccbSapXep);
-        ccb1.setModel(ccbTim);
-        ccb.add("Không");
-        ccb.add("Theo giá từ cao xuống thấp");
         ccb.add("Theo giá từ thấp lên cao");
-        
+        ccb.add("Theo giá từ cao xuống thấp");
+
         for (String string : ccb) {
             ccbSapXep.addElement(string);
         }
-        
-        ccbFind.add("Mã Hóa Đơn");
-        ccbFind.add("Tên Khách Hàng");
-        ccbFind.add("Tên Nhân Viên");
         for (String string : ccbFind) {
             ccbTim.addElement(string);
         }
-        
+
         String[] heaaderHoaDon = {"Mã HD", "Tên NV", "Tên KH", "Ngày Tạo", "Mã Khuyến Mại", "Tổng Tiền", "Trạng Thái", "Tổng số SP"};
         tableHoaDon.setColumnIdentifiers(heaaderHoaDon);
         String[] headerSanPham = {"Mã DT", "Mã HD ", "Tên SP", "Hãng", "Dòng", "Độ Mới", "Mô tả"};
         tableSanPhamHD.setColumnIdentifiers(headerSanPham);
-        
-        listGetAll = sv.getAll(listGetAll);
-        sv.showData(listGetAll, tableHoaDon);
-        
+
+        listSearch = sv.getAll(listGetAll);
+        sv.showData(listSearch, tableHoaDon);
+
     }
 
     /**
@@ -77,6 +66,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
@@ -91,7 +81,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
         tlbSanPham = new javax.swing.JTable();
         btnLoc = new javax.swing.JButton();
         btnDong = new javax.swing.JButton();
-        ccb1 = new javax.swing.JComboBox<>();
+        radioTatCa = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,6 +102,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
         jLabel7.setText("Trạng Thái:");
 
+        buttonGroup1.add(radioChuaThanhToan);
         radioChuaThanhToan.setText("Chưa thanh toán");
         radioChuaThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,6 +110,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(radioDaThanhToan);
         radioDaThanhToan.setText("Đã thanh toán");
         radioDaThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,7 +163,13 @@ public class ViewHoaDon extends javax.swing.JFrame {
             }
         });
 
-        ccb1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        buttonGroup1.add(radioTatCa);
+        radioTatCa.setText("Tất cả");
+        radioTatCa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioTatCaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,21 +187,21 @@ public class ViewHoaDon extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(radioChuaThanhToan)
-                        .addGap(135, 135, 135)
-                        .addComponent(radioDaThanhToan)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(ccb1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)))
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(ccbLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnLoc)
-                .addGap(25, 25, 25))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(ccbLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLoc)
+                        .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(radioChuaThanhToan)
+                        .addGap(35, 35, 35)
+                        .addComponent(radioDaThanhToan)
+                        .addGap(47, 47, 47)
+                        .addComponent(radioTatCa)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -223,13 +221,13 @@ public class ViewHoaDon extends javax.swing.JFrame {
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(ccbLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLoc)
-                    .addComponent(ccb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLoc))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(radioChuaThanhToan)
-                    .addComponent(radioDaThanhToan))
+                    .addComponent(radioDaThanhToan)
+                    .addComponent(radioTatCa))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -253,76 +251,60 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         // TODO add your handling code here:
-        if (ccb1.getSelectedIndex() == 0) {
-            name = txtTimKiem.getText();
-            listHD = sv.searchHoaDon(name);
-            listSearch = sv.searchHoaDon(name);
-            sv.showData(listHD, tableHoaDon);
-            
-        }
-        if (ccb1.getSelectedIndex() == 1) {
-            name = txtTimKiem.getText();
-            listKH = sv.searchTenKH(name);
-            listSearch = sv.searchTenKH(name);
-            sv.showData(listKH, tableHoaDon);
-        }
-        
-        if (ccb1.getSelectedIndex() == 2) {
-            name = txtTimKiem.getText();
-            listNV = sv.searchTenNV(name);
-            listSearch = sv.searchTenNV(name);
-            sv.showData(listNV, tableHoaDon);
-        }
-        
-        if (txtTimKiem.getText().isEmpty()) {
-            listGetAll = sv.getAll(listNV);
-            sv.showData(listGetAll, tableHoaDon);
-        }
+        name = txtTimKiem.getText();
+        sv.showData(sv.searchHoaDon(name), tableHoaDon);
+        listSearch = sv.searchHoaDon(name);
+        TrangThai = 1;
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
         // TODO add your handling code here:
         this.dispose();
+
     }//GEN-LAST:event_btnDongActionPerformed
 
     private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
         // TODO add your handling code here:
         if (ccbLoc.getSelectedIndex() == 0) {
-            listGetAll = sv.getAll(listGetAll);
-            sv.showData(listGetAll, tableHoaDon);
+            sv.giaCaoXuongThap(listSearch);
+            sv.showData(listSearch, tableHoaDon);
         }
+
         if (ccbLoc.getSelectedIndex() == 1) {
-            listGetAll = sv.giaCaoXuongThap();
-            sv.showData(listGetAll, tableHoaDon);
+            sv.giaThapLenCao(listSearch);
+            sv.showData(listSearch, tableHoaDon);
         }
-        if (ccbLoc.getSelectedIndex() == 2) {
-            listGetAll = sv.giaThapLenCao();
-            sv.showData(listGetAll, tableHoaDon);
-        }
+        TrangThai = 2;
     }//GEN-LAST:event_btnLocActionPerformed
 
     private void radioChuaThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioChuaThanhToanActionPerformed
         // TODO add your handling code here:
-        radioDaThanhToan.setSelected(false);
-        for (ViewModelHoaDon viewModelHoaDon : listGetAll) {
+        listSort.removeAll(listSort);
+        for (ViewModelHoaDon viewModelHoaDon : listSearch) {
             if (viewModelHoaDon.getTrangThai() == 0) {
                 listSort.add(viewModelHoaDon);
             }
         }
-        
+        TrangThai = 3;
         sv.showData(listSort, tableHoaDon);
     }//GEN-LAST:event_radioChuaThanhToanActionPerformed
 
     private void radioDaThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioDaThanhToanActionPerformed
         // TODO add your handling code here:
-        radioChuaThanhToan.setSelected(false);
-        for (ViewModelHoaDon viewModelHoaDon : listGetAll) {
+        listSort.removeAll(listSort);
+        for (ViewModelHoaDon viewModelHoaDon : listSearch) {
             if (viewModelHoaDon.getTrangThai() == 1) {
                 listSort.add(viewModelHoaDon);
             }
         }
+        TrangThai = 3;
         sv.showData(listSort, tableHoaDon);
     }//GEN-LAST:event_radioDaThanhToanActionPerformed
+
+    private void radioTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTatCaActionPerformed
+        // TODO add your handling code here:
+        sv.showData(listSearch, tableHoaDon);
+    }//GEN-LAST:event_radioTatCaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -362,7 +344,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDong;
     private javax.swing.JButton btnLoc;
-    private javax.swing.JComboBox<String> ccb1;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> ccbLoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -372,6 +354,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JRadioButton radioChuaThanhToan;
     private javax.swing.JRadioButton radioDaThanhToan;
+    private javax.swing.JRadioButton radioTatCa;
     private javax.swing.JTable tlbHoaDon;
     private javax.swing.JTable tlbSanPham;
     private javax.swing.JTextField txtTimKiem;

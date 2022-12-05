@@ -27,15 +27,15 @@ public class HoaDonRespository {
         String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
                 + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam,\n"
                 + "(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
-                + "from HoaDon  full join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
-                + "full join KhachHang on HoaDon.id_khach_hang = KhachHang.id \n"
+                + "from HoaDon  left join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
+                + "left join KhachHang on HoaDon.id_khach_hang = KhachHang.id \n"
                 + "full join HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
-                + "full join ChiTietDienThoai on HoaDonChiTiet.IMEI = ChiTietDienThoai.IMEI\n"
-                + "full join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_dong = QuocGiaDong.id\n"
-                + "full join KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id \n"
-                + "group by HoaDon.id, HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
+                + "left join ChiTietDienThoai on HoaDonChiTiet.IMEI = ChiTietDienThoai.IMEI\n"
+                + "left join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_dong = QuocGiaDong.id\n"
+                + "left join KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id \n"
+                + "group by HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
                 + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam\n"
-                + "order by  HoaDon.ma_hoa_don";
+                + "order by HoaDon.ma_hoa_don";
         List<ViewModelHoaDon> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
@@ -49,40 +49,6 @@ public class HoaDonRespository {
             return list;
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
-        }
-        return null;
-    }
-
-    public List<ViewModelHoaDon> getAllHoaDon5Rows(int rowOfSet) {
-
-        String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
-                + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam,\n"
-                + "(sum(QuocGiaDong.gia_ban - KhuyenMai.gia_giam)) as 'Tong Tien', count(ChiTietDienThoai.IMEI) as 'Tong so San pham'\n"
-                + "from HoaDon left join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
-                + "left join KhachHang on HoaDon.id_khach_hang = KhachHang.id \n"
-                + "full join HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
-                + "full join ChiTietDienThoai on HoaDonChiTiet.IMEI = ChiTietDienThoai.IMEI\n"
-                + "full join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_dong = QuocGiaDong.id\n"
-                + "left join KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id \n"
-                + "group by HoaDon.id,HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
-                + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam\n"
-                + "order by HoaDon.id\n"
-                + "offset ? rows fetch next 5 rows only";
-        List<ViewModelHoaDon> list = new ArrayList<>();
-        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareCall(query);) {
-            ps.setObject(1, rowOfSet);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                ViewModelHoaDon view = new ViewModelHoaDon(rs.getString("ma_hoa_don"), rs.getString("ten_nhan_vien"),
-                        rs.getString("ten_khach_hang"), rs.getString("ngay_tao"),
-                        rs.getString("ma_khuyen_mai"), rs.getInt("trang_thai"),
-                        rs.getInt("Tong so San pham"), rs.getFloat("gia_giam"), rs.getFloat("Tong Tien"));
-                list.add(view);
-            }
-            return list;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
         return null;
     }

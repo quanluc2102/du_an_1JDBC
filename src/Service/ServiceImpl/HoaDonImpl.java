@@ -4,19 +4,19 @@
  */
 package Service.ServiceImpl;
 
-import Service.HoaDonIpml;
 import Repository.HoaDonRespository;
 import ViewModel.VIewModelSanPhamHoaDon;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import ViewModel.ViewModelHoaDon;
+import Service.HoaDonService;
 
 /**
  *
  * @author PC
  */
-public class HoaDonService implements HoaDonIpml {
+public class HoaDonImpl implements HoaDonService {
 
     @Override
     public List<ViewModelHoaDon> getAll(List<ViewModelHoaDon> list) {
@@ -32,27 +32,38 @@ public class HoaDonService implements HoaDonIpml {
     }
 
     @Override
-    public List<ViewModelHoaDon> getAll5Rows(int rowOfSet) {
-
-        return new HoaDonRespository().getAllHoaDon5Rows(rowOfSet);
-    }
-
-    @Override
     public List<ViewModelHoaDon> searchHoaDon(String mahd) {
 
         List<ViewModelHoaDon> listSearch = new ArrayList<>();
-        listSearch = new HoaDonRespository().searchHoaDon(mahd);
+
+        for (ViewModelHoaDon viewModelHoaDon : new HoaDonRespository().getAllHoaDon()) {
+
+            if (viewModelHoaDon.getMaHD().contains(mahd) || viewModelHoaDon.getTenKH().contains(mahd) || viewModelHoaDon.getTenNV().contains(mahd)) {
+                listSearch.add(viewModelHoaDon);
+            }
+
+        }
         return listSearch;
     }
 
     @Override
-    public List<ViewModelHoaDon> giaCaoXuongThap() {
-        return new HoaDonRespository().giaCaoXuongThap();
+    public List<ViewModelHoaDon> giaCaoXuongThap(List<ViewModelHoaDon> list) {
+        list.sort((o1, o2) -> {
+            int x1 = (int) o1.getTongTien();
+            int x2 = (int) o2.getTongTien();
+            return x1 - x2;
+        });
+        return list;
     }
 
     @Override
-    public List<ViewModelHoaDon> giaThapLenCao() {
-        return new HoaDonRespository().giaThapLenCao();
+    public List<ViewModelHoaDon> giaThapLenCao(List<ViewModelHoaDon> list) {
+        list.sort((o1, o2) -> {
+            int x1 = (int) o1.getTongTien();
+            int x2 = (int) o2.getTongTien();
+            return x2 - x1;
+        });
+        return list;
 
     }
 
@@ -67,20 +78,6 @@ public class HoaDonService implements HoaDonIpml {
         for (VIewModelSanPhamHoaDon vIewModelSanPhamHoaDon : list) {
             dtm.addRow(vIewModelSanPhamHoaDon.dataRowSPHoaDon());
         }
-    }
-
-    @Override
-    public List<ViewModelHoaDon> searchTenNV(String name) {
-        List<ViewModelHoaDon> list = new ArrayList<>();
-        list = new HoaDonRespository().searchHoaDonTheoTenNV(name);
-        return list;
-    }
-
-    @Override
-    public List<ViewModelHoaDon> searchTenKH(String name) {
-        List<ViewModelHoaDon> list = new ArrayList<>();
-        list = new HoaDonRespository().searchHoaDonTheoTenKH(name);
-        return list;
     }
 
 }

@@ -13,26 +13,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author PC
  */
-public interface HoaDonIpml {
+public interface HoaDonService {
 
     List<ViewModelHoaDon> getAll(List<ViewModelHoaDon> list);
 
-    List<ViewModelHoaDon> getAll5Rows(int rowOfSet);
-
     List<ViewModelHoaDon> searchHoaDon(String mahd);
-    
-    List<ViewModelHoaDon> searchTenNV(String name);
-    
-    List<ViewModelHoaDon> searchTenKH(String name);
 
-    List<ViewModelHoaDon> giaCaoXuongThap();
+    List<ViewModelHoaDon> giaCaoXuongThap(List<ViewModelHoaDon> list);
 
-    List<ViewModelHoaDon> giaThapLenCao();
+    List<ViewModelHoaDon> giaThapLenCao(List<ViewModelHoaDon> list);
 
     List<VIewModelSanPhamHoaDon> getAllSp(String mahd);
 
     void showData(List<ViewModelHoaDon> list, DefaultTableModel dtm);
-    
+
     void showData1(List<VIewModelSanPhamHoaDon> list, DefaultTableModel dtm);
 
 }
