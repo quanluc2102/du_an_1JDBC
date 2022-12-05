@@ -95,9 +95,9 @@ public class NhanVienServiceImpl implements NhanVienService {
     }
 
     @Override
-    public List<NhanVienView> searchNhanVien(String tenNhanVien, int rowOffset) {
+    public List<NhanVienView> searchNhanVien(String tenNhanVien) {
         List<NhanVienView> listSearch = new ArrayList<>();
-        listSearch = Nvrp.searchNhanVien(tenNhanVien, rowOffset);
+        listSearch = Nvrp.searchNhanVien(tenNhanVien);
         return listSearch;
     }
 

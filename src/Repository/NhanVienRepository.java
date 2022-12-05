@@ -158,17 +158,13 @@ public class NhanVienRepository {
         return check > 0;
     }
 
-    public List<NhanVienView> searchNhanVien(String id, int rowOffset) {
+    public List<NhanVienView> searchNhanVien(String id) {
         String query = "select NhanVien.id,ma_nhan_vien,ten_nhan_vien,id_chuc_vu,ten_chuc_vu,ngay_sinh,sdt,email,dia_chi,mat_khau,NhanVien.trang_thai  \n"
-                + "from NhanVien left join ChucVu on NhanVien.id_chuc_vu = ChucVu.id where ten_nhan_vien like ? \n"
-                + "order by id\n"
-                + "offset ? rows\n"
-                + "fetch next 5 rows only";
+                + "from NhanVien left join ChucVu on NhanVien.id_chuc_vu = ChucVu.id where ten_nhan_vien like ? ";
         List<NhanVienView> list = new ArrayList<>();
         String a = "%" + id + "%";
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, a);
-            ps.setObject(2, rowOffset);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

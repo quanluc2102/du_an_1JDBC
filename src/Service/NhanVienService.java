@@ -33,5 +33,5 @@ public interface NhanVienService {
     
     List<NhanVienView> getAllNhanVienSearch(int rowOffset);
     
-    List<NhanVienView> searchNhanVien(String tenNhanVien, int rowOffset);
+    List<NhanVienView> searchNhanVien(String tenNhanVien);
 }
