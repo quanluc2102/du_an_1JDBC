@@ -11,23 +11,31 @@ package ViewModel;
 public class ChucVuViewModel {
 
     private String id;
-
     private String ma;
-
+    private String maNV;
     private String ten;
+    private String tenNV;
 
     public ChucVuViewModel() {
-    }
-
-    public ChucVuViewModel(String ma, String ten) {
-        this.ma = ma;
-        this.ten = ten;
     }
 
     public ChucVuViewModel(String id, String ma, String ten) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
+    }
+
+    public ChucVuViewModel(String ma, String maNV) {
+        this.ma = ma;
+        this.maNV = maNV;
+    }
+
+    public ChucVuViewModel(String id, String ma, String maNV, String ten, String tenNV) {
+        this.id = id;
+        this.ma = ma;
+        this.maNV = maNV;
+        this.ten = ten;
+        this.tenNV = tenNV;
     }
 
     public String getId() {
@@ -46,6 +54,14 @@ public class ChucVuViewModel {
         this.ma = ma;
     }
 
+    public String getMaNV() {
+        return maNV;
+    }
+
+    public void setMaNV(String maNV) {
+        this.maNV = maNV;
+    }
+
     public String getTen() {
         return ten;
     }
@@ -54,7 +70,20 @@ public class ChucVuViewModel {
         this.ten = ten;
     }
 
-    public Object[] toDaTaRow() {
-        return new Object[]{id, ma, ten};
+    public String getTenNV() {
+        return tenNV;
     }
+
+    public void setTenNV(String tenNV) {
+        this.tenNV = tenNV;
+    }
+
+    public Object[] toDaTaRow() {
+        return new Object[]{ma,ten,maNV,tenNV};
+    }
+
+    public Object[] toDaTa() {
+        return new Object[]{maNV, tenNV};
+    }
+
 }

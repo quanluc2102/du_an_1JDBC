@@ -90,9 +90,6 @@ public class ThongKeView extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -111,45 +108,13 @@ public class ThongKeView extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtNTNam = new javax.swing.JLabel();
         txtThang = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnDong = new javax.swing.JButton();
 
         jRadioButton2.setText("jRadioButton2");
 
         jRadioButton1.setText("jRadioButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "IMEI", "Tên Điện thoại", "Người bán", "Người mua"
-            }
-        ));
-        jScrollPane5.setViewportView(jTable4);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(278, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(304, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Sản phẩm", jPanel2);
 
         jPanel1.setBackground(new java.awt.Color(255, 117, 0));
 
@@ -224,10 +189,10 @@ public class ThongKeView extends javax.swing.JFrame {
 
         txtThang.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDong.setText("Đóng ");
+        btnDong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDongActionPerformed(evt);
             }
         });
 
@@ -281,7 +246,7 @@ public class ThongKeView extends javax.swing.JFrame {
                                 .addGap(34, 34, 34)
                                 .addComponent(txtDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1))
+                                .addComponent(btnDong))
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -319,7 +284,7 @@ public class ThongKeView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelTong)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton1)
+                        .addComponent(btnDong)
                         .addComponent(txtDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31))
         );
@@ -352,15 +317,10 @@ public class ThongKeView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TableThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableThongKeMouseClicked
-        // TODO add your handling code here:
-//        int row = TableThongKe.getSelectedRow();
-//        fillDaTaRow(row);
-    }//GEN-LAST:event_TableThongKeMouseClicked
+    private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
 
-    private void cbbNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbNgayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbbNgayActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnDongActionPerformed
 
     private void cbbNTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbNTNActionPerformed
         // TODO add your handling code here:
@@ -393,13 +353,17 @@ public class ThongKeView extends javax.swing.JFrame {
         txtLaiThang.setText(df.format(ThanhTien(thongKe)) + " " + "VNĐ");
 
         thongKeImpl.showDaTa(dtm, thongKe);
-
     }//GEN-LAST:event_cbbNTNActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ThongKeView tk = new ThongKeView();
-        tk.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void cbbNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbNgayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbNgayActionPerformed
+
+    private void TableThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableThongKeMouseClicked
+        // TODO add your handling code here:
+        //        int row = TableThongKe.getSelectedRow();
+        //        fillDaTaRow(row);
+    }//GEN-LAST:event_TableThongKeMouseClicked
 
     /**
      * @param args the command line arguments
@@ -439,13 +403,13 @@ public class ThongKeView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableThongKe;
+    private javax.swing.JButton btnDong;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cbbNTN;
     private javax.swing.JComboBox<String> cbbNam;
     private javax.swing.JComboBox<String> cbbNgay;
     private javax.swing.JComboBox<String> cbbThang;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel20;
@@ -454,13 +418,10 @@ public class ThongKeView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelTong;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable4;
     private javax.swing.JLabel txtDaonhThu;
     private javax.swing.JLabel txtDoanhThu;
     private javax.swing.JLabel txtLaiThang;

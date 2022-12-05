@@ -21,27 +21,7 @@ import java.util.List;
  */
 public class ThongKeRespository {
 
-    public List<KhachHangViewModel> getAllKhachHang() {
-        String query = "SELECT\n"
-                + "      id,[ten_khach_hang]\n"
-                + "      ,[ngay_sinh]\n"
-                + "      ,[sdt]\n"
-                + "      ,[email]\n"
-                + "      ,[dia_chi]\n"
-                + "  FROM [dbo].[KhachHang]";
-        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            ResultSet rs = ps.executeQuery();
-            List<KhachHangViewModel> list = new ArrayList<>();
-            while (rs.next()) {
-                KhachHangViewModel kh = new KhachHangViewModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5), rs.getString(6));
-                list.add(kh);
-            }
-            return list;
-        } catch (Exception e) {
-        }
-        return null;
-    }
-
+    
     public List<HoaDon> searchTheoNgay(String ngay) {
         String query = "SELECT [id]\n"
                 + "      ,[ma_hoa_don]\n"
@@ -55,7 +35,7 @@ public class ThongKeRespository {
                 + "  WHERE DAY(ngay_tao) like ?";
         List<HoaDon> listHoaDon = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-//            ps.setString(1, "%" + ngay + "%");
+
             ps.setObject(1, ngay);
             ResultSet rs = ps.executeQuery();
 

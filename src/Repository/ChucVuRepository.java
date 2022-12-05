@@ -5,8 +5,10 @@
 package Repository;
 
 import DomainModel.ChucVu;
+import DomainModel.NhanVien;
 import Ultilities.SQLServerConnection;
 import ViewModel.ChucVuViewModel;
+import ViewModel.NhanVienView;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,7 +52,6 @@ public class ChucVuRepository {
                 + "  FROM [dbo].[ChucVu]";
         List<ChucVuViewModel> cv = new ArrayList<>();
         try ( Connection conn = new SQLServerConnection().getConnection()) {
-
             PreparedStatement ps = conn.prepareCall(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -62,6 +63,30 @@ public class ChucVuRepository {
             e.printStackTrace(System.out);
         }
         return cv;
+
+    }
+
+    public List<NhanVien> getCV(String ma) {
+
+        String query = "SELECT ma_nhan_vien, ten_nhan_vien\n"
+                + "                FROM NhanVien join ChucVu on NhanVien.id_chuc_vu = ChucVu.id\n"
+                + "				where ma_chuc_vu =?";
+        List<NhanVien> cvv = new ArrayList<>();
+        try ( Connection conn = new SQLServerConnection().getConnection()) {
+
+            PreparedStatement ps = conn.prepareCall(query);
+            ps.setObject(1, ma);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                NhanVien nv = new NhanVien(rs.getString(1), rs.getString(2));
+
+                cvv.add(nv);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return cvv;
 
     }
 
@@ -81,4 +106,37 @@ public class ChucVuRepository {
         }
         return check > 0;
     }
+
+    public ChucVuViewModel getOne(String ma) {
+        String query = "SELECT [id]\n"
+                + "      ,[ma_chuc_vu]\n"
+                + "      ,[ten_chuc_vu]\n"
+                + "  FROM [dbo].[ChucVu]"
+                + "where ma_chuc_vu =?";
+
+        try ( Connection conn = new SQLServerConnection().getConnection()) {
+
+            PreparedStatement ps = conn.prepareCall(query);
+            ps.setObject(1, ma);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return new ChucVuViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new ChucVuRepository().getCV("CV001"));
+        for (NhanVien arg : new ChucVuRepository().getCV("CV00")) {
+            System.out.println(arg.toString());
+        }
+
+    }
+
 }
