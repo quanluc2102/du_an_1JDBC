@@ -6,11 +6,14 @@ package Service;
 
 import DomainModel.BoNho;
 import DomainModel.Cpu;
+import DomainModel.Dong;
+import DomainModel.Hang;
 import DomainModel.HeDieuHanh;
 import DomainModel.KetNoi;
 import DomainModel.ManHinh;
 import DomainModel.MauSac;
 import DomainModel.Pin;
+import DomainModel.QuocGia;
 import DomainModel.ThietKe;
 import DomainModel.ThongSo;
 import DomainModel.TienIch;
@@ -92,11 +95,11 @@ public interface SanPhamServices {
 
     String suaKN(KetNoi tk);
 
-    List<String> getHang();
+    List<Hang> getHang();
 
-    List<String> getDong();
+    List<Dong> getDong();
 
-    List<String> getQG();
+    List<QuocGia> getQG();
 
     int moi(String imei);
 

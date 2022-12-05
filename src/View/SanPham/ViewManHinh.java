@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author haha
  */
 public class ViewManHinh extends javax.swing.JDialog {
-
+    
     DefaultTableModel tbl;
     int index = 0;
     int tblIndex = 0;
@@ -32,17 +32,17 @@ public class ViewManHinh extends javax.swing.JDialog {
     public ViewManHinh(java.awt.Frame parent, boolean modal, String id) {
         super(parent, modal);
         initComponents();
-
         loadx();
         loadDataToTable(sps.getHM());
-
+        
     }
-     public String id() {
+
+    public String id() {
         return sps.getHM().get(index).getId();
     }
-
+    
     private void loadx() {
-
+        
         tbl = (DefaultTableModel) tbl1.getModel();
         String[] title = {"Kích thước", "loại", "kiểu dáng", "công nghệ đi kèm"};
         tbl.setColumnIdentifiers(title);
@@ -52,9 +52,9 @@ public class ViewManHinh extends javax.swing.JDialog {
         lsTrangThai.add("còn ");
         lsTrangThai.add("không hỗ trợ");
         modelcbb.addAll(lsTrangThai);
-
+        
     }
-
+    
     private void loadDataToTable(List<ManHinh> h) {
         tbl.setRowCount(0);
         for (ManHinh x : h) {
@@ -268,13 +268,15 @@ public class ViewManHinh extends javax.swing.JDialog {
         ManHinh hdh = sps.getHM().get(index);
         txtLoai.setText(hdh.getKichThuoc());
         txtKT.setText(hdh.getKichThuoc());
-
+        txtDPG.setText(hdh.getDoPhanGiai());
+        txtCN.setText(hdh.getCongNghe());
+        txtTSQ.setText(hdh.getTangSoQuet());
         txtKieu.setText(hdh.getKieu());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
     }//GEN-LAST:event_tbl1MouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-
+        
         if (btnThem.getText() == "Lưu") {
             if (txtLoai.getText().isBlank() || txtKT.getText().isBlank() || txtKieu.getText().isBlank()) {
                 System.out.println("them khong dc");
@@ -283,17 +285,17 @@ public class ViewManHinh extends javax.swing.JDialog {
                 ManHinh hdh = new ManHinh("", txtLoai.getText(), txtKieu.getText(), txtTSQ.getText(), txtDPG.getText(), txtKT.getText(), txtCN.getText(), cbbTrangThai.getSelectedIndex());
                 JOptionPane.showMessageDialog(this, sps.addHM(hdh));
                 loadDataToTable(sps.getHM());
-
+                
             }
         } else {
-            txtLoai.setText("");
-            txtKT.setText("");
-
-            txtKieu.setText("");
+           
             txtLoai.setEditable(true);
             txtKT.setEditable(true);
             txtKieu.setEditable(true);
-
+            txtCN.setEditable(true);
+            txtDPG.setEditable(true);
+            txtTSQ.setEditable(true);
+            
             cbbTrangThai.setSelectedIndex(0);
         }
         btnThem.setText("Lưu");
@@ -311,13 +313,16 @@ public class ViewManHinh extends javax.swing.JDialog {
                 ManHinh hdh = new ManHinh("", txtLoai.getText(), txtKieu.getText(), txtTSQ.getText(), txtDPG.getText(), txtKT.getText(), txtCN.getText(), cbbTrangThai.getSelectedIndex());
                 JOptionPane.showMessageDialog(this, sps.suaHM(hdh));
                 loadDataToTable(sps.getHM());
-
+                
             }
         } else {
-            txtLoai.setEditable(true);
-            txtKT.setEditable(true);
-            txtKieu.setEditable(true);
-
+            txtLoai.setEditable(false);
+            txtKT.setEditable(false);
+            txtKieu.setEditable(false);
+            txtCN.setEditable(false);
+            txtDPG.setEditable(false);
+            txtTSQ.setEditable(false);
+            
             cbbTrangThai.setSelectedIndex(1);
         }
         btnSua.setText("Lưu");
@@ -354,65 +359,14 @@ public class ViewManHinh extends javax.swing.JDialog {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

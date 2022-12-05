@@ -23,6 +23,11 @@ public class DienThoai {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "DienThoai{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", idHang=" + idHang + '}';
+    }
+
     public void setId(String id) {
         this.id = id;
     }

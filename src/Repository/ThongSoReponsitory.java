@@ -401,7 +401,7 @@ public class ThongSoReponsitory {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
-                TienIch sp = new TienIch(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(4));
+                TienIch sp = new TienIch(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
 
                 ls.add(sp);
             }

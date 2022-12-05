@@ -66,7 +66,5 @@ public class ChiTietDienThoai {
     public void setIdQuocGiaDong(String idQuocGiaDong) {
         this.idQuocGiaDong = idQuocGiaDong;
     }
-    
-    
-        
+
 }

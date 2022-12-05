@@ -21,11 +21,23 @@ public class Hang {
     public Hang() {
     }
 
+    @Override
+    public String toString() {
+        return "Hang{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + '}';
+    }
+
     public Hang(String id, String ma, String ten) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
     }
+
+    public Hang(String id, String ten) {
+        this.id = id;
+        this.ten = ten;
+    }
+
+    
 
     public String getId() {
         return id;

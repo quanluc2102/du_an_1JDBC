@@ -6,11 +6,14 @@ package Service.ServiceImpl;
 
 import DomainModel.BoNho;
 import DomainModel.Cpu;
+import DomainModel.Dong;
+import DomainModel.Hang;
 import DomainModel.HeDieuHanh;
 import DomainModel.KetNoi;
 import DomainModel.ManHinh;
 import DomainModel.MauSac;
 import DomainModel.Pin;
+import DomainModel.QuocGia;
 import DomainModel.ThietKe;
 import DomainModel.ThongSo;
 import DomainModel.TienIch;
@@ -220,14 +223,6 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public String addHM(ManHinh tk) {
-        if (new ThongSoReponsitory().SuaMH(tk)) {
-            return "OK";
-        }
-        return "FAIL";
-    }
-
-    @Override
-    public String suaHM(ManHinh tk) {
         if (new ThongSoReponsitory().ThemMH(tk)) {
             return "OK";
         }
@@ -235,12 +230,20 @@ public class SanPhamServicesImpl implements SanPhamServices {
     }
 
     @Override
-    public List<String> getHang() {
+    public String suaHM(ManHinh tk) {
+        if (new ThongSoReponsitory().SuaMH(tk)) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
+    @Override
+    public List<Hang> getHang() {
         return new SanPhamRespository().getHang();
     }
 
     @Override
-    public List<String> getDong() {
+    public List<Dong> getDong() {
         return new SanPhamRespository().getDong();
     }
 
@@ -292,7 +295,7 @@ public class SanPhamServicesImpl implements SanPhamServices {
     }
 
     @Override
-    public List<String> getQG() {
+    public List<QuocGia> getQG() {
         return new SanPhamRespository().getQuocGia();
     }
 

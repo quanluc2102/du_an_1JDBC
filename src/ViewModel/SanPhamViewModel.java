@@ -13,16 +13,25 @@ public class SanPhamViewModel {
     private String id;
     private String srcAnh;
     private String ten;
+    private String ma;
+    
     private String tenHang;
     private String tenDong;
     private String tenQuocGia;
-
     private int soLuongCon;
     private double giaBan;
     private double giaNhap;
 
     public String getId() {
         return id;
+    }
+
+    public String getMa() {
+        return ma;
+    }
+
+    public void setMa(String ma) {
+        this.ma = ma;
     }
 
     public void setId(String id) {
@@ -56,6 +65,20 @@ public class SanPhamViewModel {
         this.giaBan = giaBan;
         this.giaNhap = giaNhap;
     }
+
+    public SanPhamViewModel(String id, String srcAnh, String ten, String ma, String tenHang, String tenDong, String tenQuocGia, int soLuongCon, double giaBan, double giaNhap) {
+        this.id = id;
+        this.srcAnh = srcAnh;
+        this.ten = ten;
+        this.ma = ma;
+        this.tenHang = tenHang;
+        this.tenDong = tenDong;
+        this.tenQuocGia = tenQuocGia;
+        this.soLuongCon = soLuongCon;
+        this.giaBan = giaBan;
+        this.giaNhap = giaNhap;
+    }
+    
 
     public String getTenDong() {
         return tenDong;

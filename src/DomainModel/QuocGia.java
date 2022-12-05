@@ -25,9 +25,20 @@ public class QuocGia{
         return trangThai;
     }
 
+    @Override
+    public String toString() {
+        return "QuocGia{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", trangThai=" + trangThai + '}';
+    }
+
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
+
+    public QuocGia(String id, String ten) {
+        this.id = id;
+        this.ten = ten;
+    }
+    
     
 
     public String getId() {

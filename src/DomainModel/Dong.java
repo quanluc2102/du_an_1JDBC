@@ -22,12 +22,23 @@ public class Dong {
     public Dong() {
     }
 
+    @Override
+    public String toString() {
+        return "Dong{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", idDienThoai=" + idDienThoai + '}';
+    }
+
     public Dong(String id, String ma, String ten, String idDienThoai) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.idDienThoai = idDienThoai;
     }
+
+    public Dong(String id, String ten) {
+        this.id = id;
+        this.ten = ten;
+    }
+    
 
     public String getId() {
         return id;

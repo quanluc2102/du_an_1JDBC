@@ -11,18 +11,12 @@ package DomainModel;
 public class ThongSo {
 
     private String id;
-
     private String idQuocGiaDong;
     private String heDieuhanh;
-
     private String cpu;
-
     private String boNho;
-
     private String pin;
-
     private String ketNoi;
-
     private String manHinh;
     private String thietKe;
     private String tienIch;
