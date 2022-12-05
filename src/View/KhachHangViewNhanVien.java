@@ -69,7 +69,6 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
         btgGender = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         btAdd = new javax.swing.JButton();
-        btEdit = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -111,13 +110,6 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
         btAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAddActionPerformed(evt);
-            }
-        });
-
-        btEdit.setText("Sua");
-        btEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEditActionPerformed(evt);
             }
         });
 
@@ -286,7 +278,7 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin và tìm kiem", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin và tìm kiem"));
 
         jLabel8.setText("Tim kiem theo: ");
 
@@ -415,9 +407,7 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btAdd)
-                                .addGap(105, 105, 105)
-                                .addComponent(btEdit)
-                                .addGap(85, 85, 85)
+                                .addGap(262, 262, 262)
                                 .addComponent(jButton1))
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -438,7 +428,6 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btAdd)
-                            .addComponent(btEdit)
                             .addComponent(jButton1))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -547,22 +536,6 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btAddActionPerformed
 
-
-    private void btEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditActionPerformed
-        // TODO add your handling code here:
-        KhachHang kh = new KhachHang();
-        String ID = id.getText();
-        kh.setTen(txtTen.getText());
-        kh.setDiaChi(txtDiaChi.getText());
-        kh.setEmail(txtEmail.getText());
-        String ngaySinhs = txtNgaySinh.getText();
-        java.sql.Date date = java.sql.Date.valueOf(ngaySinhs);
-        kh.setNgaySinh((date));
-        kh.setSdt(txtSDT.getText());
-        JOptionPane.showMessageDialog(rootPane, service.editKhachHang(kh, ID));
-        listKhachHangView = service.getAllKhachHang(rowOffset);
-        service.showDataTable(dtm, listKhachHangView);
-    }//GEN-LAST:event_btEditActionPerformed
 
     private void tbQuanLyKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQuanLyKhachHangMouseClicked
         // TODO add your handling code here:
@@ -925,7 +898,6 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btBack;
     private javax.swing.JButton btBackEnd;
     private javax.swing.JButton btBackFirst;
-    private javax.swing.JButton btEdit;
     private javax.swing.JButton btNext;
     private javax.swing.ButtonGroup btgGender;
     private javax.swing.JComboBox<String> cbbSearch;
