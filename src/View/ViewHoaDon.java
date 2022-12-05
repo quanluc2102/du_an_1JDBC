@@ -244,8 +244,8 @@ public class ViewHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = tlbHoaDon.getSelectedRow();
         String mahd = listGetAll.get(row).getMaHD();
-        listGetSP = sv.getAllSp(mahd);
-        sv.showData1(listGetSP, tableHoaDon);
+        System.out.println(mahd);
+       
 
     }//GEN-LAST:event_tlbHoaDonMouseClicked
 
@@ -260,8 +260,8 @@ public class ViewHoaDon extends javax.swing.JFrame {
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        ViewHoaDon view = new ViewHoaDon();
-        view.setVisible(true);
+        //ViewHoaDon view = new ViewHoaDon();
+        //view.setVisible(true);
     }//GEN-LAST:event_btnDongActionPerformed
 
     private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
