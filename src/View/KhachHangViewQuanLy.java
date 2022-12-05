@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author quan l
  */
-public class KhachHangView extends javax.swing.JFrame {
+public class KhachHangViewQuanLy extends javax.swing.JFrame {
 
     /**
      * Creates new form KhachHangView
@@ -41,7 +41,7 @@ public class KhachHangView extends javax.swing.JFrame {
     int index = 0;
     int o = 0;
 
-    public KhachHangView() {
+    public KhachHangViewQuanLy() {
         initComponents();
         tbQuanLyKhachHang.setModel(dtm);
         String header[] = {"Ten", "Ngay sinh", "So dien thoai", "Dia chi", "Email"};
@@ -895,14 +895,18 @@ public class KhachHangView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KhachHangViewQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KhachHangViewQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KhachHangViewQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KhachHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KhachHangViewQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -911,7 +915,7 @@ public class KhachHangView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KhachHangView().setVisible(true);
+                new KhachHangViewQuanLy().setVisible(true);
             }
         });
     }
