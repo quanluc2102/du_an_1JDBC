@@ -47,7 +47,7 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
         dcbm.addAll(listcombobox);
         dcbm.setSelectedItem("Sắp diễn ra");
         service.getAll(list);
-       list = service.getAllDem(rowOffset);
+       //list = service.getAllDem(rowOffset);
         System.out.println(rowOffset);
         o = service.getAllDem(rowOffset).size() / fetch;
         loadSoTrang();
@@ -714,17 +714,15 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
     }//GEN-LAST:event_btSauActionPerformed
 
     private void btSauuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSauuActionPerformed
-       if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
+      if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
             index = 0;        // TODO add your handling code here:
             int c = service.getAllDem(rowOffset).size() % fetch;
             rowOffset = 0;
-           list= service.getAllDem(rowOffset);
+            list = service.getAllDem(rowOffset);
             showdataTable(list);
             loadSoTrang();
-            
-        }
     }//GEN-LAST:event_btSauuActionPerformed
-
+    }
     /**
      * @param args the command line arguments
      */
