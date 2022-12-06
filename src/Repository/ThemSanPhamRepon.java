@@ -4,6 +4,9 @@
  */
 package Repository;
 
+import DomainModel.ChiTietDienThoai;
+import DomainModel.DienThoai;
+import DomainModel.QuocGiaDong;
 import DomainModel.ThongSo;
 import DomainModel.TienIch;
 import Ultilities.SQLServerConnection;
@@ -16,21 +19,22 @@ import java.sql.SQLException;
  * @author haha
  */
 public class ThemSanPhamRepon {
-     public boolean ThemSP(ThongSo ts) {
-        String query = "INSERT INTO [dbo].[ThongSo]\n" +
-"           ([id_dong]\n" +
-"           ,[id_tien_ich]\n" +
-"           ,[id_mau]\n" +
-"           ,[id_bo_nho]\n" +
-"           ,[id_he_dieu_hanh]\n" +
-"           ,[id_man_hinh]\n" +
-"           ,[id_CPU]\n" +
-"           ,[id_ket_noi]\n" +
-"           ,[id_thiet_ke]\n" +
-"           ,[trang_thai]\n" +
-"           ,[id_pin])\n" +
-"     VALUES\n" +
-"           (?,? ,?,? ,? ,? ,? ,?,?,?,?";
+
+    public boolean ThemSP(ThongSo ts) {
+        String query = "INSERT INTO [dbo].[ThongSo]\n"
+                + "           ([id_dong]\n"
+                + "           ,[id_tien_ich]\n"
+                + "           ,[id_mau]\n"
+                + "           ,[id_bo_nho]\n"
+                + "           ,[id_he_dieu_hanh]\n"
+                + "           ,[id_man_hinh]\n"
+                + "           ,[id_CPU]\n"
+                + "           ,[id_ket_noi]\n"
+                + "           ,[id_thiet_ke]\n"
+                + "           ,[trang_thai]\n"
+                + "           ,[id_pin])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,? ,? ,? ,? ,?,?,?,?)";
         int sp = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ts.getIdQuocGiaDong());
@@ -42,9 +46,89 @@ public class ThemSanPhamRepon {
             ps.setObject(7, ts.getCpu());
             ps.setObject(8, ts.getKetNoi());
             ps.setObject(9, ts.getThietKe());
-            ps.setObject(10,1);
+            ps.setObject(10, 1);
             ps.setObject(11, ts.getPin());
-          
+
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public boolean ThemQGD(QuocGiaDong ts) {
+        String query = "INSERT INTO [dbo].[QuocGiaDong]\n"
+                + "           ([id_dong]\n"
+                + "           ,[id_quoc_gia]\n"
+                + "           ,[gia_ban]\n"
+                + "           ,[gia_nhap]\n"
+                + "           ,[anh]\n"
+                + "           ,[ngay_nhap])\n"
+                + "     VALUES\n"
+                + "           (?,? ,?,?  ,?  ,GETDATE())";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ts.getIdDong());
+            ps.setObject(2, ts.getIdQuocGia());
+            ps.setObject(3, ts.getGiaBan());
+            ps.setObject(4, ts.getGiaNhap());
+            ps.setObject(5, ts.getSrcAnh());
+
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public boolean ThemDT(DienThoai ts) {
+        String query = "INSERT INTO [dbo].[DienThoai]\n"
+                + "           ([ma_dien_thoai]\n"
+                + "           ,[ten_dien_thoai]\n"
+                + "           ,[id_hang]\n"
+                + "           ,[trang_thai])\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,1)";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ts.getMa());
+            ps.setObject(2, ts.getTen());
+            ps.setObject(3, ts.getIdHang());
+
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public boolean ThemCTDT(ChiTietDienThoai ts) {
+        String query = "INSERT INTO [dbo].[ChiTietDienThoai]\n"
+                + "           ([IMEI]\n"
+                + "           ,[trang_thai]\n"
+                + "           ,[moi]\n"
+                + "           ,[mo_ta]\n"
+                + "           ,[id_quoc_gia_dong])\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?)";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ts.getIMEI());
+            ps.setObject(2, 1);
+            ps.setObject(3, ts.getMoi());
+            ps.setObject(4, ts.getMoTa());
+            ps.setObject(5, ts.getIdQuocGiaDong());
+
             sp = ps.executeUpdate();
 
         } catch (SQLException e) {

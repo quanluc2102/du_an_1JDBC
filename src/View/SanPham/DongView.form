@@ -63,7 +63,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="T&#xea;n H&#xe3;ng"/>
+            <Property name="text" type="java.lang.String" value="T&#xea;n D&#xf2;ng"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -73,7 +73,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="M&#xe3; H&#xe3;ng"/>
+            <Property name="text" type="java.lang.String" value="M&#xe3; d&#xf2;ng"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -81,9 +81,9 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtMahang">
+        <Component class="javax.swing.JTextField" name="txtMaDong">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMahangActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaDongActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -91,14 +91,14 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtTenhang">
+        <Component class="javax.swing.JTextField" name="txtTenDong">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="92" y="54" width="173" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cbbHang">
+        <Component class="javax.swing.JComboBox" name="cbbDong">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
@@ -231,8 +231,8 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="2" rowCount="4">
-                        <Column editable="false" title="M&#xe3; h&#xe3;ng" type="java.lang.Object"/>
-                        <Column editable="false" title="T&#xea;n h&#xe3;ng" type="java.lang.Object"/>
+                        <Column editable="false" title="M&#xe3; d&#xf2;ng" type="java.lang.Object"/>
+                        <Column editable="false" title="T&#xea;n d&#xf2;ng" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="selectionMode" type="int" value="0"/>
@@ -287,8 +287,8 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="2" rowCount="4">
-                        <Column editable="false" title="M&#xe3; hang" type="java.lang.Object"/>
-                        <Column editable="false" title="T&#xea;n hang" type="java.lang.Object"/>
+                        <Column editable="false" title="M&#xe3; d&#xf2;ng" type="java.lang.Object"/>
+                        <Column editable="false" title="T&#xea;n d&#xf2;ng" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="selectionMode" type="int" value="0"/>

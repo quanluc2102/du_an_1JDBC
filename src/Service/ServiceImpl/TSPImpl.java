@@ -5,7 +5,10 @@
 package Service.ServiceImpl;
 
 import DomainModel.BoNho;
+import DomainModel.ChiTietDienThoai;
 import DomainModel.Cpu;
+import DomainModel.DienThoai;
+import DomainModel.Dong;
 import DomainModel.Hang;
 import DomainModel.HeDieuHanh;
 import DomainModel.KetNoi;
@@ -13,6 +16,7 @@ import DomainModel.ManHinh;
 import DomainModel.MauSac;
 import DomainModel.Pin;
 import DomainModel.QuocGia;
+import DomainModel.QuocGiaDong;
 import DomainModel.ThietKe;
 import DomainModel.ThongSo;
 import DomainModel.TienIch;
@@ -47,7 +51,7 @@ public class TSPImpl implements ThemSPServices {
                 return boNho.getId();
             }
         }
-        return "";
+        return null;
     }
 
     @Override
@@ -63,7 +67,7 @@ public class TSPImpl implements ThemSPServices {
                 return boNho.getId();
             }
         }
-        return "";
+        return null;
     }
 
     @Override
@@ -79,7 +83,7 @@ public class TSPImpl implements ThemSPServices {
                 return boNho.getId();
             }
         }
-        return "";
+        return null;
     }
 
     @Override
@@ -95,7 +99,7 @@ public class TSPImpl implements ThemSPServices {
                 return boNho.getId();
             }
         };
-        return "";
+        return null;
     }
 
     @Override
@@ -111,7 +115,7 @@ public class TSPImpl implements ThemSPServices {
                 return boNho.getId();
             }
         }
-        return "";
+        return null;
     }
 
     @Override
@@ -127,7 +131,7 @@ public class TSPImpl implements ThemSPServices {
                 return boNho.getId();
             }
         }
-        return "";
+        return null;
     }
 
     @Override
@@ -143,7 +147,7 @@ public class TSPImpl implements ThemSPServices {
                 return boNho.getId();
             }
         }
-        return "";
+        return null;
     }
 
     @Override
@@ -159,7 +163,7 @@ public class TSPImpl implements ThemSPServices {
                 return boNho.getId();
             }
         }
-        return "";
+        return null;
     }
 
     @Override
@@ -175,7 +179,7 @@ public class TSPImpl implements ThemSPServices {
                 return boNho.getId();
             }
         }
-        return "";
+        return null;
     }
 
     @Override
@@ -273,4 +277,45 @@ public class TSPImpl implements ThemSPServices {
         }
         return ls;
     }
+
+    @Override
+    public String themDT(DienThoai ha) {
+        if (new ThemSanPhamRepon().ThemDT(ha)) {
+            return "nhập thành công";
+        }
+        return "không nhập được";
+    }
+
+    @Override
+    public String suaDT(DienThoai ha) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<DienThoai> getDT(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<DienThoai> getTimKiemDT(String i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+
+    public String themQGD(QuocGiaDong ha) {
+        if (new ThemSanPhamRepon().ThemQGD(ha)) {
+            return "nhập thành công";
+        }
+        return "không nhập được";
+    }
+
+    @Override
+    public String themCTDT(ChiTietDienThoai ha) {
+        if (new ThemSanPhamRepon().ThemCTDT(ha)) {
+            return "nhập thành công";
+        }
+        return "không nhập được";
+    }
+
 }

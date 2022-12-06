@@ -206,7 +206,8 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private void save() {
 
         Hang h = new Hang();
-        h = sps.getHang().get(cbbHang.getSelectedIndex());
+
+        h = tsp.getHang(1).get(cbbHang.getSelectedIndex());
         DienThoai dt = new DienThoai();
         dt.setTen(txtTenDienThoai.getText());
         dt.setIdHang(h.getId());
@@ -218,7 +219,10 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         qgd.setIdDong(d.getId());
         qgd.setGiaBan(Double.valueOf(txtGiaBan.getText().replace(",", "")));
         qgd.setGiaNhap(Double.valueOf(txtGiaNhap.getText().replace(",", "")));
-        qgd.setSrcAnh(srcAnh);
+        if (srcAnh.isBlank() == false) {
+            qgd.setSrcAnh(srcAnh.substring(0, 12));
+        }
+
         qgd.setIdQuocGia(sps.getQG().get(cbbQuocGia.getSelectedIndex()).getId());
         BoNho bn = new BoNho("", Value(1), Value(2), Value(3), 1);
         Cpu cpu = new Cpu("", Value(5), Value(6), Value(7), Value(8), Value(9), 1);
@@ -231,11 +235,15 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         TienIch ti = new TienIch("", Value(42), Value(43), Value(44), 1);
         ThongSo ts = new ThongSo("", qgd.getId(), tsp.idHDH(hdh), tsp.idCPU(cpu), tsp.idBN(bn), tsp.idPIN(pin),
                 tsp.idKN(kn), tsp.idMH(mh), tsp.idTK(tk), tsp.idTI(ti), tsp.idMS(ms));
-
+        tsp.themHang(h);
+        tsp.themQGD(qgd);
+        tsp.themSP(ts);
+        tsp.themDT(dt);
         for (String string : mei) {
             ChiTietDienThoai ctdt = new ChiTietDienThoai(string, true, Integer.parseInt(txtDoMoi.getText().replace("%", "")), "", qgd.getId());
-            System.out.println(tsp.themSP(ts));
+            System.out.println(tsp.themCTDT(ctdt));
         }
+        loadTable(sps.getAll());
 
     }
 
@@ -583,9 +591,10 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1))
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -617,7 +626,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                                 .addComponent(anhSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(28, 28, 28))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                                 .addContainerGap())))
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -753,7 +762,10 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         ThongSo ts = new ThongSo();
         if (btnThem.getText() == "Lưu") {
+            save();
             btnThem.setText("Thêm");
+            btnThem.setText("Thêm");
+            txtMaDT.setEditable(false);
             btnAddImei.setEnabled(false);
             btnDong.setEnabled(false);
             btnHang.setEnabled(false);
@@ -765,6 +777,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             btnQG.setEnabled(false);
             trangThai = 0;
         } else {
+            txtMaDT.setEditable(true);
             anhSanPham.setText("                  Chọn ảnh");
             trangThai = 1;
             btnQG.setEnabled(true);
@@ -783,7 +796,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private void btnAddImeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddImeiActionPerformed
         mei.removeAll(mei);
         ViewIMEIexcel c = new ViewIMEIexcel(new javax.swing.JFrame(), true);
-        this.setVisible(false);
+//        this.setVisible(false);
         c.setVisible(true);
         if (c.allIMEI().isEmpty() == false) {
             modelCBB.removeAllElements();
@@ -792,8 +805,8 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             cbbIMEI.setSelectedIndex(0);
             txtSoLuongNhap.setText(mei.size() + "");
         }
-        c.setVisible(false);
-        this.setVisible(true);
+
+//        this.setVisible(true);
 
     }//GEN-LAST:event_btnAddImeiActionPerformed
 
@@ -855,7 +868,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     }//GEN-LAST:event_anhSanPhamMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        save();
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void cbbIMEIItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbIMEIItemStateChanged

@@ -18,6 +18,10 @@ public class Dong {
     private String ten;
 
     private String idDienThoai;
+    
+    private int trangThai;
+    
+    
 
     public Dong() {
     }

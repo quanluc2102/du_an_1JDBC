@@ -5,7 +5,10 @@
 package Service;
 
 import DomainModel.BoNho;
+import DomainModel.ChiTietDienThoai;
 import DomainModel.Cpu;
+import DomainModel.DienThoai;
+import DomainModel.Dong;
 import DomainModel.Hang;
 import DomainModel.HeDieuHanh;
 import DomainModel.KetNoi;
@@ -13,6 +16,7 @@ import DomainModel.ManHinh;
 import DomainModel.MauSac;
 import DomainModel.Pin;
 import DomainModel.QuocGia;
+import DomainModel.QuocGiaDong;
 import DomainModel.ThietKe;
 import DomainModel.ThongSo;
 import DomainModel.TienIch;
@@ -59,4 +63,14 @@ public interface ThemSPServices {
     List<Hang> getHang(int i);
 
     List<Hang> getTimKiemHa(String i);
+    
+    String themQGD(QuocGiaDong ha);
+    String themDT(DienThoai ha);
+    String themCTDT(ChiTietDienThoai ha);
+
+    String suaDT(DienThoai ha);
+
+    List<DienThoai> getDT(int i);
+
+    List<DienThoai> getTimKiemDT(String i);
 }
