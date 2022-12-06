@@ -478,7 +478,7 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
             txtValidateName.setForeground(Color.red);
             txtTen.setBackground(Color.red);
         } else if (!txtTen.getText().matches("^[A-Z a-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]{1,150}+$")) {
-            txtValidateName.setText("Tên không duoc chua so");
+            txtValidateName.setText("Tên không duoc chua so hoac cac ky tu dac biet");
             txtValidateName.setForeground(Color.red);
             txtTen.setBackground(Color.red);
         } else {
