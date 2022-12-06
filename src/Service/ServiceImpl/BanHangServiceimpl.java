@@ -182,4 +182,9 @@ public class BanHangServiceimpl implements BanHangService {
     public void thayDoiTrangThaiDienThoai(String imei) {
         bhr.updateTrangThaiChiTietDienThoai(imei);
     }
+
+    @Override
+    public void checkTrungIMEI(String maHD, String IMEI,List<HoaDonChiTietViewModel> list) {
+        list.addAll(bhr.getAllHoaDonCheckTrung(maHD, IMEI));
+    }
 }

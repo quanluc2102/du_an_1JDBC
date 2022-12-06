@@ -137,6 +137,7 @@ public class BanHangView extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 102, 0));
 
         jLabel1.setText("Tìm kiếm sản phẩm");
 
@@ -568,14 +569,20 @@ public class BanHangView extends javax.swing.JFrame {
         ChonIMEIView detail1 = new ChonIMEIView(this, rootPaneCheckingEnabled, listDienThoai.get(row).getMaDienThoai());
         detail1.setVisible(true);
         lbIMEIDaChon.setText(detail1.layIMEI());
-        bhs.addVaoHDCT(lbIMEIDaChon.getText(), lbmaHDDuocChon.getText());
+        List<HoaDonChiTietViewModel> lista=new ArrayList<>();
+        bhs.checkTrungIMEI(lbmaHDDuocChon.getText(), lbIMEIDaChon.getText(), lista);
+        if(lista.size() > 0){
+            JOptionPane.showMessageDialog(rootPane, "IMEI này đã có trong hóa đơn");
+        }else{
+            bhs.addVaoHDCT(lbIMEIDaChon.getText(), lbmaHDDuocChon.getText());
+        }
         resetHoaDonChiTiet(lbmaHDDuocChon.getText());
         thayDoiTien();
     }//GEN-LAST:event_tbSanPhamBanHangMouseClicked
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
         // TODO add your handling code here:
-        KhachHangView detail1 = new KhachHangView();
+        KhachHangViewNhanVien detail1 = new KhachHangViewNhanVien();
         this.dispose();
         detail1.setVisible(true);
 

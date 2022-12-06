@@ -70,4 +70,6 @@ public interface BanHangService {
     void timTen(List<DienThoaiViewModel> list,String ten);
     
     void thayDoiTrangThaiDienThoai(String imei);
+    
+    void checkTrungIMEI(String maHD,String IMEI,List<HoaDonChiTietViewModel> list);
 }
