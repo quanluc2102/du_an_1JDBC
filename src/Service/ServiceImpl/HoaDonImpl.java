@@ -49,8 +49,8 @@ public class HoaDonImpl implements HoaDonService {
     @Override
     public List<ViewModelHoaDon> giaCaoXuongThap(List<ViewModelHoaDon> list) {
         list.sort((o1, o2) -> {
-            int x1 = (int) o1.getTongTien();
-            int x2 = (int) o2.getTongTien();
+            int x1 = (int) Math.round(o1.getTongTien());
+            int x2 = (int) Math.round(o2.getTongTien());
             return x1 - x2;
         });
         return list;
@@ -59,8 +59,8 @@ public class HoaDonImpl implements HoaDonService {
     @Override
     public List<ViewModelHoaDon> giaThapLenCao(List<ViewModelHoaDon> list) {
         list.sort((o1, o2) -> {
-            int x1 = (int) o1.getTongTien();
-            int x2 = (int) o2.getTongTien();
+            int x1 = (int) Math.round(o1.getTongTien());
+            int x2 = (int) Math.round(o2.getTongTien());
             return x2 - x1;
         });
         return list;

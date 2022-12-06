@@ -4,6 +4,7 @@
  */
 package ViewModel;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 /**
@@ -19,13 +20,13 @@ public class ViewModelHoaDon {
     String MaKhuyenMai;
     int TrangThai;
     int TongSoSP;
-    float GiaGiam;
-    float tongTien;
+    Double GiaGiam;
+    Double tongTien;
 
     public ViewModelHoaDon() {
     }
 
-    public ViewModelHoaDon(String MaHD, String TenNV, String TenKH, String NgayTao, String MaKhuyenMai, int TrangThai, int TongSoSP, float GiaGiam, float tongTien) {
+    public ViewModelHoaDon(String MaHD, String TenNV, String TenKH, String NgayTao, String MaKhuyenMai, int TrangThai, int TongSoSP, Double GiaGiam, Double tongTien) {
         this.MaHD = MaHD;
         this.TenNV = TenNV;
         this.TenKH = TenKH;
@@ -93,19 +94,19 @@ public class ViewModelHoaDon {
         this.TongSoSP = TongSoSP;
     }
 
-    public float getGiaGiam() {
+    public Double getGiaGiam() {
         return GiaGiam;
     }
 
-    public void setGiaGiam(float GiaGiam) {
+    public void setGiaGiam(Double GiaGiam) {
         this.GiaGiam = GiaGiam;
     }
 
-    public float getTongTien() {
+    public Double getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(float tongTien) {
+    public void setTongTien(Double tongTien) {
         this.tongTien = tongTien;
     }
 
@@ -116,6 +117,7 @@ public class ViewModelHoaDon {
     }
 
     public Object[] dataRow() {
-        return new Object[]{MaHD, TenNV, TenKH, NgayTao, MaKhuyenMai, tongTien, trangthai(TrangThai),TongSoSP};
+        DecimalFormat df = new DecimalFormat("###,###,###,###");
+        return new Object[]{MaHD, TenNV, TenKH, NgayTao, MaKhuyenMai, df.format(tongTien), trangthai(TrangThai), TongSoSP};
     }
 }

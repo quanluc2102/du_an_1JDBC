@@ -4,6 +4,8 @@
  */
 package ViewModel;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author PC
@@ -15,14 +17,14 @@ public class VIewModelSanPhamHoaDon {
     String TenSp;
     String TenHang;
     String TenDong;
-    float GiaBan;
+    Double GiaBan;
     int DoMoi;
     String MoTa;
 
     public VIewModelSanPhamHoaDon() {
     }
 
-    public VIewModelSanPhamHoaDon(String MaHdSp, String MaDT, String TenSp, String TenHang, String TenDong, float GiaBan, int DoMoi, String MoTa) {
+    public VIewModelSanPhamHoaDon(String MaHdSp, String MaDT, String TenSp, String TenHang, String TenDong, Double GiaBan, int DoMoi, String MoTa) {
         this.MaHdSp = MaHdSp;
         this.MaDT = MaDT;
         this.TenSp = TenSp;
@@ -33,20 +35,20 @@ public class VIewModelSanPhamHoaDon {
         this.MoTa = MoTa;
     }
 
-    public String getMaDT() {
-        return MaDT;
-    }
-
-    public void setMaDT(String MaDT) {
-        this.MaDT = MaDT;
-    }
-
     public String getMaHdSp() {
         return MaHdSp;
     }
 
     public void setMaHdSp(String MaHdSp) {
         this.MaHdSp = MaHdSp;
+    }
+
+    public String getMaDT() {
+        return MaDT;
+    }
+
+    public void setMaDT(String MaDT) {
+        this.MaDT = MaDT;
     }
 
     public String getTenSp() {
@@ -73,11 +75,11 @@ public class VIewModelSanPhamHoaDon {
         this.TenDong = TenDong;
     }
 
-    public float getGiaBan() {
+    public Double getGiaBan() {
         return GiaBan;
     }
 
-    public void setGiaBan(float GiaBan) {
+    public void setGiaBan(Double GiaBan) {
         this.GiaBan = GiaBan;
     }
 
@@ -98,7 +100,8 @@ public class VIewModelSanPhamHoaDon {
     }
 
     public Object[] dataRowSPHoaDon() {
-        return new Object[]{MaDT, MaHdSp, TenSp, TenHang, TenDong, GiaBan, DoMoi + "%", MoTa};
+        DecimalFormat df = new DecimalFormat("###,###,###,###");
+        return new Object[]{MaDT, MaHdSp, TenSp, TenHang, TenDong, df.format(GiaBan), DoMoi + "%", MoTa};
     }
 
 }

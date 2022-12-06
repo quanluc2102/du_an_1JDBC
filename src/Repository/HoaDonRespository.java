@@ -43,7 +43,7 @@ public class HoaDonRespository {
                 ViewModelHoaDon view = new ViewModelHoaDon(rs.getString("ma_hoa_don"), rs.getString("ten_nhan_vien"),
                         rs.getString("ten_khach_hang"), rs.getString("ngay_tao"),
                         rs.getString("ma_khuyen_mai"), rs.getInt("trang_thai"),
-                        rs.getInt("Tong so San pham"), rs.getFloat("gia_giam"), rs.getFloat("Tong Tien"));
+                        rs.getInt("Tong so San pham"), rs.getDouble("gia_giam"), rs.getDouble("Tong Tien"));
                 list.add(view);
             }
             return list;
@@ -75,7 +75,7 @@ public class HoaDonRespository {
                 VIewModelSanPhamHoaDon view = new VIewModelSanPhamHoaDon(rs.getString("ma_dien_thoai"),
                         rs.getString("ma_hoa_don"), rs.getString("ten_dien_thoai"),
                         rs.getString("ten_hang"), rs.getString("ten_dong"),
-                        rs.getFloat("gia_ban"), rs.getInt("moi"), rs.getString("mo_ta"));
+                        rs.getDouble("gia_ban"), rs.getInt("moi"), rs.getString("mo_ta"));
                 list.add(view);
             }
             return list;
@@ -106,7 +106,7 @@ public class HoaDonRespository {
                 ViewModelHoaDon hd = new ViewModelHoaDon(rs.getString("ma_hoa_don"), rs.getString("ten_nhan_vien"),
                         rs.getString("ten_khach_hang"), rs.getString("ngay_tao"),
                         rs.getString("ma_khuyen_mai"), rs.getInt("trang_thai"),
-                        rs.getInt("Tong so San pham"), rs.getFloat("gia_giam"), rs.getFloat("Tong Tien"));
+                        rs.getInt("Tong so San pham"), rs.getDouble("gia_giam"), rs.getDouble("Tong Tien"));
                 list.add(hd);
             }
             return list;
@@ -137,7 +137,7 @@ public class HoaDonRespository {
                 ViewModelHoaDon hd = new ViewModelHoaDon(rs.getString("ma_hoa_don"), rs.getString("ten_nhan_vien"),
                         rs.getString("ten_khach_hang"), rs.getString("ngay_tao"),
                         rs.getString("ma_khuyen_mai"), rs.getInt("trang_thai"),
-                        rs.getInt("Tong so San pham"), rs.getFloat("gia_giam"), rs.getFloat("Tong Tien"));
+                        rs.getInt("Tong so San pham"), rs.getDouble("gia_giam"), rs.getDouble("Tong Tien"));
                 list.add(hd);
             }
             return list;
@@ -173,7 +173,7 @@ public class HoaDonRespository {
                 ViewModelHoaDon hd = new ViewModelHoaDon(rs.getString("ma_hoa_don"), rs.getString("ten_nhan_vien"),
                         rs.getString("ten_khach_hang"), rs.getString("ngay_tao"),
                         rs.getString("ma_khuyen_mai"), rs.getInt("trang_thai"),
-                        rs.getInt("Tong so San pham"), rs.getFloat("gia_giam"), rs.getFloat("Tong Tien"));
+                        rs.getInt("Tong so San pham"), rs.getDouble("gia_giam"), rs.getDouble("Tong Tien"));
                 listSearch.add(hd);
             }
             return listSearch;

@@ -49,15 +49,12 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
         String[] heaaderHoaDon = {"Mã HD", "Tên NV", "Tên KH", "Ngày Tạo", "Mã Khuyến Mại", "Tổng Tiền", "Trạng Thái", "Tổng số SP"};
         tableHoaDon.setColumnIdentifiers(heaaderHoaDon);
-        String[] headerSanPham = {"Mã HD ", "Mã DT", "Tên SP", "Hãng", "Dòng", "Độ Mới", "Mô tả"};
+        String[] headerSanPham = {"Mã HD ", "Mã DT", "Tên SP", "Hãng", "Dòng","Giá Bán", "Độ Mới", "Mô tả"};
         tableSanPhamHD.setColumnIdentifiers(headerSanPham);
 
         listSearch = sv.getAll(listGetAll);
         sv.showData(listSearch, tableHoaDon);
         radioTatCa.setSelected(true);
-
-        listGetSP = sv.getAllSp("HD001");
-        sv.showData1(listGetSP, tableSanPhamHD);
 
         int TrangThai = 0;
     }
@@ -249,6 +246,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = 0;
         if (TrangThai == 1) {
+            
             if (ccbLoc.getSelectedIndex() == 0) {
                 row = tlbHoaDon.getSelectedRow();
                 String mahd = listSearch.get(row).getMaHD();
@@ -280,14 +278,6 @@ public class ViewHoaDon extends javax.swing.JFrame {
             listGetSP = sv.getAllSp(mahd);
             sv.showData1(listGetSP, tableSanPhamHD);
         }
-
-        if (radioTatCa.isSelected() == true) {
-            row = tlbHoaDon.getSelectedRow();
-            String mahd = listSort.get(row).getMaHD();
-            listGetSP = sv.getAllSp(mahd);
-            sv.showData1(listGetSP, tableSanPhamHD);
-        }
-
 
     }//GEN-LAST:event_tlbHoaDonMouseClicked
 
