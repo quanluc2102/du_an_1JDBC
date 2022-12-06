@@ -261,8 +261,9 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         tsp.themDT(dt);
         for (String string : mei) {
             ChiTietDienThoai ctdt = new ChiTietDienThoai(string, true, Integer.parseInt(txtDoMoi.getText().replace("%", "")), "", tsp.timKiem(qgd));
-            JOptionPane.showMessageDialog(this, tsp.themCTDT(ctdt));
+
         }
+        JOptionPane.showMessageDialog(this, "thêm thành công");
         loadTable(sps.getAll());
 
     }
@@ -512,6 +513,11 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         jPanel4.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 211, 75, 52));
 
         jButton3.setText("sửa");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 80, 52));
 
         jButton4.setText("xóa");
@@ -792,6 +798,8 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         ThongSo ts = new ThongSo();
         if (btnThem.getText() == "Lưu") {
             save();
+            new ThemSanPhamRepon().s();
+            loadTable(sps.getAll());
             btnThem.setText("Thêm");
             btnThem.setText("Thêm");
             txtMaDT.setEditable(false);
@@ -899,6 +907,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         new ThemSanPhamRepon().Xoa(sps.getAll().get(index).getId());
         loadTable2();
+        loadTable(sps.getAll());
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -960,6 +969,10 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         s.setVisible(true);
         cbbHang.setSelectedItem(s.getName());
     }//GEN-LAST:event_btnHangActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        save();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

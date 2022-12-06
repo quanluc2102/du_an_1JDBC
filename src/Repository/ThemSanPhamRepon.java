@@ -153,4 +153,20 @@ public class ThemSanPhamRepon {
         }
         return sp > 0;
     }
+
+    public boolean s() {
+        String query = "UPDATE [dbo].[ChiTietDienThoai]\n"
+                + "   SET [trang_thai] = 1\n"
+                + "      \n"
+                + " WHERE trang_thai = 0";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
 }
