@@ -49,12 +49,16 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
         String[] heaaderHoaDon = {"Mã HD", "Tên NV", "Tên KH", "Ngày Tạo", "Mã Khuyến Mại", "Tổng Tiền", "Trạng Thái", "Tổng số SP"};
         tableHoaDon.setColumnIdentifiers(heaaderHoaDon);
-        String[] headerSanPham = {"Mã DT", "Mã HD ", "Tên SP", "Hãng", "Dòng", "Độ Mới", "Mô tả"};
+        String[] headerSanPham = {"Mã HD ", "Mã DT", "Tên SP", "Hãng", "Dòng", "Độ Mới", "Mô tả"};
         tableSanPhamHD.setColumnIdentifiers(headerSanPham);
 
         listSearch = sv.getAll(listGetAll);
         sv.showData(listSearch, tableHoaDon);
         radioTatCa.setSelected(true);
+
+        
+        listGetSP = sv.getAllSp("HD001");
+        sv.showData1(listGetSP, tableSanPhamHD);
 
         int TrangThai = 0;
     }
@@ -245,44 +249,46 @@ public class ViewHoaDon extends javax.swing.JFrame {
     private void tlbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tlbHoaDonMouseClicked
         // TODO add your handling code here:
         int row = 0;
-        if(TrangThai != 0){
+        if (TrangThai == 1) {
+
+            if (radioTatCa.isSelected() == true) {
+                row = tlbHoaDon.getSelectedRow();
+                String mahd = listSort.get(row).getMaHD();
+                listGetSP = sv.getAllSp(mahd);
+                sv.showData1(listGetSP, tableSanPhamHD);
+            }
+            if (ccbLoc.getSelectedIndex() == 0) {
+                row = tlbHoaDon.getSelectedRow();
+                String mahd = listSearch.get(row).getMaHD();
+                listGetSP = sv.getAllSp(mahd);
+                sv.showData1(listGetSP, tableSanPhamHD);
+            }
+            if (ccbLoc.getSelectedIndex() == 1) {
+                row = tlbHoaDon.getSelectedRow();
+                String mahd = listSearch.get(row).getMaHD();
+                listGetSP = sv.getAllSp(mahd);
+                sv.showData1(listGetSP, tableSanPhamHD);
+            }
+        } else if (TrangThai == 2) {
             if (radioChuaThanhToan.isSelected() == true) {
-            row = tlbHoaDon.getSelectedRow();
-            String mahd = listSort.get(row).getMaHD();
-            listGetSP = sv.getAllSp(mahd);
-            sv.showData1(listGetSP, tableSanPhamHD);
-        }
-        if (radioDaThanhToan.isSelected() == true) {
-            row = tlbHoaDon.getSelectedRow();
-            String mahd = listSort.get(row).getMaHD();
-            listGetSP = sv.getAllSp(mahd);
-            sv.showData1(listGetSP, tableSanPhamHD);
-        }
-        if (radioTatCa.isSelected() == true) {
-            row = tlbHoaDon.getSelectedRow();
-            String mahd = listSort.get(row).getMaHD();
-            listGetSP = sv.getAllSp(mahd);
-            sv.showData1(listGetSP, tableSanPhamHD);
-        }
-        if (ccbLoc.getSelectedIndex() == 0) {
+                row = tlbHoaDon.getSelectedRow();
+                String mahd = listSort.get(row).getMaHD();
+                listGetSP = sv.getAllSp(mahd);
+                sv.showData1(listGetSP, tableSanPhamHD);
+            }
+            if (radioDaThanhToan.isSelected() == true) {
+                row = tlbHoaDon.getSelectedRow();
+                String mahd = listSort.get(row).getMaHD();
+                listGetSP = sv.getAllSp(mahd);
+                sv.showData1(listGetSP, tableSanPhamHD);
+            }
+        } else {
             row = tlbHoaDon.getSelectedRow();
             String mahd = listSearch.get(row).getMaHD();
             listGetSP = sv.getAllSp(mahd);
             sv.showData1(listGetSP, tableSanPhamHD);
         }
-        if (ccbLoc.getSelectedIndex() == 1) {
-            row = tlbHoaDon.getSelectedRow();
-            String mahd = listSearch.get(row).getMaHD();
-            listGetSP = sv.getAllSp(mahd);
-            sv.showData1(listGetSP, tableSanPhamHD);
-        }
-        }else{
-            row = tlbHoaDon.getSelectedRow();
-            String mahd = listGetAll.get(row).getMaHD();
-            listGetSP = sv.getAllSp(mahd);
-            sv.showData1(listGetSP, tableSanPhamHD);
-        }
-        
+
 
     }//GEN-LAST:event_tlbHoaDonMouseClicked
 

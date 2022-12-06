@@ -76,6 +76,7 @@ public class HoaDonRespository {
                         rs.getString("ma_hoa_don"), rs.getString("ten_dien_thoai"),
                         rs.getString("ten_hang"), rs.getString("ten_dong"),
                         rs.getFloat("gia_ban"), rs.getInt("moi"), rs.getString("mo_ta"));
+                list.add(view);
             }
             return list;
         } catch (SQLException ex) {

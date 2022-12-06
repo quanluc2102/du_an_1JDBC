@@ -10,8 +10,8 @@ package ViewModel;
  */
 public class VIewModelSanPhamHoaDon {
 
-    String MaDT;
     String MaHdSp;
+    String MaDT;
     String TenSp;
     String TenHang;
     String TenDong;
@@ -22,9 +22,9 @@ public class VIewModelSanPhamHoaDon {
     public VIewModelSanPhamHoaDon() {
     }
 
-    public VIewModelSanPhamHoaDon(String MaDT, String MaHdSp, String TenSp, String TenHang, String TenDong, float GiaBan, int DoMoi, String MoTa) {
-        this.MaDT = MaDT;
+    public VIewModelSanPhamHoaDon(String MaHdSp, String MaDT, String TenSp, String TenHang, String TenDong, float GiaBan, int DoMoi, String MoTa) {
         this.MaHdSp = MaHdSp;
+        this.MaDT = MaDT;
         this.TenSp = TenSp;
         this.TenHang = TenHang;
         this.TenDong = TenDong;
@@ -98,7 +98,7 @@ public class VIewModelSanPhamHoaDon {
     }
 
     public Object[] dataRowSPHoaDon() {
-        return new Object[]{MaDT, MaHdSp, TenSp, TenHang, TenDong, GiaBan, DoMoi, MoTa};
+        return new Object[]{MaDT, MaHdSp, TenSp, TenHang, TenDong, GiaBan, DoMoi + "%", MoTa};
     }
 
 }
