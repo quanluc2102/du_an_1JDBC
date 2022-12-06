@@ -56,7 +56,6 @@ public class ViewHoaDon extends javax.swing.JFrame {
         sv.showData(listSearch, tableHoaDon);
         radioTatCa.setSelected(true);
 
-        
         listGetSP = sv.getAllSp("HD001");
         sv.showData1(listGetSP, tableSanPhamHD);
 
@@ -250,13 +249,6 @@ public class ViewHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = 0;
         if (TrangThai == 1) {
-
-            if (radioTatCa.isSelected() == true) {
-                row = tlbHoaDon.getSelectedRow();
-                String mahd = listSort.get(row).getMaHD();
-                listGetSP = sv.getAllSp(mahd);
-                sv.showData1(listGetSP, tableSanPhamHD);
-            }
             if (ccbLoc.getSelectedIndex() == 0) {
                 row = tlbHoaDon.getSelectedRow();
                 String mahd = listSearch.get(row).getMaHD();
@@ -285,6 +277,13 @@ public class ViewHoaDon extends javax.swing.JFrame {
         } else {
             row = tlbHoaDon.getSelectedRow();
             String mahd = listSearch.get(row).getMaHD();
+            listGetSP = sv.getAllSp(mahd);
+            sv.showData1(listGetSP, tableSanPhamHD);
+        }
+
+        if (radioTatCa.isSelected() == true) {
+            row = tlbHoaDon.getSelectedRow();
+            String mahd = listSort.get(row).getMaHD();
             listGetSP = sv.getAllSp(mahd);
             sv.showData1(listGetSP, tableSanPhamHD);
         }
