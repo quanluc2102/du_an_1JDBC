@@ -18,6 +18,8 @@ public class DienThoai {
     private String ten;
 
     private String idHang;
+    
+    private int trangThai;
 
     public String getId() {
         return id;
@@ -27,6 +29,24 @@ public class DienThoai {
     public String toString() {
         return "DienThoai{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", idHang=" + idHang + '}';
     }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public DienThoai(String id, String ma, String ten, String idHang, int trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.idHang = idHang;
+        this.trangThai = trangThai;
+    }
+    
+    
 
     public void setId(String id) {
         this.id = id;

@@ -229,7 +229,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         h = tsp.getHang(1).get(cbbHang.getSelectedIndex());
         DienThoai dt = new DienThoai();
-        dt.setTen(txtTenDienThoai.getText());
+     
         dt.setIdHang(h.getId());
         dt.setMa(txtMaDT.getText());
         Dong d = new Dong();
@@ -294,7 +294,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         tblSanPham = new javax.swing.JTable();
         anhSanPham = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        txtTenDienThoai = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cbbIMEI = new javax.swing.JComboBox<>();
@@ -323,6 +322,8 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         txtMaDT = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        cbbDienThoai = new javax.swing.JComboBox<>();
+        jButton6 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblThongTin = new javax.swing.JTable();
@@ -440,9 +441,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin cơ bản"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtTenDienThoai.setEditable(false);
-        jPanel4.add(txtTenDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 31, 341, -1));
-
         jLabel1.setText("Tên điện thoại");
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 34, 87, -1));
 
@@ -457,7 +455,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         });
         jPanel4.add(cbbIMEI, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 61, 264, -1));
 
-        btnAddImei.setText("jButton1");
+        btnAddImei.setText("IMEI");
         btnAddImei.setEnabled(false);
         btnAddImei.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -578,6 +576,12 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             }
         });
         jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 100, 50));
+
+        cbbDienThoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel4.add(cbbDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 260, -1));
+
+        jButton6.setText("ĐT");
+        jPanel4.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, 70, -1));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin sản phẩm"));
 
@@ -798,7 +802,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         ThongSo ts = new ThongSo();
         if (btnThem.getText() == "Lưu") {
             save();
-            new ThemSanPhamRepon().s();
+            
             loadTable(sps.getAll());
             btnThem.setText("Thêm");
             btnThem.setText("Thêm");
@@ -807,7 +811,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             btnDong.setEnabled(false);
             btnHang.setEnabled(false);
             txtDoMoi.setEditable(false);
-            txtTenDienThoai.setEditable(false);
+         
             txtGiaBan.setEditable(false);
             txtGiaNhap.setEditable(false);
             txtSoLuongNhap.setEditable(false);
@@ -822,7 +826,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             btnDong.setEnabled(true);
             btnHang.setEnabled(true);
             txtDoMoi.setEditable(true);
-            txtTenDienThoai.setEditable(true);
+          
             txtGiaBan.setEditable(true);
             txtGiaNhap.setEditable(true);
             txtSoLuongNhap.setEditable(true);
@@ -865,7 +869,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
             txtGiaBan.setText(df.format(s.getGiaBan()));
             txtGiaNhap.setText(df.format(s.getGiaNhap()));
-            txtTenDienThoai.setText(s.getTen());
+            
 
             txtMaDT.setText(s.getMa());
             idDong = s.getId();
@@ -1023,6 +1027,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private javax.swing.JButton btnHang;
     private javax.swing.JButton btnQG;
     private javax.swing.JButton btnThem;
+    private javax.swing.JComboBox<String> cbbDienThoai;
     private javax.swing.JComboBox<String> cbbDong;
     private javax.swing.JComboBox<String> cbbHang;
     private javax.swing.JComboBox<String> cbbIMEI;
@@ -1032,6 +1037,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -1059,7 +1065,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private javax.swing.JTextField txtGiaNhap;
     private javax.swing.JTextField txtMaDT;
     private javax.swing.JTextField txtSoLuongNhap;
-    private javax.swing.JTextField txtTenDienThoai;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
