@@ -136,4 +136,21 @@ public class ThemSanPhamRepon {
         }
         return sp > 0;
     }
+
+    public boolean Xoa(String id) {
+        String query = "UPDATE [dbo].[ChiTietDienThoai]\n"
+                + "   SET [trang_thai] = 0\n"
+                + "      \n"
+                + " WHERE id_quoc_gia_dong = ?";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, id);
+
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
 }

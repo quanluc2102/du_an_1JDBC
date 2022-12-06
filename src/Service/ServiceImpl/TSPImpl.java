@@ -318,4 +318,19 @@ public class TSPImpl implements ThemSPServices {
         return "không nhập được";
     }
 
+    @Override
+    public String themDong(Dong ha) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String timKiem(QuocGiaDong ha) {
+        for (QuocGia quocGia :   new QuocGiaRepon().getAll(1)) {
+            if (quocGia.equals(ha)) {
+            return quocGia.getId();
+            }
+        }
+        return null;
+    }
+
 }

@@ -131,6 +131,30 @@ public class SanPhamRespository {
         }
         return listSanPhamViewModelView;
     }
+    public List<SanPhamViewModel> getAll2() {
+        String query = "select QuocGiaDong.id ,anh,ten_dien_thoai,ma_dien_thoai,ten_hang,ten_dong,ten_quoc_gia,COUNT(ChiTietDienThoai.IMEI)as soluong,gia_ban,gia_nhap from QuocGiaDong \n"
+                + "                                              						join ChiTietDienThoai on QuocGiaDong.id = ChiTietDienThoai.id_quoc_gia_Dong \n"
+                + "                                              						join Dong on dong.id = QuocGiaDong.id_dong  \n"
+                + "                                              						join DienThoai on DienThoai.id = Dong.id_dien_thoai  \n"
+                + "                              										join Hang on Hang.id = DienThoai.id_hang \n"
+                + "																	join QuocGia on QuocGia.id = QuocGiaDong.id_quoc_gia\n"
+                + "             where ChiTietDienThoai.trang_thai =0  \n"
+                + "             group by anh, QuocGiaDong.id,gia_ban,gia_nhap,ten_dien_thoai,ten_hang,ten_dong,ten_quoc_gia,ma_dien_thoai";
+        List<SanPhamViewModel> listSanPhamViewModelView = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                SanPhamViewModel sp = new SanPhamViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8),
+                        rs.getDouble(9), rs.getDouble(10));
+                listSanPhamViewModelView.add(sp);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return listSanPhamViewModelView;
+    }
 
     public ThongSoViewModel getAllThongSoView(String id) {
         String queryx = "SELECT BoNho.id, BoNho.so_luong_ram, BoNho.so_Luong_rom, BoNho.the_nho, CPU.id AS Expr1, CPU.ten_CPU, CPU.GPU, CPU.loai, CPU.hang_cpu, CPU.tien_trinh, PIN.id AS Expr2, \n"

@@ -63,14 +63,21 @@ public interface ThemSPServices {
     List<Hang> getHang(int i);
 
     List<Hang> getTimKiemHa(String i);
-    
+
     String themQGD(QuocGiaDong ha);
+
+    String timKiem(QuocGiaDong ha);
+
     String themDT(DienThoai ha);
+
     String themCTDT(ChiTietDienThoai ha);
+
+    String themDong(Dong ha);
 
     String suaDT(DienThoai ha);
 
     List<DienThoai> getDT(int i);
 
     List<DienThoai> getTimKiemDT(String i);
+
 }
