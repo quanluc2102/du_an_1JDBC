@@ -26,6 +26,7 @@ import Service.SanPhamServices;
 import Service.ServiceImpl.SanPhamServicesImpl;
 import Service.ServiceImpl.TSPImpl;
 import Service.ThemSPServices;
+import View.SanPham.CameraView;
 import View.SanPham.HangView;
 import View.SanPham.QuocGiaView;
 import View.SanPham.ViewBoNho;
@@ -36,6 +37,7 @@ import View.SanPham.ViewKetNoi;
 import View.SanPham.ViewManHinh;
 import View.SanPham.ViewMauSac;
 import View.SanPham.ViewPin;
+import View.SanPham.ViewThemSanPham;
 import View.SanPham.ViewThietKe;
 import View.SanPham.ViewTienIch;
 import ViewModel.SanPhamViewModel;
@@ -62,6 +64,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QuanLySanPhamView extends javax.swing.JDialog {
 
+    ViewThemSanPham vtsp = new ViewThemSanPham(new javax.swing.JFrame(), true);
+    ViewBoNho bnv = new ViewBoNho(new javax.swing.JFrame(), true, "");
+    CameraView cmdv = new CameraView(new javax.swing.JFrame(), true);
+    ViewHeDieuHanh hdhv = new ViewHeDieuHanh(new javax.swing.JFrame(), true, "");
     int trangThai = 0;
     String srcAnh = "";
     int trang = 0;
@@ -99,7 +105,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         loadTable(sps.getAll());
         modelTT.setRowCount(0);
         loadCBB();
-        loadTable2();
 
     }
 
@@ -115,22 +120,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             ImageIcon x = new ImageIcon(new ImageIcon(sp.getSrcAnh()).getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
             Object[] row = new Object[]{x, sp.getTen(), sp.getTenHang(), sp.getSoLuongCon()};
             modelTBL.addRow(row);
-        }
-
-    }
-
-    private void loadTable2() {
-
-        modeldx = (DefaultTableModel) tbldaxoa.getModel();
-        modeldx.setRowCount(0);
-        String[] title = new String[]{
-            "Tên máy", "Hãng", "Số lượng còn",};
-        modeldx.setColumnIdentifiers(title);
-
-        for (SanPhamViewModel sp : new SanPhamRespository().getAll2()) {
-
-            Object[] row = new Object[]{sp.getTen(), sp.getTenHang(), sp.getSoLuongCon()};
-            modeldx.addRow(row);
         }
 
     }
@@ -225,46 +214,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
     private void save() {
 
-        Hang h = new Hang();
-
-        h = tsp.getHang(1).get(cbbHang.getSelectedIndex());
-        DienThoai dt = new DienThoai();
-     
-        dt.setIdHang(h.getId());
-        dt.setMa(txtMaDT.getText());
-        Dong d = new Dong();
-        d = sps.getDong().get(cbbDong.getSelectedIndex());
-        d.setIdDienThoai(dt.getId());
-        QuocGiaDong qgd = new QuocGiaDong();
-        qgd.setIdDong(d.getId());
-
-        qgd.setGiaBan(Double.valueOf(txtGiaBan.getText().replace(",", "")));
-        qgd.setGiaNhap(Double.valueOf(txtGiaNhap.getText().replace(",", "")));
-        if (srcAnh.isBlank() == false) {
-            qgd.setSrcAnh(srcAnh.substring(0, 12));
-        }
-        qgd.setIdQuocGia(sps.getQG().get(cbbQuocGia.getSelectedIndex()).getId());
-        BoNho bn = new BoNho("", Value(1), Value(2), Value(3), 1);
-        Cpu cpu = new Cpu("", Value(5), Value(6), Value(7), Value(8), Value(9), 1);
-        Pin pin = new Pin("", Value(11), Value(12), Value(13), Value(14), 1);
-        HeDieuHanh hdh = new HeDieuHanh("", Value(16), Value(17), 1);
-        ThietKe tk = new ThietKe("", Value(19), Value(20), Value(21), Value(22), 1);
-        ManHinh mh = new ManHinh("", Value(24), Value(25), Value(26), Value(27), Value(28), Value(29), 1);
-        KetNoi kn = new KetNoi("", Value(31), Value(32), Value(33), Value(34), Value(35), Value(36), Value(37), 1);
-        MauSac ms = new MauSac("", Value(39), Value(40), 1);
-        TienIch ti = new TienIch("", Value(42), Value(43), Value(44), 1);
-        ThongSo ts = new ThongSo("", tsp.timKiem(qgd), thongSoView.getHDHID(), thongSoView.getCPU(), thongSoView.getBoNhoID(), thongSoView.getPinID(),
-                thongSoView.getKetNoiID(), thongSoView.getManHinhID(), thongSoView.getThietKeID(), thongSoView.getTienIchID(), thongSoView.getMauSacID());
-        tsp.themHang(h);
-        tsp.themQGD(qgd);
-        tsp.themSP(ts);
-        tsp.themDT(dt);
-        for (String string : mei) {
-            ChiTietDienThoai ctdt = new ChiTietDienThoai(string, true, Integer.parseInt(txtDoMoi.getText().replace("%", "")), "", tsp.timKiem(qgd));
-
-        }
-        JOptionPane.showMessageDialog(this, "thêm thành công");
-        loadTable(sps.getAll());
+      
 
     }
 
@@ -729,9 +679,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         SanPhamViewModel s = ls.get(index);
         if (trangThai == 0 || trangThai == 2 && i != -1) {
             if (i >= 0 && i <= 3) {
-                ViewBoNho v = new ViewBoNho(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getBoNhoID());
-                v.setVisible(true);
-                thongSoView.setBoNhoID(v.id());
 
             } else if (i >= 4 && i <= 8) {
                 ViewCPU v = new ViewCPU(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getCPUID());
@@ -799,39 +746,32 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     }//GEN-LAST:event_txtTimKiemFocusGained
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        ThongSo ts = new ThongSo();
-        if (btnThem.getText() == "Lưu") {
-            save();
-            
-            loadTable(sps.getAll());
-            btnThem.setText("Thêm");
-            btnThem.setText("Thêm");
-            txtMaDT.setEditable(false);
-            btnAddImei.setEnabled(false);
-            btnDong.setEnabled(false);
-            btnHang.setEnabled(false);
-            txtDoMoi.setEditable(false);
-         
-            txtGiaBan.setEditable(false);
-            txtGiaNhap.setEditable(false);
-            txtSoLuongNhap.setEditable(false);
-            btnQG.setEnabled(false);
-            trangThai = 0;
-        } else {
-            txtMaDT.setEditable(true);
-            anhSanPham.setText("                  Chọn ảnh");
-            trangThai = 1;
-            btnQG.setEnabled(true);
-            btnAddImei.setEnabled(true);
-            btnDong.setEnabled(true);
-            btnHang.setEnabled(true);
-            txtDoMoi.setEditable(true);
-          
-            txtGiaBan.setEditable(true);
-            txtGiaNhap.setEditable(true);
-            txtSoLuongNhap.setEditable(true);
-            btnThem.setText("Lưu");
+
+        vtsp.setVisible(true);
+        if (vtsp.viewx().isEmpty() == false) {
+            for (Integer integer : vtsp.viewx()) {
+                switch (integer) {
+                    case 1:
+
+                        bnv.setVisible(true);
+
+                        break;
+                    case 2:
+
+                        cmdv.setVisible(true);
+
+                        break;
+                    case 3:
+
+                        hdhv.setVisible(true);
+
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+            }
         }
+
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnAddImeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddImeiActionPerformed
@@ -869,7 +809,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
             txtGiaBan.setText(df.format(s.getGiaBan()));
             txtGiaNhap.setText(df.format(s.getGiaNhap()));
-            
 
             txtMaDT.setText(s.getMa());
             idDong = s.getId();
@@ -910,7 +849,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         new ThemSanPhamRepon().Xoa(sps.getAll().get(index).getId());
-        loadTable2();
+
         loadTable(sps.getAll());
 
     }//GEN-LAST:event_jButton4ActionPerformed

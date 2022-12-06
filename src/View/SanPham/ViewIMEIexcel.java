@@ -4,28 +4,23 @@
  */
 package View.SanPham;
 
+import Service.ExcelServices;
+import Service.ServiceImpl.ExcelServicesImpl;
 import java.awt.Color;
 import java.io.File;
-import java.io.FileInputStream;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
  * @author haha
  */
 public class ViewIMEIexcel extends javax.swing.JDialog {
-
+    ExcelServices exs = new ExcelServicesImpl();
     boolean check = false;
     List<String> ix = new ArrayList<>();
     List<Integer> place = new ArrayList<>();
@@ -42,35 +37,9 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
         model = (DefaultTableModel) tblIMEI.getModel();
     }
 
-    private List<String> EXCel() {
+ 
 
-        try {
-            FileInputStream file = new FileInputStream(link);
-            XSSFWorkbook wb = new XSSFWorkbook(file);
-            XSSFSheet xs = wb.getSheetAt(0);
-            FormulaEvaluator formula = wb.getCreationHelper().createFormulaEvaluator();
-            for (Row row : xs) {
-                String Imei = "";
-                for (Cell cell : row) {
-                    if (cell.getAddress().getColumn() == 0) {
-                        DecimalFormat df = new DecimalFormat("######################");
-                        Imei = df.format(cell.getNumericCellValue());
-
-                    }
-
-                }
-                ix.add(Imei);
-            }
-            wb.close();
-            file.close();
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-
-        return ix;
-
-    }
-
+    
     private void filltable(List<String> x) {
         model.setRowCount(0);
         for (String string : x) {
@@ -341,7 +310,8 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
-        filltable(EXCel());
+      ix =  exs.getFile(link);
+        filltable(exs.getFile(link));
         this.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnChonActionPerformed

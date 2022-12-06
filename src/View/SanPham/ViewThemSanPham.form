@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="C&#xe1;c th&#xf4;ng tin mu&#x1ed1;n th&#xea;m"/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbHDH" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbCamera" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbTienIch" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbKetNoi" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbMauSac" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbPin" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbManHinh" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbViXuLy" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbBoNho" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbThietKe" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="btnXacNhan" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cbHDH" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbThietKe" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cbCamera" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbBoNho" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cbTienIch" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbViXuLy" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cbKetNoi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbManHinh" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cbMauSac" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbPin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <Component id="btnXacNhan" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JCheckBox" name="cbHDH">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="H&#x1ec7; &#x111;i&#x1ec1;u h&#xe0;nh"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="cbCamera">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Camera"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="cbTienIch">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ti&#x1ec7;n &#xed;ch"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="cbKetNoi">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="K&#x1ebf;t n&#x1ed1;i"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="cbMauSac">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="M&#xe0;u s&#x1eaf;c"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="cbThietKe">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Thi&#x1ebf;t k&#x1ebf;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="cbBoNho">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="B&#x1ed9; nh&#x1edb;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbBoNhoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="cbViXuLy">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Vi x&#x1eed; l&#xfd;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="cbManHinh">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="M&#xe0;n h&#xec;nh"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="cbPin">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Pin"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnXacNhan">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="X&#xe1;c nh&#x1ead;n"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXacNhanActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
