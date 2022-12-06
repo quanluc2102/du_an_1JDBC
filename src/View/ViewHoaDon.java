@@ -54,7 +54,9 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
         listSearch = sv.getAll(listGetAll);
         sv.showData(listSearch, tableHoaDon);
+        radioTatCa.setSelected(true);
 
+        int TrangThai = 0;
     }
 
     /**
@@ -156,7 +158,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
             }
         });
 
-        btnDong.setText("Đóng");
+        btnDong.setText("Exit");
         btnDong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDongActionPerformed(evt);
@@ -242,10 +244,45 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
     private void tlbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tlbHoaDonMouseClicked
         // TODO add your handling code here:
-        int row = tlbHoaDon.getSelectedRow();
-        String mahd = listGetAll.get(row).getMaHD();
-        System.out.println(mahd);
-       
+        int row = 0;
+        if(TrangThai != 0){
+            if (radioChuaThanhToan.isSelected() == true) {
+            row = tlbHoaDon.getSelectedRow();
+            String mahd = listSort.get(row).getMaHD();
+            listGetSP = sv.getAllSp(mahd);
+            sv.showData1(listGetSP, tableSanPhamHD);
+        }
+        if (radioDaThanhToan.isSelected() == true) {
+            row = tlbHoaDon.getSelectedRow();
+            String mahd = listSort.get(row).getMaHD();
+            listGetSP = sv.getAllSp(mahd);
+            sv.showData1(listGetSP, tableSanPhamHD);
+        }
+        if (radioTatCa.isSelected() == true) {
+            row = tlbHoaDon.getSelectedRow();
+            String mahd = listSort.get(row).getMaHD();
+            listGetSP = sv.getAllSp(mahd);
+            sv.showData1(listGetSP, tableSanPhamHD);
+        }
+        if (ccbLoc.getSelectedIndex() == 0) {
+            row = tlbHoaDon.getSelectedRow();
+            String mahd = listSearch.get(row).getMaHD();
+            listGetSP = sv.getAllSp(mahd);
+            sv.showData1(listGetSP, tableSanPhamHD);
+        }
+        if (ccbLoc.getSelectedIndex() == 1) {
+            row = tlbHoaDon.getSelectedRow();
+            String mahd = listSearch.get(row).getMaHD();
+            listGetSP = sv.getAllSp(mahd);
+            sv.showData1(listGetSP, tableSanPhamHD);
+        }
+        }else{
+            row = tlbHoaDon.getSelectedRow();
+            String mahd = listGetAll.get(row).getMaHD();
+            listGetSP = sv.getAllSp(mahd);
+            sv.showData1(listGetSP, tableSanPhamHD);
+        }
+        
 
     }//GEN-LAST:event_tlbHoaDonMouseClicked
 
@@ -254,7 +291,6 @@ public class ViewHoaDon extends javax.swing.JFrame {
         name = txtTimKiem.getText();
         sv.showData(sv.searchHoaDon(name), tableHoaDon);
         listSearch = sv.searchHoaDon(name);
-        TrangThai = 1;
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
@@ -269,13 +305,14 @@ public class ViewHoaDon extends javax.swing.JFrame {
         if (ccbLoc.getSelectedIndex() == 0) {
             sv.giaCaoXuongThap(listSearch);
             sv.showData(listSearch, tableHoaDon);
+            TrangThai = 1;
         }
 
         if (ccbLoc.getSelectedIndex() == 1) {
             sv.giaThapLenCao(listSearch);
             sv.showData(listSearch, tableHoaDon);
+            TrangThai = 1;
         }
-        TrangThai = 2;
     }//GEN-LAST:event_btnLocActionPerformed
 
     private void radioChuaThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioChuaThanhToanActionPerformed
@@ -286,8 +323,8 @@ public class ViewHoaDon extends javax.swing.JFrame {
                 listSort.add(viewModelHoaDon);
             }
         }
-        TrangThai = 3;
         sv.showData(listSort, tableHoaDon);
+        TrangThai = 2;
     }//GEN-LAST:event_radioChuaThanhToanActionPerformed
 
     private void radioDaThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioDaThanhToanActionPerformed
@@ -298,13 +335,14 @@ public class ViewHoaDon extends javax.swing.JFrame {
                 listSort.add(viewModelHoaDon);
             }
         }
-        TrangThai = 3;
         sv.showData(listSort, tableHoaDon);
+        TrangThai = 2;
     }//GEN-LAST:event_radioDaThanhToanActionPerformed
 
     private void radioTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTatCaActionPerformed
         // TODO add your handling code here:
         sv.showData(listSearch, tableHoaDon);
+        TrangThai = 0;
     }//GEN-LAST:event_radioTatCaActionPerformed
 
     /**
