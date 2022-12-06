@@ -133,24 +133,38 @@ public class SanPhamServicesImpl implements SanPhamServices {
     }
 
     @Override
-    public List<BoNho> getBN() {
-        return new ThongSoReponsitory().getBN();
+    public List<BoNho> getBN(int i) {
+        return new ThongSoReponsitory().getBN(i);
     }
 
     @Override
     public String addBN(BoNho tk) {
-        if (new ThongSoReponsitory().ThemBN(tk)) {
-            return "OK";
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        } else if (new ThongSoReponsitory().ThemBN(tk)) {
+            return "Thêm thành cônng";
         }
-        return "FAIL";
+        return "Thêm thất bại";
     }
 
     @Override
     public String suaBN(BoNho tk) {
-        if (new ThongSoReponsitory().SuaBN(tk)) {
-            return "OK";
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        } else if (new ThongSoReponsitory().SuaBN(tk)) {
+            return "sửa thành cônng";
         }
-        return "FAIL";
+        return "Sửa thất bại";
+    }
+
+    @Override
+    public String xoaBN(BoNho tk,int tt) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        } else if (new ThongSoReponsitory().xoaBN(tk,tt)) {
+            return "sửa thành cônng";
+        }
+        return "Sửa thất bại";
     }
 
     @Override

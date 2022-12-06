@@ -68,6 +68,13 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     ViewBoNho bnv = new ViewBoNho(new javax.swing.JFrame(), true, "");
     CameraView cmdv = new CameraView(new javax.swing.JFrame(), true);
     ViewHeDieuHanh hdhv = new ViewHeDieuHanh(new javax.swing.JFrame(), true, "");
+    ViewThietKe vTK = new ViewThietKe(new javax.swing.JFrame(), true, "");
+    ViewPin vPin = new ViewPin(new javax.swing.JFrame(), true, "");
+    ViewCPU vCPU = new ViewCPU(new javax.swing.JFrame(), true, "");
+    ViewManHinh vMH = new ViewManHinh(new javax.swing.JFrame(), true, "");
+    ViewKetNoi vKN = new ViewKetNoi(new javax.swing.JFrame(), true, "");
+    ViewMauSac vMS = new ViewMauSac(new javax.swing.JFrame(), true, "");
+    ViewTienIch vTI = new ViewTienIch(new javax.swing.JFrame(), true, "");
     int trangThai = 0;
     String srcAnh = "";
     int trang = 0;
@@ -213,8 +220,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     }
 
     private void save() {
-
-      
 
     }
 
@@ -674,54 +679,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        int i = tblThongTin.getSelectedRow();
-        index = tblSanPham.getSelectedRow();
-        SanPhamViewModel s = ls.get(index);
-        if (trangThai == 0 || trangThai == 2 && i != -1) {
-            if (i >= 0 && i <= 3) {
 
-            } else if (i >= 4 && i <= 8) {
-                ViewCPU v = new ViewCPU(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getCPUID());
-                v.setVisible(true);
-                thongSoView.setCPUID((v.id()));
-
-            } else if (i >= 9 && i <= 14) {
-                ViewPin v = new ViewPin(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getPinID());
-                v.setVisible(true);
-                thongSoView.setPinID(v.id());
-
-            } else if (i >= 15 && i <= 17) {
-                ViewHeDieuHanh v = new ViewHeDieuHanh(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getHDHID());
-                v.setVisible(true);
-                thongSoView.setHDHID(v.id());
-
-            } else if (i >= 18 && i <= 22) {
-                ViewThietKe v = new ViewThietKe(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getThietKeID());
-                v.setVisible(true);
-                thongSoView.setThietKeID(v.id());
-
-            } else if (i >= 23 && i <= 29) {
-                ViewManHinh v = new ViewManHinh(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getManHinhID());
-                v.setVisible(true);
-                thongSoView.setManHinhID(v.id());
-
-            } else if (i >= 30 && i <= 37) {
-                ViewKetNoi v = new ViewKetNoi(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getKetNoiID());
-                v.setVisible(true);
-                thongSoView.setKetNoiID(v.id());
-
-            } else if (i >= 37 && i <= 39) {
-                ViewMauSac v = new ViewMauSac(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getMauSacID());
-                v.setVisible(true);
-                thongSoView.setMauSacID(v.id());
-
-            } else if (i >= 40 && i <= 44) {
-                ViewTienIch v = new ViewTienIch(new javax.swing.JFrame(), true, sps.getAllThongSo(s.getId()).getTienIchID());
-                v.setVisible(true);
-                thongSoView.setTienIchID(v.id());
-
-            }
-        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
@@ -766,6 +724,36 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                         hdhv.setVisible(true);
 
                         break;
+                    case 4:
+
+                        vKN.setVisible(true);
+
+                        break;
+                    case 5:
+
+                        vMH.setVisible(true);
+
+                        break;
+                    case 6:
+
+                        vMS.setVisible(true);
+
+                        break;
+                    case 7:
+
+                        vPin.setVisible(true);
+
+                        break;
+                    case 8:
+
+                        vTK.setVisible(true);
+
+                        break;
+                    case 9:
+
+                        vCPU.setVisible(true);
+
+                        break;
                     default:
                         throw new AssertionError();
                 }
@@ -777,7 +765,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private void btnAddImeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddImeiActionPerformed
         mei.removeAll(mei);
         ViewIMEIexcel c = new ViewIMEIexcel(new javax.swing.JFrame(), true);
-//        this.setVisible(false);
         c.setVisible(true);
         if (c.allIMEI().isEmpty() == false) {
             modelCBB.removeAllElements();
@@ -787,7 +774,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             txtSoLuongNhap.setText(mei.size() + "");
         }
 
-//        this.setVisible(true);
 
     }//GEN-LAST:event_btnAddImeiActionPerformed
 

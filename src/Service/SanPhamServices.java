@@ -59,11 +59,12 @@ public interface SanPhamServices {
 
     String suaTK(ThietKe tk);
 
-    List<BoNho> getBN();
+    List<BoNho> getBN(int i);
 
     String addBN(BoNho tk);
 
     String suaBN(BoNho tk);
+    String xoaBN(BoNho tk,int tt);
 
     List<Cpu> getCPU();
 

@@ -201,14 +201,35 @@ public class ThongSoReponsitory {
         }
         return sp > 0;
     }
+    public boolean xoaBN(BoNho hdh,int tt) {
+        String query = "UPDATE [dbo].[BoNho]\n"
+                + "   SET [so_luong_ram] = ?\n"
+                + "      ,[so_Luong_rom] = ?\n"
+                + "      ,[the_nho] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + " WHERE id =?\n";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getRAM());
+            ps.setObject(2, hdh.getROM());
+            ps.setObject(3, hdh.getTheNho());
+            ps.setObject(4, tt);
+            ps.setObject(5, hdh.getId());
+            sp = ps.executeUpdate();
 
-    public List<BoNho> getBN() {
-        String query = "select * from BoNho where trang_thai != 0";
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public List<BoNho> getBN(int i) {
+        String query = "select * from BoNho where trang_thai = ?";
         List<BoNho> ls = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, i);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-
                 BoNho sp = new BoNho(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
                 ls.add(sp);
             }
