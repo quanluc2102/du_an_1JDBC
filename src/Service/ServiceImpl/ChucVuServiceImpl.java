@@ -55,15 +55,6 @@ public class ChucVuServiceImpl implements ChucVuService {
         return cvRespository.getOne(ma);
     }
 
-   
-
-    @Override
-    public void show(List<ChucVuViewModel> listCv, DefaultTableModel dtm) {
-        dtm.setRowCount(0);
-        for (ChucVuViewModel x : listCv) {
-            dtm.addRow(x.toDaTa());
-        }
-    }
 
     @Override
     public List<NhanVien> getLisst(String ma) {

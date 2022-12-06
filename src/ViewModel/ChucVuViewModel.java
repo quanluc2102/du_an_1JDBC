@@ -82,8 +82,6 @@ public class ChucVuViewModel {
         return new Object[]{ma,ten,maNV,tenNV};
     }
 
-    public Object[] toDaTa() {
-        return new Object[]{maNV, tenNV};
-    }
+ 
 
 }

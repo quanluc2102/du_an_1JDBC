@@ -7,7 +7,6 @@ package Service;
 import DomainModel.ChucVu;
 import DomainModel.NhanVien;
 import ViewModel.ChucVuViewModel;
-import ViewModel.NhanVienView;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,8 +19,6 @@ public interface ChucVuService {
     List<ChucVuViewModel> getAll();
 
     void showDaTa(List<ChucVuViewModel> listChucVu, DefaultTableModel dtm);
-
-    void show(List<ChucVuViewModel> listCv, DefaultTableModel dtm);
 
     String add(ChucVuViewModel chucVu);
 
