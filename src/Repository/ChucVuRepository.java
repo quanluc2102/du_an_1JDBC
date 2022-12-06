@@ -8,7 +8,6 @@ import DomainModel.ChucVu;
 import DomainModel.NhanVien;
 import Ultilities.SQLServerConnection;
 import ViewModel.ChucVuViewModel;
-import ViewModel.NhanVienView;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -69,9 +68,9 @@ public class ChucVuRepository {
     public List<NhanVien> getCV(String ma) {
 
         String query = "SELECT ma_nhan_vien, ten_nhan_vien\n"
-                + "                FROM NhanVien join ChucVu on NhanVien.id_chuc_vu = ChucVu.id\n"
-                + "				where ma_chuc_vu =?";
-        List<NhanVien> cvv = new ArrayList<>();
+                + "     FROM NhanVien join ChucVu on NhanVien.id_chuc_vu = ChucVu.id\n"
+                + "     where ma_chuc_vu =?";
+        List<NhanVien> nhanVien = new ArrayList<>();
         try ( Connection conn = new SQLServerConnection().getConnection()) {
 
             PreparedStatement ps = conn.prepareCall(query);
@@ -79,14 +78,13 @@ public class ChucVuRepository {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 NhanVien nv = new NhanVien(rs.getString(1), rs.getString(2));
-
-                cvv.add(nv);
+                nhanVien.add(nv);
             }
 
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
-        return cvv;
+        return nhanVien;
 
     }
 
@@ -131,12 +129,8 @@ public class ChucVuRepository {
         return null;
     }
 
-    public static void main(String[] args) {
-        System.out.println(new ChucVuRepository().getCV("CV001"));
-        for (NhanVien arg : new ChucVuRepository().getCV("CV00")) {
-            System.out.println(arg.toString());
-        }
+   
 
-    }
+    
 
 }

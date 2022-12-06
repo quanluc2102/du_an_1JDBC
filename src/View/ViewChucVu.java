@@ -8,8 +8,6 @@ import DomainModel.ChucVu;
 import DomainModel.NhanVien;
 import Service.ServiceImpl.ChucVuServiceImpl;
 import ViewModel.ChucVuViewModel;
-
-import ViewModel.NhanVienView;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -46,7 +44,6 @@ public class ViewChucVu extends javax.swing.JFrame {
 
     public void fillDaTa(int index) {
         ChucVuViewModel chucVu = listChucVuView.get(index);
-
         txtMa.setText(chucVu.getMa());
         txtTen.setText(chucVu.getTen());
 
