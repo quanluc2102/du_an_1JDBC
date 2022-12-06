@@ -6,15 +6,23 @@ package Service.ServiceImpl;
 
 import DomainModel.BoNho;
 import DomainModel.Cpu;
+import DomainModel.Hang;
 import DomainModel.HeDieuHanh;
 import DomainModel.KetNoi;
 import DomainModel.ManHinh;
 import DomainModel.MauSac;
 import DomainModel.Pin;
+import DomainModel.QuocGia;
 import DomainModel.ThietKe;
+import DomainModel.ThongSo;
 import DomainModel.TienIch;
+import Repository.HangReponsitory;
+import Repository.QuocGiaRepon;
+import Repository.ThemSanPhamRepon;
 import Service.SanPhamServices;
 import Service.ThemSPServices;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,6 +30,7 @@ import Service.ThemSPServices;
  */
 public class TSPImpl implements ThemSPServices {
 
+    ThemSanPhamRepon sp = new ThemSanPhamRepon();
     SanPhamServices sps = new SanPhamServicesImpl();
 
     @Override
@@ -169,4 +178,99 @@ public class TSPImpl implements ThemSPServices {
         return "";
     }
 
+    @Override
+    public String themSP(ThongSo ts) {
+        if (sp.ThemSP(ts)) {
+            return "Thêm thành công";
+        }
+        return "Thêm không thành công";
+    }
+    QuocGiaRepon qgq = new QuocGiaRepon();
+
+    @Override
+    public List<QuocGia> getQG(int i) {
+        return qgq.getAll(i);
+    }
+
+    @Override
+    public String themQG(QuocGia qg) {
+        for (QuocGia x : qgq.getAll(1)) {
+            if (x.getMa().equalsIgnoreCase(qg.getMa())) {
+                return "Thêm Không thành công";
+            }
+        }
+        for (QuocGia x : qgq.getAll(0)) {
+            if (x.getMa().equalsIgnoreCase(qg.getMa())) {
+                return "Thêm Không thành công";
+            }
+        }
+        if (new QuocGiaRepon().add(qg)) {
+            return "Thêm thành công";
+        }
+        return "Thêm Không thành công";
+
+    }
+
+    @Override
+    public List<QuocGia> getTimKiem(String i) {
+        List<QuocGia> ls = new ArrayList<>();
+        for (QuocGia quocGia : qgq.getAll(1)) {
+            if (quocGia.getTen().contains(i) || quocGia.getMa().contains(i)) {
+                ls.add(quocGia);
+            }
+        }
+        return ls;
+    }
+
+    @Override
+    public String suaQG(QuocGia qg) {
+        if (new QuocGiaRepon().sua(qg)) {
+            return "Sửa thành công";
+        }
+        return "Sửa Không thành công";
+    }
+
+    HangReponsitory hangls = new HangReponsitory();
+
+    @Override
+    public String themHang(Hang ha) {
+        for (Hang x : hangls.getAll(1)) {
+            if (x.getMa().equalsIgnoreCase(ha.getMa())) {
+                return "Thêm Không thành công";
+            }
+        }
+        for (Hang x : hangls.getAll(0)) {
+            if (x.getMa().equalsIgnoreCase(ha.getMa())) {
+                return "Thêm Không thành công";
+            }
+        }
+        if (hangls.add(ha)) {
+            return "Thêm thành công";
+        }
+        return "Thêm Không thành công";
+    }
+
+    @Override
+    public String suaHang(Hang ha) {
+        if (hangls.sua(ha)) {
+            return "Sửa thành công";
+        }
+        return "Sửa Không thành công";
+    }
+
+    @Override
+    public List<Hang> getHang(int i) {
+        return hangls.getAll(i);
+    }
+
+    @Override
+    public List<Hang> getTimKiemHa(String i) {
+        List<Hang> ls = new ArrayList<>();
+        for (Hang quocGia : hangls.getAll(1)) {
+            if (quocGia.getTen().contains(i) || quocGia.getMa().contains(i)) {
+                ls.add(quocGia);
+            }
+        }
+        return ls;
+    }
 }

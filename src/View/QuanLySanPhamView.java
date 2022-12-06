@@ -24,6 +24,8 @@ import Service.SanPhamServices;
 import Service.ServiceImpl.SanPhamServicesImpl;
 import Service.ServiceImpl.TSPImpl;
 import Service.ThemSPServices;
+import View.SanPham.HangView;
+import View.SanPham.QuocGiaView;
 import View.SanPham.ViewBoNho;
 import View.SanPham.ViewCPU;
 import View.SanPham.ViewHeDieuHanh;
@@ -47,6 +49,7 @@ import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -231,6 +234,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         for (String string : mei) {
             ChiTietDienThoai ctdt = new ChiTietDienThoai(string, true, Integer.parseInt(txtDoMoi.getText().replace("%", "")), "", qgd.getId());
+            System.out.println(tsp.themSP(ts));
         }
 
     }
@@ -243,7 +247,6 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         return "";
 
     }
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -500,6 +503,11 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         btnHang.setText("jButton1");
         btnHang.setEnabled(false);
+        btnHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHangActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 24, -1));
 
         btnDong.setText("jButton1");
@@ -664,6 +672,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -892,18 +901,21 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     }//GEN-LAST:event_tblThongTinMouseClicked
 
     private void btnQGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQGActionPerformed
-        // TODO add your handling code here:
+        QuocGiaView s = new QuocGiaView(new JFrame(), true, "");
+        s.setVisible(true);
+        cbbQuocGia.setSelectedItem(s.getName());
     }//GEN-LAST:event_btnQGActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        TrangChuQuanLyView s = new TrangChuQuanLyView(""); 
-        TrangChuQuanLyView x = new TrangChuQuanLyView(s.takemaNV()); 
-        
-        
-        x.setVisible(true);
+
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHangActionPerformed
+        HangView s = new HangView(new JFrame(), true, "");
+        s.setVisible(true);
+        cbbHang.setSelectedItem(s.getName());
+    }//GEN-LAST:event_btnHangActionPerformed
 
     /**
      * @param args the command line arguments

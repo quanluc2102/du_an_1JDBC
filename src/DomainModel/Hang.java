@@ -17,20 +17,34 @@ public class Hang {
     private String ma;
 
     private String ten;
+    private int trangThai;
 
     public Hang() {
     }
+    
 
     @Override
     public String toString() {
         return "Hang{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + '}';
     }
 
-    public Hang(String id, String ma, String ten) {
+    public Hang(String id, String ma, String ten, int trangThai) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
+        this.trangThai = trangThai;
     }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+    
+
+   
 
     public Hang(String id, String ten) {
         this.id = id;

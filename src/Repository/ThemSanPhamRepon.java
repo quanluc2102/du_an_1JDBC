@@ -41,6 +41,9 @@ public class ThemSanPhamRepon {
             ps.setObject(6, ts.getManHinh());
             ps.setObject(7, ts.getCpu());
             ps.setObject(8, ts.getKetNoi());
+            ps.setObject(9, ts.getThietKe());
+            ps.setObject(10,1);
+            ps.setObject(11, ts.getPin());
           
             sp = ps.executeUpdate();
 
