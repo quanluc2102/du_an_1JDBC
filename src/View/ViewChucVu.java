@@ -297,9 +297,9 @@ public class ViewChucVu extends javax.swing.JFrame {
 
     private void btnQuayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayActionPerformed
         // TODO add your handling code here:
-        TrangChuQuanLyView s = new TrangChuQuanLyView("");
-        TrangChuQuanLyView x = new TrangChuQuanLyView(s.takemaNV());
-        x.setVisible(true);
+//        TrangChuQuanLyView s = new TrangChuQuanLyView("");
+//        TrangChuQuanLyView x = new TrangChuQuanLyView(s.takemaNV());
+//        x.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnQuayActionPerformed
 

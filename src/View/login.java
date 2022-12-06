@@ -380,7 +380,8 @@ public class login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "tai khoan hoac mat khau khong dung");
         } else {
             if (thongBao.contains("NV")) {
-                TrangChuNhanVienView nvv = new TrangChuNhanVienView(this, true);
+//                TrangChuNhanVienView nvv = new TrangChuNhanVienView(this, true);
+TrangChuNhanVienView nvv = new TrangChuNhanVienView();
                 nvv.setVisible(true);
             }
             if (thongBao.contains("QL")) {
