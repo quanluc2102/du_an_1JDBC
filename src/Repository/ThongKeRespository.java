@@ -67,7 +67,7 @@ public class ThongKeRespository {
             while (rs.next()) {
 
                 ThongKeViewModel thongKe = new ThongKeViewModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getDouble(4), rs.getDouble(5), rs.getDouble(6));
-//                ThongKeViewModel thongKe = new ThongKeViewModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getDouble(4), rs.getBoolean(5));
+//             
                 listthongKe.add(thongKe);
 
             }

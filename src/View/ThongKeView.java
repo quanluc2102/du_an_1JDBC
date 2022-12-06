@@ -26,7 +26,7 @@ public class ThongKeView extends javax.swing.JFrame {
     private List<ThongKeViewModel> listhongKe = new ArrayList<>();
     private ThongKeServiceImpl thongKeImpl = new ThongKeServiceImpl();
     private List<HoaDon> listHoaDon = new ArrayList<>();
-//    private DefaultComboBoxModel dcdc;
+
 
     public ThongKeView() {
         initComponents();

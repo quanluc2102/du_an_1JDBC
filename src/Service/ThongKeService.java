@@ -17,10 +17,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public interface ThongKeService {
 
-   
-
-
-
     List<HoaDon> searchTheoNgay(String ngay);
 
     void showDaTa(DefaultTableModel dtm, List<ThongKeViewModel> listHD);
