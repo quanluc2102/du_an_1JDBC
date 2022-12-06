@@ -21,13 +21,28 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
 
     @Override
     public String add(KhuyenMaiViewModel km) {
+        List<KhuyenMaiViewModel> list = new ArrayList<>();
+        list.addAll(rs.getAllvali(km.getMa()));
+
         if (km.getMa().isEmpty()) {
-            return "Mã tìm kiếm không được để trống ";
+            return "Mã Khuyến mại không được để trống ";
         }
         if (km.getMoTa().isEmpty()) {
             return "Mô tả không được để trống";
         }
-
+        if (String.valueOf(km.getGiaGiam()).isEmpty()) {
+            return "Mô tả không được để trống";
+        }
+        if (list.size() > 0) {
+            return "Mã khuyến mại bị trùng";
+        }
+        if (km.getNgayKetThuc().getYear() < km.getNgayBatDau().getYear()) {
+            return "Năm bắt đầu nhỏ hơn hoặc bằng năm kết thúc  ";
+        } else if (km.getNgayKetThuc().getMonth() < km.getNgayBatDau().getMonth()) {
+            return "Tháng bắt đầu phải nhỏ hơn hoặc bằng tháng kết thúc ";
+        } else if (km.getNgayKetThuc().getDate() < km.getNgayBatDau().getDate()) {
+            return "Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc ";
+        }
         boolean add = rs.add(km);
         if (add == true) {
             return "Thêm thành công";
@@ -38,7 +53,8 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public String delete(String idKM) {
+    public String delete(String idKM
+    ) {
         boolean delete = rs.delete(idKM);
         if (delete == true) {
             return "Xóa thành công";
@@ -48,13 +64,15 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public void getAll(List<KhuyenMaiViewModel> list) {
+    public void getAll(List<KhuyenMaiViewModel> list
+    ) {
         list.addAll(rs.getAll());
 
     }
 
     @Override
-    public String update(String idKM, KhuyenMaiViewModel km) {
+    public String update(String idKM, KhuyenMaiViewModel km
+    ) {
         boolean update = rs.update(km, idKM);
         if (update == true) {
             return "Sửa thành công";
@@ -64,11 +82,14 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public List<KhuyenMaiViewModel> timTheoMa(List<KhuyenMaiViewModel> listKMs, String ma) {
+    public List<KhuyenMaiViewModel> timTheoMa(List<KhuyenMaiViewModel> listKMs, String ma
+    ) {
         List<KhuyenMaiViewModel> listSearch = new ArrayList<>();
         for (KhuyenMaiViewModel km : listKMs) {
             if (km.getMa().contains(ma)) {
                 listSearch.add(km);
+            } else {
+
             }
 
         }
@@ -77,7 +98,8 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public List<KhuyenMaiViewModel> listShowDangDienRa(List<KhuyenMaiViewModel> listKhuyenMais) {
+    public List<KhuyenMaiViewModel> listShowDangDienRa(List<KhuyenMaiViewModel> listKhuyenMais
+    ) {
         List<KhuyenMaiViewModel> listShowDangDienRa = new ArrayList<>();
         for (KhuyenMaiViewModel KM : listKhuyenMais) {
             if (KM.getTrangThai() == 0) {
@@ -88,7 +110,8 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public List<KhuyenMaiViewModel> listShowSapDienRa(List<KhuyenMaiViewModel> listKhuyenMais) {
+    public List<KhuyenMaiViewModel> listShowSapDienRa(List<KhuyenMaiViewModel> listKhuyenMais
+    ) {
         List<KhuyenMaiViewModel> listShowSapDienRa = new ArrayList<>();
         for (KhuyenMaiViewModel KM : listKhuyenMais) {
             if (KM.getTrangThai() == 1) {
@@ -99,7 +122,8 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public List<KhuyenMaiViewModel> listShowDaKT(List<KhuyenMaiViewModel> listKhuyenMais) {
+    public List<KhuyenMaiViewModel> listShowDaKT(List<KhuyenMaiViewModel> listKhuyenMais
+    ) {
         List<KhuyenMaiViewModel> listShowDaKT = new ArrayList<>();
         for (KhuyenMaiViewModel KM : listKhuyenMais) {
             if (KM.getTrangThai() == 2) {
@@ -116,10 +140,19 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
     }
 
     @Override
-    public void sapXep(List<KhuyenMaiViewModel> list) {
+    public void sapXep(List<KhuyenMaiViewModel> list
+    ) {
         list.sort((o1, o2) -> {
             return o1.getGiaGiam().compareTo(o2.getGiaGiam());
         });
+    }
+
+    @Override
+    public List<KhuyenMaiViewModel> getAllDem(int soDem
+    ) {
+
+        return rs.getAllDem(soDem);
+
     }
 
 }

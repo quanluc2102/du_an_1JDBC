@@ -11,7 +11,8 @@ import java.sql.Date;
  * @author togia
  */
 public class KhuyenMaiViewModel {
-     private String id;
+
+    private String id;
     private String ma;
     private Date ngayBatDau;
     private Date ngayKetThuc;
@@ -43,7 +44,7 @@ public class KhuyenMaiViewModel {
         this.moTa = moTa;
         this.trangThai = trangThai;
     }
- 
+
     public String getId() {
         return id;
     }
@@ -107,18 +108,20 @@ public class KhuyenMaiViewModel {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-    public String layTrangThai(){
+
+    public String layTrangThai() {
         if (trangThai == 0) {
             return "Đang diễn ra";
-        }else if (trangThai == 1) {
-             return "Sắp diễn ra";
-        }else{
+        } else if (trangThai == 1) {
+            return "Sắp diễn ra";
+        } else {
             return "Kết thúc";
-        }      
-     
+        }
+
     }
+
     public Object[] toDataRow() {
-        return new Object[]{id, ma, ngayBatDau, ngayKetThuc, giaGiam, donVi ? "Money" : "%" , moTa, layTrangThai()};
+        return new Object[]{id, ma, ngayBatDau, ngayKetThuc, giaGiam, donVi ? "Money" : "%", moTa, layTrangThai()};
 
     }
 }

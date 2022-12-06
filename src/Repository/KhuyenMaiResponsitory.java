@@ -44,6 +44,60 @@ public class KhuyenMaiResponsitory {
         return list;
     }
 
+    public List<KhuyenMaiViewModel> getAllvali(String maKM) {
+        String query = "SELECT [id]\n"
+                + "      ,[ma_khuyen_mai]\n"
+                + "      ,[ngay_bat_dau]\n"
+                + "      ,[ngay_ket_thuc]\n"
+                + "      ,[gia_giam]\n"
+                + "      ,[don_vi]\n"
+                + "      ,[mo_ta]\n"
+                + "      ,[trang_thai]\n"
+                + "  FROM [dbo].[KhuyenMai]\n"
+                + "  where ma_khuyen_mai = ?  ";
+        List<KhuyenMaiViewModel> list = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, maKM);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                KhuyenMaiViewModel km = new KhuyenMaiViewModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getDouble(5), rs.getBoolean(6), rs.getString(7), rs.getInt(8));
+                list.add(km);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return list;
+    }
+
+    public List<KhuyenMaiViewModel> getAllDem(int rowOffset) {
+        String query = "SELECT [id]\n"
+                + "      ,[ma_khuyen_mai]\n"
+                + "      ,[ngay_bat_dau]\n"
+                + "      ,[ngay_ket_thuc]\n"
+                + "      ,[gia_giam]\n"
+                + "      ,[don_vi]\n"
+                + "      ,[mo_ta]\n"
+                + "      ,[trang_thai]\n"
+                + "  FROM [dbo].[KhuyenMai]"
+                + "  order by id\n"
+                + "  offset ? rows\n"
+                + "  fetch next 5 rows only  ";
+        List<KhuyenMaiViewModel> list = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, rowOffset);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                KhuyenMaiViewModel km = new KhuyenMaiViewModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getDouble(5), rs.getBoolean(6), rs.getString(7), rs.getInt(8));
+                list.add(km);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return list;
+    }
+
     public boolean add(KhuyenMaiViewModel km) {
         String query = "INSERT INTO [dbo].[KhuyenMai]\n"
                 + "           ([ma_khuyen_mai]\n"
@@ -112,5 +166,4 @@ public class KhuyenMaiResponsitory {
         return check > 0;
     }
 
-    
 }

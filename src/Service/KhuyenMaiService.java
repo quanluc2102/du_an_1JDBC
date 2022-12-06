@@ -18,6 +18,8 @@ public interface KhuyenMaiService {
 
     void getAll(List<KhuyenMaiViewModel> list);
 
+    List<KhuyenMaiViewModel> getAllDem(int rowOffset);
+
     String add(KhuyenMaiViewModel km);
 
     String delete(String idKM);
