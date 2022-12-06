@@ -47,7 +47,7 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
         dcbm.addAll(listcombobox);
         dcbm.setSelectedItem("Sắp diễn ra");
         service.getAll(list);
-       // list = service.getAllDem(rowOffset);
+       list = service.getAllDem(rowOffset);
         System.out.println(rowOffset);
         o = service.getAllDem(rowOffset).size() / fetch;
         loadSoTrang();
