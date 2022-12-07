@@ -871,7 +871,7 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         TrangChuQuanLyView detail1 = new TrangChuQuanLyView("");
         this.dispose();
-        detail1.setVisible(true);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
