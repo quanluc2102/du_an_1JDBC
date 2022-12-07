@@ -7,6 +7,7 @@ package Repository;
 import DomainModel.NhanVien;
 import Ultilities.SQLServerConnection;
 import ViewModel.LoginViewModel;
+import ViewModel.loginWebCamView;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +28,7 @@ public class LoginRepository {
             PreparedStatement ps = conn.prepareCall(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ls.add(new LoginViewModel(rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4)));
+                ls.add(new LoginViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
             }
             return ls;
         } catch (SQLException e) {
@@ -37,10 +38,30 @@ public class LoginRepository {
 
     }
 
+    public List<loginWebCamView> getAllWebCam() {
+        List<loginWebCamView> ls = new ArrayList<>();
+        try ( Connection conn = new SQLServerConnection().getConnection()) {
+            String query = "SELECT        dbo.ChucVu.ma_chuc_vu, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.cmnd\n"
+                    + "FROM            dbo.NhanVien INNER JOIN\n"
+                    + "                         dbo.ChucVu ON dbo.NhanVien.id_chuc_vu = dbo.ChucVu.id";
+            PreparedStatement ps = conn.prepareCall(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ls.add(new loginWebCamView( rs.getString(1), rs.getString(2), rs.getString(3)));
+            }
+           
+            return ls;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
     public static void main(String[] args) {
-        List<LoginViewModel> l = new LoginRepository().getAll();
-        for (LoginViewModel nhanVien : l) {
-            System.out.println(nhanVien.getCmnd());
+        List<loginWebCamView> l = new LoginRepository().getAllWebCam();
+        for (loginWebCamView nhanVien : l) {
+            System.out.println(nhanVien.toString());
         }
     }
 
@@ -80,5 +101,5 @@ public class LoginRepository {
         }
 
     }
-   
+
 }

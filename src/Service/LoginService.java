@@ -21,5 +21,5 @@ public interface LoginService {
 
     String dangKi(NhanVien nv);
  
-    Boolean loginWebCam(String cmnd);
+    String loginWebCam(String cmnd);
 }

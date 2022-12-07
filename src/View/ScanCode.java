@@ -180,7 +180,7 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            ScanCode sc = new ScanCode(new javax.swing.JFrame(), true, 0);
+            ScanCode sc = new ScanCode(new javax.swing.JFrame(), true, 1);
             sc.setVisible(true);
         });
     }
@@ -230,7 +230,9 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
 
             if (result != null) {
                 scr = result.getText();
-                txtCode.setText(scr); 
+                txtCode.setText(scr);
+//                this.dispose();
+//                webcam.close();
                 break;
 
             }

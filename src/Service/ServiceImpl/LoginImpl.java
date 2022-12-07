@@ -10,6 +10,7 @@ import Repository.ChucVuRepository;
 import Repository.LoginRepository;
 import Service.LoginService;
 import ViewModel.LoginViewModel;
+import ViewModel.loginWebCamView;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,17 +67,30 @@ public class LoginImpl implements LoginService {
     }
 
     @Override
-    public Boolean loginWebCam(String cmnd) {
+    public String loginWebCam(String cmnd) {
 
-        List<LoginViewModel> lg = new LoginRepository().getAll();
-
-        for (LoginViewModel x : lg) {
-
-            if (x.getCmnd().equalsIgnoreCase(cmnd)) {
-                return true;
+//        List<LoginViewModel> lg = new LoginRepository().getAll();
+//
+//        for (LoginViewModel x : lg) {
+//
+//            if (x.getCmnd().equalsIgnoreCase(cmnd) && x.getTenCV().equalsIgnoreCase("Nhân viên")){
+//                return "NV";
+//            }
+//            if (x.getCmnd().equalsIgnoreCase(cmnd) && x.getTenCV().equalsIgnoreCase("Quản lý")) {
+//                return "QL";
+//            }
+//        }
+//        return "NOT";
+//    }
+        List<loginWebCamView> lg = new LoginRepository().getAllWebCam();
+        for (loginWebCamView loginViewModel : lg) {
+            if (loginViewModel.getCmnd().equalsIgnoreCase(cmnd) && loginViewModel.getTenChucVu().equalsIgnoreCase("Nhân viên")) {
+                return "NV";
             }
-
+            if (loginViewModel.getCmnd().equalsIgnoreCase(cmnd) && loginViewModel.getTenChucVu().equalsIgnoreCase("Quản lý")) {
+                return "QL";
+            }
         }
-        return false;
+        return "NOT";
     }
 }

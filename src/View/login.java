@@ -50,6 +50,7 @@ public class login extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        ccbWebcam = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -175,13 +176,16 @@ public class login extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
 
-        jButton1.setText("jButton1");
+        jButton1.setText("QR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 440, -1, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
+
+        ccbWebcam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "WebCam LapTop", "WebCam Điện thoại", " " }));
+        jPanel2.add(ccbWebcam, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 320, 480));
 
@@ -239,7 +243,7 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPassActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-      DangKyView bhv = new DangKyView();
+        DangKyView bhv = new DangKyView();
         this.dispose();
         bhv.setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
@@ -283,9 +287,9 @@ public class login extends javax.swing.JFrame {
 //        } 
 //        }
 //        
-    
+
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-         NhanVien nv = new NhanVien();
+        NhanVien nv = new NhanVien();
         String userID = txtID.getText();
         String userPass = txtPass.getText();
         String thongBao = impl.login(userID, userPass);
@@ -306,13 +310,40 @@ public class login extends javax.swing.JFrame {
             conf2 = true;
         }
         if (conf2 == true && conf1 == true) {
-               System.out.println(thongBao);
+            System.out.println(thongBao);
+            if (thongBao.contains("NOT")) {
+                JOptionPane.showMessageDialog(this, "tai khoan hoac mat khau khong dung");
+            } else {
+                if (thongBao.contains("NV")) {
+//                TrangChuNhanVienView nvv = new TrangChuNhanVienView(this, true);
+                    TrangChuNhanVienView nvv = new TrangChuNhanVienView();
+                    nvv.setVisible(true);
+                }
+                if (thongBao.contains("QL")) {
+                    TrangChuQuanLyView ql = new TrangChuQuanLyView(txtID.getText());
+                    ql.setVisible(true);
+                }
+                this.dispose();
+            }
+        }
+
+
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String cmnd = "";
+        int camera = ccbWebcam.getSelectedIndex();
+        ScanCode sc = new ScanCode(new java.awt.Frame(), true, camera);
+        sc.setVisible(true);
+        cmnd = sc.getScanResutlx().substring(0,12);
+        System.out.println(cmnd);
+        String thongBao = impl.loginWebCam(cmnd);
+
         if (thongBao.contains("NOT")) {
-            JOptionPane.showMessageDialog(this, "tai khoan hoac mat khau khong dung");
+            JOptionPane.showMessageDialog(this, "sai");
         } else {
             if (thongBao.contains("NV")) {
-//                TrangChuNhanVienView nvv = new TrangChuNhanVienView(this, true);
-TrangChuNhanVienView nvv = new TrangChuNhanVienView();
+                TrangChuNhanVienView nvv = new TrangChuNhanVienView();
                 nvv.setVisible(true);
             }
             if (thongBao.contains("QL")) {
@@ -320,23 +351,7 @@ TrangChuNhanVienView nvv = new TrangChuNhanVienView();
                 ql.setVisible(true);
             }
             this.dispose();
-        } 
         }
-        
-    
-    }//GEN-LAST:event_jLabel6MouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ScanCode sc = new ScanCode(new javax.swing.JFrame(), true, 1);
-            sc.setVisible(true);
-           String x = sc.login().substring(0,12);
-           if ( impl.loginWebCam(x)) {
-             TrangChuQuanLyView ql = new TrangChuQuanLyView(txtID.getText());
-                ql.setVisible(true);
-        } else {
-               JOptionPane.showConfirmDialog(rootPane,"Sai");
-        }
-         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -378,6 +393,7 @@ TrangChuNhanVienView nvv = new TrangChuNhanVienView();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ccbWebcam;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
