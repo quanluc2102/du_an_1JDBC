@@ -23,11 +23,11 @@ public class LoginRepository {
     public List<LoginViewModel> getAll() {
         List<LoginViewModel> ls = new ArrayList<>();
         try ( Connection conn = new SQLServerConnection().getConnection()) {
-            String query = "Select ma_nhan_vien,mat_khau,ten_chuc_vu from NhanVien join ChucVu on NhanVien.id_chuc_vu = ChucVu.id";
+            String query = "Select ma_nhan_vien,mat_khau,ten_chuc_vu,cmnd from NhanVien join ChucVu on NhanVien.id_chuc_vu = ChucVu.id";
             PreparedStatement ps = conn.prepareCall(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ls.add(new LoginViewModel(rs.getString(1), rs.getString(2), rs.getString(3)));
+                ls.add(new LoginViewModel(rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4)));
             }
             return ls;
         } catch (SQLException e) {

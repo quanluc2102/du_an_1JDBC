@@ -20,11 +20,12 @@ public class NhanVien {
     private String diaChi;
    private String matKhau;
    private int trangThai;
+   private String cmnd;
 
     public NhanVien() {
     }
 
-    public NhanVien(String id, String ma, String ten, String idChucVu, String ngaySinh, String sdt, String email, String diaChi, String matKhau, int trangThai) {
+    public NhanVien(String id, String ma, String ten, String idChucVu, String ngaySinh, String sdt, String email, String diaChi, String matKhau, int trangThai, String cmnd) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -35,7 +36,18 @@ public class NhanVien {
         this.diaChi = diaChi;
         this.matKhau = matKhau;
         this.trangThai = trangThai;
+        this.cmnd = cmnd;
     }
+
+    public String getCmnd() {
+        return cmnd;
+    }
+
+    public void setCmnd(String cmnd) {
+        this.cmnd = cmnd;
+    }
+
+    
 
     public NhanVien(String ma, String ten) {
         this.ma = ma;

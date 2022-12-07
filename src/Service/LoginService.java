@@ -20,5 +20,6 @@ public interface LoginService {
     List<String> IDChucVu();
 
     String dangKi(NhanVien nv);
-
+ 
+    String loginWebCam(String cmnd);
 }

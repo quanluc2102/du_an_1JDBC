@@ -12,13 +12,24 @@ public class LoginViewModel {
     private String ma;
     private String matKhau;
     private String tenCV;
+    private String cmnd;
 
-    public LoginViewModel(String ma, String matKhau, String tenCV) {
+    public LoginViewModel(String ma, String matKhau, String tenCV, String cmnd) {
         this.ma = ma;
         this.matKhau = matKhau;
         this.tenCV = tenCV;
+        this.cmnd = cmnd;
     }
 
+    public String getCmnd() {
+        return cmnd;
+    }
+
+    public void setCmnd(String cmnd) {
+        this.cmnd = cmnd;
+    }
+
+ 
     public LoginViewModel() {
     }
 
@@ -48,8 +59,10 @@ public class LoginViewModel {
 
     @Override
     public String toString() {
-        return "LoginViewModel{" + "ma=" + ma + ", matKhau=" + matKhau + ", tenCV=" + tenCV + '}';
+        return "LoginViewModel{" + "ma=" + ma + ", matKhau=" + matKhau + ", tenCV=" + tenCV + ", cmnd=" + cmnd + '}';
     }
+
+  
 
     
     

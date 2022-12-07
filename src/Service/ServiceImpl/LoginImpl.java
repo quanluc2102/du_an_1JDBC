@@ -62,6 +62,18 @@ public class LoginImpl implements LoginService{
         }
 
         return "them that bai";    }    
+
+    @Override
+    public String loginWebCam(String cmnd) {
+  List<LoginViewModel> lg = new LoginRepository().getAll();
+        for (LoginViewModel loginViewModel : lg) {
+            if (loginViewModel.getCmnd().equalsIgnoreCase(cmnd)&&loginViewModel.getTenCV().equalsIgnoreCase("Nhân viên")) {
+                return "NV";
+            }if (loginViewModel.getMa().equalsIgnoreCase(cmnd)&&loginViewModel.getTenCV().equalsIgnoreCase("Quản lý")) {
+                return "QL";
+            }
+        }
+        return "NOT";    }
 }
  
         

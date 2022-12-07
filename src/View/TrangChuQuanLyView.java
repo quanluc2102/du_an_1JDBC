@@ -41,7 +41,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
 
     public TrangChuQuanLyView(String a) {
         initComponents();
-        String header[] = {"id", "Mã Nhân viên", "Tên Nhân viên", "id Chức vụ", "Chức vụ", "Ngày sinh", "SDT", "Email", "Địa chỉ", "Mật khẩu", "Trạng thái"};
+        String header[] = {"id", "Mã Nhân viên", "Tên Nhân viên", "id Chức vụ", "Chức vụ", "Ngày sinh", "SDT", "Email", "Địa chỉ", "Mật khẩu", "Trạng thái","CMND"};
         tbNV.setModel(dtm);
         dtm.setColumnIdentifiers(header);
         listNV = impl.getAll();

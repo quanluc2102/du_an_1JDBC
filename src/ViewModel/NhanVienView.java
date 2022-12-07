@@ -20,11 +20,20 @@ public class NhanVienView {
     private String diaChi;
     private String matKhau;
     private int trangThai;
+    private String cmnd;
 
     public NhanVienView() {
     }
 
-    public NhanVienView(String id, String ma, String ten, String idChucVu, String tenChucVu, String ngaySinh, String sdt, String email, String diaChi, String matKhau, int trangThai) {
+    public String getCmnd() {
+        return cmnd;
+    }
+
+    public void setCmnd(String cmnd) {
+        this.cmnd = cmnd;
+    }
+
+    public NhanVienView(String id, String ma, String ten, String idChucVu, String tenChucVu, String ngaySinh, String sdt, String email, String diaChi, String matKhau, int trangThai, String cmnd) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -36,7 +45,9 @@ public class NhanVienView {
         this.diaChi = diaChi;
         this.matKhau = matKhau;
         this.trangThai = trangThai;
+        this.cmnd = cmnd;
     }
+
 
     public String getId() {
         return id;
@@ -138,7 +149,7 @@ public class NhanVienView {
     }
 
     public Object[] toData(){
-        return new Object[]{id,ma,ten,idChucVu,tenChucVu,ngaySinh,sdt,email,diaChi,matKhau,tentrangThai(trangThai)};
+        return new Object[]{id,ma,ten,idChucVu,tenChucVu,ngaySinh,sdt,email,diaChi,matKhau,tentrangThai(trangThai),cmnd};
     }
     
     

@@ -25,14 +25,15 @@ public class NhanVienRepository {
         List<NhanVienView> ls = new ArrayList<>();
         try ( Connection conn = new SQLServerConnection().getConnection()) {
             String query = "SELECT        dbo.NhanVien.id, dbo.NhanVien.ma_nhan_vien, dbo.NhanVien.ten_nhan_vien, dbo.NhanVien.id_chuc_vu, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.ngay_sinh, dbo.NhanVien.sdt, dbo.NhanVien.email, dbo.NhanVien.dia_chi, \n"
-                    + "                         dbo.NhanVien.mat_khau, dbo.NhanVien.trang_thai\n"
-                    + "FROM            dbo.NhanVien left JOIN\n"
-                    + "                         dbo.ChucVu ON dbo.NhanVien.id_chuc_vu = dbo.ChucVu.id";
+                    + "                         dbo.NhanVien.mat_khau, dbo.NhanVien.trang_thai, dbo.NhanVien.cmnd\n"
+                    + "FROM            dbo.ChucVu RIGHT OUTER JOIN\n"
+                    + "                         dbo.NhanVien ON dbo.ChucVu.id = dbo.NhanVien.id_chuc_vu";
             PreparedStatement ps = conn.prepareCall(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ls.add(new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11)));
+                ls.add(new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11), rs.getString(12)));
             }
+//            rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11)),rs.getString(12)
             return ls;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,7 +49,7 @@ public class NhanVienRepository {
             PreparedStatement ps = conn.prepareCall(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ls.add(new NhanVien(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10)));
+                ls.add(new NhanVien(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10), rs.getString(11)));
             }
             return ls;
         } catch (SQLException e) {
@@ -168,7 +169,7 @@ public class NhanVienRepository {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                NhanVienView nv = new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11));
+                NhanVienView nv = new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11),rs.getString(12));
                 list.add(nv);
             }
 
@@ -189,7 +190,7 @@ public class NhanVienRepository {
 
             List<NhanVienView> list = new ArrayList<>();
             while (rs.next()) {
-                NhanVienView kh = new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11));
+                NhanVienView kh = new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11),rs.getString(12));
                 list.add(kh);
             }
             return list;
