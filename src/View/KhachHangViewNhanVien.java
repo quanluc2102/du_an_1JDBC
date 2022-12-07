@@ -100,6 +100,7 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
         btBackEnd = new javax.swing.JButton();
         lbls = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -394,6 +395,13 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
+        jButton2.setText("Quay lai");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -403,13 +411,20 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(99, 99, 99)
                                 .addComponent(btAdd)
-                                .addGap(262, 262, 262)
-                                .addComponent(jButton1))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addGap(59, 59, 59))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)
+                                .addGap(158, 158, 158))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(260, 260, 260)
                         .addComponent(jLabel1)))
@@ -428,8 +443,10 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btAdd)
-                            .addComponent(jButton1))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                            .addComponent(jButton1))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -674,7 +691,7 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
         if (txtSearch.getText().isEmpty()) {
             index++;
             rowOffset += 5;
-            if (rowOffset > service.getAllKhachHang1().size()-1) {
+            if (rowOffset > service.getAllKhachHang1().size() - 1) {
                 rowOffset = 0;
                 index = 0;
             }
@@ -798,7 +815,7 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
         if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
             index = o;        // TODO add your handling code here:
             int c = service.getAllKhachHang1().size() % fetch;
-            rowOffset = service.getAllKhachHang1().size() -  c;
+            rowOffset = service.getAllKhachHang1().size() - c;
             listKhachHangView = service.getAllKhachHang(rowOffset);
             service.showDataTable(dtm, listKhachHangView);
             loadSoTrang();
@@ -824,6 +841,13 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btBackEndActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        BanHangView detail1 = new BanHangView();
+        this.dispose();
+        detail1.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -903,6 +927,7 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbbSearch;
     private javax.swing.JLabel id;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

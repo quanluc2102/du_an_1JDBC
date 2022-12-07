@@ -869,8 +869,9 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-
+        TrangChuQuanLyView detail1 = new TrangChuQuanLyView("");
         this.dispose();
+        detail1.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
