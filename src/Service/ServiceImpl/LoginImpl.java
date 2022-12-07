@@ -17,15 +17,16 @@ import java.util.List;
  *
  * @author buiti
  */
-public class LoginImpl implements LoginService{
+public class LoginImpl implements LoginService {
 
     @Override
     public String login(String username, String pass) {
         List<LoginViewModel> lg = new LoginRepository().getAll();
         for (LoginViewModel loginViewModel : lg) {
-            if (loginViewModel.getMa().equalsIgnoreCase(username)&&loginViewModel.getMatKhau().equalsIgnoreCase(pass)&&loginViewModel.getTenCV().equalsIgnoreCase("Nhân viên")) {
+            if (loginViewModel.getMa().equalsIgnoreCase(username) && loginViewModel.getMatKhau().equalsIgnoreCase(pass) && loginViewModel.getTenCV().equalsIgnoreCase("Nhân viên")) {
                 return "NV";
-            }if (loginViewModel.getMa().equalsIgnoreCase(username)&&loginViewModel.getMatKhau().equalsIgnoreCase(pass)&&loginViewModel.getTenCV().equalsIgnoreCase("Quản lý")) {
+            }
+            if (loginViewModel.getMa().equalsIgnoreCase(username) && loginViewModel.getMatKhau().equalsIgnoreCase(pass) && loginViewModel.getTenCV().equalsIgnoreCase("Quản lý")) {
                 return "QL";
             }
         }
@@ -34,18 +35,18 @@ public class LoginImpl implements LoginService{
 
     @Override
     public List<String> ChucVuCBB() {
- List<String> cbb = new ArrayList<>();
+        List<String> cbb = new ArrayList<>();
         ChucVuRepository cv = new ChucVuRepository();
         List<ChucVu> fullCH = cv.getAll();
         for (ChucVu chucVu : fullCH) {
             cbb.add(chucVu.getTen());
         }
-        return cbb;    
+        return cbb;
     }
 
     @Override
     public List<String> IDChucVu() {
-   List<String> cbb = new ArrayList<>();
+        List<String> cbb = new ArrayList<>();
         ChucVuRepository cv = new ChucVuRepository();
         List<ChucVu> fullCH = cv.getAll();
         for (ChucVu chucVu : fullCH) {
@@ -56,26 +57,26 @@ public class LoginImpl implements LoginService{
 
     @Override
     public String dangKi(NhanVien nv) {
- LoginRepository nva = new LoginRepository();
+        LoginRepository nva = new LoginRepository();
         if (nva.addNV(nv)) {
             return "them thanh cong";
         }
 
-        return "them that bai";    }    
+        return "them that bai";
+    }
 
     @Override
     public String loginWebCam(String cmnd) {
-  List<LoginViewModel> lg = new LoginRepository().getAll();
-        for (LoginViewModel loginViewModel : lg) {
-            if (loginViewModel.getCmnd().equalsIgnoreCase(cmnd)&&loginViewModel.getTenCV().equalsIgnoreCase("Nhân viên")) {
-                return "NV";
-            }if (loginViewModel.getMa().equalsIgnoreCase(cmnd)&&loginViewModel.getTenCV().equalsIgnoreCase("Quản lý")) {
-                return "QL";
-            }
-        }
-        return "NOT";    }
-}
- 
-        
 
-  
+        List<LoginViewModel> lg = new LoginRepository().getAll();
+
+        for (LoginViewModel x : lg) {
+
+            if (x.getCmnd().equalsIgnoreCase(cmnd)) {
+                return "chúng mày tuổi";
+            }
+
+        }
+        return "Không chính xác";
+    }
+}

@@ -208,6 +208,11 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
         jButton3.setText("Scan");
 
         jButton4.setText("Read");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -454,6 +459,23 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
         }
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+     
+         try {
+            JFileChooser jfc = new JFileChooser("C:\\Users\\haha\\Desktop\\ds\\source");
+            
+            
+            jfc.setMultiSelectionEnabled(false);
+            jfc.showOpenDialog(null);
+            File file = jfc.getSelectedFile();
+            link = file.getPath();
+            JOptionPane.showMessageDialog(this, exs.barCode("355693101282070",link));
+
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

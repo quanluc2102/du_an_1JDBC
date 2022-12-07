@@ -40,7 +40,7 @@ public class LoginRepository {
     public static void main(String[] args) {
         List<LoginViewModel> l = new LoginRepository().getAll();
         for (LoginViewModel nhanVien : l) {
-            System.out.println(nhanVien.toString());
+            System.out.println(nhanVien.getCmnd());
         }
     }
 
@@ -80,4 +80,5 @@ public class LoginRepository {
         }
 
     }
+   
 }
