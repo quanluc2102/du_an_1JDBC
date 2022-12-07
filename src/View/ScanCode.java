@@ -22,7 +22,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,10 +32,11 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
     LoginService lgs = new LoginImpl();
     private WebcamPanel panel = null;
     private Webcam webcam = null;
-    int port = 0;
+
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
-    String cmd ;
+    String cmd;
+    String scr = "";
 
     /**
      * Creates new form ScanCode
@@ -44,10 +44,18 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
     public ScanCode(java.awt.Frame parent, boolean modal, int x) {
         super(parent, modal);
         initComponents();
-        initWebcam();
+        initWebcam(x);
         ImageIcon iconx = new ImageIcon("source\\image\\barcode-reader-regular-24.png");
         this.setIconImage(iconx.getImage());
-        port = 5;
+        ;
+    }
+
+    public String getScanResutlx() {
+        if (scr.isBlank()) {
+            scr = "Đầu vào không hợp lệ";
+        }
+        return scr;
+
     }
 
     /**
@@ -62,6 +70,8 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
         pnShowCam = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txtCode = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Scan Code");
@@ -87,18 +97,29 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
 
         pnShowCam.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 380));
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit-regular-24.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(pnShowCam, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(pnShowCam, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addComponent(jSeparator1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -106,9 +127,13 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(pnShowCam, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addGap(6, 6, 6)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtCode, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -117,7 +142,14 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         webcam.close();
+        this.dispose();
+
     }//GEN-LAST:event_formWindowClosed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        webcam.close();
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,16 +180,14 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            ScanCode sc = new ScanCode(new javax.swing.JFrame(), true, 1);
+            ScanCode sc = new ScanCode(new javax.swing.JFrame(), true, 0);
             sc.setVisible(true);
         });
     }
-    public String login(){
-        return cmd;
-    }
-    private void initWebcam() {
+
+    private void initWebcam(int port) {
         Dimension size = WebcamResolution.QVGA.getSize();
-        webcam = Webcam.getWebcams().get(1);
+        webcam = Webcam.getWebcams().get(port);
         webcam.setViewSize(size);
 
         panel = new WebcamPanel(webcam);
@@ -199,13 +229,9 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
             }
 
             if (result != null) {
-                String cdm = result.getText();
-                txtCode.setText(cdm);
-//                new TrangChuQuanLyView(lgs.loginWebCam(cdm)).setVisible(true);
-                webcam.close();
-                this.dispose();
+                scr = result.getText();
+                txtCode.setText(scr); 
                 break;
-                
 
             }
         } while (true || webcam.isOpen());
@@ -219,7 +245,9 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel pnShowCam;
     private javax.swing.JTextField txtCode;
     // End of variables declaration//GEN-END:variables

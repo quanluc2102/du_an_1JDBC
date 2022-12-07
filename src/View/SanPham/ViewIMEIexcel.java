@@ -6,6 +6,7 @@ package View.SanPham;
 
 import Service.ExcelServices;
 import Service.ServiceImpl.ExcelServicesImpl;
+import View.ScanCode;
 import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;
@@ -88,9 +89,10 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        cbbPort = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         txtSearch.setForeground(new java.awt.Color(153, 153, 153));
         txtSearch.setText("Tìm kiếm");
@@ -206,13 +208,13 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
         });
 
         jButton3.setText("Scan");
-
-        jButton4.setText("Read");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
+
+        cbbPort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Camera laptop", "Camera ngoài" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,7 +244,7 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
                                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbbPort, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -277,7 +279,7 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(cbbPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -460,22 +462,14 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-     
-         try {
-            JFileChooser jfc = new JFileChooser("C:\\Users\\haha\\Desktop\\ds\\source");
-            
-            
-            jfc.setMultiSelectionEnabled(false);
-            jfc.showOpenDialog(null);
-            File file = jfc.getSelectedFile();
-            link = file.getPath();
-            JOptionPane.showMessageDialog(this, exs.barCode("355693101282070",link));
-
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+     String scanImei = "";
+     int camera = cbbPort.getSelectedIndex();
+        ScanCode sc = new ScanCode(new java.awt.Frame(), true, camera);
+        sc.setVisible(true);
+        scanImei = sc.getScanResutlx();
+       JOptionPane.showMessageDialog(rootPane, scanImei);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -525,10 +519,10 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
     private javax.swing.JButton btnChon;
     private javax.swing.JButton btnU;
     private javax.swing.JButton btnX;
+    private javax.swing.JComboBox<String> cbbPort;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
