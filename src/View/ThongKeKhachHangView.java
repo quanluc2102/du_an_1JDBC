@@ -32,11 +32,12 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
     private ThongKeKhachHangService thongKeKhachHangService = new ThongKeKhachHangServiceImpl();
     int rowoffset = 0;
     int index = 0;
-
+    
     public ThongKeKhachHangView() {
         initComponents();
 //        tbHoaDonDaMua.setModel(dtmDaMua);
         tbSoLanMua.setModel(dtmSoLan);
+        tbSoLanMua1.setModel(dtmDaMua);
         String daMua[] = {"IMEI", "Ten san pham", "Ten Dong", "Gia ban"};
         String soLanMua[] = {"ID", "Ten Khach Hang", "So lan mua"};
         dtmDaMua.setColumnIdentifiers(daMua);
@@ -249,7 +250,7 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
                 thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSearch);
             }
         }
-
+        
         if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
             listSoLanMua = thongKeKhachHangService.getAllSoLanMua(rowoffset);
             thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.getAllSoLanMua(rowoffset));
@@ -270,33 +271,33 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
             }
             listSoLanMua = thongKeKhachHangService.getAllSoLanMuaKPT();
             thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.getAllSoLanMua(rowoffset));
-
+            
         } else {
-
+            
             if (!txtSearch.getText().isEmpty()) {
                 index++;
                 rowoffset += 5;
                 if (rowoffset > listSearchTen.size()) {
-
+                    
                     rowoffset = 0;
                     index = 0;
-
+                    
                 }
-
+                
                 thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.searchTen(name, rowoffset));
-
+                
             } else {
                 index++;
                 rowoffset += 5;
-
+                
                 if (rowoffset > listSoLanMua.size()) {
                     rowoffset = 0;
                     index = 0;
-
+                    
                 }
-
+                
                 thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.searchSoLanMua(soLan, rowoffset));
-
+                
             }
         }
 
@@ -315,9 +316,9 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
             }
             listSoLanMua = thongKeKhachHangService.getAllSoLanMua(rowoffset);
             thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSoLanMua);
-
+            
         } else {
-
+            
             if (!txtSearch.getText().isEmpty()) {
                 index--;
                 rowoffset -= 5;
@@ -325,22 +326,22 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
                     int c = listSearch.size() % fetch;
                     rowoffset = listSearch.size() - c;
                     index = o;
-
+                    
                 }
-
+                
                 thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.searchTen(name, rowoffset));
-
+                
             } else {
                 index--;
                 rowoffset -= 5;
-
+                
                 if (rowoffset < 0) {
                     int c = listSearch.size() % fetch;
                     rowoffset = listSearch.size() - c;
                     index = o;
-
+                    
                 }
-
+                
                 thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.searchSoLanMua(soLan, rowoffset));
             }
         }
