@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface ExcelServices {
         List<String> getFile(String link);
+        
+        String barCode(String nhap,String link);
 }

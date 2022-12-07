@@ -5,6 +5,7 @@
 package Service.ServiceImpl;
 
 import Service.ExcelServices;
+import com.barcodelib.barcode.Linear;
 import java.io.FileInputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -48,6 +49,20 @@ public class ExcelServicesImpl implements ExcelServices {
         }
 
         return ix;
+    }
+
+    @Override
+    public String barCode(String nhap, String link) {
+        try {
+            Linear barcode = new Linear();
+            barcode.setType(Linear.CODE128B);
+            barcode.setData(nhap);//nội dung cần chuyển
+            barcode.setI(11.0f);
+            barcode.renderBarcode(link);//vị trí xuất ảnh ra
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Xuất thất bại";
     }
 
 }
