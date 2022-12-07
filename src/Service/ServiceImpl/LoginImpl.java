@@ -66,17 +66,17 @@ public class LoginImpl implements LoginService {
     }
 
     @Override
-    public String loginWebCam(String cmnd) {
+    public Boolean loginWebCam(String cmnd) {
 
         List<LoginViewModel> lg = new LoginRepository().getAll();
 
         for (LoginViewModel x : lg) {
 
             if (x.getCmnd().equalsIgnoreCase(cmnd)) {
-                return "chúng mày tuổi";
+                return true;
             }
 
         }
-        return "Không chính xác";
+        return false;
     }
 }

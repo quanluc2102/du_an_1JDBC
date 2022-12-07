@@ -49,6 +49,7 @@ public class login extends javax.swing.JFrame {
         txtRPPAss = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -173,6 +174,14 @@ public class login extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 440, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 320, 480));
 
@@ -317,6 +326,19 @@ TrangChuNhanVienView nvv = new TrangChuNhanVienView();
     
     }//GEN-LAST:event_jLabel6MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ScanCode sc = new ScanCode(new javax.swing.JFrame(), true, 1);
+            sc.setVisible(true);
+           String x = sc.login().substring(0,12);
+           if ( impl.loginWebCam(x)) {
+             TrangChuQuanLyView ql = new TrangChuQuanLyView(txtID.getText());
+                ql.setVisible(true);
+        } else {
+               JOptionPane.showConfirmDialog(rootPane,"Sai");
+        }
+         
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -356,6 +378,7 @@ TrangChuNhanVienView nvv = new TrangChuNhanVienView();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

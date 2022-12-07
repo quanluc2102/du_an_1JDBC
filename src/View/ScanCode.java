@@ -36,6 +36,7 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
     int port = 0;
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
+    String cmd ;
 
     /**
      * Creates new form ScanCode
@@ -46,7 +47,7 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
         initWebcam();
         ImageIcon iconx = new ImageIcon("source\\image\\barcode-reader-regular-24.png");
         this.setIconImage(iconx.getImage());
-        port = x;
+        port = 5;
     }
 
     /**
@@ -147,14 +148,16 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            ScanCode sc = new ScanCode(new javax.swing.JFrame(), true, 0);
+            ScanCode sc = new ScanCode(new javax.swing.JFrame(), true, 1);
             sc.setVisible(true);
         });
     }
-
+    public String login(){
+        return cmd;
+    }
     private void initWebcam() {
         Dimension size = WebcamResolution.QVGA.getSize();
-        webcam = Webcam.getWebcams().get(port);
+        webcam = Webcam.getWebcams().get(1);
         webcam.setViewSize(size);
 
         panel = new WebcamPanel(webcam);
@@ -196,12 +199,13 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
             }
 
             if (result != null) {
-                String cdm = result.getText().substring(0, 12);
+                String cdm = result.getText();
                 txtCode.setText(cdm);
-                JOptionPane.showMessageDialog(rootPane, lgs.loginWebCam(cdm));
-                new TrangChuQuanLyView(lgs.loginWebCam(cdm)).setVisible(true);
+//                new TrangChuQuanLyView(lgs.loginWebCam(cdm)).setVisible(true);
                 webcam.close();
                 this.dispose();
+                break;
+                
 
             }
         } while (true || webcam.isOpen());
