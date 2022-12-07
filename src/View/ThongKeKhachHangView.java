@@ -32,7 +32,7 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
     private ThongKeKhachHangService thongKeKhachHangService = new ThongKeKhachHangServiceImpl();
     int rowoffset = 0;
     int index = 0;
-    
+
     public ThongKeKhachHangView() {
         initComponents();
 //        tbHoaDonDaMua.setModel(dtmDaMua);
@@ -110,23 +110,33 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setText("jButton1");
+        jButton1.setText("||<");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("jButton1");
+        jButton3.setText("<");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("jButton1");
+        jButton2.setText(">");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton4.setText("jButton1");
+        jButton4.setText(">||");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Tìm kiem theo ten: ");
 
@@ -193,14 +203,14 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
                         .addGap(268, 268, 268)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -250,7 +260,7 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
                 thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSearch);
             }
         }
-        
+
         if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
             listSoLanMua = thongKeKhachHangService.getAllSoLanMua(rowoffset);
             thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.getAllSoLanMua(rowoffset));
@@ -271,33 +281,33 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
             }
             listSoLanMua = thongKeKhachHangService.getAllSoLanMuaKPT();
             thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.getAllSoLanMua(rowoffset));
-            
+
         } else {
-            
+
             if (!txtSearch.getText().isEmpty()) {
                 index++;
                 rowoffset += 5;
                 if (rowoffset > listSearchTen.size()) {
-                    
+
                     rowoffset = 0;
                     index = 0;
-                    
+
                 }
-                
+
                 thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.searchTen(name, rowoffset));
-                
+
             } else {
                 index++;
                 rowoffset += 5;
-                
+
                 if (rowoffset > listSoLanMua.size()) {
                     rowoffset = 0;
                     index = 0;
-                    
+
                 }
-                
+
                 thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.searchSoLanMua(soLan, rowoffset));
-                
+
             }
         }
 
@@ -316,9 +326,9 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
             }
             listSoLanMua = thongKeKhachHangService.getAllSoLanMua(rowoffset);
             thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSoLanMua);
-            
+
         } else {
-            
+
             if (!txtSearch.getText().isEmpty()) {
                 index--;
                 rowoffset -= 5;
@@ -326,22 +336,22 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
                     int c = listSearch.size() % fetch;
                     rowoffset = listSearch.size() - c;
                     index = o;
-                    
+
                 }
-                
+
                 thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.searchTen(name, rowoffset));
-                
+
             } else {
                 index--;
                 rowoffset -= 5;
-                
+
                 if (rowoffset < 0) {
                     int c = listSearch.size() % fetch;
                     rowoffset = listSearch.size() - c;
                     index = o;
-                    
+
                 }
-                
+
                 thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.searchSoLanMua(soLan, rowoffset));
             }
         }
@@ -350,6 +360,44 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
     private void tbSoLanMua1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSoLanMua1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tbSoLanMua1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
+            index = 0;        // TODO add your handling code here:
+            int c = thongKeKhachHangService.getAllSoLanMuaKPT().size() % fetch;
+            rowoffset = 0;
+            listSoLanMua = thongKeKhachHangService.getAllSoLanMua(rowoffset);
+            thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSoLanMua);
+        } else {
+            index = 0;        // TODO add your handling code here:
+            int c = thongKeKhachHangService.getAllSoLanMuaKPT().size() % fetch;
+            rowoffset = 0;
+            listSearchTen = thongKeKhachHangService.searchTen(name, rowoffset);
+            thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSearchTen);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
+            index = o;        // TODO add your handling code here:
+            int c = thongKeKhachHangService.getAllSoLanMuaKPT().size() % fetch;
+            rowoffset = thongKeKhachHangService.getAllSoLanMuaKPT().size() - c;
+            listSoLanMua = thongKeKhachHangService.getAllSoLanMua(rowoffset);
+            thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSoLanMua);
+        } else {
+
+            // TODO add your handling code here:
+            int c = listSearchTen.size() / fetch;
+            index = listSearchTen.size() / fetch;
+            rowoffset = thongKeKhachHangService.searchTen(name, rowoffset).size() - c;
+            listSearchTen = thongKeKhachHangService.searchTen(name, rowoffset);
+            thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSearchTen);
+
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
