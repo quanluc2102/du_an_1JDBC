@@ -83,7 +83,7 @@ public class ThongKeView extends javax.swing.JFrame {
         dtmSoLan.setColumnIdentifiers(soLanMua);
         listSoLanMua = thongKeKhachHangService.getAllSoLanMua(rowoffset);
         thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSoLanMua);
-        
+
     }
 
     private double ThanhTien(List<ThongKeViewModel> x) {
@@ -476,7 +476,7 @@ public class ThongKeView extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 144, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -524,7 +524,7 @@ public class ThongKeView extends javax.swing.JFrame {
                 .addGap(25, 25, 25))
         );
 
-        jTabbedPane2.addTab("tab2", jPanel2);
+        jTabbedPane2.addTab("Khach hang", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -621,10 +621,6 @@ public class ThongKeView extends javax.swing.JFrame {
         String id = thongKeKhachHangService.getAllSoLanMua(rowoffset).get(row).getID();
         listSPDM = thongKeKhachHangService.getAllSPDM(id);
         thongKeKhachHangService.showDataTableSPDM(dtmDaMua, listSPDM);
-        System.out.println(id);
-        for (SanPhamDaMuaViewModel sanPhamDaMuaViewModel : listSPDM) {
-            System.out.println(sanPhamDaMuaViewModel.toString());
-        }
     }//GEN-LAST:event_tbSoLanMuaMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
