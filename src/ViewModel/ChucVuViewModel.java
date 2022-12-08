@@ -25,10 +25,12 @@ public class ChucVuViewModel {
         this.ten = ten;
     }
 
-    public ChucVuViewModel(String ma, String maNV) {
+    public ChucVuViewModel(String ma, String ten) {
         this.ma = ma;
-        this.maNV = maNV;
+        this.ten = ten;
     }
+
+  
 
     public ChucVuViewModel(String id, String ma, String maNV, String ten, String tenNV) {
         this.id = id;

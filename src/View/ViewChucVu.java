@@ -23,6 +23,7 @@ public class ViewChucVu extends javax.swing.JFrame {
      * Creates new form ViewChucVu
      */
     private DefaultTableModel dtm;
+    private DefaultTableModel dtbm;
     private ChucVuServiceImpl chucVuImpl = new ChucVuServiceImpl();
     private List<ChucVuViewModel> listChucVuView;
     private List<NhanVien> listNhanVien = new ArrayList<>();
@@ -36,9 +37,9 @@ public class ViewChucVu extends javax.swing.JFrame {
         dtm.setColumnIdentifiers(heards);
         listChucVuView = chucVuImpl.getAll();
         chucVuImpl.showDaTa(listChucVuView, dtm);
-        tbNhanVien.setModel(dtm = new DefaultTableModel());
+        tbNhanVien.setModel(dtbm = new DefaultTableModel());
         String[] heards1 = {"Mã Nhân Viên", "Tên Nhân Viên"};
-        dtm.setColumnIdentifiers(heards1);
+        dtbm.setColumnIdentifiers(heards1);
 
     }
 
@@ -50,10 +51,10 @@ public class ViewChucVu extends javax.swing.JFrame {
     }
 
     private void showDaTa(List<NhanVien> listNV) {
-        dtm.setRowCount(0);
+        dtbm.setRowCount(0);
         for (NhanVien x : listNV) {
             Object[] row = new Object[]{x.getMa(), x.getTen()};
-            dtm.addRow(row);
+            dtbm.addRow(row);
         }
     }
 
@@ -288,11 +289,19 @@ public class ViewChucVu extends javax.swing.JFrame {
             ChucVuViewModel chucVu = new ChucVuViewModel(ma, ten);
             JOptionPane.showMessageDialog(this, chucVuImpl.add(chucVu));
             listChucVuView.add(chucVu);
+            listChucVuView = chucVuImpl.getAll();
             chucVuImpl.showDaTa(listChucVuView, dtm);
         } else {
             JOptionPane.showMessageDialog(this, "Mã bị trùng");
 
         }
+//         ChucVuViewModel cvv = new ChucVuViewModel();
+//        cvv.setMa(txtMa.getText());
+//        cvv.setTen(txtTen.getText());
+//          ChucVuViewModel cv = chucVuImpl.getOne( cvv.setMa(txtMa.getText()));
+//        JOptionPane.showConfirmDialog(rootPane, chucVuImpl.add(cvv));
+//        listChucVuView = chucVuImpl.getAll();
+//        chucVuImpl.showDaTa(listChucVuView, dtm);
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnQuayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayActionPerformed

@@ -4,7 +4,6 @@
  */
 package Service.ServiceImpl;
 
-import DomainModel.ChucVu;
 import DomainModel.NhanVien;
 import Repository.ChucVuRepository;
 import Service.ChucVuService;
@@ -36,12 +35,14 @@ public class ChucVuServiceImpl implements ChucVuService {
 
     @Override
     public String add(ChucVuViewModel chucVu) {
-        if (chucVu.getMa().isEmpty()) {
-            return "Mã chức vụ không được để trống";
-        }
-        if (chucVu.getTen().isEmpty()) {
-            return "Tên chức vụ không được để trống";
-        }
+        
+        if (chucVu.getMa().isEmpty()&& chucVu.getTen().isEmpty()) {
+            return "Mã chức vụ  và tên chức vụ không được để trống";
+        } else if (chucVu.getMa().isEmpty()) {
+            return "Mã  chức vụ không được để trống";
+        } else if (chucVu.getTen().isEmpty() ) {
+            return "Tên chức vụ không để trống  ";
+        } else;
         boolean add = cvRespository.add(chucVu);
         if (add == true) {
             return "Add thành công";
@@ -54,7 +55,6 @@ public class ChucVuServiceImpl implements ChucVuService {
     public ChucVuViewModel getOne(String ma) {
         return cvRespository.getOne(ma);
     }
-
 
     @Override
     public List<NhanVien> getLisst(String ma) {
