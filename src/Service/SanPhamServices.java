@@ -39,7 +39,7 @@ public interface SanPhamServices {
 
     List<String> getImei(String id);
 
-    List<HeDieuHanh> getHDH();
+    List<HeDieuHanh> getHDH(int x);
 
     String addHDH(HeDieuHanh hdh);
 
@@ -47,52 +47,68 @@ public interface SanPhamServices {
 
     String suaHDH(HeDieuHanh hdh);
 
-    List<Pin> getPin();
+    String xoaHDH(HeDieuHanh hdh, int tt);
+
+    List<Pin> getPin(int x);
 
     String addPin(Pin hdh);
 
     String suaPin(Pin hdh);
 
-    List<ThietKe> getTK();
+    String xoaPin(Pin hdh,int tt);
+
+    List<ThietKe> getTK(int x);
 
     String addTK(ThietKe tk);
 
     String suaTK(ThietKe tk);
+
+    String xoaTK(ThietKe tk, int tt);
 
     List<BoNho> getBN(int i);
 
     String addBN(BoNho tk);
 
     String suaBN(BoNho tk);
-    String xoaBN(BoNho tk,int tt);
 
-    List<Cpu> getCPU();
+    String xoaBN(BoNho tk, int tt);
+
+    List<Cpu> getCPU(int x);
 
     String addCPU(Cpu tk);
 
     String suaCPU(Cpu tk);
 
-    List<MauSac> getMauSacs();
+    String xoaCPU(Cpu tk, int tt);
+
+    List<MauSac> getMauSacs(int x);
 
     String addMauSac(MauSac tk);
 
     String suaMauSac(MauSac tk);
+    String xoaMauSac(MauSac tk,int tt);
 
-    List<TienIch> getTI();
+    List<TienIch> getTI(int x);
 
     String addTI(TienIch tk);
 
     String suaTI(TienIch tk);
 
-    List<ManHinh> getHM();
+    String xoaTI(TienIch tk, int tt);
+
+    List<ManHinh> getHM(int x);
 
     String addHM(ManHinh tk);
 
     String suaHM(ManHinh tk);
 
-    List<KetNoi> getKN();
+    String xoaHM(ManHinh tk, int tt);
+
+    List<KetNoi> getKN(int x);
 
     String addKN(KetNoi tk);
+
+    String xoaKN(KetNoi tk, int tt);
 
     String suaKN(KetNoi tk);
 
@@ -103,6 +119,5 @@ public interface SanPhamServices {
     List<QuocGia> getQG();
 
     int moi(String imei);
-    
 
 }

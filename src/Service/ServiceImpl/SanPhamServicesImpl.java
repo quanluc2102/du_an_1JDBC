@@ -68,8 +68,8 @@ public class SanPhamServicesImpl implements SanPhamServices {
     }
 
     @Override
-    public List<HeDieuHanh> getHDH() {
-        return new SanPhamRespository().getHDH();
+    public List<HeDieuHanh> getHDH(int x) {
+        return new SanPhamRespository().getHDH(x);
     }
 
     @Override
@@ -91,12 +91,15 @@ public class SanPhamServicesImpl implements SanPhamServices {
     }
 
     @Override
-    public List<Pin> getPin() {
-        return new ThongSoReponsitory().getPin();
+    public List<Pin> getPin(int x) {
+        return new ThongSoReponsitory().getPin(x);
     }
 
     @Override
     public String addPin(Pin hdh) {
+        if (hdh == null) {
+            return "Không được để trống thông tin";
+        }
         if (new ThongSoReponsitory().ThemHDH(hdh)) {
             return "OK";
         }
@@ -105,6 +108,9 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public String suaPin(Pin hdh) {
+        if (hdh == null) {
+            return "Không được để trống thông tin";
+        }
         if (new ThongSoReponsitory().SuaHDH(hdh)) {
             return "OK";
         }
@@ -112,12 +118,15 @@ public class SanPhamServicesImpl implements SanPhamServices {
     }
 
     @Override
-    public List<ThietKe> getTK() {
+    public List<ThietKe> getTK(int x) {
         return new ThongSoReponsitory().getThietKe();
     }
 
     @Override
     public String addTK(ThietKe tk) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        }
         if (new ThongSoReponsitory().ThemThietKe(tk)) {
             return "OK";
         }
@@ -126,6 +135,9 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public String suaTK(ThietKe tk) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        }
         if (new ThongSoReponsitory().SuaThietKe(tk)) {
             return "OK";
         }
@@ -158,22 +170,25 @@ public class SanPhamServicesImpl implements SanPhamServices {
     }
 
     @Override
-    public String xoaBN(BoNho tk,int tt) {
+    public String xoaBN(BoNho tk, int tt) {
         if (tk == null) {
             return "Không được để trống thông tin";
-        } else if (new ThongSoReponsitory().xoaBN(tk,tt)) {
+        } else if (new ThongSoReponsitory().xoaBN(tk, tt)) {
             return "sửa thành cônng";
         }
         return "Sửa thất bại";
     }
 
     @Override
-    public List<Cpu> getCPU() {
-        return new ThongSoReponsitory().getCpu();
+    public List<Cpu> getCPU(int x) {
+        return new ThongSoReponsitory().getCpu(x);
     }
 
     @Override
     public String addCPU(Cpu tk) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        }
         if (new ThongSoReponsitory().ThemCPU(tk)) {
             return "OK";
         }
@@ -182,6 +197,9 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public String suaCPU(Cpu tk) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        }
         if (new ThongSoReponsitory().SuaCPU(tk)) {
             return "OK";
         }
@@ -189,12 +207,15 @@ public class SanPhamServicesImpl implements SanPhamServices {
     }
 
     @Override
-    public List<MauSac> getMauSacs() {
-        return new ThongSoReponsitory().getMau();
+    public List<MauSac> getMauSacs(int x) {
+        return new ThongSoReponsitory().getMau(x);
     }
 
     @Override
     public String addMauSac(MauSac tk) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        }
         if (new ThongSoReponsitory().ThemMau(tk)) {
             return "OK";
         }
@@ -203,6 +224,9 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public String suaMauSac(MauSac tk) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        }
         if (new ThongSoReponsitory().SuaMau(tk)) {
             return "OK";
         }
@@ -210,12 +234,15 @@ public class SanPhamServicesImpl implements SanPhamServices {
     }
 
     @Override
-    public List<TienIch> getTI() {
-        return new ThongSoReponsitory().getTi();
+    public List<TienIch> getTI(int x) {
+        return new ThongSoReponsitory().getTi(x);
     }
 
     @Override
     public String addTI(TienIch tk) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        }
         if (new ThongSoReponsitory().ThemTi(tk)) {
             return "OK";
         }
@@ -224,6 +251,9 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public String suaTI(TienIch tk) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        }
         if (new ThongSoReponsitory().SuaTi(tk)) {
             return "OK";
         }
@@ -231,12 +261,15 @@ public class SanPhamServicesImpl implements SanPhamServices {
     }
 
     @Override
-    public List<ManHinh> getHM() {
-        return new ThongSoReponsitory().getMH();
+    public List<ManHinh> getHM(int x) {
+        return new ThongSoReponsitory().getMH(x);
     }
 
     @Override
     public String addHM(ManHinh tk) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        }
         if (new ThongSoReponsitory().ThemMH(tk)) {
             return "OK";
         }
@@ -245,6 +278,9 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public String suaHM(ManHinh tk) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        }
         if (new ThongSoReponsitory().SuaMH(tk)) {
             return "OK";
         }
@@ -280,12 +316,15 @@ public class SanPhamServicesImpl implements SanPhamServices {
     }
 
     @Override
-    public List<KetNoi> getKN() {
-        return new ThongSoReponsitory().getKN();
+    public List<KetNoi> getKN(int x) {
+        return new ThongSoReponsitory().getKN(x);
     }
 
     @Override
     public String addKN(KetNoi tk) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        }
         if (new ThongSoReponsitory().ThemKN(tk)) {
             return "OK";
         }
@@ -294,6 +333,9 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public String suaKN(KetNoi tk) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        }
         if (new ThongSoReponsitory().SuaKN(tk)) {
             return "OK";
         }
@@ -302,6 +344,9 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public String addDT(ThongSo ts) {
+        if (ts == null) {
+            return "Không được để trống thông tin";
+        }
         if (new SanPhamRespository().ThemDienThoai(ts)) {
             return "OK";
         }
@@ -311,6 +356,81 @@ public class SanPhamServicesImpl implements SanPhamServices {
     @Override
     public List<QuocGia> getQG() {
         return new SanPhamRespository().getQuocGia();
+    }
+
+    @Override
+    public String xoaKN(KetNoi tk, int tt) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        } else if (new ThongSoReponsitory().xoaKN(tk, tt)) {
+            return "sửa thành cônng";
+        }
+        return "Sửa thất bại";
+    }
+
+    @Override
+    public String xoaHDH(HeDieuHanh hdh, int tt) {
+        if (hdh == null) {
+            return "Không được để trống thông tin";
+        } else if (new SanPhamRespository().xoaHDH(hdh, tt)) {
+            return "sửa thành cônng";
+        }
+        return "Sửa thất bại";
+    }
+
+    @Override
+    public String xoaPin(Pin hdh, int tt) {
+        if (hdh == null) {
+            return "Không được để trống thông tin";
+        } else if (new ThongSoReponsitory().xoaPin(hdh, tt)) {
+            return "sửa thành cônng";
+        }
+        return "Sửa thất bại";
+    }
+
+    @Override
+    public String xoaTK(ThietKe tk, int tt) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String xoaCPU(Cpu tk, int tt) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        } else if (new ThongSoReponsitory().xoaCPU(tk, tt)) {
+            return "sửa thành cônng";
+        }
+        return "Sửa thất bại";
+    }
+
+    @Override
+    public String xoaTI(TienIch tk, int tt) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        } else if (new ThongSoReponsitory().xoaTi(tk, tt)) {
+            return "sửa thành cônng";
+        }
+        return "Sửa thất bại";
+    }
+
+    @Override
+    public String xoaHM(ManHinh tk, int tt) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        } else if (new ThongSoReponsitory().xoaMH(tk, tt)) {
+            return "sửa thành cônng";
+        }
+        return "Sửa thất bại";
+    }
+
+    @Override
+    public String xoaMauSac(MauSac tk, int tt) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        } else if (new ThongSoReponsitory().xoaMau(tk, tt)) {
+            return "sửa thành cônng";
+        }
+        return "Sửa thất bại";
     }
 
 }
