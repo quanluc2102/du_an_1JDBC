@@ -176,6 +176,7 @@ public class login extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/QR.png"))); // NOI18N
         jButton1.setText("QR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,14 +186,14 @@ public class login extends javax.swing.JFrame {
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
 
         ccbWebcam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "WebCam LapTop", "WebCam Điện thoại", " " }));
-        jPanel2.add(ccbWebcam, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, -1, -1));
+        jPanel2.add(ccbWebcam, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 320, 480));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 320, 510));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/login1.jpg"))); // NOI18N
         jLabel8.setText("jLabel8");
         jLabel8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 360, 510));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 360, 580));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));

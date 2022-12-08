@@ -5,6 +5,7 @@
 package Service.ServiceImpl;
 
 import DomainModel.BoNho;
+import DomainModel.Camera;
 import DomainModel.ChiTietDienThoai;
 import DomainModel.Cpu;
 import DomainModel.DienThoai;
@@ -20,9 +21,11 @@ import DomainModel.QuocGiaDong;
 import DomainModel.ThietKe;
 import DomainModel.ThongSo;
 import DomainModel.TienIch;
+import Repository.CameraRepon;
 import Repository.HangReponsitory;
 import Repository.QuocGiaRepon;
 import Repository.ThemSanPhamRepon;
+import Repository.ThongSoReponsitory;
 import Service.SanPhamServices;
 import Service.ThemSPServices;
 import java.util.ArrayList;
@@ -33,169 +36,17 @@ import java.util.List;
  * @author haha
  */
 public class TSPImpl implements ThemSPServices {
-
+    
     ThemSanPhamRepon sp = new ThemSanPhamRepon();
     SanPhamServices sps = new SanPhamServicesImpl();
-
-    @Override
-    public String idBN(BoNho bn) {
-
-        for (BoNho boNho : sps.getBN()) {
-            if (boNho.equals(bn)) {
-                return boNho.getId();
-            }
-        }
-        sps.addBN(bn);
-        for (BoNho boNho : sps.getBN()) {
-            if (boNho.equals(bn)) {
-                return boNho.getId();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public String idCPU(Cpu cpu) {
-        for (Cpu boNho : sps.getCPU()) {
-            if (boNho.equals(cpu)) {
-                return boNho.getId();
-            }
-        }
-        sps.addCPU(cpu);
-        for (Cpu boNho : sps.getCPU()) {
-            if (boNho.equals(cpu)) {
-                return boNho.getId();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public String idPIN(Pin pin) {
-        for (Pin boNho : sps.getPin()) {
-            if (boNho.equals(pin)) {
-                return boNho.getId();
-            }
-        }
-        sps.addPin(pin);
-        for (Pin boNho : sps.getPin()) {
-            if (boNho.equals(pin)) {
-                return boNho.getId();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public String idHDH(HeDieuHanh hdh) {
-        for (HeDieuHanh boNho : sps.getHDH()) {
-            if (boNho.equals(hdh)) {
-                return boNho.getId();
-            }
-        }
-        sps.addHDH(hdh);
-        for (HeDieuHanh boNho : sps.getHDH()) {
-            if (boNho.equals(hdh)) {
-                return boNho.getId();
-            }
-        };
-        return null;
-    }
-
-    @Override
-    public String idTK(ThietKe tk) {
-        for (ThietKe boNho : sps.getTK()) {
-            if (boNho.equals(tk)) {
-                return boNho.getId();
-            }
-        }
-        sps.addTK(tk);
-        for (ThietKe boNho : sps.getTK()) {
-            if (boNho.equals(tk)) {
-                return boNho.getId();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public String idMH(ManHinh mh) {
-        for (ManHinh boNho : sps.getHM()) {
-            if (boNho.equals(mh)) {
-                return boNho.getId();
-            }
-        }
-        sps.addHM(mh);
-        for (ManHinh boNho : sps.getHM()) {
-            if (boNho.equals(mh)) {
-                return boNho.getId();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public String idKN(KetNoi kn) {
-        for (KetNoi boNho : sps.getKN()) {
-            if (boNho.equals(kn)) {
-                return boNho.getId();
-            }
-        }
-        sps.addKN(kn);
-        for (KetNoi boNho : sps.getKN()) {
-            if (boNho.equals(kn)) {
-                return boNho.getId();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public String idMS(MauSac ms) {
-        for (MauSac boNho : sps.getMauSacs()) {
-            if (boNho.equals(ms)) {
-                return boNho.getId();
-            }
-        }
-        sps.addMauSac(ms);
-        for (MauSac boNho : sps.getMauSacs()) {
-            if (boNho.equals(ms)) {
-                return boNho.getId();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public String idTI(TienIch ti) {
-        for (TienIch boNho : sps.getTI()) {
-            if (boNho.equals(ti)) {
-                return boNho.getId();
-            }
-        }
-        sps.addTI(ti);
-        for (TienIch boNho : sps.getTI()) {
-            if (boNho.equals(ti)) {
-                return boNho.getId();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public String themSP(ThongSo ts) {
-        if (sp.ThemSP(ts)) {
-            return "Thêm thành công";
-        }
-        return "Thêm không thành công";
-    }
+    
     QuocGiaRepon qgq = new QuocGiaRepon();
-
+    
     @Override
     public List<QuocGia> getQG(int i) {
         return qgq.getAll(i);
     }
-
+    
     @Override
     public String themQG(QuocGia qg) {
         for (QuocGia x : qgq.getAll(1)) {
@@ -212,9 +63,9 @@ public class TSPImpl implements ThemSPServices {
             return "Thêm thành công";
         }
         return "Thêm Không thành công";
-
+        
     }
-
+    
     @Override
     public List<QuocGia> getTimKiem(String i) {
         List<QuocGia> ls = new ArrayList<>();
@@ -225,7 +76,7 @@ public class TSPImpl implements ThemSPServices {
         }
         return ls;
     }
-
+    
     @Override
     public String suaQG(QuocGia qg) {
         if (new QuocGiaRepon().sua(qg)) {
@@ -233,9 +84,9 @@ public class TSPImpl implements ThemSPServices {
         }
         return "Sửa Không thành công";
     }
-
+    
     HangReponsitory hangls = new HangReponsitory();
-
+    
     @Override
     public String themHang(Hang ha) {
         for (Hang x : hangls.getAll(1)) {
@@ -253,7 +104,7 @@ public class TSPImpl implements ThemSPServices {
         }
         return "Thêm Không thành công";
     }
-
+    
     @Override
     public String suaHang(Hang ha) {
         if (hangls.sua(ha)) {
@@ -261,12 +112,12 @@ public class TSPImpl implements ThemSPServices {
         }
         return "Sửa Không thành công";
     }
-
+    
     @Override
     public List<Hang> getHang(int i) {
         return hangls.getAll(i);
     }
-
+    
     @Override
     public List<Hang> getTimKiemHa(String i) {
         List<Hang> ls = new ArrayList<>();
@@ -277,7 +128,7 @@ public class TSPImpl implements ThemSPServices {
         }
         return ls;
     }
-
+    
     @Override
     public String themDT(DienThoai ha) {
         if (new ThemSanPhamRepon().ThemDT(ha)) {
@@ -285,31 +136,31 @@ public class TSPImpl implements ThemSPServices {
         }
         return "không nhập được";
     }
-
+    
     @Override
     public String suaDT(DienThoai ha) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public List<DienThoai> getDT(int i) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public List<DienThoai> getTimKiemDT(String i) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
-
+    
     public String themQGD(QuocGiaDong ha) {
         if (new ThemSanPhamRepon().ThemQGD(ha)) {
             return "nhập thành công";
         }
         return "không nhập được";
     }
-
+    
     @Override
     public String themCTDT(ChiTietDienThoai ha) {
         if (new ThemSanPhamRepon().ThemCTDT(ha)) {
@@ -317,20 +168,55 @@ public class TSPImpl implements ThemSPServices {
         }
         return "không nhập được";
     }
-
+    
     @Override
     public String themDong(Dong ha) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public String timKiem(QuocGiaDong ha) {
-        for (QuocGia quocGia :   new QuocGiaRepon().getAll(1)) {
+        for (QuocGia quocGia : new QuocGiaRepon().getAll(1)) {
             if (quocGia.equals(ha)) {
-            return quocGia.getId();
+                return quocGia.getId();
             }
         }
         return null;
     }
-
+    
+    @Override
+    public List<Camera> getCamera(int x) {
+        return new CameraRepon().getCamera(x);
+    }
+    
+    @Override
+    public String themCamera(Camera tk) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        } else if (new CameraRepon().ThemCamera(tk)) {
+            return "Thêm thành cônng";
+        }
+        return "Thêm thất bại";
+    }
+    
+    @Override
+    public String suaCamera(Camera tk) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        } else if (new CameraRepon().ThemCamera(tk)) {
+            return "sửa thành cônng";
+        }
+        return "Sửa thất bại";
+    }
+    
+    @Override
+    public String xoaCamera(Camera tk, int x) {
+        if (tk == null) {
+            return "Không được để trống thông tin";
+        } else if (new CameraRepon().xoaCamera(tk, x)) {
+            return "sửa thành cônng";
+        }
+        return "Sửa thất bại";
+    }
+    
 }

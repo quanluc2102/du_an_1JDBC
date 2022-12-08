@@ -244,6 +244,25 @@ public class SanPhamRespository {
         }
         return sp > 0;
     }
+    public boolean xoaHDH(HeDieuHanh hdh,int tt) {
+        String query = "UPDATE [dbo].[HeDieuHanh]\n"
+                + "   SET [ten_he_dieu_hanh] =?\n"
+                + "      ,[phien_ban] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + " WHERE id = ?";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getTenHDH());
+            ps.setObject(2, hdh.getPhienBan());
+            ps.setObject(3, tt);
+            ps.setObject(4, hdh.getId());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
 
     public boolean ThemDienThoai(ThongSo ts) {
         String query = "INSERT INTO [dbo].[ThongSo]\n"
@@ -281,10 +300,11 @@ public class SanPhamRespository {
         return sp > 0;
     }
 
-    public List<HeDieuHanh> getHDH() {
-        String query = "select * from HeDieuHanh ";
+    public List<HeDieuHanh> getHDH(int x ) {
+        String query = "select * from HeDieuHanh  where trang_thai = ?";
         List<HeDieuHanh> ls = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+          ps.setObject(1, x);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 

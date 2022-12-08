@@ -4,6 +4,7 @@
  */
 package Repository;
 
+import DomainModel.Camera;
 import Ultilities.SQLServerConnection;
 import ViewModel.CameraModelView;
 import java.sql.Connection;
@@ -18,17 +19,101 @@ import java.util.List;
  * @author haha
  */
 public class CameraRepon {
-    public List<CameraModelView> get1CMD(String id) {
-        String query = "select cam_bien,khau_do, chuc_nang,max_zoom,quay_video from Camera join CamBien on CamBien.id = Camera.id_cam_bien\n"
-                + "where id_thong_so = ?";
-        List<CameraModelView> ls = new ArrayList<>();
+
+    public boolean ThemCamera(Camera hdh) {
+        String query = "INSERT INTO [dbo].[Camera]\n"
+                + "           ([camera_truoc]\n"
+                + "           ,[camera_sau]\n"
+                + "           ,[quay_video]\n"
+                + "           ,[max_zoom]\n"
+                + "           ,[chong_rung]\n"
+                + "           ,[dac_biet]\n"
+                + "           ,[trang_thai])\n"
+                + "     VALUES\n"
+                + "           (?   ,?   ,?   ,?  ,?  ,? ,?    )";
+        int sp = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, id);
+            ps.setObject(1, hdh.getCameraTruoc());
+            ps.setObject(2, hdh.getCameraSau());
+            ps.setObject(3, hdh.getQuayVideo());
+            ps.setObject(4, hdh.getZoom());
+            ps.setObject(5, hdh.getChongRung());
+            ps.setObject(6, hdh.getDacBiet());
+            ps.setObject(7, hdh.getTrangThai());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public boolean SuaCamera(Camera hdh) {
+        String query = "UPDATE [dbo].[Camera]\n"
+                + "   SET [camera_truoc] = ?\n"
+                + "      ,[camera_sau] = ?\n"
+                + "      ,[quay_video] = ?\n"
+                + "      ,[max_zoom] = ?\n"
+                + "      ,[chong_rung] = ?\n"
+                + "      ,[dac_biet] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + " WHERE id =?";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getCameraTruoc());
+            ps.setObject(2, hdh.getCameraSau());
+            ps.setObject(3, hdh.getQuayVideo());
+            ps.setObject(4, hdh.getZoom());
+            ps.setObject(5, hdh.getChongRung());
+            ps.setObject(6, hdh.getDacBiet());
+            ps.setObject(7, hdh.getTrangThai());
+            ps.setObject(8, hdh.getId());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public boolean xoaCamera(Camera hdh, int tt) {
+        String query = "UPDATE [dbo].[Camera]\n"
+                + "   SET [camera_truoc] = ?\n"
+                + "      ,[camera_sau] = ?\n"
+                + "      ,[quay_video] = ?\n"
+                + "      ,[max_zoom] = ?\n"
+                + "      ,[chong_rung] = ?\n"
+                + "      ,[dac_biet] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + " WHERE id =?";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getCameraTruoc());
+            ps.setObject(2, hdh.getCameraSau());
+            ps.setObject(3, hdh.getQuayVideo());
+            ps.setObject(4, hdh.getZoom());
+            ps.setObject(5, hdh.getChongRung());
+            ps.setObject(6, hdh.getDacBiet());
+            ps.setObject(7, tt);
+            ps.setObject(8, hdh.getId());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
+    public List<Camera> getCamera(int x) {
+        String query = "select * from Camera where trang_thai =?";
+        List<Camera> ls = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, x);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
-                CameraModelView sp = new CameraModelView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
-
+                Camera sp = new Camera(rs.getString(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
                 ls.add(sp);
             }
 
@@ -37,11 +122,5 @@ public class CameraRepon {
         }
         return ls;
     }
-    
-    
-//    select COUNT(Camera.id_cam_bien)
-//from 
-//	ThongSo full outer join Camera on Camera.id_thong_so = ThongSo.id
-//	join CamBien on cambien.id = Camera.id_cam_bien
-//where   truoc_sau = 0 and id_dong = ?
+
 }
