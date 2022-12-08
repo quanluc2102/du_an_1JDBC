@@ -5,7 +5,11 @@
 package View;
 
 import DomainModel.HoaDon;
+import Service.ServiceImpl.ThongKeKhachHangServiceImpl;
 import Service.ServiceImpl.ThongKeServiceImpl;
+import Service.ThongKeKhachHangService;
+import ViewModel.SanPhamDaMuaViewModel;
+import ViewModel.SoLanMuaViewModel;
 import ViewModel.ThongKeViewModel;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -26,7 +30,20 @@ public class ThongKeView extends javax.swing.JFrame {
     private List<ThongKeViewModel> listhongKe = new ArrayList<>();
     private ThongKeServiceImpl thongKeImpl = new ThongKeServiceImpl();
     private List<HoaDon> listHoaDon = new ArrayList<>();
-
+    private DefaultTableModel dtmSoLan = new DefaultTableModel();
+    private DefaultTableModel dtmDaMua = new DefaultTableModel();
+    private List<SoLanMuaViewModel> listSoLanMua = new ArrayList<>();
+    private List<SoLanMuaViewModel> listSearch = new ArrayList<>();
+    private List<SoLanMuaViewModel> listSearchTen = new ArrayList<>();
+    private List<SanPhamDaMuaViewModel> listSPDM = new ArrayList<>();
+    private List<SoLanMuaViewModel> listSearchSoLuong = new ArrayList<>();
+    private ThongKeKhachHangService thongKeKhachHangService = new ThongKeKhachHangServiceImpl();
+    int rowoffset = 0;
+    int index = 0;
+    String name = "";
+    int soLan;
+    int fetch = 5;
+    int o = 0;
 
     public ThongKeView() {
         initComponents();
@@ -58,7 +75,15 @@ public class ThongKeView extends javax.swing.JFrame {
             cbbNam.addItem(i + "");
         }
 
-
+        tbSoLanMua.setModel(dtmSoLan);
+        tbSoLanMua1.setModel(dtmDaMua);
+        String daMua[] = {"IMEI", "Ten san pham", "Ten Dong", "Gia ban"};
+        String soLanMua[] = {"ID", "Ten Khach Hang", "So lan mua"};
+        dtmDaMua.setColumnIdentifiers(daMua);
+        dtmSoLan.setColumnIdentifiers(soLanMua);
+        listSoLanMua = thongKeKhachHangService.getAllSoLanMua(rowoffset);
+        thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSoLanMua);
+        
     }
 
     private double ThanhTien(List<ThongKeViewModel> x) {
@@ -105,6 +130,20 @@ public class ThongKeView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        txtSearch = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tbSoLanMua1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbSoLanMua = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         jRadioButton2.setText("jRadioButton2");
 
@@ -206,12 +245,6 @@ public class ThongKeView extends javax.swing.JFrame {
                 .addGap(67, 67, 67)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabelTong, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
@@ -250,7 +283,13 @@ public class ThongKeView extends javax.swing.JFrame {
                                         .addGap(187, 187, 187)))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(jLabelTong, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,6 +361,171 @@ public class ThongKeView extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Doanh Thu", jPanel1);
 
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("San Pham Da Mua"));
+
+        tbSoLanMua1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tbSoLanMua1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbSoLanMua1MouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tbSoLanMua1);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jLabel1.setText("Thong ke khach hang");
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("So lan mua"));
+
+        tbSoLanMua.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tbSoLanMua.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbSoLanMuaMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tbSoLanMua);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jButton1.setText("||<");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("<");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText(">");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText(">||");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Tìm kiem theo ten: ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 144, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(211, 211, 211)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(268, 268, 268)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton3)
+                    .addComponent(jButton2)
+                    .addComponent(jButton4))
+                .addGap(25, 25, 25))
+        );
+
+        jTabbedPane2.addTab("tab2", jPanel2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -385,8 +589,165 @@ public class ThongKeView extends javax.swing.JFrame {
     }//GEN-LAST:event_cbbNgayActionPerformed
 
     private void TableThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableThongKeMouseClicked
-       
+
     }//GEN-LAST:event_TableThongKeMouseClicked
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // TODO add your handling code here:
+        if (!txtSearch.getText().isEmpty() || !txtSearch.getText().isBlank()) {
+            name = txtSearch.getText();
+            listSearch = thongKeKhachHangService.searchTen(name, rowoffset);
+            listSearchTen = thongKeKhachHangService.searchTen(name, rowoffset);
+            try {
+                thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSearch);
+            } catch (Exception e) {
+                thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSearch);
+            }
+        }
+
+        if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
+            listSoLanMua = thongKeKhachHangService.getAllSoLanMua(rowoffset);
+            thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.getAllSoLanMua(rowoffset));
+        }
+    }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void tbSoLanMua1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSoLanMua1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbSoLanMua1MouseClicked
+
+    private void tbSoLanMuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSoLanMuaMouseClicked
+        // TODO add your handling code here:
+        int row = tbSoLanMua.getSelectedRow();
+        String id = thongKeKhachHangService.getAllSoLanMua(rowoffset).get(row).getID();
+        listSPDM = thongKeKhachHangService.getAllSPDM(id);
+        thongKeKhachHangService.showDataTableSPDM(dtmDaMua, listSPDM);
+        System.out.println(id);
+        for (SanPhamDaMuaViewModel sanPhamDaMuaViewModel : listSPDM) {
+            System.out.println(sanPhamDaMuaViewModel.toString());
+        }
+    }//GEN-LAST:event_tbSoLanMuaMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
+            index = 0;        // TODO add your handling code here:
+            int c = thongKeKhachHangService.getAllSoLanMuaKPT().size() % fetch;
+            rowoffset = 0;
+            listSoLanMua = thongKeKhachHangService.getAllSoLanMua(rowoffset);
+            thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSoLanMua);
+        } else {
+            index = 0;        // TODO add your handling code here:
+            int c = thongKeKhachHangService.getAllSoLanMuaKPT().size() % fetch;
+            rowoffset = 0;
+            listSearchTen = thongKeKhachHangService.searchTen(name, rowoffset);
+            thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSearchTen);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if (txtSearch.getText().isEmpty()) {
+            index--;
+            rowoffset -= 5;
+            if (rowoffset < 0) {
+                int c = thongKeKhachHangService.getAllSoLanMuaKPT().size() % fetch;
+                rowoffset = thongKeKhachHangService.getAllSoLanMuaKPT().size() - c;
+                index = o;
+            }
+            listSoLanMua = thongKeKhachHangService.getAllSoLanMua(rowoffset);
+            thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSoLanMua);
+
+        } else {
+
+            if (!txtSearch.getText().isEmpty()) {
+                index--;
+                rowoffset -= 5;
+                if (rowoffset < 0) {
+                    int c = listSearch.size() % fetch;
+                    rowoffset = listSearch.size() - c;
+                    index = o;
+
+                }
+
+                thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.searchTen(name, rowoffset));
+
+            } else {
+                index--;
+                rowoffset -= 5;
+
+                if (rowoffset < 0) {
+                    int c = listSearch.size() % fetch;
+                    rowoffset = listSearch.size() - c;
+                    index = o;
+
+                }
+
+                thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.searchSoLanMua(soLan, rowoffset));
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if (txtSearch.getText().isEmpty()) {
+            index++;
+            rowoffset += 5;
+            if (rowoffset > thongKeKhachHangService.getAllSoLanMuaKPT().size() - 1) {
+                rowoffset = 0;
+                index = 0;
+            }
+            listSoLanMua = thongKeKhachHangService.getAllSoLanMuaKPT();
+            thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.getAllSoLanMua(rowoffset));
+
+        } else {
+
+            if (!txtSearch.getText().isEmpty()) {
+                index++;
+                rowoffset += 5;
+                if (rowoffset > listSearchTen.size()) {
+
+                    rowoffset = 0;
+                    index = 0;
+
+                }
+
+                thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.searchTen(name, rowoffset));
+
+            } else {
+                index++;
+                rowoffset += 5;
+
+                if (rowoffset > listSoLanMua.size()) {
+                    rowoffset = 0;
+                    index = 0;
+
+                }
+
+                thongKeKhachHangService.showDataTableSoLan(dtmSoLan, thongKeKhachHangService.searchSoLanMua(soLan, rowoffset));
+
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
+            index = o;        // TODO add your handling code here:
+            int c = thongKeKhachHangService.getAllSoLanMuaKPT().size() % fetch;
+            rowoffset = thongKeKhachHangService.getAllSoLanMuaKPT().size() - c;
+            listSoLanMua = thongKeKhachHangService.getAllSoLanMua(rowoffset);
+            thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSoLanMua);
+        } else {
+
+            // TODO add your handling code here:
+            int c = listSearchTen.size() / fetch;
+            index = listSearchTen.size() / fetch;
+            rowoffset = thongKeKhachHangService.searchTen(name, rowoffset).size() - c;
+            listSearchTen = thongKeKhachHangService.searchTen(name, rowoffset);
+            thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSearchTen);
+
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -433,6 +794,11 @@ public class ThongKeView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbbNam;
     private javax.swing.JComboBox<String> cbbNgay;
     private javax.swing.JComboBox<String> cbbThang;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -441,16 +807,25 @@ public class ThongKeView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelTong;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable tbSoLanMua;
+    private javax.swing.JTable tbSoLanMua1;
     private javax.swing.JLabel txtDaonhThu;
     private javax.swing.JLabel txtDoanhThu;
     private javax.swing.JLabel txtLaiThang;
     private javax.swing.JLabel txtNTNam;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JLabel txtThang;
     // End of variables declaration//GEN-END:variables
 
