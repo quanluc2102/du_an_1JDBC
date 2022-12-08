@@ -240,9 +240,8 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
 
     private void tbSoLanMuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSoLanMuaMouseClicked
         // TODO add your handling code here:
-        int row = 0;
-        row = tbSoLanMua.getSelectedRow();
-        String id = listSoLanMua.get(row).getID();
+        int row = tbSoLanMua.getSelectedRow();
+        String id = thongKeKhachHangService.getAllSoLanMua(rowoffset).get(row).getID();
         listSPDM = thongKeKhachHangService.getAllSPDM(id);
         thongKeKhachHangService.showDataTableSPDM(dtmDaMua, listSPDM);
     }//GEN-LAST:event_tbSoLanMuaMouseClicked

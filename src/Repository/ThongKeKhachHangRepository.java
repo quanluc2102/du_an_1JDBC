@@ -126,7 +126,6 @@ public class ThongKeKhachHangRepository {
 
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, imei);
-
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
