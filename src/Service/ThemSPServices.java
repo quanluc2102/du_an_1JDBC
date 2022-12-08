@@ -5,6 +5,7 @@
 package Service;
 
 import DomainModel.BoNho;
+import DomainModel.Camera;
 import DomainModel.ChiTietDienThoai;
 import DomainModel.Cpu;
 import DomainModel.DienThoai;
@@ -28,25 +29,6 @@ import java.util.List;
  */
 public interface ThemSPServices {
 
-    String idBN(BoNho bn);
-
-    String idCPU(Cpu cpu);
-
-    String idPIN(Pin pin);
-
-    String idHDH(HeDieuHanh hdh);
-
-    String idTK(ThietKe tk);
-
-    String idMH(ManHinh mh);
-
-    String idKN(KetNoi kn);
-
-    String idMS(MauSac ms);
-
-    String idTI(TienIch ti);
-
-    String themSP(ThongSo ts);
 
     String themQG(QuocGia qg);
 
@@ -79,5 +61,10 @@ public interface ThemSPServices {
     List<DienThoai> getDT(int i);
 
     List<DienThoai> getTimKiemDT(String i);
+    
+    List<Camera> getCamera(int x);
+    String themCamera(Camera tk);
+    String suaCamera(Camera tk);
+    String xoaCamera(Camera tk,int x);
 
 }

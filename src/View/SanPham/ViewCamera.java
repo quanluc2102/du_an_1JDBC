@@ -4,11 +4,13 @@
  */
 package View.SanPham;
 
-import DomainModel.ThietKe;
-import DomainModel.ThietKe;
-import DomainModel.ThietKe;
+import DomainModel.Camera;
+import DomainModel.Camera;
+import DomainModel.Camera;
 import Service.SanPhamServices;
 import Service.ServiceImpl.SanPhamServicesImpl;
+import Service.ServiceImpl.TSPImpl;
+import Service.ThemSPServices;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -21,30 +23,30 @@ import javax.swing.table.TableRowSorter;
  *
  * @author haha
  */
-public class ViewTK extends javax.swing.JDialog {
+public class ViewCamera extends javax.swing.JDialog {
 
     DefaultTableModel tbla;
     DefaultTableModel tblb;
     int index = 0;
     int tblIndex = 0;
-    SanPhamServices sps = new SanPhamServicesImpl();
+    ThemSPServices sps = new TSPImpl();
     DefaultComboBoxModel modelcbb;
     List<String> lsTrangThai = new ArrayList<>();
     String id = "";
     int trang = 1;
 
     /**
-     * Creates new form ThietKe
+     * Creates new form Camera
      */
-    public ViewTK(java.awt.Frame parent, boolean modal, String id) {
+    public ViewCamera(java.awt.Frame parent, boolean modal, String id) {
         super(parent, modal);
         initComponents();
-        ImageIcon icon = new ImageIcon("src\\image\\ti.png");
+        ImageIcon icon = new ImageIcon("source\\image\\came_ra.png");
         this.setIconImage(icon.getImage());
 
         loadx();
-        loadDataToTable(sps.getTK(1), tbla);
-        loadDataToTable(sps.getTK(0), tblb);
+        loadDataToTable(sps.getCamera(1), tbla);
+        loadDataToTable(sps.getCamera(0), tblb);
         cbbTrangThai.setSelectedIndex(0);
         sapXep();
 
@@ -65,7 +67,7 @@ public class ViewTK extends javax.swing.JDialog {
 
         tblb = (DefaultTableModel) tbl2.getModel();
         tbla = (DefaultTableModel) tbl1.getModel();
-        String[] title = {"Mặt trước", "Mặt sau", "Viền", "Trọng Lượng"};
+        String[] title = {"Camera trước", "Camera sau", "Quay video", "Chống rung"};
         tbla.setColumnIdentifiers(title);
         tblb.setColumnIdentifiers(title);
 
@@ -77,20 +79,22 @@ public class ViewTK extends javax.swing.JDialog {
 
     }
 
-    private void loadDataToTable(List<ThietKe> h, DefaultTableModel tbl) {
+    private void loadDataToTable(List<Camera> h, DefaultTableModel tbl) {
         tbl.setRowCount(0);
-        for (ThietKe x : h) {
-            Object[] row = new Object[]{x.getMatTruoc(), x.getMatLung(), x.getVien(), x.getTrongLuong()};
+        for (Camera x : h) {
+            Object[] row = new Object[]{x.getCameraTruoc(), x.getCameraSau(), x.getQuayVideo(), x.getChongRung()};
             tbl.addRow(row);
         }
     }
 
-    private ThietKe add(String id) {
+    private Camera add(String id) {
 
         String mt = txtMT.getText();
         String ml = txtMS.getText();
-        String tl = txtTrongLuong.getText();
-        String v = txtVien.getText();
+        String vd = txtVideo.getText();
+        String zoom = txtZoom.getText();
+        String cr = txtCR.getText();
+        String Db = txtDb.getText();
 
         if (mt.isBlank()) {
             mt = "không có thông tin";
@@ -100,16 +104,22 @@ public class ViewTK extends javax.swing.JDialog {
             ml = "không có thông tin";
         };
 
-        if (tl.isBlank()) {
-            tl = "không có thông tin";
+        if (vd.isBlank()) {
+            vd = "không có thông tin";
         };
 
-        if (v.isBlank()) {
-            v = "không có thông tin";
+        if (zoom.isBlank()) {
+            zoom = "không có thông tin";
+        };
+        if (cr.isBlank()) {
+            cr = "không có thông tin";
+        };
+        if (Db.isBlank()) {
+            Db = "không có thông tin";
         };
 
         int trangThai = cbbTrangThai.getSelectedIndex();
-        ThietKe nbn = new ThietKe(id, mt, ml, v, tl, trangThai);
+        Camera nbn = new Camera(id, mt, ml, vd, zoom, cr, Db, trangThai);
         return nbn;
     }
 
@@ -134,9 +144,13 @@ public class ViewTK extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtMS = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtVien = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtTrongLuong = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtVideo = new javax.swing.JTextField();
+        txtZoom = new javax.swing.JTextField();
+        txtCR = new javax.swing.JTextField();
+        txtDb = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -183,17 +197,17 @@ public class ViewTK extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Mặt trước");
+        jLabel1.setText("Camera trước");
 
-        jLabel2.setText("Mặt sau");
+        jLabel2.setText("Camera sau");
 
-        jLabel4.setText("Viền");
+        jLabel4.setText("Quay video");
 
-        txtVien.setText("200w");
+        jLabel5.setText("Zoom");
 
-        jLabel5.setText("trọng lượng");
+        jLabel6.setText("Chống rung");
 
-        txtTrongLuong.setText("200w");
+        jLabel7.setText("Đặc biệt");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -203,7 +217,7 @@ public class ViewTK extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 94, Short.MAX_VALUE)
                         .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,24 +231,35 @@ public class ViewTK extends javax.swing.JDialog {
                         .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMS)
-                            .addComponent(txtMT)
-                            .addComponent(txtVien)))
+                            .addComponent(txtMT)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(1, 1, 1)
-                        .addComponent(txtTrongLuong)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(14, 14, 14))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtZoom)
+                            .addComponent(txtCR)
+                            .addComponent(txtDb, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                            .addComponent(txtVideo))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -245,16 +270,24 @@ public class ViewTK extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtVideo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtTrongLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtZoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtCR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtDb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,11 +324,13 @@ public class ViewTK extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Đang có", jPanel2);
@@ -322,11 +357,11 @@ public class ViewTK extends javax.swing.JDialog {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Đã xóa", jPanel3);
@@ -337,21 +372,18 @@ public class ViewTK extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -360,54 +392,58 @@ public class ViewTK extends javax.swing.JDialog {
 
     private void tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl1MouseClicked
         int index = tbl1.getSelectedRow();
-        ThietKe hdh = sps.getTK(1).get(index);
-        txtMS.setText(hdh.getMatLung());
-        txtMT.setText(hdh.getMatTruoc());
-        txtTrongLuong.setText(hdh.getTrongLuong());
-        txtVien.setText(hdh.getVien());
-        cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
+        Camera x = sps.getCamera(1).get(index);
+        txtCR.setText(x.getChongRung());
+        txtDb.setText(x.getDacBiet());
+        txtMS.setText(x.getCameraSau());
+        txtMT.setText(x.getCameraTruoc());
+        txtVideo.setText(x.getQuayVideo());
+        txtZoom.setText(x.getZoom());
+        cbbTrangThai.setSelectedIndex(x.getTrangThai());
 
 
     }//GEN-LAST:event_tbl1MouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
 
-        JOptionPane.showMessageDialog(rootPane, sps.addTK(add("")));
-        loadDataToTable(sps.getTK(1), tbla);
-        loadDataToTable(sps.getTK(0), tblb);
+        JOptionPane.showMessageDialog(rootPane, sps.themCamera(add("")));
+        loadDataToTable(sps.getCamera(1), tbla);
+        loadDataToTable(sps.getCamera(0), tblb);
 
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         index = tbl1.getSelectedRow();
-        String id = sps.getTK(1).get(index).getId();
-        JOptionPane.showMessageDialog(rootPane, sps.suaTK(add(id)));
-        loadDataToTable(sps.getTK(1), tbla);
-        loadDataToTable(sps.getTK(0), tblb);
+        String id = sps.getCamera(1).get(index).getId();
+        JOptionPane.showMessageDialog(rootPane, sps.suaCamera(add(id)));
+        loadDataToTable(sps.getCamera(1), tbla);
+        loadDataToTable(sps.getCamera(0), tblb);
 
 
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void tbl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl2MouseClicked
         int index = tbl2.getSelectedRow();
-        ThietKe hdh = sps.getTK(0).get(index);
-        txtMS.setText(hdh.getMatLung());
-        txtMT.setText(hdh.getMatTruoc());
-        txtTrongLuong.setText(hdh.getTrongLuong());
-        txtVien.setText(hdh.getVien());
-        cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
+        Camera x = sps.getCamera(0).get(index);
+        txtCR.setText(x.getChongRung());
+        txtDb.setText(x.getDacBiet());
+        txtVideo.setText(x.getQuayVideo());
+        txtMS.setText(x.getCameraSau());
+        txtMT.setText(x.getCameraTruoc());
+        txtZoom.setText(x.getZoom());
+        cbbTrangThai.setSelectedIndex(x.getTrangThai());
     }//GEN-LAST:event_tbl2MouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         String idx = "";
         if (trang == 0) {
-            idx = sps.getTK(1).get(index).getId();
+            idx = sps.getCamera(1).get(index).getId();
         } else {
-            idx = sps.getTK(0).get(index).getId();
+            idx = sps.getCamera(0).get(index).getId();
         }
-        JOptionPane.showMessageDialog(rootPane, sps.xoaTK(add(idx), trang));
-        loadDataToTable(sps.getTK(1), tbla);
-        loadDataToTable(sps.getTK(0), tblb);
+        JOptionPane.showMessageDialog(rootPane, sps.xoaCamera(add(idx), trang));
+        loadDataToTable(sps.getCamera(1), tbla);
+        loadDataToTable(sps.getCamera(0), tblb);
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
@@ -446,14 +482,54 @@ public class ViewTK extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewTK.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewCamera.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewTK.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewCamera.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewTK.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewCamera.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewTK.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewCamera.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -502,7 +578,7 @@ public class ViewTK extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ViewTK dialog = new ViewTK(new javax.swing.JFrame(), true, "");
+                ViewCamera dialog = new ViewCamera(new javax.swing.JFrame(), true, "");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -525,6 +601,8 @@ public class ViewTK extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -533,9 +611,11 @@ public class ViewTK extends javax.swing.JDialog {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tbl1;
     private javax.swing.JTable tbl2;
+    private javax.swing.JTextField txtCR;
+    private javax.swing.JTextField txtDb;
     private javax.swing.JTextField txtMS;
     private javax.swing.JTextField txtMT;
-    private javax.swing.JTextField txtTrongLuong;
-    private javax.swing.JTextField txtVien;
+    private javax.swing.JTextField txtVideo;
+    private javax.swing.JTextField txtZoom;
     // End of variables declaration//GEN-END:variables
 }

@@ -75,7 +75,8 @@ public class ThongSoReponsitory {
         }
         return sp > 0;
     }
-    public boolean xoaPin(Pin hdh,int tt) {
+
+    public boolean xoaPin(Pin hdh, int tt) {
         String query = "UPDATE [dbo].[PIN]\n"
                 + "   SET \n"
                 + "      [dung_luong] = ?\n"
@@ -166,10 +167,35 @@ public class ThongSoReponsitory {
         return sp > 0;
     }
     
-    public List<ThietKe> getThietKe() {
-        String query = "select * from ThietKe where trang_thai != 0";
+    public boolean xoaThietKe(ThietKe hdh, int tt) {
+        String query = "UPDATE [dbo].[ThietKe]\n"
+                + "   SET [mat_truoc] = ?\n"
+                + "      ,[mat_lung] = ?\n"
+                + "      ,[vien] = ?\n"
+                + "      ,[trong_luong] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + " WHERE id =?";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getMatTruoc());
+            ps.setObject(2, hdh.getMatLung());
+            ps.setObject(3, hdh.getVien());
+            ps.setObject(4, hdh.getTrongLuong());
+            ps.setObject(5, tt);
+            ps.setObject(6, hdh.getId());
+            sp = ps.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+    
+    public List<ThietKe> getThietKe(int x) {
+        String query = "select * from ThietKe where trang_thai =?";
         List<ThietKe> ls = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, x);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 
@@ -317,7 +343,8 @@ public class ThongSoReponsitory {
         }
         return sp > 0;
     }
-    public boolean xoaCPU(Cpu hdh,int tt) {
+
+    public boolean xoaCPU(Cpu hdh, int tt) {
         String query = "UPDATE [dbo].[CPU]\n"
                 + "   SET [ten_CPU] = ?\n"
                 + "      ,[GPU] = ?\n"
@@ -404,7 +431,8 @@ public class ThongSoReponsitory {
         }
         return sp > 0;
     }
-    public boolean xoaMau(MauSac hdh,int tt) {
+
+    public boolean xoaMau(MauSac hdh, int tt) {
         String query = "UPDATE [dbo].[MauSac]\n"
                 + "   SET [ma_mau] = ?\n"
                 + "      ,[ten_mau] = ?\n"
@@ -487,7 +515,8 @@ public class ThongSoReponsitory {
         }
         return sp > 0;
     }
-    public boolean xoaTi(TienIch hdh,int tt) {
+
+    public boolean xoaTi(TienIch hdh, int tt) {
         String query = "UPDATE [dbo].[TienIch]\n"
                 + "   SET [bao_mat] = ?\n"
                 + "      ,[khang_nuoc] =?\n"
@@ -499,7 +528,7 @@ public class ThongSoReponsitory {
             ps.setObject(1, hdh.getBaoMat());
             ps.setObject(2, hdh.getKhangNuoc());
             ps.setObject(3, hdh.getDacBiet());
-            ps.setObject(4,tt);
+            ps.setObject(4, tt);
             ps.setObject(5, hdh.getId());
             sp = ps.executeUpdate();
             
@@ -583,7 +612,8 @@ public class ThongSoReponsitory {
         }
         return sp > 0;
     }
-    public boolean xoaMH(ManHinh hdh,int tt) {
+
+    public boolean xoaMH(ManHinh hdh, int tt) {
         String query = "UPDATE [dbo].[ManHinh]\n"
                 + "   SET [loai_man_hinh] = ?\n"
                 + "      ,[kieu_man_hinh] = ?\n"

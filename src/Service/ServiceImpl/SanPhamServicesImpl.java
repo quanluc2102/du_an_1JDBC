@@ -119,7 +119,7 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public List<ThietKe> getTK(int x) {
-        return new ThongSoReponsitory().getThietKe();
+        return new ThongSoReponsitory().getThietKe(x);
     }
 
     @Override
@@ -390,8 +390,12 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public String xoaTK(ThietKe tk, int tt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+     if (tk == null) {
+            return "Không được để trống thông tin";
+        } else if (new ThongSoReponsitory().xoaThietKe(tk, tt)) {
+            return "sửa thành cônng";
+        }
+        return "Sửa thất bại";    }
 
     @Override
     public String xoaCPU(Cpu tk, int tt) {
