@@ -45,6 +45,7 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
         listSoLanMua = thongKeKhachHangService.getAllSoLanMua(rowoffset);
         thongKeKhachHangService.showDataTableSoLan(dtmSoLan, listSoLanMua);
         sapXep();
+
     }
 
     /**
@@ -244,6 +245,10 @@ public class ThongKeKhachHangView extends javax.swing.JFrame {
         String id = thongKeKhachHangService.getAllSoLanMua(rowoffset).get(row).getID();
         listSPDM = thongKeKhachHangService.getAllSPDM(id);
         thongKeKhachHangService.showDataTableSPDM(dtmDaMua, listSPDM);
+        System.out.println(id);
+        for (SanPhamDaMuaViewModel sanPhamDaMuaViewModel : listSPDM) {
+            System.out.println(sanPhamDaMuaViewModel.toString());
+        }
     }//GEN-LAST:event_tbSoLanMuaMouseClicked
     String name = "";
     int soLan;

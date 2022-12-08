@@ -134,6 +134,7 @@ public class ThongKeKhachHangRepository {
             }
 
         } catch (Exception e) {
+            e.printStackTrace(System.out);
         }
         return list;
     }

@@ -63,7 +63,7 @@ public class ThongKeKhachHangServiceImpl implements ThongKeKhachHangService {
     public void showDataTableSPDM(DefaultTableModel dtm, List<SanPhamDaMuaViewModel> list) {
         dtm.setRowCount(0);
         for (SanPhamDaMuaViewModel sanPhamDaMuaViewModel : list) {
-            sanPhamDaMuaViewModel.toDataRow();
+            dtm.addRow(sanPhamDaMuaViewModel.toDataRow());
         }
     }
 
