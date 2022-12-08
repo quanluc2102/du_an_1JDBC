@@ -19,7 +19,6 @@ public class ThongKeViewModel {
     private Double giaBan;
     private double giaGiam;
     private Double giaNhap;
-//    private Boolean trangThai;
     private int ngay;
     private int thang;
     private int nam;
@@ -149,18 +148,6 @@ public class ThongKeViewModel {
         return lai = giaBan - giaNhap - giaGiam();
     }
 
-//    public boolean hopLe() {
-//
-//        int[] ngayMax = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-//        if (nam % 4 == 0) {
-//            ngayMax[2] = 29;
-//        }
-//        if (ngay > ngayMax[thang]) {
-//            return false;
-//        }
-//
-//        return true;
-//    }
 
     public Object[] toDaTaRow() {
         DecimalFormat df = new DecimalFormat("###,###,###,###");
