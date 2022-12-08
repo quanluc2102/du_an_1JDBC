@@ -5,10 +5,6 @@
 package View.SanPham;
 
 import DomainModel.Camera;
-import DomainModel.Camera;
-import DomainModel.Camera;
-import Service.SanPhamServices;
-import Service.ServiceImpl.SanPhamServicesImpl;
 import Service.ServiceImpl.TSPImpl;
 import Service.ThemSPServices;
 import java.util.ArrayList;
@@ -400,6 +396,7 @@ public class ViewCamera extends javax.swing.JDialog {
         txtVideo.setText(x.getQuayVideo());
         txtZoom.setText(x.getZoom());
         cbbTrangThai.setSelectedIndex(x.getTrangThai());
+        id = x.getId();
 
 
     }//GEN-LAST:event_tbl1MouseClicked
@@ -431,6 +428,7 @@ public class ViewCamera extends javax.swing.JDialog {
         txtMS.setText(x.getCameraSau());
         txtMT.setText(x.getCameraTruoc());
         txtZoom.setText(x.getZoom());
+        id = x.getId();
         cbbTrangThai.setSelectedIndex(x.getTrangThai());
     }//GEN-LAST:event_tbl2MouseClicked
 

@@ -365,6 +365,7 @@ public class ViewPinSac extends javax.swing.JDialog {
         txtLP.setText(hdh.getLoaiPin());
         txtDL.setText(hdh.getDungLuong());
         txtDacBiet.setText(hdh.getDacBiet());
+         id = hdh.getId();
         txtSacj.setText(hdh.getSac());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
 
@@ -394,6 +395,7 @@ public class ViewPinSac extends javax.swing.JDialog {
         Pin hdh = sps.getPin(0).get(index);
         txtLP.setText(hdh.getLoaiPin());
         txtDL.setText(hdh.getDungLuong());
+         id = hdh.getId();
         txtDacBiet.setText(hdh.getDacBiet());
         txtSacj.setText(hdh.getSac());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());

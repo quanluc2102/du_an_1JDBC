@@ -22,6 +22,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,8 +36,9 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
 
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
-    String cmd;
+
     String scr = "";
+    String texts = "";
 
     /**
      * Creates new form ScanCode
@@ -148,6 +150,7 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         webcam.close();
+
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -180,7 +183,7 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            ScanCode sc = new ScanCode(new javax.swing.JFrame(), true, 1);
+            ScanCode sc = new ScanCode(new javax.swing.JFrame(), true, 0);
             sc.setVisible(true);
         });
     }
@@ -229,7 +232,10 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
             }
 
             if (result != null) {
+               
                 scr = result.getText();
+             
+                JOptionPane.showMessageDialog(rootPane, scr, "Kết quả:", 1);
                 txtCode.setText(scr);
 //                this.dispose();
 //                webcam.close();

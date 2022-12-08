@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author haha
  */
 public class ViewIMEIexcel extends javax.swing.JDialog {
+
     ExcelServices exs = new ExcelServicesImpl();
     boolean check = false;
     List<String> ix = new ArrayList<>();
@@ -38,9 +39,6 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
         model = (DefaultTableModel) tblIMEI.getModel();
     }
 
- 
-
-    
     private void filltable(List<String> x) {
         model.setRowCount(0);
         for (String string : x) {
@@ -329,7 +327,7 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
-      ix =  exs.getFile(link);
+        ix = exs.getFile(link);
         filltable(exs.getFile(link));
         this.setVisible(true);
         // TODO add your handling code here:
@@ -463,12 +461,13 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-     String scanImei = "";
-     int camera = cbbPort.getSelectedIndex();
+        String scanImei = "";
+        int camera = cbbPort.getSelectedIndex();
         ScanCode sc = new ScanCode(new java.awt.Frame(), true, camera);
         sc.setVisible(true);
         scanImei = sc.getScanResutlx();
-       JOptionPane.showMessageDialog(rootPane, scanImei);
+        txtIMEIHT.setText(scanImei);
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

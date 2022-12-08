@@ -366,7 +366,7 @@ public class ViewTK extends javax.swing.JDialog {
         txtTrongLuong.setText(hdh.getTrongLuong());
         txtVien.setText(hdh.getVien());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
-
+        id = hdh.getId();
 
     }//GEN-LAST:event_tbl1MouseClicked
 
@@ -396,6 +396,7 @@ public class ViewTK extends javax.swing.JDialog {
         txtTrongLuong.setText(hdh.getTrongLuong());
         txtVien.setText(hdh.getVien());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
+        id = hdh.getId();
     }//GEN-LAST:event_tbl2MouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed

@@ -14,30 +14,30 @@ public class ThongSoViewModel {
     private String ram;
     private String rom;
     private String theNho;
-    
+
     private String CPUID;
     private String CPU;
     private String GPU;
     private String CPULoai;
     private String CPUHang;
     private String tienTrinh;
-    
+
     private String pinID;
     private String pinDungLuong;
     private String pinLoai;
     private String sac;
     private String pindacBiet;
-    
+
     private String HDHID;
     private String heDieuhanh;
     private String HDHphienBan;
-    
+
     private String thietKeID;
     private String matTruoc;
     private String matLung;
     private String khungVien;
     private String trongLuong;
-    
+
     private String manHinhID;
     private String manHinhLoai;
     private String manHinhKieu;
@@ -45,7 +45,7 @@ public class ThongSoViewModel {
     private String doPhanGiai;
     private String manHinhKichThuoc;
     private String manHinhCongNghe;
-    
+
     private String ketNoiID;
     private String SIM;
     private String hongNgoai;
@@ -54,18 +54,82 @@ public class ThongSoViewModel {
     private String wifi;
     private String blutooth;
     private String GPS;
-    
+
     private String mauSacID;
     private String mauTen;
     private String mauMa;
-    
+
     private String tienIchID;
     private String baoMat;
     private String khangNuoc;
     private String dacBiet;
 
+    private String cameraID;
+    private String cameraTruoc;
+    private String cameraSau;
+    private String quayVideo;
+    private String Zoom;
+    private String chongRung;
+    private String CameraDacBiet;
+
     public ThongSoViewModel() {
     }
+
+    public ThongSoViewModel(String boNhoID, String ram, String rom, String theNho, String CPUID, String CPU, String GPU, String CPULoai, String CPUHang, String tienTrinh, String pinID, String pinDungLuong, String pinLoai, String sac, String pindacBiet, String HDHID, String heDieuhanh, String HDHphienBan, String thietKeID, String matTruoc, String matLung, String khungVien, String trongLuong, String manHinhID, String manHinhLoai, String manHinhKieu, String tangSoQuet, String doPhanGiai, String manHinhKichThuoc, String manHinhCongNghe, String ketNoiID, String SIM, String hongNgoai, String jackTaiNghe, String mangHoTro, String wifi, String blutooth, String GPS, String mauSacID, String mauTen, String mauMa, String tienIchID, String baoMat, String khangNuoc, String dacBiet, String cameraID, String cameraTruoc, String cameraSau, String quayVideo, String Zoom, String chongRung, String CameraDacBiet) {
+        this.boNhoID = boNhoID;
+        this.ram = ram;
+        this.rom = rom;
+        this.theNho = theNho;
+        this.CPUID = CPUID;
+        this.CPU = CPU;
+        this.GPU = GPU;
+        this.CPULoai = CPULoai;
+        this.CPUHang = CPUHang;
+        this.tienTrinh = tienTrinh;
+        this.pinID = pinID;
+        this.pinDungLuong = pinDungLuong;
+        this.pinLoai = pinLoai;
+        this.sac = sac;
+        this.pindacBiet = pindacBiet;
+        this.HDHID = HDHID;
+        this.heDieuhanh = heDieuhanh;
+        this.HDHphienBan = HDHphienBan;
+        this.thietKeID = thietKeID;
+        this.matTruoc = matTruoc;
+        this.matLung = matLung;
+        this.khungVien = khungVien;
+        this.trongLuong = trongLuong;
+        this.manHinhID = manHinhID;
+        this.manHinhLoai = manHinhLoai;
+        this.manHinhKieu = manHinhKieu;
+        this.tangSoQuet = tangSoQuet;
+        this.doPhanGiai = doPhanGiai;
+        this.manHinhKichThuoc = manHinhKichThuoc;
+        this.manHinhCongNghe = manHinhCongNghe;
+        this.ketNoiID = ketNoiID;
+        this.SIM = SIM;
+        this.hongNgoai = hongNgoai;
+        this.jackTaiNghe = jackTaiNghe;
+        this.mangHoTro = mangHoTro;
+        this.wifi = wifi;
+        this.blutooth = blutooth;
+        this.GPS = GPS;
+        this.mauSacID = mauSacID;
+        this.mauTen = mauTen;
+        this.mauMa = mauMa;
+        this.tienIchID = tienIchID;
+        this.baoMat = baoMat;
+        this.khangNuoc = khangNuoc;
+        this.dacBiet = dacBiet;
+        this.cameraID = cameraID;
+        this.cameraTruoc = cameraTruoc;
+        this.cameraSau = cameraSau;
+        this.quayVideo = quayVideo;
+        this.Zoom = Zoom;
+        this.chongRung = chongRung;
+        this.CameraDacBiet = CameraDacBiet;
+    }
+    
 
     public String getBoNhoID() {
         return boNhoID;
@@ -103,6 +167,62 @@ public class ThongSoViewModel {
         return thietKeID;
     }
 
+    public String getCameraID() {
+        return cameraID;
+    }
+
+    public void setCameraID(String cameraID) {
+        this.cameraID = cameraID;
+    }
+
+    public String getCameraTruoc() {
+        return cameraTruoc;
+    }
+
+    public void setCameraTruoc(String cameraTruoc) {
+        this.cameraTruoc = cameraTruoc;
+    }
+
+    public String getCameraSau() {
+        return cameraSau;
+    }
+
+    public void setCameraSau(String cameraSau) {
+        this.cameraSau = cameraSau;
+    }
+
+    public String getQuayVideo() {
+        return quayVideo;
+    }
+
+    public void setQuayVideo(String quayVideo) {
+        this.quayVideo = quayVideo;
+    }
+
+    public String getZoom() {
+        return Zoom;
+    }
+
+    public void setZoom(String Zoom) {
+        this.Zoom = Zoom;
+    }
+
+    public String getChongRung() {
+        return chongRung;
+    }
+
+    public void setChongRung(String chongRung) {
+        this.chongRung = chongRung;
+    }
+
+    public String getCameraDacBiet() {
+        return CameraDacBiet;
+    }
+
+    public void setCameraDacBiet(String CameraDacBiet) {
+        this.CameraDacBiet = CameraDacBiet;
+    }
+
     public void setThietKeID(String thietKeID) {
         this.thietKeID = thietKeID;
     }
@@ -138,9 +258,8 @@ public class ThongSoViewModel {
     public void setTienIchID(String tienIchID) {
         this.tienIchID = tienIchID;
     }
-    
 
-    public ThongSoViewModel(String boNhoID, String ram, String rom, String theNho, String CPUID, String CPU, String GPU, String CPULoai, String CPUHang, String tienTrinh, String pinID, String pinDungLuong, String pinLoai, String sac, String pindacBiet, String HDHID, String heDieuhanh, String HDHphienBan, String thietKeID, String matTruoc, String matLung, String khungVien, String trongLuong, String manHinhID, String manHinhLoai, String manHinhKieu, String tangSoQuet, String doPhanGiai, String manHinhKichThuoc, String manHinhCongNghe, String ketNoiID, String SIM, String hongNgoai, String jackTaiNghe, String mangHoTro, String wifi, String blutooth, String GPS, String mauSacID,String mauMa, String mauTen,  String tienIchID, String baoMat, String khangNuoc, String dacBiet) {
+    public ThongSoViewModel(String boNhoID, String ram, String rom, String theNho, String CPUID, String CPU, String GPU, String CPULoai, String CPUHang, String tienTrinh, String pinID, String pinDungLuong, String pinLoai, String sac, String pindacBiet, String HDHID, String heDieuhanh, String HDHphienBan, String thietKeID, String matTruoc, String matLung, String khungVien, String trongLuong, String manHinhID, String manHinhLoai, String manHinhKieu, String tangSoQuet, String doPhanGiai, String manHinhKichThuoc, String manHinhCongNghe, String ketNoiID, String SIM, String hongNgoai, String jackTaiNghe, String mangHoTro, String wifi, String blutooth, String GPS, String mauSacID, String mauMa, String mauTen, String tienIchID, String baoMat, String khangNuoc, String dacBiet) {
         this.boNhoID = boNhoID;
         this.ram = ram;
         this.rom = rom;
@@ -187,8 +306,6 @@ public class ThongSoViewModel {
         this.khangNuoc = khangNuoc;
         this.dacBiet = dacBiet;
     }
-    
-    
 
     @Override
     public String toString() {

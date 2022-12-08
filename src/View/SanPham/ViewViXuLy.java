@@ -369,7 +369,7 @@ public class ViewViXuLy extends javax.swing.JDialog {
         txtHang.setText(hdh.getHang());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
 
-
+        id = hdh.getId();
     }//GEN-LAST:event_tbl1MouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -399,6 +399,7 @@ public class ViewViXuLy extends javax.swing.JDialog {
         txtLoai.setText(hdh.getLoai());
         txtHang.setText(hdh.getHang());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
+        id = hdh.getId();
     }//GEN-LAST:event_tbl2MouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed

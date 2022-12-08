@@ -26,6 +26,7 @@ public class DienThoaiView extends javax.swing.JDialog {
     int trangThai = 0;
     List<Hang> ls = new ArrayList<>();
     String idxc = "";
+    String id = "";
 
     /**
      * Creates new form CameraView
@@ -52,6 +53,10 @@ public class DienThoaiView extends javax.swing.JDialog {
     public String getName() {
 
         return idxc;
+    }
+    public String getID() {
+
+        return id;
     }
 
     /**
@@ -83,7 +88,7 @@ public class DienThoaiView extends javax.swing.JDialog {
         tblHang2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Quốc gia");
+        setTitle("Điện thoại ");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
@@ -150,7 +155,7 @@ public class DienThoaiView extends javax.swing.JDialog {
                 txtsKeyReleased(evt);
             }
         });
-        jPanel1.add(txts, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 240, -1));
+        jPanel1.add(txts, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 240, -1));
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -285,7 +290,7 @@ public class DienThoaiView extends javax.swing.JDialog {
         txtTenDong.setText(qg.getMa());
         cbbDong.setSelectedIndex(qg.getTrangThai());
 
-
+        id = qg.getId();
     }//GEN-LAST:event_tblHang1MouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -306,6 +311,7 @@ public class DienThoaiView extends javax.swing.JDialog {
         txtMaDong.setText(qg.getTen());
         txtTenDong.setText(qg.getMa());
         cbbDong.setSelectedIndex(qg.getTrangThai());
+        id = qg.getId();
     }//GEN-LAST:event_tblHang2MouseClicked
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged

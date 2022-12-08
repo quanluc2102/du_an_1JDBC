@@ -5,6 +5,7 @@
 package Repository;
 
 import DomainModel.Camera;
+import DomainModel.DienThoai;
 import Ultilities.SQLServerConnection;
 import ViewModel.CameraModelView;
 import java.sql.Connection;
@@ -115,6 +116,21 @@ public class CameraRepon {
                 Camera sp = new Camera(rs.getString(1), rs.getString(2), rs.getString(3),
                         rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
                 ls.add(sp);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return ls;
+    }
+    public List<DienThoai> getDTLisst() {
+        String query = "select * from DienThoai";
+        List<DienThoai> ls = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+           
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ls.add(new DienThoai(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), 0));
             }
 
         } catch (SQLException e) {

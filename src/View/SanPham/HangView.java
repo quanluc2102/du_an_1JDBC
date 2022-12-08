@@ -26,6 +26,7 @@ public class HangView extends javax.swing.JDialog {
     int trangThai = 0;
     List<Hang> ls = new ArrayList<>();
     String idxc = "";
+    String id = "";
 
     /**
      * Creates new form CameraView
@@ -47,6 +48,11 @@ public class HangView extends javax.swing.JDialog {
             md.addRow(row);
         }
 
+    }
+
+    public String getID() {
+
+        return id;
     }
 
     public String getName() {
@@ -83,7 +89,7 @@ public class HangView extends javax.swing.JDialog {
         tblHang2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Quốc gia");
+        setTitle("Hãng");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
@@ -284,7 +290,7 @@ public class HangView extends javax.swing.JDialog {
         txtMahang.setText(qg.getTen());
         txtTenhang.setText(qg.getMa());
         cbbHang.setSelectedIndex(qg.getTrangThai());
-
+        id = qg.getId();
 
     }//GEN-LAST:event_tblHang1MouseClicked
 
@@ -304,6 +310,7 @@ public class HangView extends javax.swing.JDialog {
         index = tblHang2.getSelectedRow();
         Hang qg = tsp.getHang(0).get(index);
         txtMahang.setText(qg.getTen());
+        id = qg.getId();
         txtTenhang.setText(qg.getMa());
         cbbHang.setSelectedIndex(qg.getTrangThai());
     }//GEN-LAST:event_tblHang2MouseClicked

@@ -26,7 +26,7 @@ public class DongView extends javax.swing.JDialog {
     int trangThai = 0;
     List<Hang> ls = new ArrayList<>();
     String idxc = "";
-
+    String id = "";
     /**
      * Creates new form CameraView
      */
@@ -53,7 +53,10 @@ public class DongView extends javax.swing.JDialog {
 
         return idxc;
     }
+ public String getID() {
 
+        return id;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,7 +86,7 @@ public class DongView extends javax.swing.JDialog {
         tblHang2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Quốc gia");
+        setTitle("Dòng");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
@@ -284,7 +287,7 @@ public class DongView extends javax.swing.JDialog {
         txtMaDong.setText(qg.getTen());
         txtTenDong.setText(qg.getMa());
         cbbDong.setSelectedIndex(qg.getTrangThai());
-
+         id = qg.getId();
 
     }//GEN-LAST:event_tblHang1MouseClicked
 
@@ -305,6 +308,7 @@ public class DongView extends javax.swing.JDialog {
         Hang qg = tsp.getHang(0).get(index);
         txtMaDong.setText(qg.getTen());
         txtTenDong.setText(qg.getMa());
+         id = qg.getId();
         cbbDong.setSelectedIndex(qg.getTrangThai());
     }//GEN-LAST:event_tblHang2MouseClicked
 

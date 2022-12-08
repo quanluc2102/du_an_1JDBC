@@ -335,7 +335,7 @@ public class ViewTI extends javax.swing.JDialog {
         TienIch hdh = sps.getTI(1).get(index);
         txtKN.setText(hdh.getKhangNuoc());
         txtBM.setText(hdh.getBaoMat());
-
+        id = hdh.getId();
         txtDB.setText(hdh.getDacBiet());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
 
@@ -365,7 +365,7 @@ public class ViewTI extends javax.swing.JDialog {
         TienIch hdh = sps.getTI(0).get(index);
         txtKN.setText(hdh.getKhangNuoc());
         txtBM.setText(hdh.getBaoMat());
-
+        id = hdh.getId();
         txtDB.setText(hdh.getDacBiet());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
     }//GEN-LAST:event_tbl2MouseClicked

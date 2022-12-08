@@ -329,6 +329,7 @@ public class ViewSacMau extends javax.swing.JDialog {
         txtTen.setText(hdh.getTen());
         txtMa.setText(hdh.getMa());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
+         id = hdh.getId();
 
 
     }//GEN-LAST:event_tbl1MouseClicked
@@ -356,7 +357,7 @@ public class ViewSacMau extends javax.swing.JDialog {
         MauSac hdh = sps.getMauSacs(0).get(index);
         txtTen.setText(hdh.getTen());
         txtMa.setText(hdh.getMa());
-
+         id = hdh.getId();
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
 
     }//GEN-LAST:event_tbl2MouseClicked

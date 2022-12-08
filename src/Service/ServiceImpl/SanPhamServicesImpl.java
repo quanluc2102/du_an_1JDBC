@@ -6,6 +6,7 @@ package Service.ServiceImpl;
 
 import DomainModel.BoNho;
 import DomainModel.Cpu;
+import DomainModel.DienThoai;
 import DomainModel.Dong;
 import DomainModel.Hang;
 import DomainModel.HeDieuHanh;
@@ -17,6 +18,7 @@ import DomainModel.QuocGia;
 import DomainModel.ThietKe;
 import DomainModel.ThongSo;
 import DomainModel.TienIch;
+import Repository.CameraRepon;
 import Repository.SanPhamRespository;
 import Repository.ThongSoReponsitory;
 import Service.SanPhamServices;
@@ -436,5 +438,9 @@ public class SanPhamServicesImpl implements SanPhamServices {
         }
         return "Sửa thất bại";
     }
+
+    @Override
+    public List<DienThoai> getDT() {
+return new CameraRepon().getDTLisst();    }
 
 }

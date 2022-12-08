@@ -379,8 +379,8 @@ public class ViewKetNoi extends javax.swing.JDialog {
         txtWifi.setText(bn.getWifi());
         txtJTN.setText(bn.getJackTaiNghe());
         cbbTrangThai.setSelectedIndex(bn.getTrangThai());
-       
 
+        id = bn.getId();
 
     }//GEN-LAST:event_tbl1MouseClicked
 
@@ -412,6 +412,7 @@ public class ViewKetNoi extends javax.swing.JDialog {
         txtWifi.setText(bn.getWifi());
         txtJTN.setText(bn.getJackTaiNghe());
         cbbTrangThai.setSelectedIndex(bn.getTrangThai());
+        id = bn.getId();
     }//GEN-LAST:event_tbl2MouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed

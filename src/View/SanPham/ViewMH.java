@@ -371,6 +371,7 @@ public class ViewMH extends javax.swing.JDialog {
         txtKT.setText(bn.getKichThuoc());
         txtKieu.setText(bn.getKieu());
         txtLoai.setText(bn.getLoai());
+        id = bn.getId();
         txtTSQ.setText(bn.getTangSoQuet());
 
         cbbTrangThai.setSelectedIndex(bn.getTrangThai());
@@ -404,6 +405,7 @@ public class ViewMH extends javax.swing.JDialog {
         txtKT.setText(bn.getKichThuoc());
         txtKieu.setText(bn.getKieu());
         txtLoai.setText(bn.getLoai());
+        id = bn.getId();
         txtTSQ.setText(bn.getTangSoQuet());
 
         cbbTrangThai.setSelectedIndex(bn.getTrangThai());

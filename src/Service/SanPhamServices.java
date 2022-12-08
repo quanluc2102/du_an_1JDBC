@@ -6,6 +6,7 @@ package Service;
 
 import DomainModel.BoNho;
 import DomainModel.Cpu;
+import DomainModel.DienThoai;
 import DomainModel.Dong;
 import DomainModel.Hang;
 import DomainModel.HeDieuHanh;
@@ -115,6 +116,7 @@ public interface SanPhamServices {
     List<Hang> getHang();
 
     List<Dong> getDong();
+    List<DienThoai> getDT();
 
     List<QuocGia> getQG();
 

@@ -157,6 +157,11 @@ public class ViewHDH extends javax.swing.JDialog {
 
         btnChon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit-regular-24.png"))); // NOI18N
         btnChon.setOpaque(false);
+        btnChon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonActionPerformed(evt);
+            }
+        });
 
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/trash-regular-24.png"))); // NOI18N
         btnXoa.setOpaque(false);
@@ -321,7 +326,7 @@ public class ViewHDH extends javax.swing.JDialog {
         HeDieuHanh bn = sps.getHDH(1).get(index);
         txtROM.setText(bn.getPhienBan());
         txtRAM.setText(bn.getTenHDH());
-
+        id = bn.getId();
         cbbTrangThai.setSelectedIndex(bn.getTrangThai());
 
 
@@ -350,7 +355,7 @@ public class ViewHDH extends javax.swing.JDialog {
         HeDieuHanh bn = sps.getHDH(0).get(index);
         txtROM.setText(bn.getPhienBan());
         txtRAM.setText(bn.getTenHDH());
-
+        id = bn.getId();
         cbbTrangThai.setSelectedIndex(bn.getTrangThai());
         System.out.println(bn.getId());
     }//GEN-LAST:event_tbl2MouseClicked
@@ -386,6 +391,11 @@ public class ViewHDH extends javax.swing.JDialog {
         System.out.println("so trang " + trang);
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
+    private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
+
+        this.dispose();
+    }//GEN-LAST:event_btnChonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -411,16 +421,6 @@ public class ViewHDH extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ViewHDH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

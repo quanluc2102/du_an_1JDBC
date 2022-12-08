@@ -26,6 +26,7 @@ public class QuocGiaView extends javax.swing.JDialog {
     int trangThai = 0;
     List<QuocGia> ls = new ArrayList<>();
     String idxc = "";
+    String id = "";
 
     /**
      * Creates new form CameraView
@@ -52,6 +53,10 @@ public class QuocGiaView extends javax.swing.JDialog {
     public String getName() {
 
         return idxc;
+    }
+     public String getID() {
+
+        return id;
     }
 
     /**
@@ -284,7 +289,7 @@ public class QuocGiaView extends javax.swing.JDialog {
         txtMaQuocGia.setText(qg.getTen());
         txtTenQuocGia.setText(qg.getMa());
         cbbQuocGia.setSelectedIndex(qg.getTrangThai());
-
+        id = qg.getId();
 
     }//GEN-LAST:event_tblQuocGia1MouseClicked
 
@@ -306,6 +311,7 @@ public class QuocGiaView extends javax.swing.JDialog {
         txtMaQuocGia.setText(qg.getTen());
         txtTenQuocGia.setText(qg.getMa());
         cbbQuocGia.setSelectedIndex(qg.getTrangThai());
+        id = qg.getId();
     }//GEN-LAST:event_tblQuocGia2MouseClicked
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged

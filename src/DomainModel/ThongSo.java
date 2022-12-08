@@ -21,11 +21,33 @@ public class ThongSo {
     private String thietKe;
     private String tienIch;
     private String mauSac;
+    private String camera;
+
+    public String getCamera() {
+        return camera;
+    }
+
+    public void setCamera(String camera) {
+        this.camera = camera;
+    }
+
+    public ThongSo(String id, String idQuocGiaDong, String heDieuhanh, String cpu, String boNho, String pin, String ketNoi, String manHinh, String thietKe, String tienIch, String mauSac, String camera) {
+        this.id = id;
+        this.idQuocGiaDong = idQuocGiaDong;
+        this.heDieuhanh = heDieuhanh;
+        this.cpu = cpu;
+        this.boNho = boNho;
+        this.pin = pin;
+        this.ketNoi = ketNoi;
+        this.manHinh = manHinh;
+        this.thietKe = thietKe;
+        this.tienIch = tienIch;
+        this.mauSac = mauSac;
+        this.camera = camera;
+    }
 
     public ThongSo() {
     }
-
-   
 
     public ThongSo(String id, String idQuocGiaDong, String heDieuhanh, String cpu, String boNho, String pin, String ketNoi, String manHinh, String thietKe, String tienIch, String mauSac) {
         this.id = id;
@@ -40,7 +62,6 @@ public class ThongSo {
         this.tienIch = tienIch;
         this.mauSac = mauSac;
     }
-    
 
     public String getBoNho() {
         return boNho;
@@ -90,8 +111,6 @@ public class ThongSo {
         this.mauSac = mauSac;
     }
 
-   
-
     public String getHeDieuhanh() {
         return heDieuhanh;
     }
@@ -124,8 +143,6 @@ public class ThongSo {
         this.cpu = cpu;
     }
 
-
-
     public String getManHinh() {
         return manHinh;
     }
@@ -134,6 +151,9 @@ public class ThongSo {
         this.manHinh = manHinh;
     }
 
-
+    @Override
+    public String toString() {
+        return "ThongSo{" + "id=" + id + ", idQuocGiaDong=" + idQuocGiaDong + ", heDieuhanh=" + heDieuhanh + ", cpu=" + cpu + ", boNho=" + boNho + ", pin=" + pin + ", ketNoi=" + ketNoi + ", manHinh=" + manHinh + ", thietKe=" + thietKe + ", tienIch=" + tienIch + ", mauSac=" + mauSac + ", camera=" + camera + '}';
+    }
 
 }

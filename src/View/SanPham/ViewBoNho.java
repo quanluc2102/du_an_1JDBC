@@ -164,6 +164,11 @@ public class ViewBoNho extends javax.swing.JDialog {
 
         btnChon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit-regular-24.png"))); // NOI18N
         btnChon.setOpaque(false);
+        btnChon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonActionPerformed(evt);
+            }
+        });
 
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/trash-regular-24.png"))); // NOI18N
         btnXoa.setOpaque(false);
@@ -332,6 +337,7 @@ public class ViewBoNho extends javax.swing.JDialog {
     private void tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl1MouseClicked
         int index = tbl1.getSelectedRow();
         BoNho bn = sps.getBN(1).get(index);
+        id = bn.getId();
         txtROM.setText(bn.getROM());
         txtRAM.setText(bn.getRAM());
         txtTN.setText(bn.getTheNho());
@@ -361,6 +367,7 @@ public class ViewBoNho extends javax.swing.JDialog {
     private void tbl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl2MouseClicked
         int index = tbl2.getSelectedRow();
         BoNho bn = sps.getBN(0).get(index);
+        id = bn.getId();
         txtROM.setText(bn.getROM());
         txtRAM.setText(bn.getRAM());
         txtTN.setText(bn.getTheNho());
@@ -398,6 +405,11 @@ public class ViewBoNho extends javax.swing.JDialog {
         }
         System.out.println("so trang " + trang);
     }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
+        this.dispose();
+
+    }//GEN-LAST:event_btnChonActionPerformed
 
     /**
      * @param args the command line arguments

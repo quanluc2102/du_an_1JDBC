@@ -131,6 +131,7 @@ public class SanPhamRespository {
         }
         return listSanPhamViewModelView;
     }
+
     public List<SanPhamViewModel> getAll2() {
         String query = "select QuocGiaDong.id ,anh,ten_dien_thoai,ma_dien_thoai,ten_hang,ten_dong,ten_quoc_gia,COUNT(ChiTietDienThoai.IMEI)as soluong,gia_ban,gia_nhap from QuocGiaDong \n"
                 + "                                              						join ChiTietDienThoai on QuocGiaDong.id = ChiTietDienThoai.id_quoc_gia_Dong \n"
@@ -157,21 +158,22 @@ public class SanPhamRespository {
     }
 
     public ThongSoViewModel getAllThongSoView(String id) {
-        String queryx = "SELECT BoNho.id, BoNho.so_luong_ram, BoNho.so_Luong_rom, BoNho.the_nho, CPU.id AS Expr1, CPU.ten_CPU, CPU.GPU, CPU.loai, CPU.hang_cpu, CPU.tien_trinh, PIN.id AS Expr2, \n"
-                + "                  PIN.dung_luong, PIN.loai_pin, PIN.sac, PIN.dac_biet, HeDieuHanh.id AS Expr3, HeDieuHanh.ten_he_dieu_hanh, HeDieuHanh.phien_ban, ThietKe.id AS Expr4, ThietKe.mat_truoc, ThietKe.mat_lung, \n"
-                + "                  ThietKe.vien, ThietKe.trong_luong, ManHinh.id AS Expr5, ManHinh.loai_man_hinh, ManHinh.kieu_man_hinh, ManHinh.tang_so_quet, ManHinh.do_phan_giai, ManHinh.kich_thuoc, \n"
-                + "                  ManHinh.cong_nghe_di_kem, KetNoi.id AS Expr6, KetNoi.sim, KetNoi.hong_ngoai, KetNoi.jack35, KetNoi.ho_tro_mang, KetNoi.wifi, KetNoi.blutooth, KetNoi.GPS, MauSac.id AS Expr7, \n"
-                + "                  MauSac.ma_mau, MauSac.ten_mau, TienIch.id AS Expr8, TienIch.bao_mat, TienIch.khang_nuoc, TienIch.dac_biet AS Expr9\n"
-                + "FROM     ThongSo inner join BoNho on BoNho.id = ThongSo.id_bo_nho\n"
-                + "inner join CPU on CPU.id = ThongSo.id_CPU\n"
-                + "inner join PIN on PIN.id = ThongSo.id_pin\n"
-                + "inner join ManHinh on ManHinh.id = ThongSo.id_man_hinh\n"
-                + "inner join KetNoi on KetNoi.id = ThongSo.id_ket_noi\n"
-                + "inner join ThietKe on ThietKe.id = ThongSo.id_thiet_ke\n"
-                + "inner join TienIch on TienIch.id = ThongSo.id_tien_ich\n"
-                + "inner join MauSac on MauSac.id	= ThongSo.id_mau\n"
-                + "inner join HeDieuHanh on HeDieuHanh.id = ThongSo.id_he_dieu_hanh\n"
-                + "where id_dong =?";
+        String queryx = "SELECT BoNho.id, BoNho.so_luong_ram, BoNho.so_Luong_rom, BoNho.the_nho, CPU.id AS Expr1, CPU.ten_CPU, CPU.GPU, CPU.loai, CPU.hang_cpu, CPU.tien_trinh, PIN.id AS Expr2,  \n"
+                + "                                  PIN.dung_luong, PIN.loai_pin, PIN.sac, PIN.dac_biet, HeDieuHanh.id AS Expr3, HeDieuHanh.ten_he_dieu_hanh, HeDieuHanh.phien_ban, ThietKe.id AS Expr4, ThietKe.mat_truoc, ThietKe.mat_lung,  \n"
+                + "                                  ThietKe.vien, ThietKe.trong_luong, ManHinh.id AS Expr5, ManHinh.loai_man_hinh, ManHinh.kieu_man_hinh, ManHinh.tang_so_quet, ManHinh.do_phan_giai, ManHinh.kich_thuoc,  \n"
+                + "                                  ManHinh.cong_nghe_di_kem, KetNoi.id AS Expr6, KetNoi.sim, KetNoi.hong_ngoai, KetNoi.jack35, KetNoi.ho_tro_mang, KetNoi.wifi, KetNoi.blutooth, KetNoi.GPS, MauSac.id AS Expr7,  \n"
+                + "                                  MauSac.ma_mau, MauSac.ten_mau, TienIch.id AS Expr8, TienIch.bao_mat, TienIch.khang_nuoc, TienIch.dac_biet AS Expr9, Camera.id , Camera.camera_truoc,camera.camera_sau,camera.quay_video,camera.max_zoom,camera.chong_rung,camera.dac_biet\n"
+                + "                FROM     ThongSo inner join BoNho on BoNho.id = ThongSo.id_bo_nho \n"
+                + "                inner join CPU on CPU.id = ThongSo.id_CPU \n"
+                + "                inner join PIN on PIN.id = ThongSo.id_pin \n"
+                + "                inner join ManHinh on ManHinh.id = ThongSo.id_man_hinh \n"
+                + "                inner join KetNoi on KetNoi.id = ThongSo.id_ket_noi \n"
+                + "                inner join ThietKe on ThietKe.id = ThongSo.id_thiet_ke \n"
+                + "                inner join TienIch on TienIch.id = ThongSo.id_tien_ich \n"
+                + "                inner join MauSac on MauSac.id	= ThongSo.id_mau \n"
+                + "                inner join HeDieuHanh on HeDieuHanh.id = ThongSo.id_he_dieu_hanh \n"
+                + "				join camera on camera.id = ThongSo.id_camera\n"
+                + "				where thongso.id_dong =?";
         ThongSoViewModel sp = new ThongSoViewModel();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(queryx);) {
             ps.setObject(1, id);
@@ -185,7 +187,9 @@ public class SanPhamRespository {
                         rs.getString(23), rs.getString(24), rs.getString(25), rs.getString(26),
                         rs.getString(27), rs.getString(28), rs.getString(29), rs.getString(30),
                         rs.getString(31), rs.getString(32), rs.getString(33), rs.getString(34), rs.getString(35), rs.getString(36), rs.getString(37),
-                        rs.getString(38), rs.getString(39), rs.getString(40), rs.getString(41), rs.getString(42), rs.getString(43), rs.getString(44), rs.getString(45));
+                        rs.getString(38), rs.getString(39), rs.getString(40), rs.getString(41),
+                        rs.getString(42), rs.getString(43), rs.getString(44), rs.getString(45), rs.getString(46), rs.getString(47), rs.getString(48),
+                        rs.getString(49), rs.getString(50), rs.getString(51), rs.getString(52));
             }
 
         } catch (SQLException e) {
@@ -244,7 +248,8 @@ public class SanPhamRespository {
         }
         return sp > 0;
     }
-    public boolean xoaHDH(HeDieuHanh hdh,int tt) {
+
+    public boolean xoaHDH(HeDieuHanh hdh, int tt) {
         String query = "UPDATE [dbo].[HeDieuHanh]\n"
                 + "   SET [ten_he_dieu_hanh] =?\n"
                 + "      ,[phien_ban] = ?\n"
@@ -300,11 +305,11 @@ public class SanPhamRespository {
         return sp > 0;
     }
 
-    public List<HeDieuHanh> getHDH(int x ) {
+    public List<HeDieuHanh> getHDH(int x) {
         String query = "select * from HeDieuHanh  where trang_thai = ?";
         List<HeDieuHanh> ls = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-          ps.setObject(1, x);
+            ps.setObject(1, x);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
