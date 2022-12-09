@@ -392,12 +392,13 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public String xoaTK(ThietKe tk, int tt) {
-     if (tk == null) {
+        if (tk == null) {
             return "Không được để trống thông tin";
         } else if (new ThongSoReponsitory().xoaThietKe(tk, tt)) {
             return "sửa thành cônng";
         }
-        return "Sửa thất bại";    }
+        return "Sửa thất bại";
+    }
 
     @Override
     public String xoaCPU(Cpu tk, int tt) {
@@ -441,6 +442,7 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public List<DienThoai> getDT() {
-return new CameraRepon().getDTLisst();    }
+        return new CameraRepon().getDTLisst();
+    }
 
 }

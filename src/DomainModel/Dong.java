@@ -20,6 +20,14 @@ public class Dong {
     private String idDienThoai;
     
     private int trangThai;
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
     
     
 
@@ -29,6 +37,14 @@ public class Dong {
     @Override
     public String toString() {
         return "Dong{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", idDienThoai=" + idDienThoai + '}';
+    }
+
+    public Dong(String id, String ma, String ten, String idDienThoai, int trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.idDienThoai = idDienThoai;
+        this.trangThai = trangThai;
     }
 
     public Dong(String id, String ma, String ten, String idDienThoai) {

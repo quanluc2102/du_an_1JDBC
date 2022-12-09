@@ -4,28 +4,18 @@
  */
 package Service.ServiceImpl;
 
-import DomainModel.BoNho;
 import DomainModel.Camera;
 import DomainModel.ChiTietDienThoai;
-import DomainModel.Cpu;
 import DomainModel.DienThoai;
 import DomainModel.Dong;
 import DomainModel.Hang;
-import DomainModel.HeDieuHanh;
-import DomainModel.KetNoi;
-import DomainModel.ManHinh;
-import DomainModel.MauSac;
-import DomainModel.Pin;
 import DomainModel.QuocGia;
 import DomainModel.QuocGiaDong;
-import DomainModel.ThietKe;
-import DomainModel.ThongSo;
-import DomainModel.TienIch;
 import Repository.CameraRepon;
 import Repository.HangReponsitory;
 import Repository.QuocGiaRepon;
+import Repository.SanPhamRespository;
 import Repository.ThemSanPhamRepon;
-import Repository.ThongSoReponsitory;
 import Service.SanPhamServices;
 import Service.ThemSPServices;
 import java.util.ArrayList;
@@ -36,17 +26,17 @@ import java.util.List;
  * @author haha
  */
 public class TSPImpl implements ThemSPServices {
-    
+
     ThemSanPhamRepon sp = new ThemSanPhamRepon();
     SanPhamServices sps = new SanPhamServicesImpl();
-    
+
     QuocGiaRepon qgq = new QuocGiaRepon();
-    
+
     @Override
     public List<QuocGia> getQG(int i) {
         return qgq.getAll(i);
     }
-    
+
     @Override
     public String themQG(QuocGia qg) {
         for (QuocGia x : qgq.getAll(1)) {
@@ -63,9 +53,9 @@ public class TSPImpl implements ThemSPServices {
             return "Thêm thành công";
         }
         return "Thêm Không thành công";
-        
+
     }
-    
+
     @Override
     public List<QuocGia> getTimKiem(String i) {
         List<QuocGia> ls = new ArrayList<>();
@@ -76,7 +66,7 @@ public class TSPImpl implements ThemSPServices {
         }
         return ls;
     }
-    
+
     @Override
     public String suaQG(QuocGia qg) {
         if (new QuocGiaRepon().sua(qg)) {
@@ -84,9 +74,9 @@ public class TSPImpl implements ThemSPServices {
         }
         return "Sửa Không thành công";
     }
-    
+
     HangReponsitory hangls = new HangReponsitory();
-    
+
     @Override
     public String themHang(Hang ha) {
         for (Hang x : hangls.getAll(1)) {
@@ -104,7 +94,7 @@ public class TSPImpl implements ThemSPServices {
         }
         return "Thêm Không thành công";
     }
-    
+
     @Override
     public String suaHang(Hang ha) {
         if (hangls.sua(ha)) {
@@ -112,12 +102,12 @@ public class TSPImpl implements ThemSPServices {
         }
         return "Sửa Không thành công";
     }
-    
+
     @Override
     public List<Hang> getHang(int i) {
         return hangls.getAll(i);
     }
-    
+
     @Override
     public List<Hang> getTimKiemHa(String i) {
         List<Hang> ls = new ArrayList<>();
@@ -128,7 +118,7 @@ public class TSPImpl implements ThemSPServices {
         }
         return ls;
     }
-    
+
     @Override
     public String themDT(DienThoai ha) {
         if (new ThemSanPhamRepon().ThemDT(ha)) {
@@ -136,31 +126,35 @@ public class TSPImpl implements ThemSPServices {
         }
         return "không nhập được";
     }
-    
+
     @Override
     public String suaDT(DienThoai ha) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
-    public List<DienThoai> getDT(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<DienThoai> getDT(int i,String idHang) {
+        if (idHang.isBlank()) {
+            List<DienThoai> s = new ArrayList<>();
+            return s; 
+        }
+        return new SanPhamRespository().getDT(i,idHang);
     }
-    
+
     @Override
     public List<DienThoai> getTimKiemDT(String i) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
-    
+
     public String themQGD(QuocGiaDong ha) {
         if (new ThemSanPhamRepon().ThemQGD(ha)) {
             return "nhập thành công";
         }
         return "không nhập được";
     }
-    
+
     @Override
     public String themCTDT(ChiTietDienThoai ha) {
         if (new ThemSanPhamRepon().ThemCTDT(ha)) {
@@ -168,12 +162,12 @@ public class TSPImpl implements ThemSPServices {
         }
         return "không nhập được";
     }
-    
+
     @Override
     public String themDong(Dong ha) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public String timKiem(QuocGiaDong ha) {
         for (QuocGia quocGia : new QuocGiaRepon().getAll(1)) {
@@ -183,12 +177,12 @@ public class TSPImpl implements ThemSPServices {
         }
         return null;
     }
-    
+
     @Override
     public List<Camera> getCamera(int x) {
         return new CameraRepon().getCamera(x);
     }
-    
+
     @Override
     public String themCamera(Camera tk) {
         if (tk == null) {
@@ -198,7 +192,7 @@ public class TSPImpl implements ThemSPServices {
         }
         return "Thêm thất bại";
     }
-    
+
     @Override
     public String suaCamera(Camera tk) {
         if (tk == null) {
@@ -208,7 +202,7 @@ public class TSPImpl implements ThemSPServices {
         }
         return "Sửa thất bại";
     }
-    
+
     @Override
     public String xoaCamera(Camera tk, int x) {
         if (tk == null) {
@@ -218,5 +212,24 @@ public class TSPImpl implements ThemSPServices {
         }
         return "Sửa thất bại";
     }
-    
+
+    @Override
+    public String suaDong(Dong ha) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String xoaDong(Dong ha, int tt) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Dong> getDong(int i, String idHang) {
+         if (idHang.isBlank()) {
+            List<Dong> s = new ArrayList<>();
+            return s; 
+        }
+        return new SanPhamRespository().getDong(i, idHang);
+    }
+
 }

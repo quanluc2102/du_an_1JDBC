@@ -4,7 +4,7 @@
  */
 package View.SanPham;
 
-import DomainModel.Hang;
+import DomainModel.DienThoai;
 import Service.ServiceImpl.TSPImpl;
 import Service.ThemSPServices;
 import java.awt.Color;
@@ -24,9 +24,10 @@ public class DienThoaiView extends javax.swing.JDialog {
     DefaultTableModel modelTBL1;
     int index = -1;
     int trangThai = 0;
-    List<Hang> ls = new ArrayList<>();
+    List<DienThoai> ls = new ArrayList<>();
     String idxc = "";
-    String id = "";
+    String idh = "";
+    String idReturn = "";
 
     /**
      * Creates new form CameraView
@@ -34,16 +35,18 @@ public class DienThoaiView extends javax.swing.JDialog {
     public DienThoaiView(java.awt.Frame parent, boolean modal, String id) {
         super(parent, modal);
         initComponents();
-        modelTBL = (DefaultTableModel) tblHang1.getModel();
-        modelTBL1 = (DefaultTableModel) tblHang2.getModel();
-        fillTable(tsp.getHang(1), modelTBL);
-        ls = tsp.getHang(1);
-        fillTable(tsp.getHang(0), modelTBL1);
+        idh = id;
+        modelTBL = (DefaultTableModel) tbl1.getModel();
+        modelTBL1 = (DefaultTableModel) tbl2.getModel();
+        fillTable(tsp.getDT(1, idh), modelTBL);
+        ls = tsp.getDT(1, idh);
+        fillTable(tsp.getDT(0, idh), modelTBL1);
+        
     }
 
-    private void fillTable(List<Hang> qg, DefaultTableModel md) {
+    private void fillTable(List<DienThoai> qg, DefaultTableModel md) {
         md.setRowCount(0);
-        for (Hang quocGia : qg) {
+        for (DienThoai quocGia : qg) {
             Object[] row = new Object[]{quocGia.getMa(), quocGia.getTen()};
             md.addRow(row);
         }
@@ -54,9 +57,10 @@ public class DienThoaiView extends javax.swing.JDialog {
 
         return idxc;
     }
+
     public String getID() {
 
-        return id;
+        return idReturn;
     }
 
     /**
@@ -82,13 +86,14 @@ public class DienThoaiView extends javax.swing.JDialog {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblHang1 = new javax.swing.JTable();
+        tbl1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblHang2 = new javax.swing.JTable();
+        tbl2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Điện thoại ");
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
@@ -120,7 +125,7 @@ public class DienThoaiView extends javax.swing.JDialog {
                 btnThemActionPerformed(evt);
             }
         });
-        jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 40));
+        jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 40));
 
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +133,7 @@ public class DienThoaiView extends javax.swing.JDialog {
                 btnSuaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 112, 76, 40));
+        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 76, 40));
 
         btnChon.setText("Chọn");
         btnChon.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +141,7 @@ public class DienThoaiView extends javax.swing.JDialog {
                 btnChonActionPerformed(evt);
             }
         });
-        jPanel1.add(btnChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 75, 40));
+        jPanel1.add(btnChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 75, 40));
 
         txts.setForeground(new java.awt.Color(153, 153, 153));
         txts.setText("Tìm kiếm");
@@ -155,7 +160,7 @@ public class DienThoaiView extends javax.swing.JDialog {
                 txtsKeyReleased(evt);
             }
         });
-        jPanel1.add(txts, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 240, -1));
+        jPanel1.add(txts, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 260, -1));
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -163,7 +168,7 @@ public class DienThoaiView extends javax.swing.JDialog {
             }
         });
 
-        tblHang1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -182,14 +187,14 @@ public class DienThoaiView extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        tblHang1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblHang1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblHang1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblHang1MouseClicked(evt);
+                tbl1MouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblHang1);
+        jScrollPane1.setViewportView(tbl1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -208,7 +213,7 @@ public class DienThoaiView extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Đang có", jPanel2);
 
-        tblHang2.setModel(new javax.swing.table.DefaultTableModel(
+        tbl2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -227,14 +232,14 @@ public class DienThoaiView extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        tblHang2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblHang2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblHang2.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblHang2MouseClicked(evt);
+                tbl2MouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tblHang2);
+        jScrollPane2.setViewportView(tbl2);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -282,37 +287,38 @@ public class DienThoaiView extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaDongActionPerformed
 
-    private void tblHang1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHang1MouseClicked
+    private void tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl1MouseClicked
 
-        index = tblHang1.getSelectedRow();
-        Hang qg = ls.get(index);
+        index = tbl1.getSelectedRow();
+        DienThoai qg = ls.get(index);
         txtMaDong.setText(qg.getTen());
         txtTenDong.setText(qg.getMa());
         cbbDong.setSelectedIndex(qg.getTrangThai());
 
-        id = qg.getId();
-    }//GEN-LAST:event_tblHang1MouseClicked
+
+    }//GEN-LAST:event_tbl1MouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         String ten = txtMaDong.getText();
         String ma = txtTenDong.getText();
+
         if (ten.isBlank() || ma.isBlank()) {
             JOptionPane.showMessageDialog(rootPane, "Không được để trống thông tin");
         }
-        Hang quocGia = new Hang("", ma, ten, cbbDong.getSelectedIndex());
-        JOptionPane.showMessageDialog(rootPane, tsp.themHang(quocGia));
-        fillTable(tsp.getHang(1), modelTBL);
-        fillTable(tsp.getHang(0), modelTBL1);
+        DienThoai quocGia = new DienThoai("", ma, ten, idh, cbbDong.getSelectedIndex());
+        JOptionPane.showMessageDialog(rootPane, tsp.themDT(quocGia));
+        fillTable(tsp.getDT(1, idh), modelTBL);
+        fillTable(tsp.getDT(0, idh), modelTBL1);
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void tblHang2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHang2MouseClicked
-        index = tblHang2.getSelectedRow();
-        Hang qg = tsp.getHang(0).get(index);
+    private void tbl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl2MouseClicked
+        index = tbl2.getSelectedRow();
+        DienThoai qg = tsp.getDT(0, idh).get(index);
         txtMaDong.setText(qg.getTen());
         txtTenDong.setText(qg.getMa());
         cbbDong.setSelectedIndex(qg.getTrangThai());
-        id = qg.getId();
-    }//GEN-LAST:event_tblHang2MouseClicked
+        idh = qg.getIdHang();
+    }//GEN-LAST:event_tbl2MouseClicked
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         if (trangThai == 1) {
@@ -325,7 +331,7 @@ public class DienThoaiView extends javax.swing.JDialog {
 
     private void txtsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsKeyReleased
         String i = txts.getText();
-        ls = tsp.getTimKiemHa(i);
+        ls = tsp.getTimKiemDT(i);
         fillTable(ls, modelTBL);
     }//GEN-LAST:event_txtsKeyReleased
 
@@ -343,17 +349,17 @@ public class DienThoaiView extends javax.swing.JDialog {
         String ma = txtTenDong.getText();
         String id = "";
         if (trangThai == 1) {
-            id = tsp.getHang(1).get(index).getId();
+            id = tsp.getDT(1, idh).get(index).getId();
         } else {
-            id = tsp.getHang(0).get(index).getId();
+            id = tsp.getDT(0, idh).get(index).getId();
         }
         if (ten.isBlank() || ma.isBlank()) {
             JOptionPane.showMessageDialog(rootPane, "Không được để trống thông tin");
         }
-        Hang quocGia = new Hang(id, ma, ten, cbbDong.getSelectedIndex());
-        JOptionPane.showMessageDialog(rootPane, tsp.suaHang(quocGia));
-        fillTable(tsp.getHang(1), modelTBL);
-        fillTable(tsp.getHang(0), modelTBL1);
+        DienThoai quocGia = new DienThoai(id, ma, ten, idh, cbbDong.getSelectedIndex());
+        JOptionPane.showMessageDialog(rootPane, tsp.suaDT(quocGia));
+        fillTable(tsp.getDT(1, idh), modelTBL);
+        fillTable(tsp.getDT(0, idh), modelTBL1);
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
@@ -406,7 +412,7 @@ public class DienThoaiView extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DienThoaiView dialog = new DienThoaiView(new javax.swing.JFrame(), true, "");
+                DienThoaiView dialog = new DienThoaiView(new javax.swing.JFrame(), true, "b4427dd9-0c53-43e0-a90d-e501e034ed38");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -432,8 +438,8 @@ public class DienThoaiView extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tblHang1;
-    private javax.swing.JTable tblHang2;
+    private javax.swing.JTable tbl1;
+    private javax.swing.JTable tbl2;
     private javax.swing.JTextField txtMaDong;
     private javax.swing.JTextField txtTenDong;
     private javax.swing.JTextField txts;

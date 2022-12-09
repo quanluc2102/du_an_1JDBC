@@ -4,23 +4,13 @@
  */
 package Service;
 
-import DomainModel.BoNho;
 import DomainModel.Camera;
 import DomainModel.ChiTietDienThoai;
-import DomainModel.Cpu;
 import DomainModel.DienThoai;
 import DomainModel.Dong;
 import DomainModel.Hang;
-import DomainModel.HeDieuHanh;
-import DomainModel.KetNoi;
-import DomainModel.ManHinh;
-import DomainModel.MauSac;
-import DomainModel.Pin;
 import DomainModel.QuocGia;
 import DomainModel.QuocGiaDong;
-import DomainModel.ThietKe;
-import DomainModel.ThongSo;
-import DomainModel.TienIch;
 import java.util.List;
 
 /**
@@ -28,7 +18,6 @@ import java.util.List;
  * @author haha
  */
 public interface ThemSPServices {
-
 
     String themQG(QuocGia qg);
 
@@ -55,16 +44,22 @@ public interface ThemSPServices {
     String themCTDT(ChiTietDienThoai ha);
 
     String themDong(Dong ha);
+    String suaDong(Dong ha);
+    String xoaDong(Dong ha,int tt);
 
     String suaDT(DienThoai ha);
 
-    List<DienThoai> getDT(int i);
+    List<DienThoai> getDT(int i,String idHang);
+    List<Dong> getDong(int i,String idHang);
 
     List<DienThoai> getTimKiemDT(String i);
-    
+
     List<Camera> getCamera(int x);
+
     String themCamera(Camera tk);
+
     String suaCamera(Camera tk);
-    String xoaCamera(Camera tk,int x);
+
+    String xoaCamera(Camera tk, int x);
 
 }

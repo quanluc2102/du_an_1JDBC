@@ -4,6 +4,7 @@
  */
 package Repository;
 
+import DomainModel.DienThoai;
 import DomainModel.Dong;
 import DomainModel.Hang;
 import DomainModel.HeDieuHanh;
@@ -74,14 +75,34 @@ public class SanPhamRespository {
         return QuocGia;
     }
 
-    public List<Dong> getDong() {
-        String query = " select id,ten_dong from Dong ";
+    public List<Dong> getDong(int tt, String ds) {
+        String query = " select * from Dong where trang_thai =? and id_dien_thoai = ?";
         List<Dong> hang = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, tt);
+            ps.setObject(2, ds);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                hang.add(new Dong(rs.getString(1), rs.getString(2)));
+                hang.add(new Dong(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5)));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return hang;
+    }
+
+    public List<DienThoai> getDT(int tt, String idh) {
+        String query = " select * from dienThoai where trang_thai = ? and id_hang = ?";
+        List<DienThoai> hang = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, tt);
+            ps.setObject(2, idh);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                hang.add(new DienThoai(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5)));
             }
 
         } catch (SQLException e) {
