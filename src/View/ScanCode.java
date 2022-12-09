@@ -237,8 +237,8 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
              
                 JOptionPane.showMessageDialog(rootPane, scr, "Kết quả:", 1);
                 txtCode.setText(scr);
-//                this.dispose();
-//                webcam.close();
+                this.dispose();
+                webcam.close();
                 break;
 
             }
