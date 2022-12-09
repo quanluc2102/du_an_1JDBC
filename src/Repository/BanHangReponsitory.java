@@ -193,13 +193,13 @@ public class BanHangReponsitory {
     }
 
     public List<String> getAllMaGG() {
-        String query = "SELECT [ma_khuyen_mai]\n"
-                + "  FROM [dbo].[KhuyenMai]";
+        String query = "SELECT [ma_khuyen_mai] + ' '+ mo_ta\n" +
+"                  FROM [dbo].[KhuyenMai]";
         List<String> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(rs.getString("ma_khuyen_mai"));
+                list.add(rs.getString(1));
             }
             return list;
         } catch (SQLException e) {
