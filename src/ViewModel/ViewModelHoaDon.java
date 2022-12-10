@@ -19,10 +19,10 @@ public class ViewModelHoaDon {
     String NgayTao;
     String MaKhuyenMai;
     int TrangThai;
-    int TongSoSP;
     Double GiaGiam;
     Double tongTien;
-
+    int TongSoSP;
+    
     public ViewModelHoaDon() {
     }
 
@@ -118,6 +118,6 @@ public class ViewModelHoaDon {
 
     public Object[] dataRow() {
         DecimalFormat df = new DecimalFormat("###,###,###,###");
-        return new Object[]{MaHD, TenNV, TenKH, NgayTao, MaKhuyenMai, df.format(tongTien), trangthai(TrangThai), TongSoSP};
+        return new Object[]{MaHD, TenNV, TenKH, NgayTao, MaKhuyenMai,df.format(GiaGiam), df.format(tongTien), trangthai(TrangThai), TongSoSP};
     }
 }
