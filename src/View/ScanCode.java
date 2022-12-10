@@ -4,8 +4,6 @@
  */
 package View;
 
-import Service.LoginService;
-import Service.ServiceImpl.LoginImpl;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
@@ -21,7 +19,6 @@ import java.awt.image.BufferedImage;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,31 +27,31 @@ import javax.swing.JOptionPane;
  */
 public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFactory {
 
-    LoginService lgs = new LoginImpl();
     private WebcamPanel panel = null;
     private Webcam webcam = null;
-
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
 
     String scr = "";
-    String texts = "";
 
     /**
      * Creates new form ScanCode
      */
     public ScanCode(java.awt.Frame parent, boolean modal, int x) {
         super(parent, modal);
+
         initComponents();
-        initWebcam(x);
-        ImageIcon iconx = new ImageIcon("source\\image\\barcode-reader-regular-24.png");
-        this.setIconImage(iconx.getImage());
-        ;
+        Object[] option = {"Camera chính", "Camera ngoài"};
+        int port = JOptionPane.showOptionDialog(this, "Chọn camera", null, 0, 1, null, option, EXIT_ON_CLOSE);
+        if (port == 1 || port == 0) {
+            initWebcam(port);
+        } 
+       
     }
 
     public String getScanResutlx() {
         if (scr.isBlank()) {
-            scr = "Đầu vào không hợp lệ";
+            scr = "Kết quả trống";
         }
         return scr;
 
@@ -71,12 +68,15 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
 
         pnShowCam = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        txtCode = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtCode = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Scan Code");
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -106,36 +106,48 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
             }
         });
 
+        txtCode.setLineWrap(true);
+        txtCode.setRows(5);
+        jScrollPane1.setViewportView(txtCode);
+
+        jLabel1.setText("Kết quả");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(pnShowCam, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addComponent(jSeparator1))
-                .addContainerGap())
+                        .addGap(10, 10, 10)
+                        .addComponent(pnShowCam, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(pnShowCam, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(txtCode, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-                .addGap(21, 21, 21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
 
         pack();
@@ -149,9 +161,10 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
     }//GEN-LAST:event_formWindowClosed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        webcam.close();
-
-        this.dispose();
+        if (webcam.isOpen()) {
+            webcam.close();
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -219,6 +232,8 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
                 if ((image = webcam.getImage()) == null) {
                     continue;
                 }
+            } else {
+                break;
             }
             LuminanceSource source = new BufferedImageLuminanceSource(image);
             BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
@@ -232,9 +247,9 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
             }
 
             if (result != null) {
-               
+
                 scr = result.getText();
-             
+
                 JOptionPane.showMessageDialog(rootPane, scr, "Kết quả:", 1);
                 txtCode.setText(scr);
                 this.dispose();
@@ -254,9 +269,11 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel pnShowCam;
-    private javax.swing.JTextField txtCode;
+    private javax.swing.JTextArea txtCode;
     // End of variables declaration//GEN-END:variables
 }

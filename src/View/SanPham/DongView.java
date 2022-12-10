@@ -7,7 +7,6 @@ package View.SanPham;
 import DomainModel.Dong;
 import Service.ServiceImpl.TSPImpl;
 import Service.ThemSPServices;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -122,7 +121,7 @@ public class DongView extends javax.swing.JDialog {
                 btnThemActionPerformed(evt);
             }
         });
-        jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 40));
+        jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, 40));
 
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +129,7 @@ public class DongView extends javax.swing.JDialog {
                 btnSuaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 76, 40));
+        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 76, 40));
 
         btnChon.setText("Chọn");
         btnChon.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +137,7 @@ public class DongView extends javax.swing.JDialog {
                 btnChonActionPerformed(evt);
             }
         });
-        jPanel1.add(btnChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 75, 40));
+        jPanel1.add(btnChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 75, 40));
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {

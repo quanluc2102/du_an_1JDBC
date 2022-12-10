@@ -296,7 +296,7 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public List<Dong> getDong() {
-        return new SanPhamRespository().getDong();
+        return new SanPhamRespository().getDong(1,null);
     }
 
     @Override

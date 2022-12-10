@@ -11,6 +11,8 @@ import DomainModel.Dong;
 import DomainModel.Hang;
 import DomainModel.QuocGia;
 import DomainModel.QuocGiaDong;
+import DomainModel.ThongSo;
+import ViewModel.vts;
 import java.util.List;
 
 /**
@@ -44,13 +46,16 @@ public interface ThemSPServices {
     String themCTDT(ChiTietDienThoai ha);
 
     String themDong(Dong ha);
+
     String suaDong(Dong ha);
-    String xoaDong(Dong ha,int tt);
+
+    String xoaDong(Dong ha, int tt);
 
     String suaDT(DienThoai ha);
 
-    List<DienThoai> getDT(int i,String idHang);
-    List<Dong> getDong(int i,String idHang);
+    List<DienThoai> getDT(int i, String idHang);
+
+    List<Dong> getDong(int i, String idHang);
 
     List<DienThoai> getTimKiemDT(String i);
 
@@ -61,5 +66,5 @@ public interface ThemSPServices {
     String suaCamera(Camera tk);
 
     String xoaCamera(Camera tk, int x);
-
+    
 }

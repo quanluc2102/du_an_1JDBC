@@ -9,8 +9,9 @@ package ViewModel;
  * @author haha
  */
 public class vts {
- private String thuocTinh;
- private String giaTri;
+
+    private String thuocTinh;
+    private String giaTri;
 
     public vts(String thuocTinh, String giaTri) {
         this.thuocTinh = thuocTinh;
@@ -35,6 +36,7 @@ public class vts {
     public void setGiaTri(String giaTri) {
         this.giaTri = giaTri;
     }
+
     
- 
+
 }

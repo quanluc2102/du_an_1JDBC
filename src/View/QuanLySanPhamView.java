@@ -10,7 +10,9 @@ import DomainModel.Hang;
 import DomainModel.QuocGia;
 import DomainModel.ThongSo;
 import Repository.ThemSanPhamRepon;
+import Service.AddElementServices;
 import Service.SanPhamServices;
+import Service.ServiceImpl.AddElementImpl;
 import Service.ServiceImpl.SanPhamServicesImpl;
 import Service.ServiceImpl.TSPImpl;
 import Service.ThemSPServices;
@@ -92,6 +94,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     List<vts> ttList = new ArrayList<>();
     DecimalFormat df = new DecimalFormat("###,###,###,###");
     ThemSPServices tsp = new TSPImpl();
+    AddElementServices ae  = new AddElementImpl();
 
     /**
      * Creates new form QuanLySanPhamView
@@ -108,6 +111,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         loadTable(sps.getAll());
         modelTT.setRowCount(0);
         loadCBB();
+        loadThongSo(null);
 
     }
 
@@ -166,64 +170,11 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private void loadThongSo(String id) {
         modelTT.setRowCount(0);
         ThongSoViewModel t = sps.getAllThongSo(id);
-        ttList.removeAll(ttList);
-        ttList.add(new vts("--------------- BỘ NHỚ ---------------------", "_"));
-        ttList.add(new vts("RAM", t.getRam()));
-        ttList.add(new vts("ROM", t.getRom()));
-        ttList.add(new vts("Thẻ nhớ", t.getTheNho()));
-        ttList.add(new vts("--------------- Vi xử lý -------------------", "_"));
-        ttList.add(new vts("CPU", t.getCPU()));
-        ttList.add(new vts("GPU", t.getGPU()));
-        ttList.add(new vts("Loại CPU", t.getCPULoai()));
-        ttList.add(new vts("Hãng CPU", t.getCPUHang()));
-        ttList.add(new vts("Tiến trình", t.getTienTrinh()));
-        ttList.add(new vts("--------------- PIN ------------------------", "_"));
-        ttList.add(new vts("Dung lượng Pin", t.getPinDungLuong()));
-        ttList.add(new vts("Loại Pin", t.getPinLoai()));
-        ttList.add(new vts("Sạc", t.getSac()));
-        ttList.add(new vts("Đặc biệt", t.getPindacBiet()));
-        ttList.add(new vts("--------------- HỆ ĐIỀU HÀNH ---------------", "_"));
-        ttList.add(new vts("Hệ điều hành", t.getHeDieuhanh()));
-        ttList.add(new vts("Phiên bản", t.getHDHphienBan()));
-        ttList.add(new vts("--------------- THIẾT KẾ -------------------", "_"));
-        ttList.add(new vts("Mặt trước", t.getMatTruoc()));
-        ttList.add(new vts("Mặt Lưng", t.getMatLung()));
-        ttList.add(new vts("Khung viền", t.getKhungVien()));
-        ttList.add(new vts("Trọng lượng", t.getTrongLuong()));
-        ttList.add(new vts("--------------- MÀN HÌNH -------------------", "_"));
-        ttList.add(new vts("Kích thước màn hình", t.getManHinhKichThuoc()));
-        ttList.add(new vts("Loại màn hình", t.getManHinhLoai()));
-        ttList.add(new vts("Kiểu màn hình", t.getManHinhKieu()));
-        ttList.add(new vts("Tầng số quét", t.getTangSoQuet()));
-        ttList.add(new vts("Độ phân giải", t.getDoPhanGiai()));
-        ttList.add(new vts("Công nghệ màn hình", t.getManHinhCongNghe()));
-        ttList.add(new vts("--------------- KẾT NỐI -------------------", "_"));
-        ttList.add(new vts("SIM", t.getSIM()));
-        ttList.add(new vts("Cổng hồng ngoại", t.getHongNgoai()));
-        ttList.add(new vts("Jack tai nghe", t.getJackTaiNghe()));
-        ttList.add(new vts("Mạng hỗ trợ", t.getMangHoTro()));
-        ttList.add(new vts("Wifi", t.getWifi()));
-        ttList.add(new vts("Blutooth", t.getBlutooth()));
-        ttList.add(new vts("GPS", t.getGPS()));
-        ttList.add(new vts("--------------- MÀU SẮC -------------------", "_"));
-        ttList.add(new vts("Màu sắc", t.getMauTen()));
-        ttList.add(new vts("Mã màu", t.getMauMa()));
-        ttList.add(new vts("--------------- TIỆN ÍCH ĐI KÈM -----------", "_"));
-        ttList.add(new vts("Bảo mật", t.getBaoMat()));
-        ttList.add(new vts("Kháng nước", t.getKhangNuoc()));
-        ttList.add(new vts("Đặc biệt", t.getDacBiet()));
-        ttList.add(new vts("--------------- CAMERA --------------------", "_"));
-        ttList.add(new vts("Camera trước", t.getCameraTruoc()));
-        ttList.add(new vts("Camera sau", t.getCameraSau()));
-        ttList.add(new vts("Quay video", t.getQuayVideo()));
-        ttList.add(new vts("MAX Zoom", t.getZoom()));
-        ttList.add(new vts("Chống rung", t.getChongRung()));
-        ttList.add(new vts("Đặc biệt", t.getCameraDacBiet()));
-
-        for (vts x : ttList) {
+        for (vts x : ae.view(t)) {
             Object[] row = new Object[]{x.getThuocTinh(), x.getGiaTri()};
             modelTT.addRow(row);
         }
+       
 
     }
 
@@ -291,9 +242,20 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblThongTin = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        pn1 = new javax.swing.JPanel();
+        pn2 = new javax.swing.JPanel();
+        pn3 = new javax.swing.JPanel();
+        pn4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbldaxoa = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý sản phẩm");
@@ -377,7 +339,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -571,12 +533,13 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
         );
@@ -594,7 +557,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 457, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -610,7 +573,7 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                                 .addComponent(anhSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(28, 28, 28))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
                                 .addContainerGap())))
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -619,7 +582,96 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Sản phẩm đang bán", jPanel1);
 
-        tbldaxoa.setModel(new javax.swing.table.DefaultTableModel(
+        jPanel6.setBackground(java.awt.Color.pink);
+
+        jLabel11.setText("Số sản phẩm đã bán tháng này");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
+        jPanel7.setBackground(new java.awt.Color(255, 0, 0));
+
+        jLabel12.setText("Tổng số còn tồn kho");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap(49, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
+        jPanel8.setBackground(new java.awt.Color(0, 255, 204));
+
+        jLabel13.setText("Số sản phẩm đã nhập tháng này");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addGap(19, 19, 19))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addGap(41, 41, 41))
+        );
+
+        jPanel9.setBackground(new java.awt.Color(242, 203, 43));
+
+        jLabel14.setText("Số sản phẩm tồn kho lâu ngày");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel14)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+
+        pn1.setLayout(new java.awt.CardLayout());
+
+        pn2.setLayout(new java.awt.CardLayout());
+
+        pn3.setLayout(new java.awt.CardLayout());
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -630,9 +682,30 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tbldaxoa);
+        jScrollPane2.setViewportView(jTable1);
 
-        jButton2.setText("jButton2");
+        javax.swing.GroupLayout pn4Layout = new javax.swing.GroupLayout(pn4);
+        pn4.setLayout(pn4Layout);
+        pn4Layout.setHorizontalGroup(
+            pn4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn4Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(637, Short.MAX_VALUE))
+        );
+        pn4Layout.setVerticalGroup(
+            pn4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn4Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        pn3.add(pn4, "card2");
+
+        pn2.add(pn3, "card2");
+
+        pn1.add(pn2, "card2");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -640,21 +713,29 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addContainerGap(538, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addComponent(pn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("đang cập nhật....", jPanel2);
@@ -779,8 +860,8 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
             }
         }
 
-        ThongSo tsAdd = new ThongSo("", "", idhdh, idcpu, idbn, idpin, idkn, idmh, idtk, idti, idms, idcmd);
-        System.out.println(tsAdd.toString());
+        ThongSo tsAdd = new ThongSo("", null, idhdh, idcpu, idbn, idpin, idkn, idmh, idtk, idti, idms, idcmd);
+        JOptionPane.showMessageDialog(rootPane,ae.themThongSo(tsAdd) , "", 1);
 
 
     }//GEN-LAST:event_btnThemActionPerformed
@@ -965,10 +1046,13 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbbHang;
     private javax.swing.JComboBox<String> cbbIMEI;
     private javax.swing.JComboBox<String> cbbQuocGia;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -982,13 +1066,21 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JPanel pn1;
+    private javax.swing.JPanel pn2;
+    private javax.swing.JPanel pn3;
+    private javax.swing.JPanel pn4;
     private javax.swing.JTable tblSanPham;
     private javax.swing.JTable tblThongTin;
-    private javax.swing.JTable tbldaxoa;
     private javax.swing.JTextField txtDoMoi;
     private javax.swing.JTextField txtGiaBan;
     private javax.swing.JTextField txtGiaNhap;
