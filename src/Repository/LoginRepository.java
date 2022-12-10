@@ -47,9 +47,9 @@ public class LoginRepository {
             PreparedStatement ps = conn.prepareCall(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ls.add(new loginWebCamView( rs.getString(1), rs.getString(2), rs.getString(3)));
+                ls.add(new loginWebCamView(rs.getString(1), rs.getString(2), rs.getString(3)));
             }
-           
+
             return ls;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,9 +75,11 @@ public class LoginRepository {
                     + "           ,[sdt]\n"
                     + "           ,[email]\n"
                     + "           ,[dia_chi]\n"
-                    + "           ,[mat_khau])\n"
+                    + "           ,[mat_khau]\n"
+                    + "           ,[cmnd])\n"
                     + "     VALUES\n"
                     + "           (?\n"
+                    + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
@@ -92,6 +94,7 @@ public class LoginRepository {
             ps.setObject(5, nv.getEmail());
             ps.setObject(6, nv.getDiaChi());
             ps.setObject(7, nv.getMatKhau());
+            ps.setObject(8, nv.getCmnd());
 
             check = ps.executeUpdate();
             return check > 0;

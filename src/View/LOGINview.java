@@ -72,6 +72,11 @@ public class LOGINview extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -367,6 +372,19 @@ public class LOGINview extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jLabel18MouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        for (double i = 0.0; i < 1.0; i=i+0.1) {
+            String val = i +"";
+            float f= Float.valueOf(val);
+            this.setOpacity(f);
+            try {
+                Thread.sleep(50);
+            } catch (Exception e) {
+                
+            }
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
