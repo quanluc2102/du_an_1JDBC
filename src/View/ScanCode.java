@@ -45,7 +45,9 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
         int port = JOptionPane.showOptionDialog(this, "Chọn camera", null, 0, 1, null, option, EXIT_ON_CLOSE);
         if (port == 1 || port == 0) {
             initWebcam(port);
-        } 
+        } else{
+            initWebcam(0);
+        }
        
     }
 
@@ -252,9 +254,9 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
 
                 JOptionPane.showMessageDialog(rootPane, scr, "Kết quả:", 1);
                 txtCode.setText(scr);
-                this.dispose();
-                webcam.close();
-                break;
+//                this.dispose();
+//                webcam.close();
+//                break;
 
             }
         } while (true || webcam.isOpen());

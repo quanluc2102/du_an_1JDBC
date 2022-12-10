@@ -11,6 +11,7 @@ import DomainModel.Dong;
 import DomainModel.Hang;
 import DomainModel.QuocGia;
 import DomainModel.QuocGiaDong;
+import DomainModel.ThongSo;
 import Repository.CameraRepon;
 import Repository.HangReponsitory;
 import Repository.QuocGiaRepon;
@@ -232,4 +233,5 @@ public class TSPImpl implements ThemSPServices {
         return new SanPhamRespository().getDong(i, idHang);
     }
 
+    
 }
