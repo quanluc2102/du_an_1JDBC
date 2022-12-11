@@ -117,16 +117,15 @@ public class BanHangReponsitory {
         String query = "SELECT HoaDonChiTiet.[id]\n"
                 + "      ,[IMEI]\n"
                 + "      ,[id_hoa_don]\n"
-                + "      ,HoaDonChiTiet.[trang_thai]\n"
                 + "  FROM [dbo].[HoaDonChiTiet]\n"
                 + "  join HoaDon on HoaDon.id=HoaDonChiTiet.id_hoa_don\n"
-                + "  where ma_hoa_don= ?";
+                + "  where ma_hoa_don = ?";
         List<HoaDonChiTietViewModel> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, maHD);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                HoaDonChiTietViewModel a = new HoaDonChiTietViewModel(rs.getString("id"), rs.getString("IMEI"), rs.getString("id_hoa_don"), rs.getString("trang_thai"));
+                HoaDonChiTietViewModel a = new HoaDonChiTietViewModel(rs.getString("id"), rs.getString("IMEI"), rs.getString("id_hoa_don"));
                 list.add(a);
             }
             return list;
@@ -135,12 +134,11 @@ public class BanHangReponsitory {
         }
         return null;
     }
-    
-    public List<HoaDonChiTietViewModel> getAllHoaDonCheckTrung(String maHD,String IMEI) {
+
+    public List<HoaDonChiTietViewModel> getAllHoaDonCheckTrung(String maHD, String IMEI) {
         String query = "SELECT HoaDonChiTiet.[id]\n"
                 + "      ,[IMEI]\n"
                 + "      ,[id_hoa_don]\n"
-                + "      ,HoaDonChiTiet.[trang_thai]\n"
                 + "  FROM [dbo].[HoaDonChiTiet]\n"
                 + "  join HoaDon on HoaDon.id=HoaDonChiTiet.id_hoa_don\n"
                 + "  where ma_hoa_don= ? and IMEI = ?";
@@ -150,7 +148,7 @@ public class BanHangReponsitory {
             ps.setObject(2, IMEI);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                HoaDonChiTietViewModel a = new HoaDonChiTietViewModel(rs.getString("id"), rs.getString("IMEI"), rs.getString("id_hoa_don"), rs.getString("trang_thai"));
+                HoaDonChiTietViewModel a = new HoaDonChiTietViewModel(rs.getString("id"), rs.getString("IMEI"), rs.getString("id_hoa_don"));
                 list.add(a);
             }
             return list;
@@ -193,8 +191,8 @@ public class BanHangReponsitory {
     }
 
     public List<String> getAllMaGG() {
-        String query = "SELECT [ma_khuyen_mai] + ' '+ mo_ta\n" +
-"                  FROM [dbo].[KhuyenMai]";
+        String query = "SELECT [ma_khuyen_mai] + ' '+ mo_ta\n"
+                + "                  FROM [dbo].[KhuyenMai]";
         List<String> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();

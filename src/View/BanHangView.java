@@ -68,6 +68,9 @@ public class BanHangView extends javax.swing.JFrame {
         dcbmMaGG.addAll(listMaGG);
         bhs.sapXepHoaDon(listHoaDonChuaThanhToan);
         bhs.showDataHoaDonChuaThanhToan(dtmHoaDonChuaThanhToan, listHoaDonChuaThanhToan);
+        cbbKhachHangBanHang.setSelectedIndex(0);
+        cbbMaGGBanHang.setSelectedIndex(0);
+        cbbMaNhanVien.setSelectedIndex(0);
     }
 
     /**
@@ -120,9 +123,6 @@ public class BanHangView extends javax.swing.JFrame {
         btnShowAll = new javax.swing.JButton();
         btnTimKiem = new javax.swing.JButton();
         btnTrangChu = new javax.swing.JButton();
-        lbValidateKH = new javax.swing.JLabel();
-        lbValidateNV = new javax.swing.JLabel();
-        lbValidateMaKM = new javax.swing.JLabel();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -317,12 +317,6 @@ public class BanHangView extends javax.swing.JFrame {
             }
         });
 
-        lbValidateKH.setForeground(new java.awt.Color(255, 51, 51));
-
-        lbValidateNV.setForeground(new java.awt.Color(255, 51, 51));
-
-        lbValidateMaKM.setForeground(new java.awt.Color(255, 51, 51));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -398,29 +392,27 @@ public class BanHangView extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(106, 106, 106))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(jLabel10)
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(lbValidateMaKM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                    .addComponent(jLabel10)
+                                                    .addGap(18, 18, 18)
                                                     .addComponent(cbbMaGGBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(5, 5, 5)
-                                                .addComponent(jLabel6)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(lbValidateKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(cbbKhachHangBanHang, 0, 268, Short.MAX_VALUE)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel7)
-                                                .addGap(59, 59, 59)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(lbValidateNV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(cbbMaNhanVien, javax.swing.GroupLayout.Alignment.TRAILING, 0, 268, Short.MAX_VALUE))))
-                                        .addGap(26, 26, 26)))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGap(5, 5, 5)
+                                                    .addComponent(jLabel6)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(cbbKhachHangBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel7)
+                                                    .addGap(59, 59, 59)
+                                                    .addComponent(cbbMaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGap(26, 26, 26))))
                                 .addGap(18, 18, 18)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnTrangChu)
@@ -448,9 +440,7 @@ public class BanHangView extends javax.swing.JFrame {
                     .addComponent(cbbKhachHangBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(lbValidateKH))
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -475,15 +465,11 @@ public class BanHangView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(cbbMaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
-                        .addComponent(lbValidateNV)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbbMaGGBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
-                        .addGap(20, 20, 20)
-                        .addComponent(lbValidateMaKM)
-                        .addGap(18, 18, 18)
+                        .addGap(38, 38, 38)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -596,7 +582,7 @@ public class BanHangView extends javax.swing.JFrame {
         KhachHangViewNhanVien detail1 = new KhachHangViewNhanVien();
         this.dispose();
         detail1.setVisible(true);
-
+        
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void btnThemThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemThongTinActionPerformed
@@ -631,7 +617,6 @@ public class BanHangView extends javax.swing.JFrame {
     public void thayDoiTien() {
         String maHD = lbmaHDDuocChon.getText();
         String maGG = String.valueOf(cbbMaGGBanHang.getSelectedItem()).substring(0, 5);
-        System.out.println(maGG);
         int tongTien = bhs.layGiaHD(maHD);
         int giamGia = 0;
 
@@ -743,9 +728,6 @@ public class BanHangView extends javax.swing.JFrame {
     private javax.swing.JLabel lbIMEIDaChon;
     private javax.swing.JLabel lbThanhTien;
     private javax.swing.JLabel lbTongTien;
-    private javax.swing.JLabel lbValidateKH;
-    private javax.swing.JLabel lbValidateMaKM;
-    private javax.swing.JLabel lbValidateNV;
     private javax.swing.JLabel lbmaHDDuocChon;
     private javax.swing.JTable tbDonHangBanHang;
     private javax.swing.JTable tbHoaDonChuaThanhToan;
