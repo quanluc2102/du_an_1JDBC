@@ -102,6 +102,7 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
         lbls = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -411,6 +412,13 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Import Excel");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -425,9 +433,11 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(btAdd)
-                                    .addGap(105, 105, 105)
+                                    .addGap(49, 49, 49)
                                     .addComponent(btEdit)
-                                    .addGap(85, 85, 85)
+                                    .addGap(37, 37, 37)
+                                    .addComponent(jButton3)
+                                    .addGap(29, 29, 29)
                                     .addComponent(jButton1))
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -452,7 +462,8 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btAdd)
                             .addComponent(btEdit)
-                            .addComponent(jButton1))
+                            .addComponent(jButton1)
+                            .addComponent(jButton3))
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)))
                 .addContainerGap(13, Short.MAX_VALUE))
@@ -872,6 +883,13 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        ImportExcelKhachHangView iekhv = new ImportExcelKhachHangView();
+        iekhv.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -952,6 +970,7 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
