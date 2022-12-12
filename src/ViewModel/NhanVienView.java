@@ -141,7 +141,7 @@ public class NhanVienView {
         return "NhanVienView{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", idChucVu=" + idChucVu + ", tenChucVu=" + tenChucVu + ", ngaySinh=" + ngaySinh + ", sdt=" + sdt + ", email=" + email + ", diaChi=" + diaChi + ", matKhau=" + matKhau + ", trangThai=" + trangThai + '}';
     }
     public String tentrangThai(int trangThai){
-        if (trangThai==0) {
+        if (trangThai==1) {
            return "Đã nghỉ";
         } else {
             return "Đang làm";

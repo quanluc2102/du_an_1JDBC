@@ -117,7 +117,7 @@ public class NhanVienRepository {
         int check = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, null);
-            ps.setObject(2, "0");
+            ps.setObject(2, "1");
             ps.setObject(3, id);
 
             check = ps.executeUpdate();

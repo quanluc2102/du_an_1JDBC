@@ -1097,9 +1097,9 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         nv.setIdChucVu(idCV.get(cbbCV.getSelectedIndex()));
         nv.setMatKhau(txtPass.getText());
         if (radioNghi.isSelected()) {
-            nv.setTrangThai(0);
-        } else {
             nv.setTrangThai(1);
+        } else {
+            nv.setTrangThai(2);
         }
         JOptionPane.showMessageDialog(rootPane, impl.update(nv, ids));
         listNV = impl.getAll();

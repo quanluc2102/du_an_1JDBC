@@ -8,6 +8,7 @@ import DomainModel.NhanVien;
 import Service.LoginService;
 import Service.ServiceImpl.LoginImpl;
 import java.awt.Color;
+import java.util.UUID;
 import javax.swing.JOptionPane;
 
 /**
@@ -81,7 +82,6 @@ public class DangKy extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txtCMND = new javax.swing.JTextField();
-        cbbWebCam = new javax.swing.JComboBox<>();
         txtRPCMND = new javax.swing.JLabel();
         Anh = new javax.swing.JLabel();
 
@@ -155,7 +155,7 @@ public class DangKy extends javax.swing.JFrame {
         jPanel2.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, 140, 30));
 
         txtRPNgaySinh.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(txtRPNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, 140, 20));
+        jPanel2.add(txtRPNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 190, 20));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("__________________________");
@@ -239,7 +239,7 @@ public class DangKy extends javax.swing.JFrame {
                 jLabel22MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 650, -1, -1));
+        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 650, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -267,9 +267,6 @@ public class DangKy extends javax.swing.JFrame {
         jLabel11.setText("________________________________________");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 520, 200, -1));
         jPanel2.add(txtCMND, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, 200, -1));
-
-        cbbWebCam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "WebCam Laptop", "WebCam điện thoại" }));
-        jPanel2.add(cbbWebCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 650, 130, -1));
 
         txtRPCMND.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.add(txtRPCMND, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 540, 100, 20));
@@ -300,8 +297,8 @@ public class DangKy extends javax.swing.JFrame {
 
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
             String cmnd = "";
-        int camera = cbbWebCam.getSelectedIndex();
-        ScanCode sc = new ScanCode(new java.awt.Frame(), true, camera);
+//        int camera = cbbWebCam.getSelectedIndex();
+        ScanCode sc = new ScanCode(new java.awt.Frame(), true, 0);
         sc.setVisible(true);
         cmnd = sc.getScanResutlx();
         txtAllCMND.setText(cmnd);
@@ -312,6 +309,13 @@ public class DangKy extends javax.swing.JFrame {
                      String[] splits = withouTen.split("[|]");
                      txtTenNV.setText(splits[0]);
                      txtDiaChiNV.setText(splits[3]);
+//                     System.out.println(splits[1]);
+                     String nam = splits[1].substring(4,8);
+                     String ngay =splits[1].substring(0,2);
+                     String thang =splits[1].substring(2,4);
+                    String NS= (nam+"-"+thang+"-"+ngay);
+                     txtNgaySinhNV.setText(NS);
+                     txtPass.setText(UUID.randomUUID().toString().substring(0, 8));
                                  
     }//GEN-LAST:event_jLabel22MouseClicked
     public void DangKi() {
@@ -418,7 +422,7 @@ public class DangKy extends javax.swing.JFrame {
         } else {
             RPPass.setText("*");
             RPPass.setForeground(Color.GREEN);
-            nv.setSdt(txtSDT.getText());
+            nv.setMatKhau(txtPass.getText());
 
             conf7 = true;
         }
@@ -429,7 +433,7 @@ public class DangKy extends javax.swing.JFrame {
         } else {
             txtRPCMND.setText("*");
             txtRPCMND.setForeground(Color.GREEN);
-            nv.setCmnd(txtRPCMND.getText());
+            nv.setCmnd(txtCMND.getText());
 
             conf8 = true;
         }
@@ -442,7 +446,6 @@ public class DangKy extends javax.swing.JFrame {
         if (conf1 == true && conf2 == true && conf3 == true && conf4 == true && conf5 == true && conf6 == true && conf7 == true && conf8) {
             JOptionPane.showMessageDialog(rootPane, impl.dangKi(nv));
             System.out.println(nv.toString());
-            System.out.println(impl.dangKi(nv));
         }
     }
 
@@ -485,7 +488,6 @@ public class DangKy extends javax.swing.JFrame {
     private javax.swing.JLabel Anh;
     private javax.swing.JLabel Email;
     private javax.swing.JLabel RPPass;
-    private javax.swing.JComboBox<String> cbbWebCam;
     private javax.swing.JLabel hh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

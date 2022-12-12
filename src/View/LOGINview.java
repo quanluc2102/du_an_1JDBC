@@ -53,7 +53,6 @@ public class LOGINview extends javax.swing.JFrame {
         btnDangKy = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
         txtPass = new javax.swing.JPasswordField();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -67,7 +66,6 @@ public class LOGINview extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         txtRPID1 = new javax.swing.JLabel();
         txtRPPAss = new javax.swing.JLabel();
-        cbbWebCam = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -155,10 +153,6 @@ public class LOGINview extends javax.swing.JFrame {
         txtPass.setBorder(null);
         txtPass.setCaretColor(new java.awt.Color(255, 255, 255));
         jPanel2.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 230, -1));
-
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Remember Password");
-        jPanel2.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -256,12 +250,9 @@ public class LOGINview extends javax.swing.JFrame {
                 jLabel18MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, 130, 34));
+        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 130, 34));
         jPanel2.add(txtRPID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 230, 20));
         jPanel2.add(txtRPPAss, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 230, 20));
-
-        cbbWebCam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(cbbWebCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, -1, -1));
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/loginxam.jpg"))); // NOI18N
@@ -303,7 +294,7 @@ public class LOGINview extends javax.swing.JFrame {
     }//GEN-LAST:event_txtShowMouseClicked
 
     private void btnDangKyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangKyMouseClicked
-          DangKyView bhv = new DangKyView();
+          DangKy bhv = new DangKy();
         this.dispose();
         bhv.setVisible(true);
     }//GEN-LAST:event_btnDangKyMouseClicked
@@ -351,8 +342,8 @@ public class LOGINview extends javax.swing.JFrame {
 
     private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
         String cmnd = "";
-        int camera = cbbWebCam.getSelectedIndex();
-        ScanCode sc = new ScanCode(new java.awt.Frame(), true, camera);
+//        int camera = cbbWebCam.getSelectedIndex();
+        ScanCode sc = new ScanCode(new java.awt.Frame(), true, 0);
         sc.setVisible(true);
         cmnd = sc.getScanResutlx().substring(0,12);
         System.out.println(cmnd);
@@ -423,8 +414,6 @@ public class LOGINview extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnDangKy;
-    private javax.swing.JComboBox<String> cbbWebCam;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
