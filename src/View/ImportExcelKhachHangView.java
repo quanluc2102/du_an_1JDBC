@@ -154,7 +154,7 @@ DefaultTableModel dtm;
             } catch (IOException ex) {
                 Logger.getLogger(ImportExcelKhachHangView.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -189,12 +189,13 @@ DefaultTableModel dtm;
                 int result = ps.executeUpdate();
                 if (result > 0) {
                     insertedRows++;
-                    JOptionPane.showMessageDialog(null, insertedRows + " Du lieu da duoc them");
+
                 }
+
             } catch (Exception e) {
             }
         }
-
+        JOptionPane.showMessageDialog(null, " Du lieu da duoc them");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
