@@ -4,6 +4,7 @@
  */
 package Service.ServiceImpl;
 
+import DomainModel.ChucVu;
 import Service.ExcelServices;
 import com.barcodelib.barcode.Linear;
 import com.google.zxing.BinaryBitmap;
@@ -15,6 +16,9 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -93,6 +97,42 @@ public class ExcelServicesImpl implements ExcelServices {
             e.printStackTrace();
         }
         return xuat;
+    }
+
+    @Override
+    public String exFileexcel(String link, List<ChucVu> vc) {
+
+        System.out.println("Create file excel");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("ChucVu_Info");
+        int rowNum = 0;
+        Row firstRow = sheet.createRow(rowNum++);
+        Cell firstCell = firstRow.createCell(0);
+        firstCell.setCellValue("List of ChucVu");
+
+        for (ChucVu customer : vc) { // tạo model excel
+            Row row = sheet.createRow(rowNum++);
+            Cell cell1 = row.createCell(0);
+            cell1.setCellValue(customer.getId());
+            Cell cell2 = row.createCell(1);
+            cell2.setCellValue(customer.getMa());
+            Cell cell3 = row.createCell(2);
+            cell3.setCellValue(customer.getTen());
+        }
+        try {
+            FileOutputStream outputStream = new FileOutputStream("source\\24.xlsx");
+            workbook.write(outputStream);
+            workbook.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return "xuất thất bại";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "xuất thất bại";
+        }
+
+        return "xuất thành công";
+
     }
 
 }

@@ -87,7 +87,7 @@ public class AddElementImpl implements AddElementServices {
                 t.getBoNho(), ram, rom, theNho,
                 t.getCpu(), CPU, GPU, CPULoai, CPUHang, tienTrinh,
                 t.getPin(), pinDungLuong, pinLoai, sac, pindacBiet,
-                t.getHeDieuhanh(), heDieuhanh, HDHphienBan, 
+                t.getHeDieuhanh(), heDieuhanh, HDHphienBan,
                 t.getThietKe(), matTruoc, matLung, khungVien, trongLuong,
                 t.getManHinh(), manHinhLoai, manHinhKieu, tangSoQuet, doPhanGiai, manHinhKichThuoc, manHinhCongNghe,
                 t.getKetNoi(), SIM, hongNgoai, jackTaiNghe, mangHoTro, wifi, blutooth, GPS,

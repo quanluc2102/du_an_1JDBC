@@ -84,13 +84,10 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
     DefaultComboBoxModel modelcbb4;
     DefaultTableModel modelTBL;
     DefaultTableModel modelTT;
-    DefaultTableModel modeldx;
     SanPhamServices sps = new SanPhamServicesImpl();
     List<SanPhamViewModel> ls = new ArrayList<>();
     int index;
     List<String> mei = new ArrayList<>();
-    ThongSoViewModel thongSoView = new ThongSoViewModel();
-    int dataLs[] = new int[50];
     List<vts> ttList = new ArrayList<>();
     DecimalFormat df = new DecimalFormat("###,###,###,###");
     ThemSPServices tsp = new TSPImpl();
@@ -182,14 +179,6 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
 
     }
 
-    private String Value(int x) {
-        if (tblThongTin.getValueAt(x, 1) != null) {
-            return tblThongTin.getValueAt(x, 1).toString();
-        }
-
-        return "";
-
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -534,8 +523,8 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -557,7 +546,7 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 457, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(

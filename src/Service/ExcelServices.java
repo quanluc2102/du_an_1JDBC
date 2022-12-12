@@ -4,6 +4,7 @@
  */
 package Service;
 
+import DomainModel.ChucVu;
 import java.util.List;
 
 /**
@@ -12,6 +13,7 @@ import java.util.List;
  */
 public interface ExcelServices {
         List<String> getFile(String link);
+        String exFileexcel(String link,List<ChucVu> vc);
         
         String barCode(String nhap,String link);
         
