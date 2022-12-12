@@ -11,5 +11,5 @@ import java.io.File;
  * @author haha
  */
 public interface Email {
-    String sendEmail(String fromEmail, String passWord, String toEmail, String subject,String body,File file);
+    String sendEmail(String fromEmail, String passWord, String toEmail, String subject,String body,File file);//null
 }
