@@ -538,6 +538,7 @@ public class BanHangView extends javax.swing.JFrame {
         bhs.getHDCT(listHoaDonCT, lbmaHDDuocChon.getText());
         for(HoaDonChiTietViewModel a:listHoaDonCT){
             bhs.thayDoiTrangThaiDienThoai(a.getIMEI());
+            bhs.xoaSPDaCoTrongHD(a.getIMEI(), listHoaDonChuaThanhToan.get(row).getMaHoaDon());
         }
         resetHoaDonChuaThanhToan();
     }//GEN-LAST:event_btnThanhToanActionPerformed

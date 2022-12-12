@@ -72,4 +72,6 @@ public interface BanHangService {
     void thayDoiTrangThaiDienThoai(String imei);
     
     void checkTrungIMEI(String maHD,String IMEI,List<HoaDonChiTietViewModel> list);
+    
+    void xoaSPDaCoTrongHD(String imei,String maHD);
 }

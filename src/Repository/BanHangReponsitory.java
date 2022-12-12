@@ -648,4 +648,18 @@ public class BanHangReponsitory {
         }
         return check > 0;
     }
+
+    public void xoaSPDaCoTrongHD(String imei, String maHD) {
+        String query = "DELETE HoaDonChiTiet FROM [dbo].[HoaDonChiTiet] \n"
+                + "inner join HoaDon on HoaDon.id=HoaDonChiTiet.id_hoa_don\n"
+                + "      WHERE IMEI = ? and HoaDon.ma_hoa_don != ? and HoaDon.trang_thai = 0";
+        int check = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, imei);
+            ps.setObject(2, maHD);
+            check = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+    }
 }

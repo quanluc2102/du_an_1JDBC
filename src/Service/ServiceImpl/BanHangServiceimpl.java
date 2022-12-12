@@ -188,4 +188,9 @@ public class BanHangServiceimpl implements BanHangService {
     public void checkTrungIMEI(String maHD, String IMEI,List<HoaDonChiTietViewModel> list) {
         list.addAll(bhr.getAllHoaDonCheckTrung(maHD, IMEI));
     }
+
+    @Override
+    public void xoaSPDaCoTrongHD(String imei, String maHD) {
+        bhr.xoaSPDaCoTrongHD(imei, maHD);
+    }
 }
