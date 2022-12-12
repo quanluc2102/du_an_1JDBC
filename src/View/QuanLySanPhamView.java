@@ -54,7 +54,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author haha
  */
-public class QuanLySanPhamView extends javax.swing.JDialog {
+public class QuanLySanPhamView extends javax.swing.JFrame {
 
     HangView hv = new HangView(new javax.swing.JFrame(), true, "");
     DongView dv = new DongView(new javax.swing.JFrame(), true, "");
@@ -99,8 +99,8 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
     /**
      * Creates new form QuanLySanPhamView
      */
-    public QuanLySanPhamView(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public QuanLySanPhamView() {
+        
         initComponents();
         modelCBB = (DefaultComboBoxModel) cbbIMEI.getModel();
         modelcbb1 = (DefaultComboBoxModel) cbbHang.getModel();
@@ -1004,21 +1004,17 @@ public class QuanLySanPhamView extends javax.swing.JDialog {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuanLySanPhamView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuanLySanPhamView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuanLySanPhamView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(QuanLySanPhamView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                QuanLySanPhamView dialog = new QuanLySanPhamView(new javax.swing.JFrame(), true);
+                QuanLySanPhamView dialog = new QuanLySanPhamView();
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
