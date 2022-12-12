@@ -9,8 +9,14 @@ import DomainModel.NhanVien;
 import Repository.ChucVuRepository;
 import Repository.LoginRepository;
 import Service.LoginService;
+import ViewModel.DangNhapFile;
 import ViewModel.LoginViewModel;
 import ViewModel.loginWebCamView;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,5 +98,84 @@ public class LoginImpl implements LoginService {
             }
         }
         return "NOT";
+    }
+
+//    public String rememberName(String name, String pass) {
+//        try {
+//            //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
+//            FileOutputStream fos = new FileOutputStream("login.txt");
+//            ObjectOutputStream oos = new ObjectOutputStream(fos);
+//            //Bước 2: Ghi dữ liệu
+//            DangNhapFile[] dn = {new DangNhapFile(name, pass)};
+//            oos.writeObject(dn);
+//            //Bước 3: Đóng luồng
+//            fos.close();
+//            oos.close();
+//            return "DONE";
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//            return "FAIL";
+//        }
+//
+//    }
+
+    @Override
+    public DangNhapFile auto() {
+        DangNhapFile dnf = new DangNhapFile();
+        try {
+
+            //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
+            FileInputStream fis = new FileInputStream("login.txt");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            //Bước 2: Ghi dữ liệu
+            DangNhapFile[] dn = (DangNhapFile[]) ois.readObject();
+            dnf = dn[0];
+            //Bước 3: Đóng luồng
+            fis.close();
+            ois.close();
+            System.out.println("Done!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+        return dnf;
+    }
+
+    @Override
+    public String dangXuat() {
+        try {
+            //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
+            FileOutputStream fos = new FileOutputStream("login.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            //Bước 2: Ghi dữ liệu
+            DangNhapFile[] dn = {new DangNhapFile("", "")};
+            oos.writeObject(dn);
+            //Bước 3: Đóng luồng
+            fos.close();
+            oos.close();
+            return "DANG XUAT THANH CONG";
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return "FAIL";
+        }
+    }
+
+    @Override
+    public String RememberName(String name, String pass) {
+try {
+            //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
+            FileOutputStream fos = new FileOutputStream("login.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            //Bước 2: Ghi dữ liệu
+            DangNhapFile[] dn = {new DangNhapFile(name, pass)};
+            oos.writeObject(dn);
+            //Bước 3: Đóng luồng
+            fos.close();
+            oos.close();
+            return "DONE";
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return "FAIL";
+        }
     }
 }

@@ -19,16 +19,15 @@ public class LOGINview extends javax.swing.JFrame {
     /**
      * Creates new form LOGINview
      */
-        LoginService impl = new LoginImpl();
+    LoginService impl = new LoginImpl();
+
     public LOGINview() {
         initComponents();
-
-        txtID.setBackground(new java.awt.Color(0,0,1,0));
-        txtPass.setBackground(new java.awt.Color(0,0,1,0));
-         txtGach1.setBackground(new java.awt.Color(0,0,1,0));
-        txtgach2.setBackground(new java.awt.Color(0,0,1,0));
-
-
+        auto();
+        txtID.setBackground(new java.awt.Color(0, 0, 1, 0));
+        txtPass.setBackground(new java.awt.Color(0, 0, 1, 0));
+        txtGach1.setBackground(new java.awt.Color(0, 0, 1, 0));
+        txtgach2.setBackground(new java.awt.Color(0, 0, 1, 0));
 
     }
 
@@ -66,6 +65,7 @@ public class LOGINview extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         txtRPID1 = new javax.swing.JLabel();
         txtRPPAss = new javax.swing.JLabel();
+        checkRm = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -105,7 +105,7 @@ public class LOGINview extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("X");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/error.png"))); // NOI18N
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -252,7 +252,16 @@ public class LOGINview extends javax.swing.JFrame {
         });
         jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 130, 34));
         jPanel2.add(txtRPID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 230, 20));
-        jPanel2.add(txtRPPAss, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 230, 20));
+        jPanel2.add(txtRPPAss, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 230, 20));
+
+        checkRm.setForeground(new java.awt.Color(255, 255, 255));
+        checkRm.setText("Remember ?");
+        checkRm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkRmActionPerformed(evt);
+            }
+        });
+        jPanel2.add(checkRm, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, -1, -1));
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/loginxam.jpg"))); // NOI18N
@@ -277,7 +286,7 @@ public class LOGINview extends javax.swing.JFrame {
     }//GEN-LAST:event_txtGach1ActionPerformed
 
     private void txtdisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtdisMouseClicked
-       txtPass.setEchoChar((char)0);
+        txtPass.setEchoChar((char) 0);
         txtdis.setVisible(false);
         txtdis.setEnabled(false);
         txtShow.setEnabled(true);
@@ -285,7 +294,7 @@ public class LOGINview extends javax.swing.JFrame {
     }//GEN-LAST:event_txtdisMouseClicked
 
     private void txtShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtShowMouseClicked
-                txtPass.setEchoChar((char)8226);
+        txtPass.setEchoChar((char) 8226);
         txtdis.setVisible(true);
         txtdis.setEnabled(true);
         txtShow.setEnabled(false);
@@ -294,13 +303,16 @@ public class LOGINview extends javax.swing.JFrame {
     }//GEN-LAST:event_txtShowMouseClicked
 
     private void btnDangKyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangKyMouseClicked
-          DangKy bhv = new DangKy();
+        DangKy bhv = new DangKy();
         this.dispose();
         bhv.setVisible(true);
     }//GEN-LAST:event_btnDangKyMouseClicked
-
+    private void auto() {
+        txtID.setText(impl.auto().getId());
+        txtPass.setText(impl.auto().getPass());
+    }
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
-                NhanVien nv = new NhanVien();
+        NhanVien nv = new NhanVien();
         String userID = txtID.getText();
         String userPass = txtPass.getText();
         String thongBao = impl.login(userID, userPass);
@@ -308,7 +320,7 @@ public class LOGINview extends javax.swing.JFrame {
         Boolean conf2 = false;
         if (txtID.getText().isEmpty()) {
             txtRPID1.setText("Đang trống");
-            
+
             txtRPID1.setForeground(Color.white);
 
         } else {
@@ -326,18 +338,24 @@ public class LOGINview extends javax.swing.JFrame {
             if (thongBao.contains("NOT")) {
                 JOptionPane.showMessageDialog(this, "tai khoan hoac mat khau khong dung");
             } else {
+                if (checkRm.isSelected()) {
+                    impl.RememberName(userID, userPass);
+                }
                 if (thongBao.contains("NV")) {
 //                TrangChuNhanVienView nvv = new TrangChuNhanVienView(this, true);
+                    
                     TrangChuNhanVienView nvv = new TrangChuNhanVienView();
                     nvv.setVisible(true);
                 }
                 if (thongBao.contains("QL")) {
+                                       
                     TrangChuQuanLyView ql = new TrangChuQuanLyView(txtID.getText());
                     ql.setVisible(true);
                 }
                 this.dispose();
             }
         }
+        
     }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
@@ -345,7 +363,7 @@ public class LOGINview extends javax.swing.JFrame {
 //        int camera = cbbWebCam.getSelectedIndex();
         ScanCode sc = new ScanCode(new java.awt.Frame(), true, 0);
         sc.setVisible(true);
-        cmnd = sc.getScanResutlx().substring(0,12);
+        cmnd = sc.getScanResutlx().substring(0, 12);
         System.out.println(cmnd);
         String thongBao = impl.loginWebCam(cmnd);
 
@@ -365,17 +383,21 @@ public class LOGINview extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel18MouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        for (double i = 0.0; i < 1.0; i=i+0.1) {
-            String val = i +"";
-            float f= Float.valueOf(val);
+        for (double i = 0.0; i < 1.0; i = i + 0.1) {
+            String val = i + "";
+            float f = Float.valueOf(val);
             this.setOpacity(f);
             try {
                 Thread.sleep(50);
             } catch (Exception e) {
-                
+
             }
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void checkRmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkRmActionPerformed
+     
+    }//GEN-LAST:event_checkRmActionPerformed
 
     /**
      * @param args the command line arguments
@@ -414,6 +436,7 @@ public class LOGINview extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnDangKy;
+    private javax.swing.JCheckBox checkRm;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

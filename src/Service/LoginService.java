@@ -5,6 +5,7 @@
 package Service;
 
 import DomainModel.NhanVien;
+import ViewModel.DangNhapFile;
 import java.util.List;
 
 /**
@@ -22,4 +23,12 @@ public interface LoginService {
     String dangKi(NhanVien nv);
  
     String loginWebCam(String cmnd);
+    
+    String RememberName(String name,String pass);
+    
+    DangNhapFile auto();
+    
+    String dangXuat();
+    
+    
 }
