@@ -30,7 +30,7 @@ import table.TableCustom;
  *
  * @author buiti
  */
-public class TrangChuQuanLyView extends javax.swing.JDialog {
+public class TrangChuCotheSua extends javax.swing.JDialog {
 
     /**
      * Creates new form TrangChuQuanLyView
@@ -46,7 +46,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
     String a2 = "";
     int width =260; int height = 950;
 
-    public TrangChuQuanLyView(String a) {
+    public TrangChuCotheSua(String a) {
         initComponents();
         String header[] = {"id", "Mã Nhân viên", "Tên Nhân viên", "id Chức vụ", "Chức vụ", "Ngày sinh", "SDT", "Email", "Địa chỉ", "Mật khẩu", "Trạng thái", "CMND"};
         jTable1.setModel(dtm);
@@ -80,7 +80,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
                     try {
                         Thread.sleep(2);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(TrangChuQuanLyView.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(TrangChuCotheSua.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -95,7 +95,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
                                         try {
                         Thread.sleep(2);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(TrangChuQuanLyView.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(TrangChuCotheSua.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
