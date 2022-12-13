@@ -1,8 +1,10 @@
+package Repository;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Repository;
+
 
 import DomainModel.NhanVien;
 import Ultilities.SQLServerConnection;
@@ -71,7 +73,7 @@ public class NhanVienRepository {
                     + "           ,[email]\n"
                     + "           ,[dia_chi]\n"
                     + "           ,[mat_khau]\n"
-                    + "           ,[trang_thai])\n"
+                    + "           ,[trang_thai],cmnd)\n"
                     + "     VALUES\n"
                     + "           (?\n"
                     + "           ,?\n"
@@ -81,7 +83,7 @@ public class NhanVienRepository {
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
-                    + "           ,?)";
+                    + "           ,?,?)";
             PreparedStatement ps = conn.prepareCall(query);
             ps.setObject(1, nv.getMa());
             ps.setObject(2, nv.getTen());
@@ -92,6 +94,7 @@ public class NhanVienRepository {
             ps.setObject(7, nv.getDiaChi());
             ps.setObject(8, nv.getMatKhau());
             ps.setObject(9, nv.getTrangThai());
+            ps.setObject(10, nv.getCmnd());
 
             check = ps.executeUpdate();
             return check > 0;
@@ -122,6 +125,24 @@ public class NhanVienRepository {
 
             check = ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+    public boolean QuenMK(NhanVien sv, String maNV) {
+        String query = "UPDATE [dbo].[NhanVien]\n"
+                + "   SET[mat_khau] = ?\n"
+                + "\n"
+                + " WHERE \n"
+                + " ma_nhan_vien =?";
+        int check = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+
+            ps.setObject(1, sv.getMatKhau());
+            ps.setObject(2,maNV);
+            check = ps.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return check > 0;
@@ -169,7 +190,7 @@ public class NhanVienRepository {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                NhanVienView nv = new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11),rs.getString(12));
+                NhanVienView nv = new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11), rs.getString(12));
                 list.add(nv);
             }
 
@@ -190,7 +211,7 @@ public class NhanVienRepository {
 
             List<NhanVienView> list = new ArrayList<>();
             while (rs.next()) {
-                NhanVienView kh = new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11),rs.getString(12));
+                NhanVienView kh = new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11), rs.getString(12));
                 list.add(kh);
             }
             return list;

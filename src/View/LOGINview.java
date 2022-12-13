@@ -1,13 +1,18 @@
+package View;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View;
+
 
 import DomainModel.NhanVien;
 import Service.LoginService;
 import Service.ServiceImpl.LoginImpl;
+import ViewModel.MaNVViewModel;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,7 +35,7 @@ public class LOGINview extends javax.swing.JFrame {
         txtgach2.setBackground(new java.awt.Color(0, 0, 1, 0));
 
     }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,6 +71,7 @@ public class LOGINview extends javax.swing.JFrame {
         txtRPID1 = new javax.swing.JLabel();
         txtRPPAss = new javax.swing.JLabel();
         checkRm = new javax.swing.JCheckBox();
+        jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -263,6 +269,10 @@ public class LOGINview extends javax.swing.JFrame {
         });
         jPanel2.add(checkRm, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, -1, -1));
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Forgot password");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 90, -1));
+
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/loginxam.jpg"))); // NOI18N
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 510));
@@ -329,7 +339,6 @@ public class LOGINview extends javax.swing.JFrame {
         if (txtPass.getText().isEmpty()) {
             txtRPPAss.setText("Đang trống");
             txtRPPAss.setForeground(Color.white);
-
         } else {
             conf2 = true;
         }
@@ -366,7 +375,12 @@ public class LOGINview extends javax.swing.JFrame {
         cmnd = sc.getScanResutlx().substring(0, 12);
         System.out.println(cmnd);
         String thongBao = impl.loginWebCam(cmnd);
-
+        List<MaNVViewModel> lisMa = new ArrayList<>();
+        System.out.println(lisMa);
+        String ma = impl.getMaNV(cmnd).get(0).getMaNV();
+       
+        MaNVViewModel nv = new MaNVViewModel();
+//        String ma = nv.getMaNV();
         if (thongBao.contains("NOT")) {
             JOptionPane.showMessageDialog(this, "sai");
         } else {
@@ -375,7 +389,7 @@ public class LOGINview extends javax.swing.JFrame {
                 nvv.setVisible(true);
             }
             if (thongBao.contains("QL")) {
-                TrangChuQuanLyView ql = new TrangChuQuanLyView(txtID.getText());
+                TrangChuQuanLyView ql = new TrangChuQuanLyView(ma);
                 ql.setVisible(true);
             }
             this.dispose();
@@ -425,6 +439,7 @@ public class LOGINview extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(LOGINview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -451,6 +466,7 @@ public class LOGINview extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

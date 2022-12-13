@@ -1,8 +1,10 @@
+package View;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package View;
+
 
 import DomainModel.NhanVien;
 import Service.LoginService;
@@ -18,6 +20,7 @@ import ViewModel.NhanVienView;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -113,6 +116,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         Boolean conf6 = false;
         Boolean conf7 = false;
         Boolean conf8 = false;
+        Boolean conf9 = false;
         if (txtMaNV.getText().isEmpty()) {
             txtRPMa.setText("Mã không được để Trống");
             txtRPMa.setForeground(Color.red);
@@ -214,6 +218,17 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
             nv.setIdChucVu(idCV.get(cbbCV.getSelectedIndex()));
             conf8 = true;
         }
+         if (txtCMND.getText().isEmpty()) {
+            txtRPCMND.setText("Mật khậu đang trống");
+            txtRPCMND.setForeground(Color.red);
+
+        } else {
+            txtRPCMND.setText("*");
+            txtRPCMND.setForeground(Color.GREEN);
+            nv.setSdt(txtCMND.getText());
+
+            conf9 = true;
+        }
 //        nv.setMa(txtMaNV.getText());
 //        nv.setTen(txtTenNV.getText());
 //        nv.setNgaySinh(txtNgaySinhNV.getText());
@@ -223,7 +238,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
 
 //        System.out.println(nv.toString());
 //        JOptionPane.showMessageDialog(rootPane, impl.dangKi(nv));
-        if (conf1 == true && conf2 == true && conf3 == true && conf4 == true && conf5 == true && conf6 == true && conf7 == true && conf8 == true) {
+        if (conf1 == true && conf2 == true && conf3 == true && conf4 == true && conf5 == true && conf6 == true && conf7 == true && conf8 == true &&conf9) {
             nv.setMatKhau(txtPass.getText());
             JOptionPane.showMessageDialog(rootPane, impl.dangKi(nv));
             System.out.println(nv.toString());
@@ -249,6 +264,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         txtPass.setText(nv.getMatKhau());
         txtSDT.setText(nv.getSdt());
         cbbCV.setSelectedItem(nv.getTenChucVu());
+        txtCMND.setText(nv.getCmnd());
         if (nv.getTrangThai() == 0) {
             radioNghi.setSelected(true);
 
@@ -278,11 +294,6 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         jLabel23 = new javax.swing.JLabel();
         lblTime = new javax.swing.JLabel();
         textNgay = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        txtSearch = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         id = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -317,9 +328,25 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         btnDangKy = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jLabel26 = new javax.swing.JLabel();
-        txtCanCuoc = new javax.swing.JTextField();
         jButton11 = new javax.swing.JButton();
+        txtRPCMND = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtSearch = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        txtttSo = new javax.swing.JLabel();
+        txtttHoTen = new javax.swing.JLabel();
+        txtttNgaySinh = new javax.swing.JLabel();
+        txtttGioiTinh = new javax.swing.JLabel();
+        txttDiaChi = new javax.swing.JLabel();
+        jButton12 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         pnMenu = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         txtLayMa = new javax.swing.JLabel();
@@ -429,70 +456,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
 
         textNgay.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         textNgay.setText("Date");
-        jPanel4.add(textNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 480, 150, 20));
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông Tin"));
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 153, 0));
-        jLabel13.setText("arch");
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel12.setText("Se");
-
-        txtSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 204, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(255, 0, 51), new java.awt.Color(255, 51, 0)));
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
-        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSearchKeyReleased(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel12)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel13)
-                .addGap(279, 279, 279))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(179, Short.MAX_VALUE))
-        );
-
-        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 20, 290, 320));
-
-        jButton1.setBackground(new java.awt.Color(51, 51, 51));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/z3946860666735_30f52c7f5e3d1a6b5fd11409bdce2492.jpg"))); // NOI18N
-        jButton1.setText("ADD QR");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 380, 130, 50));
+        jPanel4.add(textNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 480, 120, 20));
 
         jLabel15.setText("ID");
         jPanel4.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
@@ -631,24 +595,121 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         });
         jPanel4.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 130, 50));
 
-        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel26.setText("Thông tin nhận được từ căn cước");
-        jPanel4.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 466, 298, 22));
-
-        txtCanCuoc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtCanCuoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCanCuocActionPerformed(evt);
-            }
-        });
-        jPanel4.add(txtCanCuoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 464, 357, -1));
-
         jButton11.setBackground(new java.awt.Color(0, 102, 0));
         jButton11.setForeground(new java.awt.Color(255, 255, 255));
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/excel.png"))); // NOI18N
         jButton11.setText("import Excel");
         jButton11.setBorder(null);
-        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 382, 130, 40));
+        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 380, 130, 50));
+        jPanel4.add(txtRPCMND, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 260, 20));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel13.setText("arch");
+        jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, -1, 20));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel12.setText("Se");
+        jPanel4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, -1, 20));
+
+        txtSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 204, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(255, 0, 51), new java.awt.Color(255, 51, 0)));
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+        jPanel4.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, 310, 38));
+
+        jPanel5.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), java.awt.Color.gray, new java.awt.Color(204, 204, 204)));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Thông tin căn cước");
+        jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 9, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Họ và Tên :");
+        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 90, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Số / No     :");
+        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 55, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Ngày sinh  :");
+        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 125, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Giới tính     :");
+        jPanel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 154, -1, -1));
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Địa chỉ        :");
+        jPanel5.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 189, -1, -1));
+
+        txtttSo.setForeground(new java.awt.Color(255, 255, 255));
+        txtttSo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtttSo.setText("jLabel26");
+        jPanel5.add(txtttSo, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 56, -1, -1));
+
+        txtttHoTen.setForeground(new java.awt.Color(255, 255, 255));
+        txtttHoTen.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtttHoTen.setText("jLabel27");
+        jPanel5.add(txtttHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 91, -1, -1));
+
+        txtttNgaySinh.setForeground(new java.awt.Color(255, 255, 255));
+        txtttNgaySinh.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtttNgaySinh.setText("jLabel29");
+        jPanel5.add(txtttNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 126, -1, -1));
+
+        txtttGioiTinh.setForeground(new java.awt.Color(255, 255, 255));
+        txtttGioiTinh.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtttGioiTinh.setText("jLabel30");
+        jPanel5.add(txtttGioiTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 155, -1, -1));
+
+        txttDiaChi.setForeground(new java.awt.Color(255, 255, 255));
+        txttDiaChi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txttDiaChi.setText("jLabel32");
+        jPanel5.add(txttDiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 190, -1, -1));
+
+        jButton12.setBackground(new java.awt.Color(51, 51, 51));
+        jButton12.setForeground(new java.awt.Color(255, 255, 255));
+        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/z3946860666735_30f52c7f5e3d1a6b5fd11409bdce2492.jpg"))); // NOI18N
+        jButton12.setText("Lấy thông tin");
+        jButton12.setBorder(null);
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 130, 50));
+
+        jButton1.setBackground(new java.awt.Color(51, 51, 51));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/z3946860666735_30f52c7f5e3d1a6b5fd11409bdce2492.jpg"))); // NOI18N
+        jButton1.setText("ADD QR");
+        jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 130, 50));
+
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 30, 520, 380));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 1410, 950));
 
@@ -711,7 +772,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ThongKe.png"))); // NOI18N
-        jButton5.setText("Thống kê doanh thu");
+        jButton5.setText("Thống kê");
         jButton5.setBorder(null);
         jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -840,7 +901,6 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
 
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
         index = listNV.size() - 1;
-
         fillData(index);
     }//GEN-LAST:event_jLabel23MouseClicked
 
@@ -852,44 +912,23 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         cmnd = sc.getScanResutlx();
         String soCC = cmnd.substring(0, 12);
         txtCMND.setText(soCC);
+        txtttSo.setText(soCC);
         String withouTen = cmnd.substring(14, cmnd.length());
+        
         System.out.println(withouTen);
         String[] splits = withouTen.split("[|]");
-        txtTenNV.setText(splits[0]);
-        txtDiaChiNV.setText(splits[3]);
+        txtttHoTen.setText(splits[0]);
+        txttDiaChi.setText(splits[3]);
+        txtttGioiTinh.setText(splits[2]);
+        String nam = splits[1].substring(4,8);
+                     String ngay =splits[1].substring(0,2);
+                     String thang =splits[1].substring(2,4);
+                    String NS= (ngay+"/"+thang+"/"+nam);
+                    txtttNgaySinh.setText(NS);
+//        txtTenNV.setText(splits[0]);
+//        txtDiaChiNV.setText(splits[3]);
 
-//               nguoiDung.setDiaChi(splits[3]);
-//         txtCanCuoc.setText(cmnd);
-//         String[] allcmnd = cmnd.split("");
-//         int n = 200;
-//         for (int i = 12; i < n; i++) {
-//             if (allcmnd[i].equalsIgnoreCase("|")) {
-//                 cmnd.substring(12,i);
-//                 
-//             } else {
-//             }
-//              String input = result.getText();
-//                    String withoutTen = input.substring(14, input.length());
-//                    String[] splits = withoutTen.split("[|]");
-//                    if (iNguoiDungService.getObj(input.substring(0, 12)) != null) {
-//                        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Đã tồn tại trong danh sách!");
-//                        panel.showNotification();
-//                    } else {
-//                        NguoiDung nguoiDung = new NguoiDung();
-//                        nguoiDung.setMa(input.substring(0, 12));
-//                        nguoiDung.setTen(splits[0]);
-//                        nguoiDung.setDiaChi(splits[3]);
-//        txtCMND.setText(cmnd.substring(0,12));
-//        for (String item : cmndten) {
-//            System.out.println(item);
-//        }
-//        txtcmnd.setText(cmndten[0]);
-//        txtTenNV.setText(cmndten[2]);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void txtCanCuocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCanCuocActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCanCuocActionPerformed
 
     private void txt_maActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_maActionPerformed
         // TODO add your handling code here:
@@ -966,6 +1005,14 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         System.out.println(implDX.dangXuat());
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        txtCMND.setText(txtttSo.getText());
+        txtDiaChiNV.setText(txttDiaChi.getText());
+        txtNgaySinhNV.setText(txtttNgaySinh.getText());
+        txtPass.setText(UUID.randomUUID().toString().substring(0, 8));
+        txtTenNV.setText(txtttHoTen.getText());
+    }//GEN-LAST:event_jButton12ActionPerformed
     public void setColor(JPanel p) {
         p.setBackground(new Color(255, 105, 0));
     }
@@ -988,6 +1035,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -996,6 +1044,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1003,13 +1052,17 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1017,9 +1070,9 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblTime;
@@ -1028,13 +1081,13 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
     private javax.swing.JRadioButton radioNghi;
     private javax.swing.JLabel textNgay;
     private javax.swing.JTextField txtCMND;
-    private javax.swing.JTextField txtCanCuoc;
     private javax.swing.JTextField txtDiaChiNV;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JLabel txtLayMa;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtNgaySinhNV;
     private javax.swing.JTextField txtPass;
+    private javax.swing.JLabel txtRPCMND;
     private javax.swing.JLabel txtRPDiaChi;
     private javax.swing.JLabel txtRPEmail;
     private javax.swing.JLabel txtRPMa;
@@ -1045,6 +1098,11 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtTenNV;
+    private javax.swing.JLabel txttDiaChi;
+    private javax.swing.JLabel txtttGioiTinh;
+    private javax.swing.JLabel txtttHoTen;
+    private javax.swing.JLabel txtttNgaySinh;
+    private javax.swing.JLabel txtttSo;
     // End of variables declaration//GEN-END:variables
 
 }

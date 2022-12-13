@@ -1,12 +1,15 @@
+package Repository;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Repository;
+
 
 import DomainModel.NhanVien;
 import Ultilities.SQLServerConnection;
 import ViewModel.LoginViewModel;
+import ViewModel.MaNVViewModel;
 import ViewModel.loginWebCamView;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,6 +39,24 @@ public class LoginRepository {
         }
         return null;
 
+    }
+
+    public List<MaNVViewModel> getMaNV(String cmnd) {
+        String query = "select ma_nhan_vien  from NhanVien where cmnd = ? ";
+        List<MaNVViewModel> list = new ArrayList<>();
+
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, cmnd);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                MaNVViewModel nv = new MaNVViewModel(rs.getString(1));
+                list.add(nv);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
     }
 
     public List<loginWebCamView> getAllWebCam() {

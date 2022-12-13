@@ -1,16 +1,22 @@
+package Service.ServiceImpl;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Service.ServiceImpl;
+
 
 import DomainModel.ChucVu;
 import DomainModel.NhanVien;
 import Repository.ChucVuRepository;
 import Repository.LoginRepository;
+import Repository.NhanVienRepository;
 import Service.LoginService;
 import ViewModel.DangNhapFile;
 import ViewModel.LoginViewModel;
+import ViewModel.MaNVViewModel;
+import ViewModel.NhanVienView;
+import ViewModel.QuenMKViewModel;
 import ViewModel.loginWebCamView;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -25,6 +31,8 @@ import java.util.List;
  * @author buiti
  */
 public class LoginImpl implements LoginService {
+
+    NhanVienRepository Nvrp = new NhanVienRepository();
 
     @Override
     public String login(String username, String pass) {
@@ -74,20 +82,6 @@ public class LoginImpl implements LoginService {
 
     @Override
     public String loginWebCam(String cmnd) {
-
-//        List<LoginViewModel> lg = new LoginRepository().getAll();
-//
-//        for (LoginViewModel x : lg) {
-//
-//            if (x.getCmnd().equalsIgnoreCase(cmnd) && x.getTenCV().equalsIgnoreCase("Nhân viên")){
-//                return "NV";
-//            }
-//            if (x.getCmnd().equalsIgnoreCase(cmnd) && x.getTenCV().equalsIgnoreCase("Quản lý")) {
-//                return "QL";
-//            }
-//        }
-//        return "NOT";
-//    }
         List<loginWebCamView> lg = new LoginRepository().getAllWebCam();
         for (loginWebCamView loginViewModel : lg) {
             if (loginViewModel.getCmnd().equalsIgnoreCase(cmnd) && loginViewModel.getTenChucVu().equalsIgnoreCase("Nhân viên")) {
@@ -118,7 +112,6 @@ public class LoginImpl implements LoginService {
 //        }
 //
 //    }
-
     @Override
     public DangNhapFile auto() {
         DangNhapFile dnf = new DangNhapFile();
@@ -162,7 +155,7 @@ public class LoginImpl implements LoginService {
 
     @Override
     public String RememberName(String name, String pass) {
-try {
+        try {
             //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
             FileOutputStream fos = new FileOutputStream("login.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -176,6 +169,40 @@ try {
         } catch (IOException ex) {
             ex.printStackTrace();
             return "FAIL";
+        }
+    }
+
+    @Override
+    public List<MaNVViewModel> getMaNV(String cmnd) {
+        List<MaNVViewModel> list = new ArrayList<>();
+        list = new LoginRepository().getMaNV(cmnd);
+        return list;
+    }
+
+    public static void main(String[] args) {
+        LoginImpl impl = new LoginImpl();
+        System.out.println(impl.getMaNV("034203013817"));
+    }
+
+    @Override
+    public String quenMK(String MaNV, String email) {
+        List<NhanVienView> lg = new NhanVienRepository().getAll();
+        for (NhanVienView nhanVienView : lg) {
+            if (nhanVienView.getMa().equalsIgnoreCase(MaNV) && nhanVienView.getEmail().equalsIgnoreCase(email)) {
+                return "yes";
+            }
+
+        }
+        return "NOT";
+    }
+
+    @Override
+    public String updatePass(NhanVien nv, String pass) {
+        boolean update = Nvrp.QuenMK(nv, pass);
+        if (update == true) {
+            return "Cập nhật thành công";
+        } else {
+            return "Cập nhật thất bại";
         }
     }
 }

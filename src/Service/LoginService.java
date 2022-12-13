@@ -1,11 +1,14 @@
+package Service;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package Service;
+
 
 import DomainModel.NhanVien;
 import ViewModel.DangNhapFile;
+import ViewModel.MaNVViewModel;
 import java.util.List;
 
 /**
@@ -30,5 +33,10 @@ public interface LoginService {
     
     String dangXuat();
     
+    List<MaNVViewModel> getMaNV(String cmnd);
+    
+    String quenMK(String MaNV,String email);
+    
+    String updatePass(NhanVien nv,String pass);
     
 }
