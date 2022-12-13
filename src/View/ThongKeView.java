@@ -11,11 +11,21 @@ import Service.ThongKeKhachHangService;
 import ViewModel.SanPhamDaMuaViewModel;
 import ViewModel.SoLanMuaViewModel;
 import ViewModel.ThongKeViewModel;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -130,6 +140,7 @@ public class ThongKeView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        btnXuat = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         txtSearch = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
@@ -237,6 +248,13 @@ public class ThongKeView extends javax.swing.JFrame {
 
         jLabel6.setText("Theo năm");
 
+        btnXuat.setText("Xuất Execl");
+        btnXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -310,6 +328,8 @@ public class ThongKeView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnXuat)
+                .addGap(34, 34, 34)
                 .addComponent(btnDong)
                 .addGap(200, 200, 200))
         );
@@ -355,7 +375,9 @@ public class ThongKeView extends javax.swing.JFrame {
                     .addComponent(jLabelTong)
                     .addComponent(txtDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
-                .addComponent(btnDong)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDong)
+                    .addComponent(btnXuat))
                 .addGap(22, 22, 22))
         );
 
@@ -745,6 +767,77 @@ public class ThongKeView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void btnXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatActionPerformed
+        // TODO add your handling code here:
+        try {
+
+            XSSFWorkbook worbook = new XSSFWorkbook();
+            XSSFSheet sheet = worbook.createSheet("Doanh thu");
+            XSSFRow row = null;
+            Cell cell = null;
+            row = sheet.createRow(3);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("STT");
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("IMEI");
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("Mã HD");
+            cell = row.createCell(3, CellType.NUMERIC);
+            cell.setCellValue("Giá Bán");
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("Ngày tạo ");
+            cell = row.createCell(5, CellType.NUMERIC);
+            cell.setCellValue("Giá giảm ");
+            cell = row.createCell(6, CellType.NUMERIC);
+            cell.setCellValue("Gía nhập ");
+//            cell = row.createCell(6, CellType.STRING);
+//            cell.setCellValue("Thành tiền ");
+            cell = row.createCell(7, CellType.STRING);
+            cell.setCellValue("Lãi ");
+
+            for (int i = 0; i < listhongKe.size(); i++) {
+
+                row = sheet.createRow(4 + i);// khoảng cách từ đầu đến dòng imei
+                cell = row.createCell(0, CellType.NUMERIC);
+                cell.setCellValue(i + 1); // số 1
+                cell = row.createCell(1, CellType.STRING);
+                cell.setCellValue(listhongKe.get(i).getImei());
+                cell = row.createCell(2, CellType.STRING);
+                cell.setCellValue(listhongKe.get(i).getMaHD());
+
+                cell = row.createCell(3, CellType.NUMERIC);
+                cell.setCellValue(listhongKe.get(i).getGiaBan());
+                cell = row.createCell(4, CellType.STRING);
+                cell.setCellValue(String.valueOf(listhongKe.get(i).getNgayTao()));
+                cell = row.createCell(5, CellType.NUMERIC);
+                cell.setCellValue(listhongKe.get(i).giaGiam());
+                cell = row.createCell(6, CellType.NUMERIC);
+                cell.setCellValue(listhongKe.get(i).getGiaNhap());
+                cell = row.createCell(7, CellType.NUMERIC);
+                cell.setCellValue((listhongKe.get(i).getGiaBan()) - (listhongKe.get(i).giaGiam()) - (listhongKe.get(i).getGiaNhap()));
+
+            }
+
+            File f = new File("C:\\Execl\\doanh.xlsx");
+            try {
+                FileOutputStream fiss = new FileOutputStream(f);
+                worbook.write(fiss);
+                fiss.close();
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(this, "In thành công ");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi mở  file");
+
+        }
+    }//GEN-LAST:event_btnXuatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -784,6 +877,7 @@ public class ThongKeView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableThongKe;
     private javax.swing.JButton btnDong;
+    private javax.swing.JButton btnXuat;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cbbNTN;
