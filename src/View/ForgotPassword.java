@@ -8,7 +8,9 @@ package View;
 
 import DomainModel.NhanVien;
 import Service.Email;
+import Service.EmailHung;
 import Service.LoginService;
+import Service.ServiceImpl.Emailmpl;
 import Service.ServiceImpl.LoginImpl;
 import java.awt.Color;
 import java.util.UUID;
@@ -21,6 +23,7 @@ import javax.swing.JOptionPane;
 public class ForgotPassword extends javax.swing.JFrame {
     LoginService impl = new LoginImpl();
     Email emailimpl = new Service.ServiceImpl.Email();
+    EmailHung hungEmail= new Emailmpl();
     /**
      * Creates new form ForgotPassword
      */
@@ -153,7 +156,7 @@ public class ForgotPassword extends javax.swing.JFrame {
                     System.out.println("111");
             impl.quenMK(MaNV, Email);    
             JOptionPane.showMessageDialog(rootPane,impl.updatePass(passRD,MaNV));
-            emailimpl.sendEmail("hungbtph21019@fpt.edu.vn","buitienhung09",Email,"Mật khẩu cấp lại (BeePhone)",passRD);
+            hungEmail.sendEmail(Email,"[BeePhone]","Pass mới là :"+passRD);
             }
         }
         }

@@ -16,7 +16,6 @@ import ViewModel.DangNhapFile;
 import ViewModel.LoginViewModel;
 import ViewModel.MaNVViewModel;
 import ViewModel.NhanVienView;
-import ViewModel.QuenMKViewModel;
 import ViewModel.loginWebCamView;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -197,8 +196,8 @@ public class LoginImpl implements LoginService {
     }
 
     @Override
-    public String updatePass(NhanVien nv, String pass) {
-        boolean update = Nvrp.QuenMK(nv, pass);
+    public String updatePass( String pass,String maNV) {
+        boolean update = Nvrp.QuenMK(pass,maNV);
         if (update == true) {
             return "Cập nhật thành công";
         } else {
