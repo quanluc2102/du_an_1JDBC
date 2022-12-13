@@ -45,30 +45,12 @@ public class DienThoaiRepon {
 
     }
 
-    public boolean add(DienThoai cv) {
-        String query = "INSERT INTO [dbo].[DienThoai]\n"
-                + "           ([ma_hang]\n"
-                + "           ,[ten_hang]\n"
-                + "           ,[trang_thai])\n"
-                + "     VALUES\n"
-                + "           (?,? ,?)";
-        int check = 0;
-        try ( Connection conn = new SQLServerConnection().getConnection();  PreparedStatement ps = conn.prepareCall(query);) {
-            ps.setObject(1, cv.getMa());
-            ps.setObject(2, cv.getTen());
-            ps.setObject(3, cv.getTrangThai());
 
-            check = ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace(System.out);
-        }
-        return check > 0;
-    }
 
     public boolean sua(DienThoai cv) {
         String query = "UPDATE [dbo].[DienThoai]\n"
-                + "   SET [ma_hang] = ?\n"
-                + "      ,[ten_hang] = ?\n"
+                + "   SET [ma_dien_thoai] = ?\n"
+                + "      ,[ten_dien_thoai] = ?\n"
                 + "      ,[trang_thai] = ?\n"
                 + " WHERE  id =?";
         int check = 0;

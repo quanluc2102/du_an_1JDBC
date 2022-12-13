@@ -87,7 +87,6 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        cbbPort = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -212,8 +211,6 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
             }
         });
 
-        cbbPort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Camera laptop", "Camera ngoài" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -241,8 +238,7 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(cbbPort, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -275,9 +271,7 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
                         .addComponent(btnU))
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(cbbPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -462,8 +456,8 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String scanImei = "";
-        int camera = cbbPort.getSelectedIndex();
-        ScanCode sc = new ScanCode(new java.awt.Frame(), true, camera);
+
+        ScanCode sc = new ScanCode(new java.awt.Frame(), true, 0);
         sc.setVisible(true);
         scanImei = sc.getScanResutlx();
         txtIMEIHT.setText(scanImei);
@@ -518,7 +512,6 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
     private javax.swing.JButton btnChon;
     private javax.swing.JButton btnU;
     private javax.swing.JButton btnX;
-    private javax.swing.JComboBox<String> cbbPort;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

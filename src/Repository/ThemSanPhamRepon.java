@@ -153,10 +153,7 @@ public class ThemSanPhamRepon {
         }
         return sp > 0;
     }
-    public static void main(String[] args) {
-        ThongSo s = new ThongSo(null, idQuocGiaDong, heDieuhanh, cpu, boNho,
-                pin, ketNoi, manHinh, thietKe, tienIch, mauSac, camera);
-    }
+   
 
    
 }

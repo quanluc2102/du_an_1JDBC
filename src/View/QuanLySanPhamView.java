@@ -4,10 +4,6 @@
  */
 package View;
 
-import DomainModel.DienThoai;
-import DomainModel.Dong;
-import DomainModel.Hang;
-import DomainModel.QuocGia;
 import DomainModel.ThongSo;
 import Repository.ThemSanPhamRepon;
 import Service.AddElementServices;
@@ -17,21 +13,9 @@ import Service.ServiceImpl.SanPhamServicesImpl;
 import Service.ServiceImpl.TSPImpl;
 import Service.ThemSPServices;
 import View.SanPham.DienThoaiView;
-import View.SanPham.DongView;
-import View.SanPham.ViewCamera;
 import View.SanPham.HangView;
 import View.SanPham.QuocGiaView;
-import View.SanPham.ViewBoNho;
-import View.SanPham.ViewHDH;
 import View.SanPham.ViewIMEIexcel;
-import View.SanPham.ViewKetNoi;
-import View.SanPham.ViewMH;
-import View.SanPham.ViewPinSac;
-import View.SanPham.ViewSacMau;
-import View.SanPham.ViewTI;
-import View.SanPham.ViewTK;
-import View.SanPham.ViewThemSanPham;
-import View.SanPham.ViewViXuLy;
 import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
 import ViewModel.vts;
@@ -54,23 +38,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author haha
  */
-public class QuanLySanPhamView extends javax.swing.JFrame {
+public class QuanLySanPhamView extends javax.swing.JDialog {
 
-    HangView hv = new HangView(new javax.swing.JFrame(), true, "");
-    DongView dv = new DongView(new javax.swing.JFrame(), true, "");
-    QuocGiaView qgv = new QuocGiaView(new javax.swing.JFrame(), true, "");
-    ViewThemSanPham vtsp = new ViewThemSanPham(new javax.swing.JFrame(), true);
-    ViewBoNho bnv = new ViewBoNho(new javax.swing.JFrame(), true, "");
-    ViewCamera cmdv = new ViewCamera(new javax.swing.JFrame(), true, "");
-    DienThoaiView dtv = new DienThoaiView(new javax.swing.JFrame(), true, "");
-    ViewKetNoi vkn = new ViewKetNoi(new javax.swing.JFrame(), true, "");
-    ViewMH vmh = new ViewMH(new javax.swing.JFrame(), true, "");
-    ViewTI vti = new ViewTI(new javax.swing.JFrame(), true, "");
-    ViewTK vtk = new ViewTK(new javax.swing.JFrame(), true, "");
-    ViewViXuLy vcpu = new ViewViXuLy(new javax.swing.JFrame(), true, "");
-    ViewHDH vhdh = new ViewHDH(new javax.swing.JFrame(), true, "");
-    ViewPinSac vpin = new ViewPinSac(new javax.swing.JFrame(), true, "");
-    ViewSacMau vsm = new ViewSacMau(new javax.swing.JFrame(), true, "");
     int trangThai = 0;
     String srcAnh = "";
     int trang = 0;
@@ -78,10 +47,6 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
     Double giaBan = 0.0;
     Double giaNhap = 0.0;
     DefaultComboBoxModel modelCBB;
-    DefaultComboBoxModel modelcbb1;
-    DefaultComboBoxModel modelcbb2;
-    DefaultComboBoxModel modelcbb3;
-    DefaultComboBoxModel modelcbb4;
     DefaultTableModel modelTBL;
     DefaultTableModel modelTT;
     SanPhamServices sps = new SanPhamServicesImpl();
@@ -91,23 +56,23 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
     List<vts> ttList = new ArrayList<>();
     DecimalFormat df = new DecimalFormat("###,###,###,###");
     ThemSPServices tsp = new TSPImpl();
-    AddElementServices ae  = new AddElementImpl();
+    AddElementServices ae = new AddElementImpl();
 
     /**
      * Creates new form QuanLySanPhamView
      */
+   
+
     public QuanLySanPhamView() {
-        
+
         initComponents();
+    
         modelCBB = (DefaultComboBoxModel) cbbIMEI.getModel();
-        modelcbb1 = (DefaultComboBoxModel) cbbHang.getModel();
-        modelcbb2 = (DefaultComboBoxModel) cbbDong.getModel();
-        modelcbb3 = (DefaultComboBoxModel) cbbQuocGia.getModel();
-        modelcbb4 = (DefaultComboBoxModel) cbbDienThoai.getModel();
+       
         modelTT = (DefaultTableModel) tblThongTin.getModel();
         loadTable(sps.getAll());
         modelTT.setRowCount(0);
-        loadCBB();
+        
         loadThongSo(null);
 
     }
@@ -137,32 +102,7 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
 
     }
 
-    private void loadCBB() {
-        modelcbb1.removeAllElements();
-        modelcbb2.removeAllElements();
-        modelcbb3.removeAllElements();
-        modelcbb4.removeAllElements();
-        List<String> s = new ArrayList<>();
-        for (Hang hang : sps.getHang()) {
-            s.add(hang.getTen());
-        }
-        modelcbb1.addAll(s);
-        s.removeAll(s);
-        for (Dong hang : sps.getDong()) {
-            s.add(hang.getTen());
-        }
-        modelcbb2.addAll(s);
-        s.removeAll(s);
-        for (QuocGia hang : sps.getQG()) {
-            s.add(hang.getTen());
-        }
-        modelcbb3.addAll(s);
-        s.removeAll(s);
-        for (DienThoai hang : sps.getDT()) {
-            s.add(hang.getTen());
-        }
-        modelcbb4.addAll(s);
-    }
+   
 
     private void loadThongSo(String id) {
         modelTT.setRowCount(0);
@@ -171,14 +111,12 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
             Object[] row = new Object[]{x.getThuocTinh(), x.getGiaTri()};
             modelTT.addRow(row);
         }
-       
 
     }
 
     private void save() {
 
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -207,8 +145,6 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
         txtGiaNhap = new javax.swing.JTextField();
         txtSoLuongNhap = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        cbbHang = new javax.swing.JComboBox<>();
-        cbbDong = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -220,13 +156,15 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
         btnHang = new javax.swing.JButton();
         btnDong = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        cbbQuocGia = new javax.swing.JComboBox<>();
         btnQG = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtMaDT = new javax.swing.JTextField();
         btnHome = new javax.swing.JButton();
-        cbbDienThoai = new javax.swing.JComboBox<>();
         jButton6 = new javax.swing.JButton();
+        txtTenDT = new javax.swing.JTextField();
+        txtQuocGia = new javax.swing.JTextField();
+        txtHang = new javax.swing.JTextField();
+        txtDong = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblThongTin = new javax.swing.JTable();
@@ -249,6 +187,7 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý sản phẩm");
         setAutoRequestFocus(false);
+        setBackground(new java.awt.Color(153, 153, 153));
         setLocation(new java.awt.Point(50, 50));
         setResizable(false);
 
@@ -382,17 +321,11 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
         jLabel4.setText("Giá nhập");
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 122, 64, -1));
         jPanel4.add(txtGiaBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 93, 114, -1));
-        jPanel4.add(txtGiaNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 119, 114, -1));
+        jPanel4.add(txtGiaNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 114, -1));
         jPanel4.add(txtSoLuongNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 150, 114, -1));
 
         jLabel5.setText("Số lượng nhập");
         jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 153, 81, -1));
-
-        cbbHang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel4.add(cbbHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 92, 115, -1));
-
-        cbbDong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel4.add(cbbDong, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 119, 115, -1));
 
         jLabel6.setText("Hãng");
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -453,9 +386,6 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
         jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(253, 154, -1, -1));
 
-        cbbQuocGia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel4.add(cbbQuocGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 151, 115, -1));
-
         btnQG.setText("jButton1");
         btnQG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -476,9 +406,6 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
         });
         jPanel4.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 100, 50));
 
-        cbbDienThoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel4.add(cbbDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 260, -1));
-
         jButton6.setText("ĐT");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -486,6 +413,10 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, 70, -1));
+        jPanel4.add(txtTenDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 260, -1));
+        jPanel4.add(txtQuocGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 110, -1));
+        jPanel4.add(txtHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 110, -1));
+        jPanel4.add(txtDong, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 110, -1));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin sản phẩm"));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -759,113 +690,16 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTimKiemFocusGained
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        String idbn = "";
-        String idcmd = "";
-        String idkn = "";
-        String idti = "";
-        String idtk = "";
-        String idpin = "";
-        String idms = "";
-        String idhdh = "";
-        String idmh = "";
-        String idcpu = "";
-        vtsp.setVisible(true);
-        hv.setVisible(true);
-        String idh = hv.getID();
-        dtv.setVisible(true);
-        String iddt = dtv.getID();
-        dv.setVisible(true);
-        String idd = dv.getID();
-        qgv.setVisible(true);
-        String idqg = qgv.getID();
-        if (vtsp.viewx().isEmpty() == false) {
-            for (Integer integer : vtsp.viewx()) {
-                switch (integer) {
-                    case 1:
-                        bnv.setVisible(true);
-                        idbn = bnv.id();
-                        break;
-                    case 2:
-
-                        cmdv.setVisible(true);
-                        idcmd = cmdv.id();
-                        break;
-                    case 3:
-
-                        vhdh.setVisible(true);
-                        idhdh = vhdh.id();
-                        break;
-                    case 4:
-
-                        vkn.setVisible(true);
-                        idkn = vkn.id();
-                        break;
-                    case 5:
-
-                        vmh.setVisible(true);
-                        idmh = vmh.id();
-                        break;
-                    case 6:
-
-                        vsm.setVisible(true);
-                        idms = vsm.id();
-                        break;
-                    case 7:
-
-                        vpin.setVisible(true);
-                        idpin = vpin.id();
-                        break;
-                    case 8:
-
-                        vtk.setVisible(true);
-                        idtk = vtk.id();
-                        break;
-                    case 9:
-
-                        vcpu.setVisible(true);
-                        idcpu = vcpu.id();
-                        break;
-                    case 10:
-
-                        vti.setVisible(true);
-                        idti = vti.id();
-                        break;
-                    default:
-                        throw new AssertionError();
-                }
-            }
-        }
-
-        ThongSo tsAdd = new ThongSo("", null, idhdh, idcpu, idbn, idpin, idkn, idmh, idtk, idti, idms, idcmd);
-        JOptionPane.showMessageDialog(rootPane,ae.themThongSo(tsAdd) , "", 1);
-
+        
 
     }//GEN-LAST:event_btnThemActionPerformed
-
-    private void btnAddImeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddImeiActionPerformed
-        mei.removeAll(mei);
-        ViewIMEIexcel c = new ViewIMEIexcel(new javax.swing.JFrame(), true);
-        c.setVisible(true);
-        if (c.allIMEI().isEmpty() == false) {
-            modelCBB.removeAllElements();
-            mei = c.allIMEI();
-            modelCBB.addAll(mei);
-            cbbIMEI.setSelectedIndex(0);
-            txtSoLuongNhap.setText(mei.size() + "");
-        }
-
-
-    }//GEN-LAST:event_btnAddImeiActionPerformed
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         if (trangThai != 1) {
             index = tblSanPham.getSelectedRow();
             SanPhamViewModel s = ls.get(index);
 
-            modelcbb1.setSelectedItem(s.getTenHang());
-            modelcbb2.setSelectedItem(s.getTenDong());
-            modelcbb3.setSelectedItem(s.getTenQuocGia());
-            modelcbb4.setSelectedItem(s.getTen());
+            
 
             if (s.getSrcAnh() != null) {
                 ImageIcon x = new ImageIcon(new ImageIcon(s.getSrcAnh()).getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT));
@@ -876,7 +710,10 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
 
             txtGiaBan.setText(df.format(s.getGiaBan()));
             txtGiaNhap.setText(df.format(s.getGiaNhap()));
-
+            txtTenDT.setText(s.getTen());
+            txtDong.setText(s.getTenDong());
+            txtHang.setText(s.getTenHang());
+            txtQuocGia.setText(s.getTenQuocGia());
             txtMaDT.setText(s.getMa());
             idDong = s.getId();
             loadThongSo(s.getId());
@@ -957,11 +794,24 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
         save();
     }//GEN-LAST:event_btnSuaActionPerformed
 
+    private void btnAddImeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddImeiActionPerformed
+        mei.removeAll(mei);
+        ViewIMEIexcel c = new ViewIMEIexcel(new javax.swing.JFrame(), true);
+        c.setVisible(true);
+        if (c.allIMEI().isEmpty() == false) {
+            modelCBB.removeAllElements();
+            mei = c.allIMEI();
+            modelCBB.addAll(mei);
+            cbbIMEI.setSelectedIndex(0);
+            txtSoLuongNhap.setText(mei.size() + "");
+        }
+
+    }//GEN-LAST:event_btnAddImeiActionPerformed
+
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         DienThoaiView s = new DienThoaiView(new JFrame(), true, "");
         s.setVisible(true);
         cbbDienThoai.setSelectedItem(s.getName());
-
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
@@ -984,7 +834,7 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(QuanLySanPhamView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the dialog */
@@ -1013,11 +863,7 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
-    private javax.swing.JComboBox<String> cbbDienThoai;
-    private javax.swing.JComboBox<String> cbbDong;
-    private javax.swing.JComboBox<String> cbbHang;
     private javax.swing.JComboBox<String> cbbIMEI;
-    private javax.swing.JComboBox<String> cbbQuocGia;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1054,10 +900,14 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
     private javax.swing.JTable tblSanPham;
     private javax.swing.JTable tblThongTin;
     private javax.swing.JTextField txtDoMoi;
+    private javax.swing.JTextField txtDong;
     private javax.swing.JTextField txtGiaBan;
     private javax.swing.JTextField txtGiaNhap;
+    private javax.swing.JTextField txtHang;
     private javax.swing.JTextField txtMaDT;
+    private javax.swing.JTextField txtQuocGia;
     private javax.swing.JTextField txtSoLuongNhap;
+    private javax.swing.JTextField txtTenDT;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

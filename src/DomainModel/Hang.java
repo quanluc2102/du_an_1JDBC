@@ -4,8 +4,6 @@ package DomainModel;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
-
 /**
  *
  * @author quanl
@@ -21,7 +19,6 @@ public class Hang {
 
     public Hang() {
     }
-    
 
     @Override
     public String toString() {
@@ -42,16 +39,11 @@ public class Hang {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-    
-
-   
 
     public Hang(String id, String ten) {
         this.id = id;
         this.ten = ten;
     }
-
-    
 
     public String getId() {
         return id;
@@ -76,6 +68,5 @@ public class Hang {
     public void setTen(String ten) {
         this.ten = ten;
     }
-    
-    
+
 }

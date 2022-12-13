@@ -327,6 +327,16 @@ public class SanPhamServicesImpl implements SanPhamServices {
         if (tk == null) {
             return "Không được để trống thông tin";
         }
+        for (KetNoi object : new ThongSoReponsitory().getKN(1)) {
+            if (object.getBlutooth().equalsIgnoreCase(tk.getBlutooth())&& 
+                    object.getHoTroMang().equalsIgnoreCase(tk.getHoTroMang())&&
+                    object.getHongNgoai().equalsIgnoreCase(tk.getHongNgoai()) &&
+                    object.getJackTaiNghe().equalsIgnoreCase(tk.getJackTaiNghe())&&
+                    object.getSim().equalsIgnoreCase(tk.getSim())&&
+                    object.getWifi().equalsIgnoreCase(tk.getWifi())) {
+               return "Thông tin bị trùng";
+            }
+        }
         if (new ThongSoReponsitory().ThemKN(tk)) {
             return "OK";
         }

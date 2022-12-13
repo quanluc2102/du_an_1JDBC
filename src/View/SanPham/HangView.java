@@ -7,7 +7,6 @@ package View.SanPham;
 import DomainModel.Hang;
 import Service.ServiceImpl.TSPImpl;
 import Service.ThemSPServices;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -19,14 +18,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class HangView extends javax.swing.JDialog {
 
-    ThemSPServices tsp = new TSPImpl();
-    DefaultTableModel modelTBL;
-    DefaultTableModel modelTBL1;
-    int index = -1;
-    int trangThai = 0;
-    List<Hang> ls = new ArrayList<>();
-    String idxc = "";
-    String id = "";
+    private ThemSPServices tsp = new TSPImpl();
+    private DefaultTableModel modelTBL;
+    private DefaultTableModel modelTBL1;
+    private int index = -1;
+    private int trangThai = 0;
+    private List<Hang> ls = new ArrayList<>();
+    private Hang hang = null;
 
     /**
      * Creates new form CameraView
@@ -50,14 +48,9 @@ public class HangView extends javax.swing.JDialog {
 
     }
 
-    public String getID() {
+    public Hang returnHang() {
 
-        return id;
-    }
-
-    public String getName() {
-
-        return idxc;
+        return hang;
     }
 
     /**
@@ -72,14 +65,14 @@ public class HangView extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        txtMahang = new javax.swing.JTextField();
-        txtTenhang = new javax.swing.JTextField();
+        txtTHang = new javax.swing.JTextField();
+        txtMHang = new javax.swing.JTextField();
         cbbHang = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        btnThem = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnChon = new javax.swing.JButton();
-        txts = new javax.swing.JTextField();
+        btnThem1 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -96,18 +89,18 @@ public class HangView extends javax.swing.JDialog {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Tên Hãng");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 57, 69, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 69, -1));
 
         jLabel1.setText("Mã Hãng");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 28, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        txtMahang.addActionListener(new java.awt.event.ActionListener() {
+        txtTHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMahangActionPerformed(evt);
+                txtTHangActionPerformed(evt);
             }
         });
-        jPanel1.add(txtMahang, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 25, 171, -1));
-        jPanel1.add(txtTenhang, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 54, 173, -1));
+        jPanel1.add(txtTHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 25, 171, -1));
+        jPanel1.add(txtMHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 54, 173, -1));
 
         cbbHang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Không có", "Đang có" }));
         jPanel1.add(cbbHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 83, 173, -1));
@@ -115,13 +108,13 @@ public class HangView extends javax.swing.JDialog {
         jLabel3.setText("Trạng thái");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 86, -1, -1));
 
-        btnThem.setText("Thêm");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
+        btnXoa.setText("Thêm");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+                btnXoaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 40));
+        jPanel1.add(btnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 110, 40));
 
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -129,34 +122,23 @@ public class HangView extends javax.swing.JDialog {
                 btnSuaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 112, 76, 40));
+        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 130, 110, 40));
 
-        btnChon.setText("Chọn");
+        btnChon.setText("Thoát");
         btnChon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChonActionPerformed(evt);
             }
         });
-        jPanel1.add(btnChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 75, 40));
+        jPanel1.add(btnChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 180, 110, 40));
 
-        txts.setForeground(new java.awt.Color(153, 153, 153));
-        txts.setText("Tìm kiếm");
-        txts.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtsMouseClicked(evt);
-            }
-        });
-        txts.addActionListener(new java.awt.event.ActionListener() {
+        btnThem1.setText("Xóa");
+        btnThem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtsActionPerformed(evt);
+                btnThem1ActionPerformed(evt);
             }
         });
-        txts.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtsKeyReleased(evt);
-            }
-        });
-        jPanel1.add(txts, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 240, -1));
+        jPanel1.add(btnThem1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 110, 40));
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -279,24 +261,24 @@ public class HangView extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtMahangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMahangActionPerformed
+    private void txtTHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTHangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtMahangActionPerformed
+    }//GEN-LAST:event_txtTHangActionPerformed
 
     private void tblHang1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHang1MouseClicked
 
         index = tblHang1.getSelectedRow();
         Hang qg = ls.get(index);
-        txtMahang.setText(qg.getTen());
-        txtTenhang.setText(qg.getMa());
+        txtTHang.setText(qg.getMa());
+        txtMHang.setText(qg.getTen());
         cbbHang.setSelectedIndex(qg.getTrangThai());
-        id = qg.getId();
+        hang = qg;
 
     }//GEN-LAST:event_tblHang1MouseClicked
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        String ten = txtMahang.getText();
-        String ma = txtTenhang.getText();
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        String ten = txtTHang.getText();
+        String ma = txtMHang.getText();
         if (ten.isBlank() || ma.isBlank()) {
             JOptionPane.showMessageDialog(rootPane, "Không được để trống thông tin");
         }
@@ -304,14 +286,14 @@ public class HangView extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(rootPane, tsp.themHang(quocGia));
         fillTable(tsp.getHang(1), modelTBL);
         fillTable(tsp.getHang(0), modelTBL1);
-    }//GEN-LAST:event_btnThemActionPerformed
+    }//GEN-LAST:event_btnXoaActionPerformed
 
     private void tblHang2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHang2MouseClicked
         index = tblHang2.getSelectedRow();
         Hang qg = tsp.getHang(0).get(index);
-        txtMahang.setText(qg.getTen());
-        id = qg.getId();
-        txtTenhang.setText(qg.getMa());
+        txtTHang.setText(qg.getTen());
+        hang = qg;
+        txtMHang.setText(qg.getMa());
         cbbHang.setSelectedIndex(qg.getTrangThai());
     }//GEN-LAST:event_tblHang2MouseClicked
 
@@ -324,24 +306,9 @@ public class HangView extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
-    private void txtsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsKeyReleased
-        String i = txts.getText();
-        ls = tsp.getTimKiemHa(i);
-        fillTable(ls, modelTBL);
-    }//GEN-LAST:event_txtsKeyReleased
-
-    private void txtsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsActionPerformed
-
-    }//GEN-LAST:event_txtsActionPerformed
-
-    private void txtsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtsMouseClicked
-        txts.setText("");
-        txts.setForeground(Color.BLACK);
-    }//GEN-LAST:event_txtsMouseClicked
-
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        String ten = txtMahang.getText();
-        String ma = txtTenhang.getText();
+        String ten = txtTHang.getText();
+        String ma = txtMHang.getText();
         String id = "";
         if (trangThai == 1) {
             id = tsp.getHang(1).get(index).getId();
@@ -358,9 +325,27 @@ public class HangView extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
-        idxc = txtMahang.getText();
+
         this.dispose();
     }//GEN-LAST:event_btnChonActionPerformed
+
+    private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
+        String ten = txtTHang.getText();
+        String ma = txtMHang.getText();
+        String id = "";
+        if (trangThai == 1) {
+            id = tsp.getHang(1).get(index).getId();
+        } else {
+            id = tsp.getHang(0).get(index).getId();
+        }
+        if (ten.isBlank() || ma.isBlank()) {
+            JOptionPane.showMessageDialog(rootPane, "Không được để trống thông tin");
+        }
+        Hang quocGia = new Hang(id, ma, ten, 0);
+        JOptionPane.showMessageDialog(rootPane, tsp.suaHang(quocGia));
+        fillTable(tsp.getHang(1), modelTBL);
+        fillTable(tsp.getHang(0), modelTBL1);
+    }//GEN-LAST:event_btnThem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -410,7 +395,8 @@ public class HangView extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChon;
     private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnThem1;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cbbHang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -423,8 +409,7 @@ public class HangView extends javax.swing.JDialog {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tblHang1;
     private javax.swing.JTable tblHang2;
-    private javax.swing.JTextField txtMahang;
-    private javax.swing.JTextField txtTenhang;
-    private javax.swing.JTextField txts;
+    private javax.swing.JTextField txtMHang;
+    private javax.swing.JTextField txtTHang;
     // End of variables declaration//GEN-END:variables
 }

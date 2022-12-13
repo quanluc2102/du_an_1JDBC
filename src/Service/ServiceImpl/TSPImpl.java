@@ -13,10 +13,12 @@ import DomainModel.QuocGia;
 import DomainModel.QuocGiaDong;
 import DomainModel.ThongSo;
 import Repository.CameraRepon;
+import Repository.DienThoaiRepon;
 import Repository.HangReponsitory;
 import Repository.QuocGiaRepon;
 import Repository.SanPhamRespository;
 import Repository.ThemSanPhamRepon;
+import Repository.ThongSoReponsitory;
 import Service.SanPhamServices;
 import Service.ThemSPServices;
 import java.util.ArrayList;
@@ -82,8 +84,9 @@ public class TSPImpl implements ThemSPServices {
     public String themHang(Hang ha) {
         for (Hang x : hangls.getAll(1)) {
             if (x.getMa().equalsIgnoreCase(ha.getMa())) {
-                return "Thêm Không thành công";
+                return "Thông tin Mã bị trùng";
             }
+           
         }
         for (Hang x : hangls.getAll(0)) {
             if (x.getMa().equalsIgnoreCase(ha.getMa())) {
@@ -119,10 +122,20 @@ public class TSPImpl implements ThemSPServices {
         }
         return ls;
     }
-
+    ThemSanPhamRepon tsp = new ThemSanPhamRepon();
     @Override
     public String themDT(DienThoai ha) {
-        if (new ThemSanPhamRepon().ThemDT(ha)) {
+        for (DienThoai object : new SanPhamRespository().getDT(1, ha.getIdHang())) {
+            if (object.getMa().equalsIgnoreCase(ha.getMa())) {
+                return "Mã bị trùng";
+            }
+        }
+        for (DienThoai object : new SanPhamRespository().getDT(0, ha.getIdHang())) {
+            if (object.getMa().equalsIgnoreCase(ha.getMa())) {
+                return "Mã bị trùng";
+            }
+        }
+        if (tsp.ThemDT(ha)) {
             return "nhập thành công";
         }
         return "không nhập được";
@@ -130,7 +143,10 @@ public class TSPImpl implements ThemSPServices {
 
     @Override
     public String suaDT(DienThoai ha) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            if (new DienThoaiRepon().sua(ha)) {
+            return "nhập thành công";
+        }
+        return "không nhập được";
     }
 
     @Override

@@ -25,7 +25,7 @@ public class DongView extends javax.swing.JDialog {
     int trangThai = 0;
     List<Dong> ls = new ArrayList<>();
     String idxc = "";
-    String id = "";
+    Dong dong = new Dong();
 
     /**
      * Creates new form CameraView
@@ -36,9 +36,9 @@ public class DongView extends javax.swing.JDialog {
         idxc = id;
         modelTBL = (DefaultTableModel) tbl1.getModel();
         modelTBL1 = (DefaultTableModel) tbl2.getModel();
-        fillTable(tsp.getDong(1,idxc), modelTBL);
-        ls = tsp.getDong(1,idxc);
-        fillTable(tsp.getDong(0,idxc), modelTBL1);
+        fillTable(tsp.getDong(1, idxc), modelTBL);
+        ls = tsp.getDong(1, idxc);
+        fillTable(tsp.getDong(0, idxc), modelTBL1);
     }
 
     private void fillTable(List<Dong> qg, DefaultTableModel md) {
@@ -50,14 +50,8 @@ public class DongView extends javax.swing.JDialog {
 
     }
 
-    public String getName() {
-
-        return idxc;
-    }
-
-    public String getID() {
-
-        return id;
+    public Dong returnDong() {
+        return dong;
     }
 
     /**
@@ -89,7 +83,6 @@ public class DongView extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dòng");
-        setUndecorated(true);
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
@@ -271,7 +264,7 @@ public class DongView extends javax.swing.JDialog {
         txtMaDong.setText(qg.getTen());
         txtTenDong.setText(qg.getMa());
         cbbDong.setSelectedIndex(qg.getTrangThai());
-        id = qg.getId();
+        dong = qg;
 
     }//GEN-LAST:event_tbl1MouseClicked
 
@@ -281,18 +274,18 @@ public class DongView extends javax.swing.JDialog {
         if (ten.isBlank() || ma.isBlank()) {
             JOptionPane.showMessageDialog(rootPane, "Không được để trống thông tin");
         }
-        Dong quocGia = new Dong("", ma, ten,idxc, cbbDong.getSelectedIndex());
+        Dong quocGia = new Dong("", ma, ten, idxc, cbbDong.getSelectedIndex());
         JOptionPane.showMessageDialog(rootPane, tsp.themDong(quocGia));
-        fillTable(tsp.getDong(1,idxc), modelTBL);
-        fillTable(tsp.getDong(0,idxc), modelTBL1);
+        fillTable(tsp.getDong(1, idxc), modelTBL);
+        fillTable(tsp.getDong(0, idxc), modelTBL1);
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tbl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl2MouseClicked
         index = tbl2.getSelectedRow();
-        Dong qg = tsp.getDong(0,idxc).get(index);
+        Dong qg = tsp.getDong(0, idxc).get(index);
         txtMaDong.setText(qg.getTen());
         txtTenDong.setText(qg.getMa());
-        id = qg.getId();
+        dong = qg;
         cbbDong.setSelectedIndex(qg.getTrangThai());
     }//GEN-LAST:event_tbl2MouseClicked
 
@@ -310,17 +303,17 @@ public class DongView extends javax.swing.JDialog {
         String ma = txtTenDong.getText();
         String id = "";
         if (trangThai == 1) {
-            id = tsp.getDong(1,idxc).get(index).getId();
+            id = tsp.getDong(1, idxc).get(index).getId();
         } else {
-            id = tsp.getDong(0,idxc).get(index).getId();
+            id = tsp.getDong(0, idxc).get(index).getId();
         }
         if (ten.isBlank() || ma.isBlank()) {
             JOptionPane.showMessageDialog(rootPane, "Không được để trống thông tin");
         }
-        Dong quocGia = new Dong(id, ma, ten,idxc, cbbDong.getSelectedIndex());
+        Dong quocGia = new Dong(id, ma, ten, idxc, cbbDong.getSelectedIndex());
         JOptionPane.showMessageDialog(rootPane, tsp.suaDong(quocGia));
-        fillTable(tsp.getDong(1,idxc), modelTBL);
-        fillTable(tsp.getDong(0,idxc), modelTBL1);
+        fillTable(tsp.getDong(1, idxc), modelTBL);
+        fillTable(tsp.getDong(0, idxc), modelTBL1);
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
