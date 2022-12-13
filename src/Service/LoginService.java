@@ -37,6 +37,6 @@ public interface LoginService {
     
     String quenMK(String MaNV,String email);
     
-    String updatePass(NhanVien nv,String pass);
+    String updatePass(String maNV,String pass);
     
 }

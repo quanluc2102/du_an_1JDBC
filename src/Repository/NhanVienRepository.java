@@ -130,7 +130,7 @@ public class NhanVienRepository {
         return check > 0;
     }
 
-    public boolean QuenMK(NhanVien sv, String maNV) {
+    public boolean QuenMK(String pass, String maNV) {
         String query = "UPDATE [dbo].[NhanVien]\n"
                 + "   SET[mat_khau] = ?\n"
                 + "\n"
@@ -139,11 +139,11 @@ public class NhanVienRepository {
         int check = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
 
-            ps.setObject(1, sv.getMatKhau());
+            ps.setObject(1, pass);
             ps.setObject(2,maNV);
             check = ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace(System.out);
+              e.printStackTrace(System.out);
         }
         return check > 0;
     }

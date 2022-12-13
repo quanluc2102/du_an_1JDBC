@@ -149,11 +149,11 @@ public class ForgotPassword extends javax.swing.JFrame {
             if (thongBao.contains("NOT")) {
                 JOptionPane.showMessageDialog(this, "Email hoặc Mã không đúng");
             } else {
-                if (thongBao.contains("YES")) {
-            impl.quenMK(MaNV, Email);
-            nv.setMatKhau(passRD);
-            JOptionPane.showMessageDialog(rootPane,impl.updatePass(nv, MaNV));
-            emailimpl.sendEmail("hungbtph21019@fpt.edu.vn","buitienhung09",txtEmail.getText(),"Mật khẩu cấp lại (BeePhone)", passRD,null);
+                if (thongBao.contains("yes")) {
+                    System.out.println("111");
+            impl.quenMK(MaNV, Email);    
+            JOptionPane.showMessageDialog(rootPane,impl.updatePass(passRD,MaNV));
+            emailimpl.sendEmail("hungbtph21019@fpt.edu.vn","buitienhung09",Email,"Mật khẩu cấp lại (BeePhone)",passRD);
             }
         }
         }
