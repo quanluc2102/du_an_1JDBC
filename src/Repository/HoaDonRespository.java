@@ -24,8 +24,10 @@ public class HoaDonRespository {
 
     public List<ViewModelHoaDon> getAllHoaDon() {
 
-        String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,\n"
-                + "HoaDon.trang_thai, IIF(KhuyenMai.gia_giam > 1000, KhuyenMai.gia_giam, (sum(QuocGiaDong.gia_ban)) - sum(QuocGiaDong.gia_ban)*(KhuyenMai.gia_giam / 100)) as 'GiaGiam',\n"
+        String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,HoaDon.ngay_tao,\n"
+                + "KhuyenMai.ma_khuyen_mai,\n"
+                + "HoaDon.trang_thai, IIF(KhuyenMai.gia_giam > 1000, KhuyenMai.gia_giam, \n"
+                + "sum(QuocGiaDong.gia_ban)*(KhuyenMai.gia_giam / 100)) as 'GiaGiam',\n"
                 + "IIF(KhuyenMai.gia_giam > 1000, sum(QuocGiaDong.gia_ban) - KhuyenMai.gia_giam,(sum(QuocGiaDong.gia_ban)) - sum(QuocGiaDong.gia_ban)*(KhuyenMai.gia_giam / 100)) as 'TongTien',\n"
                 + "count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
                 + "from HoaDon left join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
@@ -36,7 +38,7 @@ public class HoaDonRespository {
                 + "left join KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id\n"
                 + "group by HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
                 + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam\n"
-                + "order by HoaDon.ma_hoa_don";
+                + "order by HoaDon.ngay_tao";
         List<ViewModelHoaDon> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
@@ -90,7 +92,7 @@ public class HoaDonRespository {
         String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,HoaDon.ngay_tao,\n"
                 + "KhuyenMai.ma_khuyen_mai,\n"
                 + "HoaDon.trang_thai, IIF(KhuyenMai.gia_giam > 1000, KhuyenMai.gia_giam, \n"
-                + "(sum(QuocGiaDong.gia_ban)) - sum(QuocGiaDong.gia_ban)*(KhuyenMai.gia_giam / 100)) as 'GiaGiam',\n"
+                + "sum(QuocGiaDong.gia_ban)*(KhuyenMai.gia_giam / 100)) as 'GiaGiam',\n"
                 + "IIF(KhuyenMai.gia_giam > 1000, sum(QuocGiaDong.gia_ban) - KhuyenMai.gia_giam,(sum(QuocGiaDong.gia_ban)) - sum(QuocGiaDong.gia_ban)*(KhuyenMai.gia_giam / 100)) as 'TongTien',\n"
                 + "count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
                 + "from HoaDon left join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
@@ -124,7 +126,7 @@ public class HoaDonRespository {
         String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,HoaDon.ngay_tao,\n"
                 + "KhuyenMai.ma_khuyen_mai,\n"
                 + "HoaDon.trang_thai, IIF(KhuyenMai.gia_giam > 1000, KhuyenMai.gia_giam, \n"
-                + "(sum(QuocGiaDong.gia_ban)) - sum(QuocGiaDong.gia_ban)*(KhuyenMai.gia_giam / 100)) as 'GiaGiam',\n"
+                + "sum(QuocGiaDong.gia_ban)*(KhuyenMai.gia_giam / 100)) as 'GiaGiam',\n"
                 + "IIF(KhuyenMai.gia_giam > 1000, sum(QuocGiaDong.gia_ban) - KhuyenMai.gia_giam,(sum(QuocGiaDong.gia_ban)) - sum(QuocGiaDong.gia_ban)*(KhuyenMai.gia_giam / 100)) as 'TongTien',\n"
                 + "count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
                 + "from HoaDon left join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
@@ -159,7 +161,7 @@ public class HoaDonRespository {
         String query = "select HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,HoaDon.ngay_tao,\n"
                 + "KhuyenMai.ma_khuyen_mai,\n"
                 + "HoaDon.trang_thai, IIF(KhuyenMai.gia_giam > 1000, KhuyenMai.gia_giam, \n"
-                + "(sum(QuocGiaDong.gia_ban)) - sum(QuocGiaDong.gia_ban)*(KhuyenMai.gia_giam / 100)) as 'GiaGiam',\n"
+                + "sum(QuocGiaDong.gia_ban)*(KhuyenMai.gia_giam / 100)) as 'GiaGiam',\n"
                 + "IIF(KhuyenMai.gia_giam > 1000, sum(QuocGiaDong.gia_ban) - KhuyenMai.gia_giam,(sum(QuocGiaDong.gia_ban)) - sum(QuocGiaDong.gia_ban)*(KhuyenMai.gia_giam / 100)) as 'TongTien',\n"
                 + "count(HoaDonChiTiet.IMEI) as 'Tong so San pham'\n"
                 + "from HoaDon left join NhanVien on HoaDon.id_nhan_vien = NhanVien.id\n"
@@ -168,9 +170,10 @@ public class HoaDonRespository {
                 + "left join ChiTietDienThoai on HoaDonChiTiet.IMEI = ChiTietDienThoai.IMEI\n"
                 + "left join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_dong = QuocGiaDong.id\n"
                 + "left join KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id\n"
+                + "where HoaDon.ma_hoa_don like ?\n"
                 + "group by HoaDon.ma_hoa_don,NhanVien.ten_nhan_vien,KhachHang.ten_khach_hang,\n"
                 + "HoaDon.ngay_tao,KhuyenMai.ma_khuyen_mai,HoaDon.trang_thai,KhuyenMai.gia_giam\n"
-                + "order by HoaDon.ngay_tao\n";
+                + "order by HoaDon.ngay_tao";
 
         List<ViewModelHoaDon> listSearch = new ArrayList<>();
         String a = "%" + mahd + "%";
@@ -179,7 +182,7 @@ public class HoaDonRespository {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-               ViewModelHoaDon hd = new ViewModelHoaDon(rs.getString("ma_hoa_don"), rs.getString("ten_nhan_vien"),
+                ViewModelHoaDon hd = new ViewModelHoaDon(rs.getString("ma_hoa_don"), rs.getString("ten_nhan_vien"),
                         rs.getString("ten_khach_hang"), rs.getString("ngay_tao"),
                         rs.getString("ma_khuyen_mai"), rs.getInt("trang_thai"),
                         rs.getInt("Tong so San pham"), rs.getDouble("GiaGiam"), rs.getDouble("TongTien"));
