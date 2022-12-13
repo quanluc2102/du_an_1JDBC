@@ -7,9 +7,11 @@ package View;
 
 
 import DomainModel.NhanVien;
+import Service.Email;
 import Service.LoginService;
 import Service.ServiceImpl.LoginImpl;
 import java.awt.Color;
+import java.util.UUID;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class ForgotPassword extends javax.swing.JFrame {
     LoginService impl = new LoginImpl();
+    Email emailimpl = new Service.ServiceImpl.Email();
     /**
      * Creates new form ForgotPassword
      */
@@ -112,6 +115,7 @@ public class ForgotPassword extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
       NhanVien nv = new NhanVien();
+      String passRD = UUID.randomUUID().toString().substring(0, 8);
       String MaNV = txtMaNV.getText();
       String Email = txtEmail.getText();
       String thongBao = impl.quenMK(MaNV, Email);
@@ -147,6 +151,9 @@ public class ForgotPassword extends javax.swing.JFrame {
             } else {
                 if (thongBao.contains("YES")) {
             impl.quenMK(MaNV, Email);
+            nv.setMatKhau(passRD);
+            JOptionPane.showMessageDialog(rootPane,impl.updatePass(nv, MaNV));
+            emailimpl.sendEmail("hungbtph21019@fpt.edu.vn","buitienhung09",txtEmail.getText(),"Mật khẩu cấp lại (BeePhone)", passRD,null);
             }
         }
         }
