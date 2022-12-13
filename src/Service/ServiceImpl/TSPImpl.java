@@ -14,6 +14,7 @@ import DomainModel.QuocGiaDong;
 import DomainModel.ThongSo;
 import Repository.CameraRepon;
 import Repository.DienThoaiRepon;
+import Repository.DongRepository;
 import Repository.HangReponsitory;
 import Repository.QuocGiaRepon;
 import Repository.SanPhamRespository;
@@ -86,7 +87,7 @@ public class TSPImpl implements ThemSPServices {
             if (x.getMa().equalsIgnoreCase(ha.getMa())) {
                 return "Thông tin Mã bị trùng";
             }
-           
+
         }
         for (Hang x : hangls.getAll(0)) {
             if (x.getMa().equalsIgnoreCase(ha.getMa())) {
@@ -123,6 +124,7 @@ public class TSPImpl implements ThemSPServices {
         return ls;
     }
     ThemSanPhamRepon tsp = new ThemSanPhamRepon();
+
     @Override
     public String themDT(DienThoai ha) {
         for (DienThoai object : new SanPhamRespository().getDT(1, ha.getIdHang())) {
@@ -143,19 +145,19 @@ public class TSPImpl implements ThemSPServices {
 
     @Override
     public String suaDT(DienThoai ha) {
-            if (new DienThoaiRepon().sua(ha)) {
+        if (new DienThoaiRepon().sua(ha)) {
             return "nhập thành công";
         }
         return "không nhập được";
     }
 
     @Override
-    public List<DienThoai> getDT(int i,String idHang) {
+    public List<DienThoai> getDT(int i, String idHang) {
         if (idHang.isBlank()) {
             List<DienThoai> s = new ArrayList<>();
-            return s; 
+            return s;
         }
-        return new SanPhamRespository().getDT(i,idHang);
+        return new SanPhamRespository().getDT(i, idHang);
     }
 
     @Override
@@ -182,7 +184,23 @@ public class TSPImpl implements ThemSPServices {
 
     @Override
     public String themDong(Dong ha) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (ha == null) {
+            return "không được để trống thông tin";
+        }
+        for (Dong object : new SanPhamRespository().getDong(0, ha.getIdDienThoai())) {
+            if (object.getMa().contains(ha.getMa())) {
+                return "Thông tin mã bị trùng";
+            }
+        }
+        for (Dong object : new SanPhamRespository().getDong(1, ha.getIdDienThoai())) {
+            if (object.getMa().contains(ha.getMa())) {
+                return "Thông tin mã bị trùng";
+            }
+        }
+        if (new DongRepository().add(ha)) {
+            return "Thành công";
+        }
+        return "Thêm thất bại";
     }
 
     @Override
@@ -242,12 +260,11 @@ public class TSPImpl implements ThemSPServices {
 
     @Override
     public List<Dong> getDong(int i, String idHang) {
-         if (idHang.isBlank()) {
+        if (idHang.isBlank()) {
             List<Dong> s = new ArrayList<>();
-            return s; 
+            return s;
         }
         return new SanPhamRespository().getDong(i, idHang);
     }
 
-    
 }

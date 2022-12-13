@@ -56,7 +56,7 @@ public interface SanPhamServices {
 
     String suaPin(Pin hdh);
 
-    String xoaPin(Pin hdh,int tt);
+    String xoaPin(Pin hdh, int tt);
 
     List<ThietKe> getTK(int x);
 
@@ -87,7 +87,8 @@ public interface SanPhamServices {
     String addMauSac(MauSac tk);
 
     String suaMauSac(MauSac tk);
-    String xoaMauSac(MauSac tk,int tt);
+
+    String xoaMauSac(MauSac tk, int tt);
 
     List<TienIch> getTI(int x);
 
@@ -116,6 +117,7 @@ public interface SanPhamServices {
     List<Hang> getHang();
 
     List<Dong> getDong();
+
     List<DienThoai> getDT();
 
     List<QuocGia> getQG();

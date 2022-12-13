@@ -102,6 +102,11 @@ public class SanPhamServicesImpl implements SanPhamServices {
         if (hdh == null) {
             return "Không được để trống thông tin";
         }
+        for (Pin pin : new ThongSoReponsitory().getPin(1)) {
+            if (pin.getDungLuong().equalsIgnoreCase(hdh.getDungLuong()) && pin.getSac().equalsIgnoreCase(hdh.getSac())) {
+                return "Thông tin bị trùng";
+            }
+        }
         if (new ThongSoReponsitory().ThemHDH(hdh)) {
             return "OK";
         }
@@ -157,6 +162,16 @@ public class SanPhamServicesImpl implements SanPhamServices {
             return "Không được để trống thông tin";
         } else if (new ThongSoReponsitory().ThemBN(tk)) {
             return "Thêm thành cônng";
+        }
+        for (BoNho boNho : new ThongSoReponsitory().getBN(1)) {
+            if (boNho.getRAM().equalsIgnoreCase(tk.getRAM()) && boNho.getROM().equalsIgnoreCase(tk.getROM()) && boNho.getTheNho().equalsIgnoreCase(tk.getTheNho())) {
+                return "Thông tin bị trùng";
+            }
+        }
+        for (BoNho boNho : new ThongSoReponsitory().getBN(0)) {
+            if (boNho.getRAM().equalsIgnoreCase(tk.getRAM()) && boNho.getROM().equalsIgnoreCase(tk.getROM()) && boNho.getTheNho().equalsIgnoreCase(tk.getTheNho())) {
+                return "Thông tin bị trùng";
+            }
         }
         return "Thêm thất bại";
     }
@@ -217,6 +232,11 @@ public class SanPhamServicesImpl implements SanPhamServices {
     public String addMauSac(MauSac tk) {
         if (tk == null) {
             return "Không được để trống thông tin";
+        }
+        for (MauSac mauSac : new ThongSoReponsitory().getMau(1)) {
+            if (mauSac.getMa().equalsIgnoreCase(tk.getMa())) {
+                return "Thông tin bị trùng lặp";
+            }
         }
         if (new ThongSoReponsitory().ThemMau(tk)) {
             return "OK";
@@ -296,7 +316,7 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public List<Dong> getDong() {
-        return new SanPhamRespository().getDong(1,null);
+        return new SanPhamRespository().getDong(1, null);
     }
 
     @Override
@@ -328,13 +348,23 @@ public class SanPhamServicesImpl implements SanPhamServices {
             return "Không được để trống thông tin";
         }
         for (KetNoi object : new ThongSoReponsitory().getKN(1)) {
-            if (object.getBlutooth().equalsIgnoreCase(tk.getBlutooth())&& 
-                    object.getHoTroMang().equalsIgnoreCase(tk.getHoTroMang())&&
-                    object.getHongNgoai().equalsIgnoreCase(tk.getHongNgoai()) &&
-                    object.getJackTaiNghe().equalsIgnoreCase(tk.getJackTaiNghe())&&
-                    object.getSim().equalsIgnoreCase(tk.getSim())&&
-                    object.getWifi().equalsIgnoreCase(tk.getWifi())) {
-               return "Thông tin bị trùng";
+            if (object.getBlutooth().equalsIgnoreCase(tk.getBlutooth())
+                    && object.getHoTroMang().equalsIgnoreCase(tk.getHoTroMang())
+                    && object.getHongNgoai().equalsIgnoreCase(tk.getHongNgoai())
+                    && object.getJackTaiNghe().equalsIgnoreCase(tk.getJackTaiNghe())
+                    && object.getSim().equalsIgnoreCase(tk.getSim())
+                    && object.getWifi().equalsIgnoreCase(tk.getWifi())) {
+                return "Thông tin bị trùng";
+            }
+        }
+        for (KetNoi object : new ThongSoReponsitory().getKN(0)) {
+            if (object.getBlutooth().equalsIgnoreCase(tk.getBlutooth())
+                    && object.getHoTroMang().equalsIgnoreCase(tk.getHoTroMang())
+                    && object.getHongNgoai().equalsIgnoreCase(tk.getHongNgoai())
+                    && object.getJackTaiNghe().equalsIgnoreCase(tk.getJackTaiNghe())
+                    && object.getSim().equalsIgnoreCase(tk.getSim())
+                    && object.getWifi().equalsIgnoreCase(tk.getWifi())) {
+                return "Thông tin bị trùng";
             }
         }
         if (new ThongSoReponsitory().ThemKN(tk)) {

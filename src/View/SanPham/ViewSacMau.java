@@ -25,7 +25,7 @@ public class ViewSacMau extends javax.swing.JDialog {
     DefaultTableModel tbla;
     DefaultTableModel tblb;
     int index = 0;
-    int tblIndex = 0;
+    MauSac ms = null;
     SanPhamServices sps = new SanPhamServicesImpl();
     DefaultComboBoxModel modelcbb;
     List<String> lsTrangThai = new ArrayList<>();
@@ -56,8 +56,8 @@ public class ViewSacMau extends javax.swing.JDialog {
         tbl2.setRowSorter(sorter2);
     }
 
-    public String id() {
-        return id;
+    public MauSac returnMauSac() {
+        return ms;
     }
 
     private void loadx() {
@@ -132,7 +132,6 @@ public class ViewSacMau extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
 
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/save-regular-24.png"))); // NOI18N
-        btnThem.setOpaque(false);
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
@@ -140,7 +139,6 @@ public class ViewSacMau extends javax.swing.JDialog {
         });
 
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/edit-alt-regular-24.png"))); // NOI18N
-        btnSua.setOpaque(false);
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
@@ -150,13 +148,15 @@ public class ViewSacMau extends javax.swing.JDialog {
         jLabel3.setText("Trạng thái");
 
         cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbbTrangThai.setOpaque(false);
 
         btnChon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit-regular-24.png"))); // NOI18N
-        btnChon.setOpaque(false);
+        btnChon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonActionPerformed(evt);
+            }
+        });
 
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/trash-regular-24.png"))); // NOI18N
-        btnXoa.setOpaque(false);
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaActionPerformed(evt);
@@ -329,7 +329,7 @@ public class ViewSacMau extends javax.swing.JDialog {
         txtTen.setText(hdh.getTen());
         txtMa.setText(hdh.getMa());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
-         id = hdh.getId();
+         ms = hdh;
 
 
     }//GEN-LAST:event_tbl1MouseClicked
@@ -357,7 +357,7 @@ public class ViewSacMau extends javax.swing.JDialog {
         MauSac hdh = sps.getMauSacs(0).get(index);
         txtTen.setText(hdh.getTen());
         txtMa.setText(hdh.getMa());
-         id = hdh.getId();
+            ms = hdh;
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
 
     }//GEN-LAST:event_tbl2MouseClicked
@@ -390,12 +390,16 @@ public class ViewSacMau extends javax.swing.JDialog {
             btnThem.setEnabled(true);
             btnSua.setEnabled(true);
         }
-        System.out.println("so trang " + trang);
+        System.out.println("Loading............ +10%");
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void txtTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTenActionPerformed
+
+    private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
+      this.dispose();
+    }//GEN-LAST:event_btnChonActionPerformed
 
     /**
      * @param args the command line arguments

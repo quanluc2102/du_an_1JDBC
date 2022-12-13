@@ -25,7 +25,7 @@ public class ViewPinSac extends javax.swing.JDialog {
     DefaultTableModel tbla;
     DefaultTableModel tblb;
     int index = 0;
-    int tblIndex = 0;
+    Pin pin = null;
     SanPhamServices sps = new SanPhamServicesImpl();
     DefaultComboBoxModel modelcbb;
     List<String> lsTrangThai = new ArrayList<>();
@@ -57,8 +57,8 @@ public class ViewPinSac extends javax.swing.JDialog {
         tbl2.setRowSorter(sorter2);
     }
 
-    public String id() {
-        return id;
+    public Pin returnPin() {
+        return pin;
     }
 
     private void loadx() {
@@ -365,7 +365,7 @@ public class ViewPinSac extends javax.swing.JDialog {
         txtLP.setText(hdh.getLoaiPin());
         txtDL.setText(hdh.getDungLuong());
         txtDacBiet.setText(hdh.getDacBiet());
-         id = hdh.getId();
+        pin = hdh;
         txtSacj.setText(hdh.getSac());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
 
@@ -395,7 +395,7 @@ public class ViewPinSac extends javax.swing.JDialog {
         Pin hdh = sps.getPin(0).get(index);
         txtLP.setText(hdh.getLoaiPin());
         txtDL.setText(hdh.getDungLuong());
-         id = hdh.getId();
+       pin = hdh;
         txtDacBiet.setText(hdh.getDacBiet());
         txtSacj.setText(hdh.getSac());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
@@ -429,7 +429,7 @@ public class ViewPinSac extends javax.swing.JDialog {
             btnThem.setEnabled(true);
             btnSua.setEnabled(true);
         }
-        System.out.println("so trang " + trang);
+        System.out.println("Loading............+10%");
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     /**

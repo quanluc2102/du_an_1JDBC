@@ -269,8 +269,8 @@ public class HangView extends javax.swing.JDialog {
 
         index = tblHang1.getSelectedRow();
         Hang qg = ls.get(index);
-        txtTHang.setText(qg.getMa());
-        txtMHang.setText(qg.getTen());
+        txtTHang.setText(qg.getTen());
+        txtMHang.setText(qg.getMa());
         cbbHang.setSelectedIndex(qg.getTrangThai());
         hang = qg;
 
@@ -292,8 +292,8 @@ public class HangView extends javax.swing.JDialog {
         index = tblHang2.getSelectedRow();
         Hang qg = tsp.getHang(0).get(index);
         txtTHang.setText(qg.getTen());
-        hang = qg;
         txtMHang.setText(qg.getMa());
+        hang = qg;
         cbbHang.setSelectedIndex(qg.getTrangThai());
     }//GEN-LAST:event_tblHang2MouseClicked
 

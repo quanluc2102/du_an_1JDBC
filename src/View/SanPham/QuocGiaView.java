@@ -7,7 +7,6 @@ package View.SanPham;
 import DomainModel.QuocGia;
 import Service.ServiceImpl.TSPImpl;
 import Service.ThemSPServices;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -25,8 +24,7 @@ public class QuocGiaView extends javax.swing.JDialog {
     int index = -1;
     int trangThai = 0;
     List<QuocGia> ls = new ArrayList<>();
-    String idxc = "";
-    String id = "";
+    QuocGia quocGia = null;
 
     /**
      * Creates new form CameraView
@@ -50,13 +48,10 @@ public class QuocGiaView extends javax.swing.JDialog {
 
     }
 
-    public String getName() {
+    public QuocGia returnQuocGia() {
 
-        return idxc;
-    }
-     public String getID() {
+        return quocGia;
 
-        return id;
     }
 
     /**
@@ -78,7 +73,7 @@ public class QuocGiaView extends javax.swing.JDialog {
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnChon = new javax.swing.JButton();
-        txts = new javax.swing.JTextField();
+        btnChon1 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -120,7 +115,7 @@ public class QuocGiaView extends javax.swing.JDialog {
                 btnThemActionPerformed(evt);
             }
         });
-        jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 40));
+        jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 80, 40));
 
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +123,7 @@ public class QuocGiaView extends javax.swing.JDialog {
                 btnSuaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 112, 76, 40));
+        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 76, 40));
 
         btnChon.setText("Chọn");
         btnChon.addActionListener(new java.awt.event.ActionListener() {
@@ -136,26 +131,15 @@ public class QuocGiaView extends javax.swing.JDialog {
                 btnChonActionPerformed(evt);
             }
         });
-        jPanel1.add(btnChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 75, 40));
+        jPanel1.add(btnChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 75, 40));
 
-        txts.setForeground(new java.awt.Color(153, 153, 153));
-        txts.setText("Tìm kiếm");
-        txts.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtsMouseClicked(evt);
-            }
-        });
-        txts.addActionListener(new java.awt.event.ActionListener() {
+        btnChon1.setText("Xóa");
+        btnChon1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtsActionPerformed(evt);
+                btnChon1ActionPerformed(evt);
             }
         });
-        txts.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtsKeyReleased(evt);
-            }
-        });
-        jPanel1.add(txts, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 240, -1));
+        jPanel1.add(btnChon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 75, 40));
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -289,7 +273,7 @@ public class QuocGiaView extends javax.swing.JDialog {
         txtMaQuocGia.setText(qg.getTen());
         txtTenQuocGia.setText(qg.getMa());
         cbbQuocGia.setSelectedIndex(qg.getTrangThai());
-        id = qg.getId();
+        quocGia = qg;
 
     }//GEN-LAST:event_tblQuocGia1MouseClicked
 
@@ -311,7 +295,7 @@ public class QuocGiaView extends javax.swing.JDialog {
         txtMaQuocGia.setText(qg.getTen());
         txtTenQuocGia.setText(qg.getMa());
         cbbQuocGia.setSelectedIndex(qg.getTrangThai());
-        id = qg.getId();
+        quocGia = qg;
     }//GEN-LAST:event_tblQuocGia2MouseClicked
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
@@ -322,21 +306,6 @@ public class QuocGiaView extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_jTabbedPane1StateChanged
-
-    private void txtsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsKeyReleased
-        String i = txts.getText();
-        ls = tsp.getTimKiem(i);
-        fillTable(ls, modelTBL);
-    }//GEN-LAST:event_txtsKeyReleased
-
-    private void txtsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsActionPerformed
-
-    }//GEN-LAST:event_txtsActionPerformed
-
-    private void txtsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtsMouseClicked
-        txts.setText("");
-        txts.setForeground(Color.BLACK);
-    }//GEN-LAST:event_txtsMouseClicked
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         String ten = txtMaQuocGia.getText();
@@ -357,9 +326,27 @@ public class QuocGiaView extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
-        idxc = txtMaQuocGia.getText();
+        
         this.dispose();
     }//GEN-LAST:event_btnChonActionPerformed
+
+    private void btnChon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChon1ActionPerformed
+        String ten = txtMaQuocGia.getText();
+        String ma = txtTenQuocGia.getText();
+        String id = "";
+        if (trangThai == 1) {
+            id = tsp.getQG(1).get(index).getId();
+        } else {
+            id = tsp.getQG(0).get(index).getId();
+        }
+        if (ten.isBlank() || ma.isBlank()) {
+            JOptionPane.showMessageDialog(rootPane, "Không được để trống thông tin");
+        }
+        QuocGia quocGia = new QuocGia(id, ma, ten, 0);
+        JOptionPane.showMessageDialog(rootPane, tsp.suaQG(quocGia));
+        fillTable(tsp.getQG(1), modelTBL);
+        fillTable(tsp.getQG(0), modelTBL1);
+    }//GEN-LAST:event_btnChon1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -406,6 +393,7 @@ public class QuocGiaView extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChon;
+    private javax.swing.JButton btnChon1;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JComboBox<String> cbbQuocGia;
@@ -422,6 +410,5 @@ public class QuocGiaView extends javax.swing.JDialog {
     private javax.swing.JTable tblQuocGia2;
     private javax.swing.JTextField txtMaQuocGia;
     private javax.swing.JTextField txtTenQuocGia;
-    private javax.swing.JTextField txts;
     // End of variables declaration//GEN-END:variables
 }

@@ -73,6 +73,7 @@ public class DongView extends javax.swing.JDialog {
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnChon = new javax.swing.JButton();
+        btnXOa = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -114,7 +115,7 @@ public class DongView extends javax.swing.JDialog {
                 btnThemActionPerformed(evt);
             }
         });
-        jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, 40));
+        jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 110, 40));
 
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +123,7 @@ public class DongView extends javax.swing.JDialog {
                 btnSuaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 76, 40));
+        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 110, 40));
 
         btnChon.setText("Chọn");
         btnChon.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +131,15 @@ public class DongView extends javax.swing.JDialog {
                 btnChonActionPerformed(evt);
             }
         });
-        jPanel1.add(btnChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 75, 40));
+        jPanel1.add(btnChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 110, 40));
+
+        btnXOa.setText("Xóa");
+        btnXOa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXOaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnXOa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 110, 40));
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -261,16 +270,16 @@ public class DongView extends javax.swing.JDialog {
 
         index = tbl1.getSelectedRow();
         Dong qg = ls.get(index);
-        txtMaDong.setText(qg.getTen());
-        txtTenDong.setText(qg.getMa());
+        txtMaDong.setText(qg.getMa());
+        txtTenDong.setText(qg.getTen());
         cbbDong.setSelectedIndex(qg.getTrangThai());
         dong = qg;
 
     }//GEN-LAST:event_tbl1MouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        String ten = txtMaDong.getText();
-        String ma = txtTenDong.getText();
+        String ten = txtTenDong.getText();
+        String ma = txtMaDong.getText();
         if (ten.isBlank() || ma.isBlank()) {
             JOptionPane.showMessageDialog(rootPane, "Không được để trống thông tin");
         }
@@ -283,8 +292,8 @@ public class DongView extends javax.swing.JDialog {
     private void tbl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl2MouseClicked
         index = tbl2.getSelectedRow();
         Dong qg = tsp.getDong(0, idxc).get(index);
-        txtMaDong.setText(qg.getTen());
-        txtTenDong.setText(qg.getMa());
+        txtMaDong.setText(qg.getMa());
+        txtTenDong.setText(qg.getTen());
         dong = qg;
         cbbDong.setSelectedIndex(qg.getTrangThai());
     }//GEN-LAST:event_tbl2MouseClicked
@@ -299,8 +308,8 @@ public class DongView extends javax.swing.JDialog {
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        String ten = txtMaDong.getText();
-        String ma = txtTenDong.getText();
+        String ten = txtTenDong.getText();
+        String ma = txtMaDong.getText();
         String id = "";
         if (trangThai == 1) {
             id = tsp.getDong(1, idxc).get(index).getId();
@@ -317,9 +326,27 @@ public class DongView extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
-        idxc = txtMaDong.getText();
+
         this.dispose();
     }//GEN-LAST:event_btnChonActionPerformed
+
+    private void btnXOaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXOaActionPerformed
+        String ten = txtTenDong.getText();
+        String ma = txtMaDong.getText();
+        String id = "";
+        if (trangThai == 1) {
+            id = tsp.getDong(1, idxc).get(index).getId();
+        } else {
+            id = tsp.getDong(0, idxc).get(index).getId();
+        }
+        if (ten.isBlank() || ma.isBlank()) {
+            JOptionPane.showMessageDialog(rootPane, "Không được để trống thông tin");
+        }
+        Dong quocGia = new Dong(id, ma, ten, idxc, 0);
+        JOptionPane.showMessageDialog(rootPane, tsp.suaDong(quocGia));
+        fillTable(tsp.getDong(1, idxc), modelTBL);
+        fillTable(tsp.getDong(0, idxc), modelTBL1);
+    }//GEN-LAST:event_btnXOaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,6 +401,7 @@ public class DongView extends javax.swing.JDialog {
     private javax.swing.JButton btnChon;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXOa;
     private javax.swing.JComboBox<String> cbbDong;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

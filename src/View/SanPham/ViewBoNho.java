@@ -28,8 +28,8 @@ public class ViewBoNho extends javax.swing.JDialog {
     SanPhamServices sps = new SanPhamServicesImpl();
     DefaultComboBoxModel modelcbb;
     List<String> lsTrangThai = new ArrayList<>();
-    String id = "";
-    int trang = 1;
+    BoNho boNho = null;
+    int trang=1;
 
     /**
      * Creates new form BoNho
@@ -55,8 +55,8 @@ public class ViewBoNho extends javax.swing.JDialog {
         tbl2.setRowSorter(sorter2);
     }
 
-    public String id() {
-        return id;
+    public BoNho returnBoNho() {
+        return boNho;
     }
 
     private void loadx() {
@@ -337,7 +337,7 @@ public class ViewBoNho extends javax.swing.JDialog {
     private void tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl1MouseClicked
         int index = tbl1.getSelectedRow();
         BoNho bn = sps.getBN(1).get(index);
-        id = bn.getId();
+        boNho = bn;
         txtROM.setText(bn.getROM());
         txtRAM.setText(bn.getRAM());
         txtTN.setText(bn.getTheNho());
@@ -367,7 +367,7 @@ public class ViewBoNho extends javax.swing.JDialog {
     private void tbl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl2MouseClicked
         int index = tbl2.getSelectedRow();
         BoNho bn = sps.getBN(0).get(index);
-        id = bn.getId();
+       boNho = bn;
         txtROM.setText(bn.getROM());
         txtRAM.setText(bn.getRAM());
         txtTN.setText(bn.getTheNho());
@@ -403,7 +403,7 @@ public class ViewBoNho extends javax.swing.JDialog {
             btnThem.setEnabled(true);
             btnSua.setEnabled(true);
         }
-        System.out.println("so trang " + trang);
+        System.out.println("Loading......... +10%");
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
