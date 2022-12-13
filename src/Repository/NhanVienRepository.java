@@ -10,6 +10,7 @@ import DomainModel.NhanVien;
 import Ultilities.SQLServerConnection;
 import ViewModel.LoginViewModel;
 import ViewModel.NhanVienView;
+import ViewModel.ThongTinNguoiDungView;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -191,6 +192,26 @@ public class NhanVienRepository {
 
             while (rs.next()) {
                 NhanVienView nv = new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11), rs.getString(12));
+                list.add(nv);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
+     public List<ThongTinNguoiDungView> layThongTin(String ma) {
+        String query = "SELECT       dbo.NhanVien.ten_nhan_vien, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.ngay_sinh, dbo.NhanVien.sdt, dbo.NhanVien.email, dbo.NhanVien.dia_chi, \n" +
+"                         dbo.NhanVien.cmnd\n" +
+"FROM            dbo.NhanVien INNER JOIN\n" +
+"                         dbo.ChucVu ON dbo.NhanVien.id_chuc_vu = dbo.ChucVu.id where  ma_nhan_vien = ?";
+        List<ThongTinNguoiDungView> list = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, ma);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ThongTinNguoiDungView nv = new ThongTinNguoiDungView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
+                
                 list.add(nv);
             }
 

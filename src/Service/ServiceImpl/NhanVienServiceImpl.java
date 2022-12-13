@@ -11,6 +11,7 @@ import Repository.LoginRepository;
 import Repository.NhanVienRepository;
 import Service.NhanVienService;
 import ViewModel.NhanVienView;
+import ViewModel.ThongTinNguoiDungView;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -20,23 +21,23 @@ import javax.swing.table.DefaultTableModel;
  * @author buiti
  */
 public class NhanVienServiceImpl implements NhanVienService {
-
+    
     NhanVienRepository Nvrp = new NhanVienRepository();
-
+    
     @Override
     public List<NhanVienView> getAll() {
         return new NhanVienRepository().getAll();
     }
-
+    
     @Override
     public void showData(DefaultTableModel dtm, List<NhanVienView> list) {
         dtm.setRowCount(0);
         for (NhanVienView nhanVienView : list) {
             dtm.addRow(nhanVienView.toData());
-
+            
         }
     }
-
+    
     @Override
     public List<String> ChucVuCBB() {
         List<String> cbb = new ArrayList<>();
@@ -47,7 +48,7 @@ public class NhanVienServiceImpl implements NhanVienService {
         }
         return cbb;
     }
-
+    
     @Override
     public List<String> IDChucVu() {
         List<String> cbb = new ArrayList<>();
@@ -58,17 +59,17 @@ public class NhanVienServiceImpl implements NhanVienService {
         }
         return cbb;
     }
-
+    
     @Override
     public String dangKi(NhanVien nv) {
         
         if (Nvrp.addNV(nv)) {
             return "them thanh cong";
         }
-
+        
         return "them that bai";
     }
-
+    
     @Override
     public String update(NhanVien nv, String id) {
         boolean update = Nvrp.updateSVDiem(nv, id);
@@ -78,7 +79,7 @@ public class NhanVienServiceImpl implements NhanVienService {
             return "Cập nhật thất bại";
         }
     }
-
+    
     @Override
     public String chuyenTTNV(String id) {
         boolean cTT = Nvrp.chuyenTTNV(id);
@@ -88,24 +89,29 @@ public class NhanVienServiceImpl implements NhanVienService {
             return "Cập nhật thất bại";
         }
     }
-
+    
     @Override
     public List<NhanVien> getAlls() {
         return new NhanVienRepository().getAlls();
     }
-
+    
     @Override
     public List<NhanVienView> searchNhanVien(String tenNhanVien) {
         List<NhanVienView> listSearch = new ArrayList<>();
         listSearch = Nvrp.searchNhanVien(tenNhanVien);
         return listSearch;
     }
-
+    
     @Override
     public List<NhanVienView> getAllNhanVienSearch(int rowOffset) {
-    return  Nvrp.getAllNhanVienSearch(rowOffset);
+        return Nvrp.getAllNhanVienSearch(rowOffset);
     }
-
-
-
+    
+    @Override
+    public List<ThongTinNguoiDungView> layThongTin(String ma) {
+        List<ThongTinNguoiDungView> listSearch = new ArrayList<>();
+        listSearch = Nvrp.layThongTin(ma);
+        return listSearch;
+    }
+    
 }

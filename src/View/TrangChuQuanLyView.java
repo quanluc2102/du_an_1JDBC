@@ -358,6 +358,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -720,11 +721,11 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         jLabel16.setForeground(new java.awt.Color(51, 51, 51));
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Account.png"))); // NOI18N
         jLabel16.setText("Mã :");
-        pnMenu.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 110, 60));
+        pnMenu.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 60));
 
         txtLayMa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtLayMa.setForeground(new java.awt.Color(255, 255, 255));
-        pnMenu.add(txtLayMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 140, 40));
+        pnMenu.add(txtLayMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 140, 40));
 
         jButton2.setBackground(new java.awt.Color(51, 51, 51));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -837,6 +838,20 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
             }
         });
         pnMenu.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 800, 240, 52));
+
+        jButton13.setBackground(new java.awt.Color(51, 51, 51));
+        jButton13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton13.setForeground(new java.awt.Color(255, 255, 255));
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/HoaDon.png"))); // NOI18N
+        jButton13.setText("Hồ sơ cá nhân");
+        jButton13.setBorder(null);
+        jButton13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+        pnMenu.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, 240, 52));
 
         jPanel1.add(pnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 960));
 
@@ -1013,6 +1028,11 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         txtPass.setText(UUID.randomUUID().toString().substring(0, 8));
         txtTenNV.setText(txtttHoTen.getText());
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+         HoSoCaNhanView ql = new HoSoCaNhanView(a2);
+         ql.setVisible(true);
+    }//GEN-LAST:event_jButton13ActionPerformed
     public void setColor(JPanel p) {
         p.setBackground(new Color(255, 105, 0));
     }
@@ -1036,6 +1056,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

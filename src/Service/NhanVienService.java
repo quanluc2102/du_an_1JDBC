@@ -6,6 +6,7 @@ package Service;
 
 import DomainModel.NhanVien;
 import ViewModel.NhanVienView;
+import ViewModel.ThongTinNguoiDungView;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,4 +35,7 @@ public interface NhanVienService {
     List<NhanVienView> getAllNhanVienSearch(int rowOffset);
     
     List<NhanVienView> searchNhanVien(String tenNhanVien);
+     
+    List<ThongTinNguoiDungView> layThongTin(String ma);
+    
 }
