@@ -64,6 +64,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
          getContentPane().setBackground(Color.WHITE);
         TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
 //        testData();
+txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
     }
 
     public void addCbb() {
@@ -115,14 +116,11 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         if (txtMaNV.getText().isEmpty()) {
             txtRPMa.setText("Mã không được để Trống");
             txtRPMa.setForeground(Color.red);
-            txtMaNV.setBackground(Color.yellow);
         } else if (txtMaNV.getText().matches("/^[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]*$/")) {
             txtRPMa.setText("Mã không được chứa kí tự đặc biệt");
             txtRPMa.setForeground(Color.red);
-            txtMaNV.setBackground(Color.yellow);
         } else {
             txtRPMa.setText("*");
-            txtMaNV.setBackground(Color.white);
             txtRPMa.setForeground(Color.green);
             nv.setMa(txtMaNV.getText());
             conf1 = true;
@@ -130,14 +128,11 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         if (txtTenNV.getText().isEmpty()) {
             txtRPTen.setText("Tên không được để Trống");
             txtRPTen.setForeground(Color.red);
-            txtTenNV.setBackground(Color.yellow);
         } else if (!txtTenNV.getText().matches("^[A-Z a-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]{1,150}+$")) {
             txtRPTen.setText("Tên không được số hoặc kí tự");
             txtRPTen.setForeground(Color.red);
-            txtTenNV.setBackground(Color.yellow);
         } else {
             txtRPTen.setText("*");
-            txtTenNV.setBackground(Color.white);
             txtRPTen.setForeground(Color.green);
             nv.setTen(txtTenNV.getText());
             conf2 = true;
@@ -145,14 +140,14 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         if (txtNgaySinhNV.getText().isEmpty()) {
             txtRPNgaySinh.setText("Ngày Sinh đang trống");
             txtRPNgaySinh.setForeground(Color.red);
-            txtNgaySinhNV.setBackground(Color.yellow);
+
         } else if (!txtNgaySinhNV.getText().matches("^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$")) {
             txtRPNgaySinh.setText("Sai định dạng [Năm-Tháng-Ngày(yyyy-mm-dd)]");
             txtRPNgaySinh.setForeground(Color.red);
-            txtNgaySinhNV.setBackground(Color.yellow);
+
         } else {
             txtRPNgaySinh.setText("*");
-            txtNgaySinhNV.setBackground(Color.white);
+
             txtRPNgaySinh.setForeground(Color.green);
             nv.setNgaySinh(txtNgaySinhNV.getText());
             conf3 = true;
@@ -161,11 +156,11 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         if (txtDiaChiNV.getText().isEmpty()) {
             txtRPDiaChi.setText("Ngày sinh đang trống");
             txtRPDiaChi.setForeground(Color.red);
-            txtDiaChiNV.setBackground(Color.yellow);
+
         } else {
             txtRPDiaChi.setText("*");
             txtRPDiaChi.setForeground(Color.GREEN);
-            txtDiaChiNV.setBackground(Color.white);
+
             nv.setDiaChi(txtDiaChiNV.getText());
             conf4 = true;
         }
@@ -174,14 +169,14 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         if (txtEmail.getText().isEmpty()) {
             txtRPEmail.setText("Email đang trống");
             txtRPEmail.setForeground(Color.red);
-            txtEmail.setBackground(Color.yellow);
+
         } else if (!validateEmail.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
             txtRPEmail.setText("Sai định dạng email (example@gmail.com)");
             txtRPEmail.setForeground(Color.red);
-            txtEmail.setBackground(Color.yellow);
+
         } else {
             txtRPEmail.setText("*");
-            txtEmail.setBackground(Color.white);
+
             txtRPEmail.setForeground(Color.GREEN);
             nv.setEmail(txtEmail.getText());
             conf5 = true;
@@ -189,28 +184,27 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         String vadidateSDT = txtSDT.getText();
         if (txtSDT.getText().isEmpty()) {
             txtRPSDT.setText("Số điện thoại đang trống");
-            txtRPSDT.setForeground(Color.red);
-            txtSDT.setBackground(Color.yellow);
+
         } else if (!vadidateSDT.matches("(84|0[3|5|7|8|9])+([0-9]{8})\\b")) {
             txtRPSDT.setText("Sai định dạng số điện thoại");
             txtRPSDT.setForeground(Color.red);
-            txtSDT.setBackground(Color.yellow);
+
         } else {
             txtRPSDT.setText("*");
             txtRPSDT.setForeground(Color.GREEN);
-            txtSDT.setBackground(Color.white);
+
             nv.setSdt(txtSDT.getText());
             conf6 = true;
         }
         if (txtPass.getText().isEmpty()) {
             txtRPMatKhau.setText("Mật khậu đang trống");
             txtRPMatKhau.setForeground(Color.red);
-            txtPass.setBackground(Color.yellow);
+
         } else {
             txtRPMatKhau.setText("*");
             txtRPMatKhau.setForeground(Color.GREEN);
             nv.setSdt(txtSDT.getText());
-            txtPass.setBackground(Color.white);
+
             conf7 = true;
         }
         if (cbbCV.getSelectedIndex() == -1) {
@@ -285,9 +279,9 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         lblTime = new javax.swing.JLabel();
         textNgay = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        txtSearch = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        txtSearch = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         id = new javax.swing.JLabel();
@@ -325,6 +319,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         jButton6 = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
         txtCanCuoc = new javax.swing.JTextField();
+        jButton11 = new javax.swing.JButton();
         pnMenu = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         txtLayMa = new javax.swing.JLabel();
@@ -378,11 +373,11 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(114, 114, 114))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(158, 158, 158))
         );
 
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 508, 1400, 410));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 508, 1400, 360));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 153, 0));
@@ -393,7 +388,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
                 jLabel20MouseClicked(evt);
             }
         });
-        jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(319, 964, 60, 47));
+        jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 890, 60, 40));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 153, 0));
@@ -404,7 +399,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
                 jLabel21MouseClicked(evt);
             }
         });
-        jPanel4.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(482, 964, 57, 47));
+        jPanel4.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 890, 57, 40));
 
         jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 153, 0));
@@ -415,7 +410,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
                 jLabel22MouseClicked(evt);
             }
         });
-        jPanel4.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 964, 53, 47));
+        jPanel4.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 890, 53, 40));
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 153, 0));
@@ -426,17 +421,25 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
                 jLabel23MouseClicked(evt);
             }
         });
-        jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 964, 57, 47));
+        jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 890, 60, 40));
 
         lblTime.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblTime.setText("00:00 AM");
-        jPanel4.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 480, -1, 22));
+        jPanel4.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 480, -1, 22));
 
         textNgay.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         textNgay.setText("Date");
-        jPanel4.add(textNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 480, 150, 20));
+        jPanel4.add(textNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 480, 150, 20));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông Tin"));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel13.setText("arch");
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel12.setText("Se");
 
         txtSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 204, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(255, 0, 51), new java.awt.Color(255, 51, 0)));
         txtSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -450,40 +453,34 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
             }
         });
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 153, 0));
-        jLabel13.setText("arch");
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel12.setText("Se");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel12)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel13)
-                .addGap(18, 18, 18)
+                .addGap(279, 279, 279))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(119, 119, 119)
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(183, 183, 183))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(339, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
-        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 30, -1, 410));
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 20, 290, 320));
 
         jButton1.setBackground(new java.awt.Color(51, 51, 51));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -500,73 +497,91 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         jLabel15.setText("ID");
         jPanel4.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
-        id.setForeground(new java.awt.Color(255, 51, 0));
+        id.setForeground(new java.awt.Color(255, 255, 255));
         id.setText(" ");
         jPanel4.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 275, 25));
 
         jLabel25.setText("CMND");
         jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
-        txtCMND.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel4.add(txtCMND, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 275, 26));
+        txtCMND.setBackground(new java.awt.Color(102, 102, 102));
+        txtCMND.setForeground(new java.awt.Color(255, 255, 255));
+        txtCMND.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255), new java.awt.Color(204, 204, 204)));
+        jPanel4.add(txtCMND, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 260, 26));
 
         jLabel4.setText("Mã nhân viên");
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 74, -1));
 
-        txtMaNV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(255, 153, 0), new java.awt.Color(255, 51, 0), new java.awt.Color(255, 204, 0), new java.awt.Color(255, 204, 0)));
-        jPanel4.add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 275, 30));
+        txtMaNV.setBackground(new java.awt.Color(102, 102, 102));
+        txtMaNV.setForeground(new java.awt.Color(255, 255, 255));
+        txtMaNV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(204, 204, 204), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(51, 51, 51)));
+        jPanel4.add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 260, 30));
         jPanel4.add(txtRPMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 210, 16));
 
         jLabel5.setText("Tên nhân viên");
         jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
-        txtTenNV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(255, 102, 0), new java.awt.Color(255, 0, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(255, 204, 0)));
+        txtTenNV.setBackground(new java.awt.Color(102, 102, 102));
+        txtTenNV.setForeground(new java.awt.Color(255, 255, 255));
+        txtTenNV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(204, 204, 204), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(51, 51, 51)));
         jPanel4.add(txtTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 262, 30));
-        jPanel4.add(txtRPTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 210, 16));
+        jPanel4.add(txtRPTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 210, 16));
 
         jLabel6.setText("Ngày sinh");
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 74, -1));
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 74, -1));
 
-        txtNgaySinhNV.setText("dd-mm-yyyy");
-        txtNgaySinhNV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 153, 0), new java.awt.Color(255, 255, 51), new java.awt.Color(255, 0, 0), new java.awt.Color(255, 204, 0)));
-        jPanel4.add(txtNgaySinhNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 262, 30));
-        jPanel4.add(txtRPNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 228, 22));
+        txtNgaySinhNV.setBackground(new java.awt.Color(102, 102, 102));
+        txtNgaySinhNV.setForeground(new java.awt.Color(255, 255, 255));
+        txtNgaySinhNV.setText("yyyy-mm-dd");
+        txtNgaySinhNV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255), new java.awt.Color(204, 204, 204)));
+        jPanel4.add(txtNgaySinhNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 262, 30));
+        jPanel4.add(txtRPNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 290, 20));
 
         jLabel7.setText("Địa chỉ");
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 37, -1));
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 37, -1));
 
-        txtDiaChiNV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 153, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(255, 0, 0), new java.awt.Color(255, 204, 0)));
-        jPanel4.add(txtDiaChiNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 660, 30));
+        txtDiaChiNV.setBackground(new java.awt.Color(102, 102, 102));
+        txtDiaChiNV.setForeground(new java.awt.Color(255, 255, 255));
+        txtDiaChiNV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255), new java.awt.Color(204, 204, 204)));
+        jPanel4.add(txtDiaChiNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 660, 30));
         jPanel4.add(txtRPDiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 641, 16));
 
         jLabel8.setText("Số điện thoại");
         jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, 74, -1));
 
-        txtSDT.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 204, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(255, 0, 0), null));
+        txtSDT.setBackground(new java.awt.Color(102, 102, 102));
+        txtSDT.setForeground(new java.awt.Color(255, 255, 255));
+        txtSDT.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255), new java.awt.Color(204, 204, 204)));
         jPanel4.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, 221, 30));
         jPanel4.add(txtRPSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 220, 18));
 
         jLabel9.setText("Chức vụ");
         jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 74, 20));
 
+        cbbCV.setBackground(new java.awt.Color(102, 102, 102));
         cbbCV.setEditable(true);
         cbbCV.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        cbbCV.setForeground(new java.awt.Color(255, 255, 255));
         cbbCV.setAutoscrolls(true);
-        cbbCV.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(255, 0, 51), new java.awt.Color(255, 255, 0)));
+        cbbCV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), java.awt.Color.gray, new java.awt.Color(204, 204, 204)));
         jPanel4.add(cbbCV, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 221, 30));
         jPanel4.add(cbbRPCV, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 220, 16));
 
         jLabel10.setText("Email");
         jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, -1, -1));
 
-        txtEmail.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 153, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(255, 0, 0), new java.awt.Color(255, 153, 0)));
+        txtEmail.setBackground(new java.awt.Color(102, 102, 102));
+        txtEmail.setForeground(new java.awt.Color(255, 255, 255));
+        txtEmail.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255), new java.awt.Color(204, 204, 204)));
         jPanel4.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 221, 30));
         jPanel4.add(txtRPEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 220, 22));
 
         jLabel11.setText("Mật khẩu");
         jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, 63, -1));
 
-        txtPass.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 204, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(255, 0, 0), new java.awt.Color(255, 204, 0)));
+        txtPass.setBackground(new java.awt.Color(102, 102, 102));
+        txtPass.setForeground(new java.awt.Color(255, 255, 255));
+        txtPass.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jPanel4.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 220, 30));
         jPanel4.add(txtRPMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 260, 221, 22));
 
@@ -628,7 +643,14 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         });
         jPanel4.add(txtCanCuoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 464, 357, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 1410, 930));
+        jButton11.setBackground(new java.awt.Color(0, 102, 0));
+        jButton11.setForeground(new java.awt.Color(255, 255, 255));
+        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/excel.png"))); // NOI18N
+        jButton11.setText("import Excel");
+        jButton11.setBorder(null);
+        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 382, 130, 40));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 1410, 950));
 
         pnMenu.setBackground(new java.awt.Color(102, 102, 102));
         pnMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -965,6 +987,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
     private javax.swing.JLabel id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
