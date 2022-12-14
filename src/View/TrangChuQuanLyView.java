@@ -4,8 +4,6 @@ package View;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-
-
 import DomainModel.NhanVien;
 import Service.LoginService;
 import Service.NhanVienService;
@@ -48,7 +46,11 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
     int index = 1;
     String name = "";
     String a2 = "";
-    int width =260; int height = 950;
+    int width = 260;
+    int height = 950;
+    String namx;
+    String ngayx;
+    String thangx;
 
     public TrangChuQuanLyView(String a) {
         initComponents();
@@ -65,10 +67,10 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         textNgay.setText(java.time.LocalDate.now() + "");
         t1.start();
         //chỉnh table
-         getContentPane().setBackground(Color.WHITE);
+        getContentPane().setBackground(Color.WHITE);
         TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
 //        testData();
-txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
+        txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
     }
 
     public void addCbb() {
@@ -76,7 +78,8 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         modelccbCV.addAll(impl.ChucVuCBB());
 
     }
-     void openMenuBar(){
+
+    void openMenuBar() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -91,13 +94,14 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
             }
         }).start();
     }
-          void closeMenuBar(){
+
+    void closeMenuBar() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = width; i >0; i--) {
+                for (int i = width; i > 0; i--) {
                     pnMenu.setSize(i, height);
-                                        try {
+                    try {
                         Thread.sleep(2);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(TrangChuQuanLyView.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,7 +122,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         Boolean conf7 = false;
         Boolean conf8 = false;
         Boolean conf9 = false;
-        
+
         List<checkTrungManv> list = new ArrayList<>();
         impl.checkTrungIMEI(txtMaNV.getText(), list);
         if (txtMaNV.getText().isEmpty()) {
@@ -127,9 +131,10 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         } else if (txtMaNV.getText().matches("/^[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]*$/")) {
             txtRPMa.setText("Mã không được chứa kí tự đặc biệt");
             txtRPMa.setForeground(Color.red);
-        } if(list.size()>0){
-             JOptionPane.showMessageDialog(rootPane, "Mã nhân viên đã tồn tại");
-        }else {
+        }
+        if (list.size() > 0) {
+            JOptionPane.showMessageDialog(rootPane, "Mã nhân viên đã tồn tại");
+        } else {
             txtRPMa.setText("*");
             txtRPMa.setForeground(Color.green);
             nv.setMa(txtMaNV.getText());
@@ -224,7 +229,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
             nv.setIdChucVu(idCV.get(cbbCV.getSelectedIndex()));
             conf8 = true;
         }
-         if (txtCMND.getText().isEmpty()) {
+        if (txtCMND.getText().isEmpty()) {
             txtRPCMND.setText("Mật khậu đang trống");
             txtRPCMND.setForeground(Color.red);
 
@@ -244,7 +249,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
 
 //        System.out.println(nv.toString());
 //        JOptionPane.showMessageDialog(rootPane, impl.dangKi(nv));
-        if (conf1 == true && conf2 == true && conf3 == true && conf4 == true && conf5 == true && conf6 == true && conf7 == true && conf8 == true &&conf9) {
+        if (conf1 == true && conf2 == true && conf3 == true && conf4 == true && conf5 == true && conf6 == true && conf7 == true && conf8 == true && conf9) {
             nv.setMatKhau(txtPass.getText());
             JOptionPane.showMessageDialog(rootPane, impl.dangKi(nv));
             System.out.println(nv.toString());
@@ -353,6 +358,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         txttDiaChi = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnUpdate1 = new javax.swing.JButton();
         pnMenu = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         txtLayMa = new javax.swing.JLabel();
@@ -614,7 +620,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
                 jButton11ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 380, 130, 50));
+        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 380, 130, 50));
         jPanel4.add(txtRPCMND, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 260, 20));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -724,6 +730,17 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 130, 50));
 
         jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 30, 520, 380));
+
+        btnUpdate1.setBackground(new java.awt.Color(51, 51, 51));
+        btnUpdate1.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdate1.setText("Refresh Table");
+        btnUpdate1.setBorder(null);
+        btnUpdate1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdate1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnUpdate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 380, 130, 50));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 1410, 950));
 
@@ -935,24 +952,29 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String cmnd = "";
 //        int camera = ccbWebcam.getSelectedIndex();
-        ScanCode sc = new ScanCode(new java.awt.Frame(), true,0);
+        ScanCode sc = new ScanCode(new java.awt.Frame(), true, 0);
         sc.setVisible(true);
         cmnd = sc.getScanResutlx();
         String soCC = cmnd.substring(0, 12);
         txtCMND.setText(soCC);
         txtttSo.setText(soCC);
         String withouTen = cmnd.substring(14, cmnd.length());
-        
+
         System.out.println(withouTen);
         String[] splits = withouTen.split("[|]");
         txtttHoTen.setText(splits[0]);
         txttDiaChi.setText(splits[3]);
         txtttGioiTinh.setText(splits[2]);
-        String nam = splits[1].substring(4,8);
-                     String ngay =splits[1].substring(0,2);
-                     String thang =splits[1].substring(2,4);
-                    String NS= (ngay+"/"+thang+"/"+nam);
-                    txtttNgaySinh.setText(NS);
+        String nam = splits[1].substring(4, 8);
+        
+        String ngay = splits[1].substring(0, 2);
+        String thang = splits[1].substring(2, 4);
+        String NS = (ngay + "/" + thang + "/" + nam);
+        txtttNgaySinh.setText(NS);
+        namx = nam;
+        ngayx= ngay;
+        thangx = thang;
+        
 //        txtTenNV.setText(splits[0]);
 //        txtDiaChiNV.setText(splits[3]);
 
@@ -1000,34 +1022,34 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       new ViewChucVu().setVisible(true);
+        new ViewChucVu().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         QuanLySanPhamView spv = new QuanLySanPhamView();
+        QuanLySanPhamView spv = new QuanLySanPhamView();
         spv.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    
-         new KhachHangViewQuanLy().setVisible(true);
+
+        new KhachHangViewQuanLy().setVisible(true);
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-           new ThongKeView().setVisible(true);
+        new ThongKeView().setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       new ViewKhuyenMai().setVisible(true);
+        new ViewKhuyenMai().setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-   new BanHangView().setVisible(true);
+        new BanHangView().setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-     new ViewHoaDon().setVisible(true);
+        new ViewHoaDon().setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -1038,22 +1060,27 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         txtCMND.setText(txtttSo.getText());
         txtDiaChiNV.setText(txttDiaChi.getText());
-        txtNgaySinhNV.setText(txtttNgaySinh.getText());
+        
+        txtNgaySinhNV.setText(namx+"-"+thangx+"-"+ngayx);
         txtPass.setText(UUID.randomUUID().toString().substring(0, 8));
         txtTenNV.setText(txtttHoTen.getText());
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-         HoSoCaNhanView ql = new HoSoCaNhanView(a2);
-         ql.setVisible(true);
+        HoSoCaNhanView ql = new HoSoCaNhanView(a2);
+        ql.setVisible(true);
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
         ImportExcelNhanVienView excelNhanVienView = new ImportExcelNhanVienView();
         excelNhanVienView.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
+        dtm.setRowCount(0);
+        impl.showData(dtm, listNV);
+    }//GEN-LAST:event_btnUpdate1ActionPerformed
     public void setColor(JPanel p) {
         p.setBackground(new Color(255, 105, 0));
     }
@@ -1069,6 +1096,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangKy;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnUpdate1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbbCV;
     private javax.swing.JLabel cbbRPCV;

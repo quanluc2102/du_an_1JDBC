@@ -180,11 +180,13 @@ public class NhanVienRepository {
         return check > 0;
     }
 
-    public List<NhanVienView> searchNhanVien(String id) {
-        String query = "select NhanVien.id,ma_nhan_vien,ten_nhan_vien,id_chuc_vu,ten_chuc_vu,ngay_sinh,sdt,email,dia_chi,mat_khau,NhanVien.trang_thai  \n"
-                + "from NhanVien left join ChucVu on NhanVien.id_chuc_vu = ChucVu.id where ten_nhan_vien like ? ";
+    public List<NhanVienView> searchNhanVien(String name) {
+        String query = "SELECT        dbo.NhanVien.id, dbo.NhanVien.ma_nhan_vien, dbo.NhanVien.ten_nhan_vien, dbo.NhanVien.id_chuc_vu, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.ngay_sinh, dbo.NhanVien.sdt, dbo.NhanVien.email, dbo.NhanVien.dia_chi, \n"
+                + "                         dbo.NhanVien.mat_khau, dbo.NhanVien.trang_thai, dbo.NhanVien.cmnd\n"
+                + "FROM            dbo.NhanVien INNER JOIN\n"
+                + "                         dbo.ChucVu ON dbo.NhanVien.id_chuc_vu = dbo.ChucVu.id where ten_nhan_vien like ?";
         List<NhanVienView> list = new ArrayList<>();
-        String a = "%" + id + "%";
+        String a = "%" + name + "%";
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, a);
             ResultSet rs = ps.executeQuery();
