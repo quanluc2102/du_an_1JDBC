@@ -15,6 +15,7 @@ import DomainModel.KetNoi;
 import DomainModel.MauSac;
 import DomainModel.Pin;
 import DomainModel.QuocGia;
+import DomainModel.QuocGiaDong;
 import DomainModel.ThietKe;
 import DomainModel.TienIch;
 import Service.AddElementServices;
@@ -51,7 +52,7 @@ public class ViewADDSP extends javax.swing.JDialog {
     private Cpu cpu = null;
     private HangView hv = new HangView(new javax.swing.JFrame(), true, "");
     private QuocGiaView qgv = new QuocGiaView(new javax.swing.JFrame(), true, "");
-  
+    private QuocGiaDong qgd = new QuocGiaDong();
     private ViewBoNho bnv = new ViewBoNho(new javax.swing.JFrame(), true, "");
     private ViewCamera cmdv = new ViewCamera(new javax.swing.JFrame(), true, "");
     private ViewKetNoi vkn = new ViewKetNoi(new javax.swing.JFrame(), true, "");
@@ -96,6 +97,13 @@ public class ViewADDSP extends javax.swing.JDialog {
             modelTT.addRow(row);
         }
 
+    }
+    private void addQGD(){
+        double giaNhap = Double.valueOf(txtGiaNhap.getText());
+        double giaBan = Double.valueOf(txtGiaBan.getText());
+        String idDong = dong.getId();
+        String idQuocGia = 
+        
     }
 
     /**
@@ -413,7 +421,7 @@ public class ViewADDSP extends javax.swing.JDialog {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnKetNoi9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel19))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -489,10 +497,11 @@ public class ViewADDSP extends javax.swing.JDialog {
                             .addComponent(jLabel8)
                             .addComponent(jLabel16))
                         .addGap(6, 6, 6)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnKetNoi6)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnKetNoi8)
-                            .addComponent(btnKetNoi7)))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnKetNoi6)
+                                .addComponent(btnKetNoi7))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel19)
                         .addGap(6, 6, 6)
@@ -549,7 +558,7 @@ public class ViewADDSP extends javax.swing.JDialog {
 
         jLabel13.setText("Danh sách IMEI");
 
-        jButton14.setText("Thêm");
+        jButton14.setText("IMEI");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton14ActionPerformed(evt);
@@ -557,6 +566,11 @@ public class ViewADDSP extends javax.swing.JDialog {
         });
 
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/save-regular-24.png"))); // NOI18N
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit-regular-24.png"))); // NOI18N
 
@@ -576,10 +590,9 @@ public class ViewADDSP extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbbIMEI, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 193, Short.MAX_VALUE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -658,6 +671,7 @@ public class ViewADDSP extends javax.swing.JDialog {
             modelCBB.addAll(imei);
             cbbIMEI.setSelectedIndex(0);
         }
+         txtSoLuong.setText(imei.size()+"");
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void btnKetNoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoiActionPerformed
@@ -825,11 +839,15 @@ public class ViewADDSP extends javax.swing.JDialog {
 
     private void btnKetNoi9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoi9ActionPerformed
         vmh.setVisible(true);
-        if (vmh.returnManHinh()!=null) {
-             
+        if (vmh.returnManHinh() != null) {
+
         }
-        
+
     }//GEN-LAST:event_btnKetNoi9ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+
+    }//GEN-LAST:event_jButton15ActionPerformed
 
     /**
      * @param args the command line arguments

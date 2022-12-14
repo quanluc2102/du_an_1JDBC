@@ -324,7 +324,7 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
         ix = exs.getFile(link);
         filltable(exs.getFile(link));
         this.setVisible(true);
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnChonActionPerformed
 
     private void btnAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAActionPerformed
@@ -347,7 +347,7 @@ public class ViewIMEIexcel extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(rootPane, "IMEI trống");
         }
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_btnAActionPerformed
 
     private void txtIMEIHTFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIMEIHTFocusGained
