@@ -195,4 +195,36 @@ public class HoaDonRespository {
         return null;
     }
 
+    public int getHoaDonChuaThanhToan() {
+        int count = 0;
+        String query = "select count(HoaDon.ma_hoa_don) as 'ChuaThanhToan' from HoaDon where trang_thai = 0 ";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareCall(query);) {
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                 count = rs.getInt("ChuaThanhToan");
+            }
+           
+            return count;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
+
+    public int getHoaDonDaThanhToan() {
+        int count = 0;
+        String query = "select count(HoaDon.ma_hoa_don) as 'DaThanhToan' from HoaDon where trang_thai =1";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareCall(query);) {
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                count = rs.getInt("DaThanhToan");
+            }
+            
+            return count;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
+
 }

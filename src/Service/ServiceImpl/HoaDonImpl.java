@@ -85,4 +85,19 @@ public class HoaDonImpl implements HoaDonService {
     public void exportExcel(List<ViewModelHoaDon> list, String name) {
         new WriteExcelHoaDon().exportExcel(list,name);
     }
+
+    @Override
+    public void exportWord(ViewModelHoaDon hd,String file) {
+        new WriteWordHoaDon().exportWord(hd,file);
+    }
+
+    @Override
+    public int getSLHoaDonThanhToan() {
+        return new HoaDonRespository().getHoaDonDaThanhToan();
+    }
+
+    @Override
+    public int getSLHoaDonChuaThanhToan() {
+        return new HoaDonRespository().getHoaDonChuaThanhToan();
+    }
 }

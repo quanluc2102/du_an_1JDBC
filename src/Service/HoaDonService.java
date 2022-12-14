@@ -31,5 +31,11 @@ public interface HoaDonService {
     void showData1(List<VIewModelSanPhamHoaDon> list, DefaultTableModel dtm);
     
     void exportExcel(List<ViewModelHoaDon> list,String name);
+    
+    void exportWord(ViewModelHoaDon hd,String file);
+    
+    int getSLHoaDonThanhToan();
+    
+    int getSLHoaDonChuaThanhToan();
 
 }
