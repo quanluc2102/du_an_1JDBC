@@ -11,6 +11,9 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import ViewModel.ViewModelHoaDon;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,12 +34,13 @@ public class ViewHoaDon extends javax.swing.JFrame {
     private HoaDonImpl sv = new HoaDonImpl();
     String name = "";
     int TrangThai = 0;
+    String path = "";
 
     public ViewHoaDon() {
         initComponents();
         tlbHoaDon.setModel(tableHoaDon);
         tlbSanPham.setModel(tableSanPhamHD);
-        ccbLoc.setModel(ccbSapXep);
+        ccbFilter.setModel(ccbSapXep);
         ccb.add("Tất Cả");
         ccb.add("Theo giá từ thấp lên cao");
         ccb.add("Theo giá từ cao xuống thấp");
@@ -55,8 +59,9 @@ public class ViewHoaDon extends javax.swing.JFrame {
         String[] headerSanPham = {"Mã HD ", "Mã DT", "Tên SP", "Hãng", "Dòng", "Giá Bán", "Độ Mới", "Mô tả"};
         tableSanPhamHD.setColumnIdentifiers(headerSanPham);
 
+        listGetAll = sv.getAll(listGetAll);
         listSearch = sv.getAll(listGetAll);
-        sv.showData(listSearch, tableHoaDon);
+        sv.showData(listGetAll, tableHoaDon);
 
         int TrangThai = 0;
 
@@ -76,7 +81,6 @@ public class ViewHoaDon extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        ccbLoc = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tlbHoaDon = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -84,8 +88,11 @@ public class ViewHoaDon extends javax.swing.JFrame {
         btnDong = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        btnXuatHoaDon = new javax.swing.JButton();
+        btnGuiEmail = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        ccbFilter = new javax.swing.JComboBox<>();
+        btnExcel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,13 +109,6 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
         jLabel3.setText("Sắp Xếp Theo:");
 
-        ccbLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        ccbLoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ccbLocActionPerformed(evt);
-            }
-        });
-
         tlbHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -117,7 +117,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã HĐ", "Tên NV", "Tên KH", "Ngày Tạo", "Mã Khuyến Mại", "Tổng Tiền", "Trạng Thái", "Tổng Số Sản Phẩm"
+                "Mã HĐ", "Tên NV", "Tên KH", "Ngày Tạo", "Mã Khuyến Mại", "Tổng Tiền", "Trạng Thái", "Title 8"
             }
         ));
         tlbHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -151,11 +151,27 @@ public class ViewHoaDon extends javax.swing.JFrame {
         jLabel4.setText("Danh Sách Hóa Đơn");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setText("Sản Phẩm");
+        jLabel5.setText("Danh Sách Sản Phẩm");
 
-        jButton1.setText("Xuất Hóa Đơn");
+        btnXuatHoaDon.setText("Xuất Hóa Đơn");
 
-        jButton2.setText("Xuất Danh Sách Hóa Đơn");
+        btnGuiEmail.setText("Gửi Email ");
+
+        jButton1.setText("Thống Kê");
+
+        ccbFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ccbFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ccbFilterActionPerformed(evt);
+            }
+        });
+
+        btnExcel.setText("Xuất Excel");
+        btnExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,31 +185,35 @@ public class ViewHoaDon extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jLabel2)
-                        .addGap(35, 35, 35)
-                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(162, 162, 162)
-                        .addComponent(jLabel3)
-                        .addGap(28, 28, 28)
-                        .addComponent(ccbLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addGap(101, 101, 101)
-                                .addComponent(jButton1)
-                                .addGap(105, 105, 105)
-                                .addComponent(btnDong, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel2)
+                                .addGap(35, 35, 35)
+                                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(162, 162, 162)
+                                .addComponent(jLabel3)
+                                .addGap(41, 41, 41)
+                                .addComponent(ccbFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnGuiEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)
+                                .addComponent(btnXuatHoaDon)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDong, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1125, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,13 +224,15 @@ public class ViewHoaDon extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(ccbLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                    .addComponent(ccbFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDong)
+                    .addComponent(btnXuatHoaDon)
+                    .addComponent(btnGuiEmail)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(2, 2, 2)
+                    .addComponent(btnExcel))
+                .addGap(1, 1, 1)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,70 +250,43 @@ public class ViewHoaDon extends javax.swing.JFrame {
     private void tlbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tlbHoaDonMouseClicked
         // TODO add your handling code here:
         int row = 0;
-        if (TrangThai == 1) {
 
-            if (ccbLoc.getSelectedIndex() == 0) {
-                row = tlbHoaDon.getSelectedRow();
-                String mahd = listSearch.get(row).getMaHD();
-                listGetSP = sv.getAllSp(mahd);
-                sv.showData1(listGetSP, tableSanPhamHD);
-            }
-            if (ccbLoc.getSelectedIndex() == 1) {
-                row = tlbHoaDon.getSelectedRow();
-                String mahd = listSearch.get(row).getMaHD();
-                listGetSP = sv.getAllSp(mahd);
-                sv.showData1(listGetSP, tableSanPhamHD);
-            }
-            if (ccbLoc.getSelectedIndex() == 2) {
-                row = tlbHoaDon.getSelectedRow();
-                String mahd = listSearch.get(row).getMaHD();
-                listGetSP = sv.getAllSp(mahd);
-                sv.showData1(listGetSP, tableSanPhamHD);
-            }
-            if (ccbLoc.getSelectedIndex() == 3) {
-                row = tlbHoaDon.getSelectedRow();
-                String mahd = listSort.get(row).getMaHD();
-                listGetSP = sv.getAllSp(mahd);
-                sv.showData1(listGetSP, tableSanPhamHD);
-            }
-            if (ccbLoc.getSelectedIndex() == 4) {
-                row = tlbHoaDon.getSelectedRow();
-                String mahd = listSort.get(row).getMaHD();
-                listGetSP = sv.getAllSp(mahd);
-                sv.showData1(listGetSP, tableSanPhamHD);
-            }
-        } else if (TrangThai == 0) {
-            if (ccbLoc.getSelectedIndex() == 0) {
-                row = tlbHoaDon.getSelectedRow();
-                String mahd = listSearch.get(row).getMaHD();
-                listGetSP = sv.getAllSp(mahd);
-                sv.showData1(listGetSP, tableSanPhamHD);
-            }
-            if (ccbLoc.getSelectedIndex() == 1) {
-                row = tlbHoaDon.getSelectedRow();
-                String mahd = listSearch.get(row).getMaHD();
-                listGetSP = sv.getAllSp(mahd);
-                sv.showData1(listGetSP, tableSanPhamHD);
-            }
-            if (ccbLoc.getSelectedIndex() == 2) {
-                row = tlbHoaDon.getSelectedRow();
-                String mahd = listSearch.get(row).getMaHD();
-                listGetSP = sv.getAllSp(mahd);
-                sv.showData1(listGetSP, tableSanPhamHD);
-            }
-            if (ccbLoc.getSelectedIndex() == 3) {
-                row = tlbHoaDon.getSelectedRow();
-                String mahd = listSort.get(row).getMaHD();
-                listGetSP = sv.getAllSp(mahd);
-                sv.showData1(listGetSP, tableSanPhamHD);
-            }
-            if (ccbLoc.getSelectedIndex() == 4) {
-                row = tlbHoaDon.getSelectedRow();
-                String mahd = listSort.get(row).getMaHD();
-                listGetSP = sv.getAllSp(mahd);
-                sv.showData1(listGetSP, tableSanPhamHD);
-            }
+        if (ccbFilter.getSelectedIndex() == 0) {
+            row = tlbHoaDon.getSelectedRow();
+            String mahd = listSearch.get(row).getMaHD();
+            listGetSP = sv.getAllSp(mahd);
+            sv.showData1(listGetSP, tableSanPhamHD);
+
         }
+        if (ccbFilter.getSelectedIndex() == 1) {
+            row = tlbHoaDon.getSelectedRow();
+            String mahd = listSearch.get(row).getMaHD();
+            listGetSP = sv.getAllSp(mahd);
+            sv.showData1(listGetSP, tableSanPhamHD);
+
+        }
+        if (ccbFilter.getSelectedIndex() == 2) {
+            row = tlbHoaDon.getSelectedRow();
+            String mahd = listSearch.get(row).getMaHD();
+            listGetSP = sv.getAllSp(mahd);
+            sv.showData1(listGetSP, tableSanPhamHD);
+
+        }
+        if (ccbFilter.getSelectedIndex() == 3) {
+            row = tlbHoaDon.getSelectedRow();
+            String mahd = listSort.get(row).getMaHD();
+            listGetSP = sv.getAllSp(mahd);
+            sv.showData1(listGetSP, tableSanPhamHD);
+
+        }
+        if (ccbFilter.getSelectedIndex() == 4) {
+            row = tlbHoaDon.getSelectedRow();
+            String mahd = listSort.get(row).getMaHD();
+            listGetSP = sv.getAllSp(mahd);
+            sv.showData1(listGetSP, tableSanPhamHD);
+
+        }
+
 
     }//GEN-LAST:event_tlbHoaDonMouseClicked
 
@@ -300,7 +295,6 @@ public class ViewHoaDon extends javax.swing.JFrame {
         name = txtTimKiem.getText();
         sv.showData(sv.searchHoaDon(name), tableHoaDon);
         listSearch = sv.searchHoaDon(name);
-        TrangThai = 1;
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
@@ -310,95 +304,75 @@ public class ViewHoaDon extends javax.swing.JFrame {
         //view.setVisible(true);
     }//GEN-LAST:event_btnDongActionPerformed
 
-    private void ccbLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ccbLocActionPerformed
+    private void ccbLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void ccbFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ccbFilterActionPerformed
+        // TODO add your handling code here:
+        String text = txtTimKiem.getText();
+
+        if (ccbFilter.getSelectedIndex() == 0) {
+            sv.showData(listGetAll, tableHoaDon);
+        } else if (!text.isEmpty()) {
+            sv.showData(listSearch, tableHoaDon);
+        }
+
+        if (ccbFilter.getSelectedIndex() == 1) {
+            sv.giaCaoXuongThap(listSearch);
+            sv.showData(listSearch, tableHoaDon);
+        }
+        if (ccbFilter.getSelectedIndex() == 2) {
+
+            sv.giaThapLenCao(listSearch);
+            sv.showData(listSearch, tableHoaDon);
+            ;
+        }
+        if (ccbFilter.getSelectedIndex() == 3) {
+            listSort.removeAll(listSort);
+            for (ViewModelHoaDon viewModelHoaDon : listSearch) {
+                if (viewModelHoaDon.getTrangThai() == 0) {
+                    listSort.add(viewModelHoaDon);
+                }
+            }
+            sv.showData(listSort, tableHoaDon);
+        }
+
+        if (ccbFilter.getSelectedIndex() == 4) {
+
+            listSort.removeAll(listSort);
+            for (ViewModelHoaDon viewModelHoaDon : listSearch) {
+                if (viewModelHoaDon.getTrangThai() == 1) {
+                    listSort.add(viewModelHoaDon);
+                }
+            }
+            sv.showData(listSort, tableHoaDon);
+        }
+    }//GEN-LAST:event_ccbFilterActionPerformed
+
+    private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
         // TODO add your handling code here:
 
-        if (TrangThai == 0) {
-            if (ccbLoc.getSelectedIndex() == 0) {
-                sv.showData(listSearch, tableHoaDon);
-                TrangThai = 0;
+        String nameFile = JOptionPane.showInputDialog("Đặt tên file: ");
+        path = "C:\\Users\\PC\\Documents\\du_an_1JDBC\\source\\" + nameFile + ".xlsx";
 
-            }
-
-            if (ccbLoc.getSelectedIndex() == 1) {
-                sv.giaCaoXuongThap(listSearch);
-                sv.showData(listSearch, tableHoaDon);
-                TrangThai = 0;
-            }
-
-            if (ccbLoc.getSelectedIndex() == 2) {
-
-                sv.giaThapLenCao(listSearch);
-                sv.showData(listSearch, tableHoaDon);
-                TrangThai = 0;
-            }
-
-            if (ccbLoc.getSelectedIndex() == 3) {
-                listSort.removeAll(listSort);
-                for (ViewModelHoaDon viewModelHoaDon : listSearch) {
-                    if (viewModelHoaDon.getTrangThai() == 0) {
-                        listSort.add(viewModelHoaDon);
-                    }
-                }
-                sv.showData(listSort, tableHoaDon);
-            }
-
-            if (ccbLoc.getSelectedIndex() == 4) {
-
-                listSort.removeAll(listSort);
-                for (ViewModelHoaDon viewModelHoaDon : listSearch) {
-                    if (viewModelHoaDon.getTrangThai() == 1) {
-                        listSort.add(viewModelHoaDon);
-                    }
-                }
-                sv.showData(listSort, tableHoaDon);
-            }
+        if (ccbFilter.getSelectedIndex() == 0) {
+            sv.exportExcel(listGetAll, path);
+        }
+        if (ccbFilter.getSelectedIndex() == 1) {
+            sv.exportExcel(listSearch, path);
+        }
+        if (ccbFilter.getSelectedIndex() == 2) {
+            sv.exportExcel(listSearch, path);
+        }
+        if (ccbFilter.getSelectedIndex() == 3) {
+            sv.exportExcel(listSort, path);
+        }
+        if (ccbFilter.getSelectedIndex() == 4) {
+            sv.exportExcel(listSort, path);
         }
 
-        if (TrangThai == 1) {
-
-            if (ccbLoc.getSelectedIndex() == 0) {
-                sv.showData(listSearch, tableHoaDon);
-                TrangThai = 0;
-
-            }
-
-            if (ccbLoc.getSelectedIndex() == 1) {
-                sv.giaCaoXuongThap(listSearch);
-                sv.showData(listSearch, tableHoaDon);
-                TrangThai = 1;
-            }
-
-            if (ccbLoc.getSelectedIndex() == 2) {
-
-                sv.giaThapLenCao(listSearch);
-                sv.showData(listSearch, tableHoaDon);
-                TrangThai = 1;
-            }
-
-            if (ccbLoc.getSelectedIndex() == 3) {
-                listSort.removeAll(listSort);
-                for (ViewModelHoaDon viewModelHoaDon : listSearch) {
-                    if (viewModelHoaDon.getTrangThai() == 0) {
-                        listSort.add(viewModelHoaDon);
-                    }
-                }
-                sv.showData(listSort, tableHoaDon);
-            }
-
-            if (ccbLoc.getSelectedIndex() == 4) {
-
-                listSort.removeAll(listSort);
-                for (ViewModelHoaDon viewModelHoaDon : listSearch) {
-                    if (viewModelHoaDon.getTrangThai() == 1) {
-                        listSort.add(viewModelHoaDon);
-                    }
-                }
-                sv.showData(listSort, tableHoaDon);
-            }
-
-        }
-    }//GEN-LAST:event_ccbLocActionPerformed
+    }//GEN-LAST:event_btnExcelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -437,10 +411,12 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDong;
+    private javax.swing.JButton btnExcel;
+    private javax.swing.JButton btnGuiEmail;
+    private javax.swing.JButton btnXuatHoaDon;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> ccbLoc;
+    private javax.swing.JComboBox<String> ccbFilter;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

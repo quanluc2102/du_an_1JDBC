@@ -6,6 +6,7 @@ package Service;
 
 import ViewModel.VIewModelSanPhamHoaDon;
 import ViewModel.ViewModelHoaDon;
+import java.io.File;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,5 +29,7 @@ public interface HoaDonService {
     void showData(List<ViewModelHoaDon> list, DefaultTableModel dtm);
 
     void showData1(List<VIewModelSanPhamHoaDon> list, DefaultTableModel dtm);
+    
+    void exportExcel(List<ViewModelHoaDon> list,String name);
 
 }

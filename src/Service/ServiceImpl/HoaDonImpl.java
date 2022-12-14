@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import ViewModel.ViewModelHoaDon;
 import Service.HoaDonService;
+import java.io.File;
 
 /**
  *
@@ -80,4 +81,8 @@ public class HoaDonImpl implements HoaDonService {
         }
     }
 
+    @Override
+    public void exportExcel(List<ViewModelHoaDon> list, String name) {
+        new WriteExcelHoaDon().exportExcel(list,name);
+    }
 }
