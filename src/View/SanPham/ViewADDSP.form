@@ -53,16 +53,15 @@
                       </Group>
                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace pref="24" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
                           <Component id="jButton15" min="-2" pref="92" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="jButton17" min="-2" pref="92" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton18" min="-2" pref="92" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jButton16" min="-2" pref="92" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jPanel5" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -86,7 +85,6 @@
                       <Component id="cbbIMEI" max="32767" attributes="0"/>
                       <Component id="jLabel13" max="32767" attributes="0"/>
                       <Component id="jButton15" alignment="0" pref="63" max="32767" attributes="0"/>
-                      <Component id="jButton17" alignment="0" max="32767" attributes="0"/>
                       <Component id="jButton18" alignment="0" max="32767" attributes="0"/>
                       <Component id="jButton16" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -161,7 +159,7 @@
                                               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                                               <Component id="txtDong" min="-2" pref="110" max="-2" attributes="0"/>
                                               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                                              <Component id="txtDong1" min="-2" pref="108" max="-2" attributes="0"/>
+                                              <Component id="txtQuocGia" min="-2" pref="108" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -269,7 +267,7 @@
                                   <Component id="txtHang" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtDT" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtDong" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtDong1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtQuocGia" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -461,7 +459,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuocGiaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtDong1">
+            <Component class="javax.swing.JTextField" name="txtQuocGia">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel15">
               <Properties>
@@ -538,6 +536,9 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtGiaNhap">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtGiaNhapKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
@@ -550,6 +551,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtGiaBan">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtGiaBanKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
@@ -557,6 +561,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtDoMoi">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDoMoiKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel18">
               <Properties>
@@ -684,13 +691,6 @@
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/image/exit-regular-24.png"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton17">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/edit-alt-regular-24.png"/>
             </Property>
           </Properties>
         </Component>

@@ -5,7 +5,6 @@
 package View.SanPham;
 
 import DomainModel.MauSac;
-import DomainModel.MauSac;
 import Service.SanPhamServices;
 import Service.ServiceImpl.SanPhamServicesImpl;
 import java.util.ArrayList;
@@ -126,7 +125,7 @@ public class ViewSacMau extends javax.swing.JDialog {
         tbl2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Hệ điều hành");
+        setTitle("Màu sắc");
         setIconImages(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));

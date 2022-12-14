@@ -108,7 +108,7 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPane1 = new tabbed.MaterialTabbed();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
@@ -126,7 +126,6 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
         txtDoMoi = new javax.swing.JTextField();
         btnThem = new javax.swing.JButton();
         btnChiTiet = new javax.swing.JButton();
-        btnHome = new javax.swing.JButton();
         txtQuocGia = new javax.swing.JTextField();
         txtDong = new javax.swing.JTextField();
         txtHang = new javax.swing.JTextField();
@@ -161,7 +160,7 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý sản phẩm");
         setAutoRequestFocus(false);
-        setBackground(new java.awt.Color(153, 153, 153));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLocation(new java.awt.Point(50, 50));
         setResizable(false);
 
@@ -317,13 +316,6 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
             }
         });
 
-        btnHome.setText("Xuất danh sách");
-        btnHome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHomeActionPerformed(evt);
-            }
-        });
-
         cbbIMEI.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbbIMEIItemStateChanged(evt);
@@ -401,11 +393,8 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(btnChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(btnChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 5, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -455,9 +444,7 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
                 .addComponent(btnThem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnChiTiet)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnHome)
-                .addGap(4, 4, 4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(btnHome1))
         );
 
@@ -740,10 +727,6 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
         loadTable(sps.getTimKiemSanPham(txtTimKiem.getText()));
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
-    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-
-    }//GEN-LAST:event_btnHomeActionPerformed
-
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         index = tblSanPham.getSelectedRow();
 
@@ -810,7 +793,6 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChiTiet;
-    private javax.swing.JButton btnHome;
     private javax.swing.JButton btnHome1;
     private javax.swing.JButton btnThem;
     private javax.swing.JPanel c1;

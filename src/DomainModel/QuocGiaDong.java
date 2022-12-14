@@ -13,7 +13,6 @@ public class QuocGiaDong {
     private String id;
     private String idDong;
     private String idQuocGia;
-    private String tenHienThi;
     private Double giaBan;
     private Double giaNhap;
     private String srcAnh;
@@ -21,11 +20,11 @@ public class QuocGiaDong {
     public QuocGiaDong() {
     }
 
-    public QuocGiaDong(String id, String idDong, String idQuocGia, String tenHienThi, Double giaBan, Double giaNhap, String srcAnh) {
+    public QuocGiaDong(String id, String idDong, String idQuocGia, Double giaBan, Double giaNhap, String srcAnh) {
         this.id = id;
         this.idDong = idDong;
         this.idQuocGia = idQuocGia;
-        this.tenHienThi = tenHienThi;
+
         this.giaBan = giaBan;
         this.giaNhap = giaNhap;
         this.srcAnh = srcAnh;
@@ -38,8 +37,6 @@ public class QuocGiaDong {
     public void setSrcAnh(String srcAnh) {
         this.srcAnh = srcAnh;
     }
-
-    
 
     public String getId() {
         return id;
@@ -65,13 +62,7 @@ public class QuocGiaDong {
         this.idQuocGia = idQuocGia;
     }
 
-    public String getTenHienThi() {
-        return tenHienThi;
-    }
-
-    public void setTenHienThi(String tenHienThi) {
-        this.tenHienThi = tenHienThi;
-    }
+   
 
     public Double getGiaBan() {
         return giaBan;

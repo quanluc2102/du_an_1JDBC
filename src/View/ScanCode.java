@@ -4,6 +4,8 @@
  */
 package View;
 
+import Service.LoginService;
+import Service.ServiceImpl.LoginImpl;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
@@ -27,12 +29,14 @@ import javax.swing.JOptionPane;
  */
 public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFactory {
 
+    LoginService impl = new LoginImpl();
     private WebcamPanel panel = null;
     private Webcam webcam = null;
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
 
     String scr = "";
+    int i = 0;
 
     /**
      * Creates new form ScanCode
@@ -45,10 +49,27 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
         int port = JOptionPane.showOptionDialog(this, "Chọn camera", null, 0, 1, null, option, EXIT_ON_CLOSE);
         if (port == 1 || port == 0) {
             initWebcam(port);
-        } else{
+        } else {
             initWebcam(0);
         }
-       
+        i = x;
+
+    }
+
+    private void out() {
+        this.dispose();
+    }
+
+    private boolean ImeiScan() {
+        if (i == 1) {
+            try {
+                Double.parseDouble(scr);
+
+            } catch (Exception e) {
+                System.out.println("bug1");
+            }
+        }
+        return false;
     }
 
     public String getScanResutlx() {
@@ -251,12 +272,14 @@ public class ScanCode extends javax.swing.JDialog implements Runnable, ThreadFac
             if (result != null) {
 
                 scr = result.getText();
-
-                JOptionPane.showMessageDialog(rootPane, scr, "Kết quả:", 1);
                 txtCode.setText(scr);
-//                this.dispose();
-//                webcam.close();
-//                break;
+                if (i == 0) {
+                    if (!"NOT".equals(impl.loginWebCam(scr.substring(0, 12)))) {
+                        webcam.close();
+                        out();
+
+                    }
+                }
 
             }
         } while (true || webcam.isOpen());

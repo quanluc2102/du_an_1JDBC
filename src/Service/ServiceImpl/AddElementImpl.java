@@ -4,6 +4,7 @@
  */
 package Service.ServiceImpl;
 
+import DomainModel.QuocGiaDong;
 import DomainModel.ThongSo;
 import Repository.ThemSanPhamRepon;
 import Service.AddElementServices;
@@ -81,30 +82,35 @@ public class AddElementImpl implements AddElementServices {
     TSPImpl sp = new TSPImpl();
 
     @Override
-    public List<vts> dataToView(ThongSo t) {
-
-        ThongSoViewModel x = new ThongSoViewModel(
-                t.getBoNho(), ram, rom, theNho,
-                t.getCpu(), CPU, GPU, CPULoai, CPUHang, tienTrinh,
-                t.getPin(), pinDungLuong, pinLoai, sac, pindacBiet,
-                t.getHeDieuhanh(), heDieuhanh, HDHphienBan,
-                t.getThietKe(), matTruoc, matLung, khungVien, trongLuong,
-                t.getManHinh(), manHinhLoai, manHinhKieu, tangSoQuet, doPhanGiai, manHinhKichThuoc, manHinhCongNghe,
-                t.getKetNoi(), SIM, hongNgoai, jackTaiNghe, mangHoTro, wifi, blutooth, GPS,
-                t.getMauSac(), mauTen, mauMa,
-                t.getTienIch(), baoMat, khangNuoc, dacBiet,
-                t.getCamera(), cameraTruoc, cameraSau, quayVideo, Zoom, chongRung, CameraDacBiet);
-        return view(x);
-
-    }
-
-    @Override
     public String themThongSo(ThongSo t) {
         if (new ThemSanPhamRepon().ThemSP(t)) {
             return "Thêm thành công";
         }
         return "Thêm không thành công";
 
+    }
+
+    @Override
+    public String themQuocGiaDong(QuocGiaDong qgd) {
+        for (QuocGiaDong quocGiaDong : new ThemSanPhamRepon().getQGD()) {
+            if (quocGiaDong.getIdDong().equalsIgnoreCase(qgd.getIdDong()) && quocGiaDong.getIdQuocGia().equalsIgnoreCase(qgd.getIdQuocGia())) {
+                return "Thêm không thành công dòng sản phẩm này đã tồn tại ở ";
+            }
+        }
+        if (new ThemSanPhamRepon().ThemQGD(qgd)) {
+            return "";
+        }
+        return "Thêm không thành công";
+    }
+
+    @Override
+    public String idQGD(QuocGiaDong qgd) {
+        for (QuocGiaDong quocGiaDong : new ThemSanPhamRepon().getQGD()) {
+            if (quocGiaDong.getIdDong().equalsIgnoreCase(qgd.getIdDong()) && quocGiaDong.getIdQuocGia().equalsIgnoreCase(qgd.getIdQuocGia())) {
+                return quocGiaDong.getId();
+            }
+        }
+        return "";
     }
 
 }

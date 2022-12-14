@@ -12,18 +12,23 @@ import DomainModel.Dong;
 import DomainModel.Hang;
 import DomainModel.HeDieuHanh;
 import DomainModel.KetNoi;
+import DomainModel.ManHinh;
 import DomainModel.MauSac;
 import DomainModel.Pin;
 import DomainModel.QuocGia;
 import DomainModel.QuocGiaDong;
 import DomainModel.ThietKe;
+import DomainModel.ThongSo;
 import DomainModel.TienIch;
 import Service.AddElementServices;
+import Service.SanPhamServices;
 import Service.ServiceImpl.AddElementImpl;
+import Service.ServiceImpl.SanPhamServicesImpl;
 import ViewModel.ThongSoViewModel;
 import ViewModel.vts;
 import java.awt.Image;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -40,16 +45,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ViewADDSP extends javax.swing.JDialog {
 
-    private KetNoi kn = null;
-    private Hang hang = null;
-    private DienThoai dt = null;
-    private Dong dong = null;
-    private QuocGia quocGia = null;
-    private BoNho boNho = null;
-    private MauSac ms = null;
-    private ThietKe tk = null;
-    private Pin pin = null;
-    private Cpu cpu = null;
+    DecimalFormat df = new DecimalFormat("###,###,###,###");
+    private KetNoi kn = new KetNoi();
+    private Hang hang = new Hang();
+    private DienThoai dt = new DienThoai();
+    private Dong dong = new Dong();
+    private QuocGia quocGia = new QuocGia();
+    private BoNho boNho = new BoNho();
+    private MauSac ms = new MauSac();
+    private ThietKe tk = new ThietKe();
+    private Pin pin = new Pin();
+    private Cpu cpu = new Cpu();
     private HangView hv = new HangView(new javax.swing.JFrame(), true, "");
     private QuocGiaView qgv = new QuocGiaView(new javax.swing.JFrame(), true, "");
     private QuocGiaDong qgd = new QuocGiaDong();
@@ -67,18 +73,25 @@ public class ViewADDSP extends javax.swing.JDialog {
     private List<String> imei = new ArrayList<>();
     private DefaultComboBoxModel modelCBB;
     private DefaultTableModel modelTT;
-    private final ThongSoViewModel ts = new ThongSoViewModel();
+    private ThongSoViewModel ts = new ThongSoViewModel();
     private final AddElementServices ae = new AddElementImpl();
+    private ThongSo tsAdd = new ThongSo();
+    TienIch ti = new TienIch();
+    HeDieuHanh hdh = new HeDieuHanh();
+    Camera cmd = new Camera();
+    ManHinh mh = new ManHinh();
+    SanPhamServices sps = new SanPhamServicesImpl();
 
     /**
      * Creates new form ViewADDSP
      */
-    public ViewADDSP(java.awt.Frame parent, boolean modal) {
+    public ViewADDSP(java.awt.Frame parent, boolean modal, String idQGD) {
         super(parent, modal);
         initComponents();
         modelCBB = (DefaultComboBoxModel) cbbIMEI.getModel();
         modelCBB.removeAllElements();
         modelTT = (DefaultTableModel) tblThongTin.getModel();
+        ts = sps.getAllThongSo(idQGD);
         loadThongSo();
         srcAnh = "source\\No-Image-Placeholder.png";
         try {
@@ -98,12 +111,21 @@ public class ViewADDSP extends javax.swing.JDialog {
         }
 
     }
-    private void addQGD(){
-        double giaNhap = Double.valueOf(txtGiaNhap.getText());
-        double giaBan = Double.valueOf(txtGiaBan.getText());
+
+    private void addQGD() {
+
+        double giaNhap = 0.0;
+        double giaBan = 0.0;
+        try {
+            giaNhap = Double.parseDouble(txtGiaNhap.getText().replace(",", ""));
+            giaBan = Double.parseDouble(txtGiaBan.getText().replace(",", ""));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "Giá không được có dấu");
+        }
         String idDong = dong.getId();
-        String idQuocGia = 
-        
+        String idQuocGia = quocGia.getId();
+        qgd = new QuocGiaDong(null, idDong, idQuocGia, giaBan, giaNhap, srcAnh);
+
     }
 
     /**
@@ -139,7 +161,7 @@ public class ViewADDSP extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         btnQuocGia = new javax.swing.JButton();
-        txtDong1 = new javax.swing.JTextField();
+        txtQuocGia = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         btnKetNoi1 = new javax.swing.JButton();
         btnKetNoi2 = new javax.swing.JButton();
@@ -168,7 +190,6 @@ public class ViewADDSP extends javax.swing.JDialog {
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -310,11 +331,29 @@ public class ViewADDSP extends javax.swing.JDialog {
             }
         });
 
+        txtGiaNhap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtGiaNhapKeyReleased(evt);
+            }
+        });
+
         jLabel4.setText("Giá nhập");
 
         jLabel7.setText("Giá bán");
 
+        txtGiaBan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtGiaBanKeyReleased(evt);
+            }
+        });
+
         jLabel17.setText("Độ mới");
+
+        txtDoMoi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDoMoiKeyReleased(evt);
+            }
+        });
 
         jLabel18.setText("Số lượng");
 
@@ -378,7 +417,7 @@ public class ViewADDSP extends javax.swing.JDialog {
                                         .addGap(18, 18, 18)
                                         .addComponent(txtDong, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtDong1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(txtQuocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -461,7 +500,7 @@ public class ViewADDSP extends javax.swing.JDialog {
                             .addComponent(txtHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDong1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtQuocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnHang)
@@ -574,8 +613,6 @@ public class ViewADDSP extends javax.swing.JDialog {
 
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit-regular-24.png"))); // NOI18N
 
-        jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/edit-alt-regular-24.png"))); // NOI18N
-
         jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/trash-regular-24.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -592,16 +629,15 @@ public class ViewADDSP extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(156, 156, 156))
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -619,7 +655,6 @@ public class ViewADDSP extends javax.swing.JDialog {
                     .addComponent(cbbIMEI)
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                    .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -671,7 +706,7 @@ public class ViewADDSP extends javax.swing.JDialog {
             modelCBB.addAll(imei);
             cbbIMEI.setSelectedIndex(0);
         }
-         txtSoLuong.setText(imei.size()+"");
+        txtSoLuong.setText(imei.size() + "");
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void btnKetNoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoiActionPerformed
@@ -731,7 +766,7 @@ public class ViewADDSP extends javax.swing.JDialog {
         qgv.setVisible(true);
         if (qgv.returnQuocGia() != null) {
             quocGia = qgv.returnQuocGia();
-            txtDong1.setText(quocGia.getTen());
+            txtQuocGia.setText(quocGia.getTen());
         }
     }//GEN-LAST:event_btnQuocGiaActionPerformed
 
@@ -789,7 +824,7 @@ public class ViewADDSP extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKetNoi4ActionPerformed
 
     private void btnKetNoi5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoi5ActionPerformed
-        TienIch ti = null;
+        vti.setVisible(true);
         if (vti.returnTienIch() != null) {
             ti = vti.returnTienIch();
             ts.setBaoMat(ti.getBaoMat());
@@ -812,7 +847,7 @@ public class ViewADDSP extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKetNoi6ActionPerformed
 
     private void btnKetNoi7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoi7ActionPerformed
-        HeDieuHanh hdh = null;
+        vhdh.setVisible(true);
         if (vhdh.returnHeDieuHanh() != null) {
             hdh = vhdh.returnHeDieuHanh();
             ts.setHDHID(hdh.getId());
@@ -823,7 +858,7 @@ public class ViewADDSP extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKetNoi7ActionPerformed
 
     private void btnKetNoi8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoi8ActionPerformed
-        Camera cmd = null;
+        cmdv.setVisible(true);
         if (cmdv.returnCamera() != null) {
             cmd = cmdv.returnCamera();
             ts.setCameraID(cmd.getId());
@@ -840,14 +875,58 @@ public class ViewADDSP extends javax.swing.JDialog {
     private void btnKetNoi9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoi9ActionPerformed
         vmh.setVisible(true);
         if (vmh.returnManHinh() != null) {
+            mh = vmh.returnManHinh();
+            ts.setManHinhID(mh.getId());
+            ts.setManHinhKichThuoc(mh.getKichThuoc());
+            ts.setManHinhCongNghe(mh.getCongNghe());
+            ts.setManHinhKieu(mh.getKieu());
+            ts.setManHinhLoai(mh.getLoai());
+            ts.setTangSoQuet(mh.getTangSoQuet());
+            ts.setDoPhanGiai(mh.getDoPhanGiai());
+            loadThongSo();
 
         }
 
     }//GEN-LAST:event_btnKetNoi9ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        addQGD();
+        if (ae.themQuocGiaDong(qgd).isBlank() == false) {
+            JOptionPane.showMessageDialog(this, ae.themQuocGiaDong(qgd) + txtQuocGia.getText());
+        }
 
+        tsAdd = new ThongSo(null, ae.idQGD(qgd), hdh.getId(),
+                cpu.getId(), boNho.getId(), pin.getId(), kn.getId(),
+                mh.getId(), tk.getId(), ti.getId(), ms.getId(), cmd.getId());
+        System.out.println(ae.themThongSo(tsAdd));
     }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void txtGiaNhapKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiaNhapKeyReleased
+        if (txtGiaNhap.getText().isEmpty() == false) {
+            String gia = txtGiaNhap.getText().replace(",", "");
+
+            txtGiaNhap.setText(df.format(Double.valueOf(gia)));
+        }
+
+
+    }//GEN-LAST:event_txtGiaNhapKeyReleased
+
+    private void txtGiaBanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiaBanKeyReleased
+        if (txtGiaBan.getText().isEmpty() == false) {
+            String gia = txtGiaBan.getText().replace(",", "");
+            txtGiaBan.setText(df.format(Double.valueOf(gia)));
+        }
+    }//GEN-LAST:event_txtGiaBanKeyReleased
+
+    private void txtDoMoiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDoMoiKeyReleased
+        try {
+            if (Integer.parseInt(txtDoMoi.getText()) > 100 && txtDoMoi.getText().isEmpty() == false) {
+                txtDoMoi.setText(100 + "");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Độ mới phải là số");
+        }
+    }//GEN-LAST:event_txtDoMoiKeyReleased
 
     /**
      * @param args the command line arguments
@@ -879,7 +958,7 @@ public class ViewADDSP extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ViewADDSP dialog = new ViewADDSP(new javax.swing.JFrame(), true);
+                ViewADDSP dialog = new ViewADDSP(new javax.swing.JFrame(), true, "");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -912,7 +991,6 @@ public class ViewADDSP extends javax.swing.JDialog {
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -942,10 +1020,10 @@ public class ViewADDSP extends javax.swing.JDialog {
     private javax.swing.JTextField txtDT;
     private javax.swing.JTextField txtDoMoi;
     private javax.swing.JTextField txtDong;
-    private javax.swing.JTextField txtDong1;
     private javax.swing.JTextField txtGiaBan;
     private javax.swing.JTextField txtGiaNhap;
     private javax.swing.JTextField txtHang;
+    private javax.swing.JTextField txtQuocGia;
     private javax.swing.JTextField txtSoLuong;
     // End of variables declaration//GEN-END:variables
 }
