@@ -52,6 +52,7 @@ public class ImportExcelNhanVienView extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         tbExcel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
