@@ -28,7 +28,7 @@ public class ViewMH extends javax.swing.JDialog {
     SanPhamServices sps = new SanPhamServicesImpl();
     DefaultComboBoxModel modelcbb;
     List<String> lsTrangThai = new ArrayList<>();
-
+    ManHinh mh = null;
     String id = "";
     int trang = 1;
 
@@ -56,8 +56,8 @@ public class ViewMH extends javax.swing.JDialog {
         tbl2.setRowSorter(sorter2);
     }
 
-    public String id() {
-        return id;
+    public ManHinh returnManHinh() {
+        return mh;
     }
 
     private void loadx() {
@@ -165,6 +165,11 @@ public class ViewMH extends javax.swing.JDialog {
         cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnChon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit-regular-24.png"))); // NOI18N
+        btnChon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonActionPerformed(evt);
+            }
+        });
 
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/trash-regular-24.png"))); // NOI18N
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
@@ -367,7 +372,7 @@ public class ViewMH extends javax.swing.JDialog {
         txtLoai.setText(bn.getLoai());
         id = bn.getId();
         txtTSQ.setText(bn.getTangSoQuet());
-
+        mh = bn;
         cbbTrangThai.setSelectedIndex(bn.getTrangThai());
 
 
@@ -401,13 +406,14 @@ public class ViewMH extends javax.swing.JDialog {
         txtLoai.setText(bn.getLoai());
         id = bn.getId();
         txtTSQ.setText(bn.getTangSoQuet());
-
+        mh = bn;
         cbbTrangThai.setSelectedIndex(bn.getTrangThai());
         cbbTrangThai.setSelectedIndex(bn.getTrangThai());
     }//GEN-LAST:event_tbl2MouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         String idx = "";
+        index = tbl1.getSelectedRow();
         if (trang == 0) {
             idx = sps.getHM(1).get(index).getId();
         } else {
@@ -436,6 +442,10 @@ public class ViewMH extends javax.swing.JDialog {
         }
         System.out.println("so trang " + trang);
     }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_btnChonActionPerformed
 
     /**
      * @param args the command line arguments
