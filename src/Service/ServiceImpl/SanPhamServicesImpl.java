@@ -206,6 +206,16 @@ public class SanPhamServicesImpl implements SanPhamServices {
         if (tk == null) {
             return "Không được để trống thông tin";
         }
+        for (Cpu cpu : new ThongSoReponsitory().getCpu(0)) {
+            if (cpu.getCPU().equalsIgnoreCase(tk.getCPU())&&cpu.getGPU().equalsIgnoreCase(tk.getGPU())) {
+                return "Thông tin bị trùng";
+            }
+        }
+        for (Cpu cpu : new ThongSoReponsitory().getCpu(1)) {
+            if (cpu.getCPU().equalsIgnoreCase(tk.getCPU())&&cpu.getGPU().equalsIgnoreCase(tk.getGPU())) {
+                return "Thông tin bị trùng";
+            }
+        }
         if (new ThongSoReponsitory().ThemCPU(tk)) {
             return "OK";
         }

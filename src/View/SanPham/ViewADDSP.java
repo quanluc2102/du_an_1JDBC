@@ -5,6 +5,7 @@
 package View.SanPham;
 
 import DomainModel.BoNho;
+import DomainModel.Cpu;
 import DomainModel.DienThoai;
 import DomainModel.Dong;
 import DomainModel.Hang;
@@ -44,6 +45,7 @@ public class ViewADDSP extends javax.swing.JDialog {
     private MauSac ms = null;
     private ThietKe tk = null;
     private Pin pin = null;
+    private Cpu cpu = null;
     private HangView hv = new HangView(new javax.swing.JFrame(), true, "");
     private QuocGiaView qgv = new QuocGiaView(new javax.swing.JFrame(), true, "");
     private ViewThemSanPham vtsp = new ViewThemSanPham(new javax.swing.JFrame(), true);
@@ -195,7 +197,7 @@ public class ViewADDSP extends javax.swing.JDialog {
 
         jLabel3.setText("Dòng");
 
-        btnKetNoi.setText("jButton5");
+        btnKetNoi.setText("Edit");
         btnKetNoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKetNoiActionPerformed(evt);
@@ -227,49 +229,49 @@ public class ViewADDSP extends javax.swing.JDialog {
 
         jLabel15.setText("Kết nối");
 
-        btnKetNoi1.setText("jButton5");
+        btnKetNoi1.setText("Edit");
         btnKetNoi1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKetNoi1ActionPerformed(evt);
             }
         });
 
-        btnKetNoi2.setText("jButton5");
+        btnKetNoi2.setText("Edit");
         btnKetNoi2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKetNoi2ActionPerformed(evt);
             }
         });
 
-        btnKetNoi3.setText("jButton5");
+        btnKetNoi3.setText("Edit");
         btnKetNoi3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKetNoi3ActionPerformed(evt);
             }
         });
 
-        btnKetNoi4.setText("jButton5");
+        btnKetNoi4.setText("Edit");
         btnKetNoi4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKetNoi4ActionPerformed(evt);
             }
         });
 
-        btnKetNoi5.setText("jButton5");
+        btnKetNoi5.setText("Edit");
         btnKetNoi5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKetNoi5ActionPerformed(evt);
             }
         });
 
-        btnKetNoi6.setText("jButton5");
+        btnKetNoi6.setText("Edit");
         btnKetNoi6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKetNoi6ActionPerformed(evt);
             }
         });
 
-        btnKetNoi7.setText("jButton5");
+        btnKetNoi7.setText("Edit");
         btnKetNoi7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKetNoi7ActionPerformed(evt);
@@ -278,7 +280,7 @@ public class ViewADDSP extends javax.swing.JDialog {
 
         jLabel16.setText("Camera");
 
-        btnKetNoi8.setText("jButton5");
+        btnKetNoi8.setText("Edit");
         btnKetNoi8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKetNoi8ActionPerformed(evt);
@@ -689,7 +691,12 @@ public class ViewADDSP extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKetNoi1ActionPerformed
 
     private void btnKetNoi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoi2ActionPerformed
-        // TODO add your handling code here:
+       vcpu.setVisible(true);
+        if (vcpu.returnCpu()!= null) {
+            cpu = vcpu.returnCpu();
+            ts.setCPU(cpu.getCPU());
+            ts.setGPU(cpu.getGPU());
+        }
     }//GEN-LAST:event_btnKetNoi2ActionPerformed
 
     private void btnKetNoi3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoi3ActionPerformed

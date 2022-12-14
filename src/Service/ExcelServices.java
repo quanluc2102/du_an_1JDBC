@@ -12,10 +12,12 @@ import java.util.List;
  * @author haha
  */
 public interface ExcelServices {
-        List<String> getFile(String link);
-        String exFileexcel(String link,List<ChucVu> vc);
-        
-        String barCode(String nhap,String link);
-        
-        String barCodeIMEI(String link);
+
+    List<String> getFile(String link);
+
+    String exFileexcel(String link, List<ChucVu> vc);
+
+    String barCode(String nhap, String link);
+
+    String barCodeIMEI(String link);
 }

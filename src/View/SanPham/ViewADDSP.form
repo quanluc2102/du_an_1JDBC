@@ -366,7 +366,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnKetNoi">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton5"/>
+                <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKetNoiActionPerformed"/>
@@ -429,7 +429,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnKetNoi1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton5"/>
+                <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKetNoi1ActionPerformed"/>
@@ -437,7 +437,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnKetNoi2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton5"/>
+                <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKetNoi2ActionPerformed"/>
@@ -445,7 +445,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnKetNoi3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton5"/>
+                <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKetNoi3ActionPerformed"/>
@@ -453,7 +453,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnKetNoi4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton5"/>
+                <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKetNoi4ActionPerformed"/>
@@ -461,7 +461,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnKetNoi5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton5"/>
+                <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKetNoi5ActionPerformed"/>
@@ -469,7 +469,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnKetNoi6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton5"/>
+                <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKetNoi6ActionPerformed"/>
@@ -477,7 +477,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnKetNoi7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton5"/>
+                <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKetNoi7ActionPerformed"/>
@@ -490,7 +490,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnKetNoi8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton5"/>
+                <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKetNoi8ActionPerformed"/>
