@@ -4,13 +4,12 @@ package Repository;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
-
 import DomainModel.NhanVien;
 import Ultilities.SQLServerConnection;
 import ViewModel.LoginViewModel;
 import ViewModel.NhanVienView;
 import ViewModel.ThongTinNguoiDungView;
+import ViewModel.checkTrungManv;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -141,10 +140,10 @@ public class NhanVienRepository {
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
 
             ps.setObject(1, pass);
-            ps.setObject(2,maNV);
+            ps.setObject(2, maNV);
             check = ps.executeUpdate();
         } catch (SQLException e) {
-              e.printStackTrace(System.out);
+            e.printStackTrace(System.out);
         }
         return check > 0;
     }
@@ -199,11 +198,12 @@ public class NhanVienRepository {
         }
         return list;
     }
-     public List<ThongTinNguoiDungView> layThongTin(String ma) {
-        String query = "SELECT       dbo.NhanVien.ten_nhan_vien, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.ngay_sinh, dbo.NhanVien.sdt, dbo.NhanVien.email, dbo.NhanVien.dia_chi, \n" +
-"                         dbo.NhanVien.cmnd\n" +
-"FROM            dbo.NhanVien INNER JOIN\n" +
-"                         dbo.ChucVu ON dbo.NhanVien.id_chuc_vu = dbo.ChucVu.id where  ma_nhan_vien = ?";
+
+    public List<ThongTinNguoiDungView> layThongTin(String ma) {
+        String query = "SELECT       dbo.NhanVien.ten_nhan_vien, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.ngay_sinh, dbo.NhanVien.sdt, dbo.NhanVien.email, dbo.NhanVien.dia_chi, \n"
+                + "                         dbo.NhanVien.cmnd\n"
+                + "FROM            dbo.NhanVien INNER JOIN\n"
+                + "                         dbo.ChucVu ON dbo.NhanVien.id_chuc_vu = dbo.ChucVu.id where  ma_nhan_vien = ?";
         List<ThongTinNguoiDungView> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, ma);
@@ -211,7 +211,7 @@ public class NhanVienRepository {
 
             while (rs.next()) {
                 ThongTinNguoiDungView nv = new ThongTinNguoiDungView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
-                
+
                 list.add(nv);
             }
 
@@ -237,6 +237,26 @@ public class NhanVienRepository {
             }
             return list;
         } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public List<checkTrungManv> getAllHoaDonCheckTrung(String maNV) {
+        String query = "SELECT [ma_nhan_vien]\n"
+                + "\n"
+                + "  FROM [dbo].[NhanVien] where ma_nhan_vien = ?";
+        List<checkTrungManv> list = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, maNV);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                checkTrungManv a = new checkTrungManv(rs.getString(1));
+                list.add(a);
+            }
+            return list;
+        } catch (SQLException s) {
+            s.printStackTrace(System.out);
         }
         return null;
     }

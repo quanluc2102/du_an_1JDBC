@@ -12,6 +12,7 @@ import Repository.NhanVienRepository;
 import Service.NhanVienService;
 import ViewModel.NhanVienView;
 import ViewModel.ThongTinNguoiDungView;
+import ViewModel.checkTrungManv;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -112,6 +113,11 @@ public class NhanVienServiceImpl implements NhanVienService {
         List<ThongTinNguoiDungView> listSearch = new ArrayList<>();
         listSearch = Nvrp.layThongTin(ma);
         return listSearch;
+    }
+
+    @Override
+    public void checkTrungIMEI(String maHD, List<checkTrungManv> list) {
+      list.addAll(Nvrp.getAllHoaDonCheckTrung(maHD));
     }
     
 }

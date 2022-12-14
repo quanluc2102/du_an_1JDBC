@@ -6,8 +6,13 @@ package View;
 
 import DomainModel.NhanVien;
 import Service.LoginService;
+import Service.NhanVienService;
 import Service.ServiceImpl.LoginImpl;
+import Service.ServiceImpl.NhanVienServiceImpl;
+import ViewModel.checkTrungManv;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import javax.swing.JOptionPane;
 
@@ -18,6 +23,7 @@ import javax.swing.JOptionPane;
 public class DangKy extends javax.swing.JFrame {
 
     LoginService impl = new LoginImpl();
+    NhanVienService implNV = new NhanVienServiceImpl();
 
     /**
      * Creates new form DangKy
@@ -328,6 +334,8 @@ public class DangKy extends javax.swing.JFrame {
         Boolean conf6 = false;
         Boolean conf7 = false;
         Boolean conf8 = false;
+           List<checkTrungManv> list = new ArrayList<>();
+        implNV.checkTrungIMEI(txtMaNV.getText(), list);
         if (txtMaNV.getText().isEmpty()) {
             txtRPMa.setText("Mã không được để Trống");
             txtRPMa.setForeground(Color.red);
@@ -336,7 +344,9 @@ public class DangKy extends javax.swing.JFrame {
             txtRPMa.setText("Mã không được chứa kí tự đặc biệt");
             txtRPMa.setForeground(Color.red);
 //            txtMaNV.setBackground(Color.yellow);
-        } else {
+        } if(list.size()>0){
+             JOptionPane.showMessageDialog(rootPane, "Mã nhân viên đã tồn tại");
+        }else {
             txtRPMa.setText("*");
             txtRPMa.setForeground(Color.green);
             nv.setMa(txtMaNV.getText());

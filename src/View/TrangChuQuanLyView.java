@@ -17,6 +17,7 @@ import ViewModel.ClockThread;
 //import Service.ServiceImpl.LoginImpl;
 //import Service.ServiceImpl.NhanVienImpl;
 import ViewModel.NhanVienView;
+import ViewModel.checkTrungManv;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,13 +118,18 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         Boolean conf7 = false;
         Boolean conf8 = false;
         Boolean conf9 = false;
+        
+        List<checkTrungManv> list = new ArrayList<>();
+        impl.checkTrungIMEI(txtMaNV.getText(), list);
         if (txtMaNV.getText().isEmpty()) {
             txtRPMa.setText("Mã không được để Trống");
             txtRPMa.setForeground(Color.red);
         } else if (txtMaNV.getText().matches("/^[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]*$/")) {
             txtRPMa.setText("Mã không được chứa kí tự đặc biệt");
             txtRPMa.setForeground(Color.red);
-        } else {
+        } if(list.size()>0){
+             JOptionPane.showMessageDialog(rootPane, "Mã nhân viên đã tồn tại");
+        }else {
             txtRPMa.setText("*");
             txtRPMa.setForeground(Color.green);
             nv.setMa(txtMaNV.getText());
@@ -225,7 +231,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         } else {
             txtRPCMND.setText("*");
             txtRPCMND.setForeground(Color.GREEN);
-            nv.setSdt(txtCMND.getText());
+            nv.setCmnd(txtCMND.getText());
 
             conf9 = true;
         }
@@ -242,7 +248,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
             nv.setMatKhau(txtPass.getText());
             JOptionPane.showMessageDialog(rootPane, impl.dangKi(nv));
             System.out.println(nv.toString());
-            System.out.println(impl.dangKi(nv));
+//            System.out.println(impl.dangKi(nv));
             listNV = impl.getAll();
             impl.showData(dtm, listNV);
         }

@@ -7,6 +7,7 @@ package Service;
 import DomainModel.NhanVien;
 import ViewModel.NhanVienView;
 import ViewModel.ThongTinNguoiDungView;
+import ViewModel.checkTrungManv;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,4 +39,5 @@ public interface NhanVienService {
      
     List<ThongTinNguoiDungView> layThongTin(String ma);
     
+    void checkTrungIMEI(String maHD,List<checkTrungManv> list);
 }
