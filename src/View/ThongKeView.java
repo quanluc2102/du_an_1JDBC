@@ -5,6 +5,8 @@
 package View;
 
 import DomainModel.HoaDon;
+import Service.EmailHung;
+import Service.ServiceImpl.Emailmpl;
 import Service.ServiceImpl.ThongKeKhachHangServiceImpl;
 import Service.ServiceImpl.ThongKeServiceImpl;
 import Service.ThongKeKhachHangService;
@@ -54,6 +56,10 @@ public class ThongKeView extends javax.swing.JFrame {
     int soLan;
     int fetch = 5;
     int o = 0;
+    String doanhThuMail ;
+    String thangg;
+    String giaTri;
+    private EmailHung email = new Emailmpl();
 
     public ThongKeView() {
         initComponents();
@@ -141,6 +147,7 @@ public class ThongKeView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnXuat = new javax.swing.JButton();
+        btnGuiEmail = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         txtSearch = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
@@ -255,6 +262,13 @@ public class ThongKeView extends javax.swing.JFrame {
             }
         });
 
+        btnGuiEmail.setText("Gửi Email");
+        btnGuiEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuiEmailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -328,6 +342,8 @@ public class ThongKeView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnGuiEmail)
+                .addGap(18, 18, 18)
                 .addComponent(btnXuat)
                 .addGap(34, 34, 34)
                 .addComponent(btnDong)
@@ -377,7 +393,8 @@ public class ThongKeView extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDong)
-                    .addComponent(btnXuat))
+                    .addComponent(btnXuat)
+                    .addComponent(btnGuiEmail))
                 .addGap(22, 22, 22))
         );
 
@@ -604,6 +621,10 @@ public class ThongKeView extends javax.swing.JFrame {
         txtLaiThang.setText(df.format(ThanhTien(thongKe)) + " " + "VNĐ");
 
         thongKeImpl.showDaTa(dtm, thongKe);
+        doanhThuMail = txtLaiThang.getText();
+        thangg = txtNTNam.getText();
+        giaTri = txtThang.getText();
+       
     }//GEN-LAST:event_cbbNTNActionPerformed
 
     private void cbbNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbNgayActionPerformed
@@ -776,6 +797,7 @@ public class ThongKeView extends javax.swing.JFrame {
             XSSFRow row = null;
             Cell cell = null;
             row = sheet.createRow(3);
+
             cell = row.createCell(0, CellType.STRING);
             cell.setCellValue("STT");
             cell = row.createCell(1, CellType.STRING);
@@ -789,9 +811,8 @@ public class ThongKeView extends javax.swing.JFrame {
             cell = row.createCell(5, CellType.NUMERIC);
             cell.setCellValue("Giá giảm ");
             cell = row.createCell(6, CellType.NUMERIC);
-            cell.setCellValue("Gía nhập ");
-//            cell = row.createCell(6, CellType.STRING);
-//            cell.setCellValue("Thành tiền ");
+            cell.setCellValue("Giá nhập ");
+
             cell = row.createCell(7, CellType.STRING);
             cell.setCellValue("Lãi ");
 
@@ -818,9 +839,8 @@ public class ThongKeView extends javax.swing.JFrame {
 
             }
 
-            File f = new File("C:\\Execl\\doanh.xlsx");
             try {
-                FileOutputStream fiss = new FileOutputStream(f);
+                FileOutputStream fiss = new FileOutputStream("C:\\Execl\\doanhthuuuu.xlsx");
                 worbook.write(fiss);
                 fiss.close();
             } catch (FileNotFoundException ex) {
@@ -838,6 +858,12 @@ public class ThongKeView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnXuatActionPerformed
 
+    private void btnGuiEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiEmailActionPerformed
+
+     email.sendEmail("thudxph21096@fpt.edu.vn", "Beephone Thống kê doanh thu",  "Thống Kê "+ " "+thangg +" "+giaTri+ " "+":"+" "+doanhThuMail );
+
+    }//GEN-LAST:event_btnGuiEmailActionPerformed
+   
     /**
      * @param args the command line arguments
      */
@@ -872,11 +898,14 @@ public class ThongKeView extends javax.swing.JFrame {
                 new ThongKeView().setVisible(true);
             }
         });
+        
+                
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableThongKe;
     private javax.swing.JButton btnDong;
+    private javax.swing.JButton btnGuiEmail;
     private javax.swing.JButton btnXuat;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
