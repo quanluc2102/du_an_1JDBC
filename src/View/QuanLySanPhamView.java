@@ -5,7 +5,6 @@
 package View;
 
 import DomainModel.ThongSo;
-import Repository.ThemSanPhamRepon;
 import Service.AddElementServices;
 import Service.SanPhamServices;
 import Service.ServiceImpl.AddElementImpl;

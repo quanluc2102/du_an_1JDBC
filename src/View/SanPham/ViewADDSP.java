@@ -5,15 +5,18 @@
 package View.SanPham;
 
 import DomainModel.BoNho;
+import DomainModel.Camera;
 import DomainModel.Cpu;
 import DomainModel.DienThoai;
 import DomainModel.Dong;
 import DomainModel.Hang;
+import DomainModel.HeDieuHanh;
 import DomainModel.KetNoi;
 import DomainModel.MauSac;
 import DomainModel.Pin;
 import DomainModel.QuocGia;
 import DomainModel.ThietKe;
+import DomainModel.TienIch;
 import Service.AddElementServices;
 import Service.ServiceImpl.AddElementImpl;
 import ViewModel.ThongSoViewModel;
@@ -151,6 +154,8 @@ public class ViewADDSP extends javax.swing.JDialog {
         jButton18 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin cơ bản"));
@@ -691,11 +696,15 @@ public class ViewADDSP extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKetNoi1ActionPerformed
 
     private void btnKetNoi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoi2ActionPerformed
-       vcpu.setVisible(true);
-        if (vcpu.returnCpu()!= null) {
+        vcpu.setVisible(true);
+        if (vcpu.returnCpu() != null) {
             cpu = vcpu.returnCpu();
             ts.setCPU(cpu.getCPU());
             ts.setGPU(cpu.getGPU());
+            ts.setCPUHang(cpu.getHang());
+            ts.setCPULoai(cpu.getLoai());
+            ts.setTienTrinh(cpu.getTienTrinh());
+            loadThongSo();
         }
     }//GEN-LAST:event_btnKetNoi2ActionPerformed
 
@@ -713,11 +722,28 @@ public class ViewADDSP extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKetNoi3ActionPerformed
 
     private void btnKetNoi4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoi4ActionPerformed
-        
+            vtk.setVisible(true);
+            if (vtk.returnThietKe()!=null) {
+            tk = vtk.returnThietKe();
+            ts.setThietKeID(tk.getId());
+            ts.setMatLung(tk.getMatLung());
+            ts.setMatTruoc(tk.getMatTruoc());
+            ts.setKhungVien(tk.getVien());
+            ts.setTrongLuong(tk.getTrongLuong());
+            loadThongSo();
+        }
     }//GEN-LAST:event_btnKetNoi4ActionPerformed
 
     private void btnKetNoi5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoi5ActionPerformed
-        // TODO add your handling code here:
+       TienIch ti = null;
+        if (vti.returnTienIch()!=null) {
+            ti = vti.returnTienIch();
+            ts.setBaoMat(ti.getBaoMat());
+            ts.setKhangNuoc(ti.getKhangNuoc());
+            ts.setTienIchID(ti.getId());
+            ts.setDacBiet(ti.getDacBiet());
+            loadThongSo();
+        }
     }//GEN-LAST:event_btnKetNoi5ActionPerformed
 
     private void btnKetNoi6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoi6ActionPerformed
@@ -732,11 +758,29 @@ public class ViewADDSP extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKetNoi6ActionPerformed
 
     private void btnKetNoi7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoi7ActionPerformed
-        // TODO add your handling code here:
+        HeDieuHanh hdh = null;
+        if (vhdh.returnHeDieuHanh()!=null){
+            hdh = vhdh.returnHeDieuHanh();
+            ts.setHDHID(hdh.getId());
+            ts.setHDHphienBan(hdh.getPhienBan());
+            ts.setHeDieuhanh(hdh.getTenHDH());
+            loadThongSo();
+        }
     }//GEN-LAST:event_btnKetNoi7ActionPerformed
 
     private void btnKetNoi8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetNoi8ActionPerformed
-        // TODO add your handling code here:
+        Camera cmd = null;
+        if (cmdv.returnCamera()!=null) {
+            cmd = cmdv.returnCamera();
+            ts.setCameraID(cmd.getId());
+            ts.setCameraTruoc(cmd.getCameraTruoc());
+            ts.setCameraSau(cmd.getCameraSau());
+            ts.setCameraDacBiet(cmd.getDacBiet());
+            ts.setQuayVideo(cmd.getQuayVideo());
+            ts.setChongRung(cmd.getChongRung());
+            ts.setZoom(cmd.getZoom());
+            loadThongSo();
+        }
     }//GEN-LAST:event_btnKetNoi8ActionPerformed
 
     /**

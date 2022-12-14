@@ -24,11 +24,10 @@ public class ViewHDH extends javax.swing.JDialog {
     DefaultTableModel tbla;
     DefaultTableModel tblb;
     int index = 0;
-    int tblIndex = 0;
+    HeDieuHanh heDieuHanh = null;
     SanPhamServices sps = new SanPhamServicesImpl();
     DefaultComboBoxModel modelcbb;
     List<String> lsTrangThai = new ArrayList<>();
-    String id = "";
     int trang = 1;
 
     /**
@@ -55,8 +54,8 @@ public class ViewHDH extends javax.swing.JDialog {
         tbl2.setRowSorter(sorter2);
     }
 
-    public String id() {
-        return id;
+    public HeDieuHanh returnHeDieuHanh() {
+        return heDieuHanh;
     }
 
     private void loadx() {
@@ -326,7 +325,7 @@ public class ViewHDH extends javax.swing.JDialog {
         HeDieuHanh bn = sps.getHDH(1).get(index);
         txtROM.setText(bn.getPhienBan());
         txtRAM.setText(bn.getTenHDH());
-        id = bn.getId();
+        heDieuHanh = bn;
         cbbTrangThai.setSelectedIndex(bn.getTrangThai());
 
 
@@ -351,11 +350,11 @@ public class ViewHDH extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void tbl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl2MouseClicked
-        int index = tbl2.getSelectedRow();
+         index = tbl2.getSelectedRow();
         HeDieuHanh bn = sps.getHDH(0).get(index);
         txtROM.setText(bn.getPhienBan());
         txtRAM.setText(bn.getTenHDH());
-        id = bn.getId();
+        heDieuHanh = bn;
         cbbTrangThai.setSelectedIndex(bn.getTrangThai());
         System.out.println(bn.getId());
     }//GEN-LAST:event_tbl2MouseClicked

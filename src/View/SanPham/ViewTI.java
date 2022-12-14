@@ -5,7 +5,6 @@
 package View.SanPham;
 
 import DomainModel.TienIch;
-import DomainModel.TienIch;
 import Service.SanPhamServices;
 import Service.ServiceImpl.SanPhamServicesImpl;
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class ViewTI extends javax.swing.JDialog {
     DefaultTableModel tbla;
     DefaultTableModel tblb;
     int index = 0;
-    int tblIndex = 0;
+    TienIch ti = null;
     SanPhamServices sps = new SanPhamServicesImpl();
     DefaultComboBoxModel modelcbb;
     List<String> lsTrangThai = new ArrayList<>();
@@ -49,15 +48,15 @@ public class ViewTI extends javax.swing.JDialog {
 
     }
 
-    private void sapXep() {// gọi trong hàm khởi tạo
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(tbla); // tbla là defautablemodel của bảng mình muốn sắp xếp
+    private void sapXep() {
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(tbla); 
         tbl1.setRowSorter(sorter);
-        TableRowSorter<DefaultTableModel> sorter2 = new TableRowSorter<>(tblb); // tbla là defautablemodel của bảng mình muốn sắp xếp
+        TableRowSorter<DefaultTableModel> sorter2 = new TableRowSorter<>(tblb); 
         tbl2.setRowSorter(sorter2);
     }
 
-    public String id() {
-        return id;
+    public TienIch returnTienIch() {
+        return ti;
     }
 
     private void loadx() {
@@ -90,11 +89,15 @@ public class ViewTI extends javax.swing.JDialog {
         String kn = txtKN.getText();
         String db = txtDB.getText();
 
-        if (bm.isBlank() || kn.isBlank() || db.isBlank()) {
-            bm = "không hỗ trợ";
+        if (bm.isBlank()){
+             bm = "không hỗ trợ";}
+        if ( kn.isBlank()) {
             kn = "không hỗ trợ";
+        }if ( db.isBlank()) {
             db = "không có thông tin";
         }
+             
+        
         int trangThai = cbbTrangThai.getSelectedIndex();
         TienIch nbn = new TienIch(id, bm, kn, db, trangThai);
         return nbn;
@@ -137,7 +140,6 @@ public class ViewTI extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
 
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/save-regular-24.png"))); // NOI18N
-        btnThem.setOpaque(false);
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
@@ -145,7 +147,6 @@ public class ViewTI extends javax.swing.JDialog {
         });
 
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/edit-alt-regular-24.png"))); // NOI18N
-        btnSua.setOpaque(false);
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
@@ -155,13 +156,15 @@ public class ViewTI extends javax.swing.JDialog {
         jLabel3.setText("Trạng thái");
 
         cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbbTrangThai.setOpaque(false);
 
         btnChon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit-regular-24.png"))); // NOI18N
-        btnChon.setOpaque(false);
+        btnChon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonActionPerformed(evt);
+            }
+        });
 
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/trash-regular-24.png"))); // NOI18N
-        btnXoa.setOpaque(false);
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaActionPerformed(evt);
@@ -335,7 +338,7 @@ public class ViewTI extends javax.swing.JDialog {
         TienIch hdh = sps.getTI(1).get(index);
         txtKN.setText(hdh.getKhangNuoc());
         txtBM.setText(hdh.getBaoMat());
-        id = hdh.getId();
+        ti = hdh;
         txtDB.setText(hdh.getDacBiet());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
 
@@ -365,7 +368,7 @@ public class ViewTI extends javax.swing.JDialog {
         TienIch hdh = sps.getTI(0).get(index);
         txtKN.setText(hdh.getKhangNuoc());
         txtBM.setText(hdh.getBaoMat());
-        id = hdh.getId();
+        ti = hdh;
         txtDB.setText(hdh.getDacBiet());
         cbbTrangThai.setSelectedIndex(hdh.getTrangThai());
     }//GEN-LAST:event_tbl2MouseClicked
@@ -400,6 +403,10 @@ public class ViewTI extends javax.swing.JDialog {
         }
         System.out.println("so trang " + trang);
     }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnChonActionPerformed
 
     /**
      * @param args the command line arguments

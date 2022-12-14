@@ -79,6 +79,16 @@ public class SanPhamServicesImpl implements SanPhamServices {
         if (new SanPhamRespository().ThemHDH(hdh)) {
             return "them thanh cong";
         }
+        for (HeDieuHanh heDieuHanh : new SanPhamRespository().getHDH(0)) {
+            if (heDieuHanh.getTenHDH().equalsIgnoreCase(hdh.getTenHDH())&&heDieuHanh.getPhienBan().equalsIgnoreCase(hdh.getTenHDH())) {
+                return "Thông tin trùng";
+            }
+        }
+        for (HeDieuHanh heDieuHanh : new SanPhamRespository().getHDH(1)) {
+            if (heDieuHanh.getTenHDH().equalsIgnoreCase(hdh.getTenHDH())&&heDieuHanh.getPhienBan().equalsIgnoreCase(hdh.getTenHDH())) {
+                return "Thông tin trùng";
+            }
+        }
 
         return "Them khong thanh cong";
     }
@@ -133,6 +143,20 @@ public class SanPhamServicesImpl implements SanPhamServices {
     public String addTK(ThietKe tk) {
         if (tk == null) {
             return "Không được để trống thông tin";
+        }
+        for (ThietKe thietKe : new ThongSoReponsitory().getThietKe(0)) {
+            if (thietKe.getMatLung().equalsIgnoreCase(tk.getMatLung())&&
+                    thietKe.getMatTruoc().equalsIgnoreCase(tk.getMatTruoc())&&
+                    thietKe.getVien().equalsIgnoreCase(tk.getVien())) {
+                return "Thông tin bi trùng lặp";
+            }
+        }
+        for (ThietKe thietKe : new ThongSoReponsitory().getThietKe(1)) {
+            if (thietKe.getMatLung().equalsIgnoreCase(tk.getMatLung())&&
+                    thietKe.getMatTruoc().equalsIgnoreCase(tk.getMatTruoc())&&
+                    thietKe.getVien().equalsIgnoreCase(tk.getVien())) {
+                return "Thông tin bi trùng lặp";
+            }
         }
         if (new ThongSoReponsitory().ThemThietKe(tk)) {
             return "OK";

@@ -24,7 +24,7 @@ public class ViewCamera extends javax.swing.JDialog {
     DefaultTableModel tbla;
     DefaultTableModel tblb;
     int index = 0;
-    int tblIndex = 0;
+    Camera cmd = null;
     ThemSPServices sps = new TSPImpl();
     DefaultComboBoxModel modelcbb;
     List<String> lsTrangThai = new ArrayList<>();
@@ -55,8 +55,8 @@ public class ViewCamera extends javax.swing.JDialog {
         tbl2.setRowSorter(sorter2);
     }
 
-    public String id() {
-        return id;
+    public Camera returnCamera() {
+        return cmd;
     }
 
     private void loadx() {
@@ -396,7 +396,7 @@ public class ViewCamera extends javax.swing.JDialog {
         txtVideo.setText(x.getQuayVideo());
         txtZoom.setText(x.getZoom());
         cbbTrangThai.setSelectedIndex(x.getTrangThai());
-        id = x.getId();
+        cmd = x;
 
 
     }//GEN-LAST:event_tbl1MouseClicked
@@ -428,7 +428,7 @@ public class ViewCamera extends javax.swing.JDialog {
         txtMS.setText(x.getCameraSau());
         txtMT.setText(x.getCameraTruoc());
         txtZoom.setText(x.getZoom());
-        id = x.getId();
+        cmd = x;
         cbbTrangThai.setSelectedIndex(x.getTrangThai());
     }//GEN-LAST:event_tbl2MouseClicked
 
