@@ -1043,6 +1043,9 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
+        ImportExcelNhanVienView excelNhanVienView = new ImportExcelNhanVienView();
+        excelNhanVienView.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton11ActionPerformed
     public void setColor(JPanel p) {
         p.setBackground(new Color(255, 105, 0));
