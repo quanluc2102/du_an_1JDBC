@@ -395,14 +395,16 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(158, 158, 158))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 508, 1400, 360));
@@ -601,6 +603,11 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/excel.png"))); // NOI18N
         jButton11.setText("import Excel");
         jButton11.setBorder(null);
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 380, 130, 50));
         jPanel4.add(txtRPCMND, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 260, 20));
 
@@ -842,7 +849,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         jButton13.setBackground(new java.awt.Color(51, 51, 51));
         jButton13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton13.setForeground(new java.awt.Color(255, 255, 255));
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/HoaDon.png"))); // NOI18N
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ThongTincaNhan.png"))); // NOI18N
         jButton13.setText("Hồ sơ cá nhân");
         jButton13.setBorder(null);
         jButton13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -1033,6 +1040,10 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
          HoSoCaNhanView ql = new HoSoCaNhanView(a2);
          ql.setVisible(true);
     }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
     public void setColor(JPanel p) {
         p.setBackground(new Color(255, 105, 0));
     }
