@@ -1032,6 +1032,7 @@ txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         System.out.println(implDX.dangXuat());
+        this.dispose();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
