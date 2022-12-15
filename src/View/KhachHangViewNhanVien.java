@@ -452,6 +452,7 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private int kk() {
