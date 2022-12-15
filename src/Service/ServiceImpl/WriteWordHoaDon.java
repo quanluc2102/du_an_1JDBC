@@ -129,7 +129,7 @@ public class WriteWordHoaDon {
         column.addBreak();
         XWPFRun ke1 = ParagraphLeft.createRun();
         ke1.setFontSize(20);
-        ke1.setText("_____________________________________________");
+        ke1.setText("________________________________________");
         ke1.addBreak();
 
         XWPFRun sp = ParagraphLeft.createRun();
@@ -150,17 +150,15 @@ public class WriteWordHoaDon {
             sp.addTab();
             sp.addTab();
             sp.addTab();
-            sp.addTab();
-            sp.setText(String.valueOf(df.format(x.getGiaBan())));
+            sp.setText(String.valueOf(df.format(x.getGiaBan()) + " VND"));
             sp.addBreak();
         }
 
         XWPFRun ke = ParagraphLeft.createRun();
         ke.setFontSize(15);
-        ke.setText("____________________________________________________________");
+        ke.setText("_______________________________________________________");
         ke.addBreak();
         ke.setText("Tổng số SP: ");
-        ke.addTab();
         ke.addTab();
         ke.addTab();
         ke.addTab();
@@ -179,16 +177,14 @@ public class WriteWordHoaDon {
         ke.addTab();
         ke.addTab();
         ke.addTab();
-        ke.addTab();
-        ke.setText(String.valueOf(df.format(hd.getGiaGiam())));
+        ke.setText(String.valueOf(df.format(hd.getGiaGiam()) + " VND"));
         ke.addBreak();
         ke.setText("Tổng tiền (Đã giảm theo KM): ");
         ke.addTab();
         ke.addTab();
         ke.addTab();
         ke.addTab();
-        ke.addTab();
-        ke.setText(String.valueOf(df.format(hd.getTongTien())));
+        ke.setText(String.valueOf(df.format(hd.getTongTien()) + " VND"));
         ke.addBreak();
 
         XWPFParagraph ParagraphCamOn = document.createParagraph();
