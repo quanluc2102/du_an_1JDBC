@@ -102,6 +102,23 @@ public class ThemSanPhamRepon {
         }
         return qgd;
     }
+    public List<QuocGiaDong> getQGD2(String id) {
+        String query = "select * from quocGiaDong where id =?";
+        
+        List<QuocGiaDong> qgd = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                qgd.add(new QuocGiaDong(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getDouble(5), rs.getString(6)));
+                
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return qgd;
+    }
     
     public boolean ThemDT(DienThoai ts) {
         String query = "INSERT INTO [dbo].[DienThoai]\n"

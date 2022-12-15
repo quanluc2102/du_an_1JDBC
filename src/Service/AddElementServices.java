@@ -21,6 +21,8 @@ public interface AddElementServices {
     String themThongSo(ThongSo t);
 
     String themQuocGiaDong(QuocGiaDong qgd);
+    
+    List<QuocGiaDong> getf(String x);
 
     String idQGD(QuocGiaDong qgd);
 

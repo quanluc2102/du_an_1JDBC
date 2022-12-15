@@ -9,6 +9,7 @@ import Service.AddElementServices;
 import Service.SanPhamServices;
 import Service.ServiceImpl.AddElementImpl;
 import Service.ServiceImpl.SanPhamServicesImpl;
+import View.SanPham.ViewADDSP;
 import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
 import ViewModel.vts;
@@ -23,6 +24,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import table.TableCustom;
 
 /**
  *
@@ -30,16 +32,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QuanLySanPhamView extends javax.swing.JFrame {
 
-    int trangThai = 0;
-    DefaultComboBoxModel modelCBB;
-    DefaultTableModel modelTBL;
-    DefaultTableModel modelTT;
-    SanPhamServices sps = new SanPhamServicesImpl();
-    List<SanPhamViewModel> ls = new ArrayList<>();
-    int index;
-    List<String> mei = new ArrayList<>();
-    DecimalFormat df = new DecimalFormat("###,###,###,###");
-    AddElementServices ae = new AddElementImpl();
+    private String idQGD = "";
+    private DefaultComboBoxModel modelCBB;
+    private DefaultTableModel modelTBL;
+    private DefaultTableModel modelTT;
+    private SanPhamServices sps = new SanPhamServicesImpl();
+    private List<SanPhamViewModel> ls = new ArrayList<>();
+    private int index;
+    private List<String> mei = new ArrayList<>();
+    private DecimalFormat df = new DecimalFormat("###,###,###,###");
+    private AddElementServices ae = new AddElementImpl();
 
     /**
      * Creates new form QuanLySanPhamView
@@ -61,6 +63,11 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
         c2.setBackground(new Color(23, 126, 238));
 
         c1.setBackground(new Color(196, 151, 58));
+        TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
+        TableCustom.apply(jScrollPane2, TableCustom.TableType.MULTI_LINE);
+        
+
+        
     }
 
     private void loadTable(List<SanPhamViewModel> spsa) {
@@ -88,6 +95,7 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
         return ss;
 
     }
+   
 
     private void loadThongSo(String id) {
         modelTT.setRowCount(0);
@@ -274,6 +282,53 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
                 {null, null},
                 {null, null},
                 {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
                 {null, null}
             },
             new String [] {
@@ -388,9 +443,7 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
                                                         .addComponent(txtHang, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btnThem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(btnChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -399,6 +452,10 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -440,11 +497,11 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel9)
                         .addComponent(txtQuocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(14, 14, 14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(btnThem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnChiTiet)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHome1))
         );
 
@@ -712,7 +769,7 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTimKiemFocusGained
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-
+        new ViewADDSP(this, rootPaneCheckingEnabled, idQGD).setVisible(true);
 
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -741,6 +798,7 @@ public class QuanLySanPhamView extends javax.swing.JFrame {
 
         System.out.println(modelTBL.getValueAt(index, 3).toString());
         loadThongSo(s.getId());
+        idQGD = s.getId();
         modelCBB.removeAllElements();
         modelCBB.addAll(sps.getImei(s.getId()));
         mei.addAll(sps.getImei(s.getId()));
