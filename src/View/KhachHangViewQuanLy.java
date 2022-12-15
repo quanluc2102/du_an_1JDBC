@@ -294,7 +294,7 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
 
         jLabel8.setText("Tim kiem theo: ");
 
-        cbbSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ten", "Dia Chi" }));
+        cbbSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ten", "Dia Chi", "So dien thoai" }));
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -471,6 +471,7 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private int kk() {
