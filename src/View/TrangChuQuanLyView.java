@@ -10,6 +10,7 @@ import Service.NhanVienService;
 import Service.ServiceImpl.LoginImpl;
 import Service.ServiceImpl.NhanVienServiceImpl;
 import ViewModel.CMNDViewModel;
+import ViewModel.CheckEmail;
 import ViewModel.CheckSDT;
 import ViewModel.ClockThread;
 //import Service.LoginService;
@@ -134,6 +135,8 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         impl.checkTrungCMND(txtCMND.getText(), listcmnd);
         List<CheckSDT> listsdt = new ArrayList<>();
         impl.checkTrungsdt(txtSDT.getText(), listsdt);
+        List<CheckEmail> listEmail = new ArrayList<>();
+        impl.checkTrungEmail(txtEmail.getText(), listEmail);
 
         if (txtMaNV.getText().isEmpty()) {
             txtRPMa.setText("Mã không được để Trống");
@@ -201,6 +204,11 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
             txtRPEmail.setText("Sai định dạng email (example@gmail.com)");
             txtRPEmail.setForeground(Color.red);
 
+        }else
+        if (listEmail.size() > 0) {
+            JOptionPane.showMessageDialog(rootPane, "Email đã tồn tại");
+            txtRPEmail.setText("*");
+            txtRPEmail.setForeground(Color.yellow);
         } else {
             txtRPEmail.setText("*");
 

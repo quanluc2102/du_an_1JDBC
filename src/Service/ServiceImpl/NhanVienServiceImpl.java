@@ -11,6 +11,7 @@ import Repository.LoginRepository;
 import Repository.NhanVienRepository;
 import Service.NhanVienService;
 import ViewModel.CMNDViewModel;
+import ViewModel.CheckEmail;
 import ViewModel.CheckSDT;
 import ViewModel.NhanVienView;
 import ViewModel.ThongTinNguoiDungView;
@@ -151,6 +152,11 @@ public class NhanVienServiceImpl implements NhanVienService {
           List<NhanVienView> listSearch = new ArrayList<>();
         listSearch = Nvrp.searchNhanVienMaNV(maNV);
         return listSearch;
+    }
+
+    @Override
+    public void checkTrungEmail(String email, List<CheckEmail> list) {
+          list.addAll(Nvrp.getAllCheckTrunggEmail(email));
     }
 
 }

@@ -6,6 +6,7 @@ package Service;
 
 import DomainModel.NhanVien;
 import ViewModel.CMNDViewModel;
+import ViewModel.CheckEmail;
 import ViewModel.CheckSDT;
 import ViewModel.NhanVienView;
 import ViewModel.ThongTinNguoiDungView;
@@ -52,4 +53,6 @@ public interface NhanVienService {
     void checkTrungCMND(String cmnd, List<CMNDViewModel> list);
 
     void checkTrungsdt(String sdt, List<CheckSDT> list);
+    
+     void checkTrungEmail(String email, List<CheckEmail> list);
 }

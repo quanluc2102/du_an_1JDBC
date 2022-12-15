@@ -7,6 +7,7 @@ package Repository;
 import DomainModel.NhanVien;
 import Ultilities.SQLServerConnection;
 import ViewModel.CMNDViewModel;
+import ViewModel.CheckEmail;
 import ViewModel.CheckSDT;
 import ViewModel.LoginViewModel;
 import ViewModel.NhanVienView;
@@ -337,6 +338,25 @@ public class NhanVienRepository {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 CMNDViewModel a = new CMNDViewModel(rs.getString(1));
+                list.add(a);
+            }
+            return list;
+        } catch (SQLException s) {
+            s.printStackTrace(System.out);
+        }
+        return null;
+    }
+      public List<CheckEmail> getAllCheckTrunggEmail(String email) {
+        String query = "SELECT email\n"
+                + "\n"
+                + "  FROM [dbo].[NhanVien] where email= ?";
+        List<CheckEmail> list = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, email);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CheckEmail a = new CheckEmail(rs.getString(1));
                 list.add(a);
             }
             return list;
