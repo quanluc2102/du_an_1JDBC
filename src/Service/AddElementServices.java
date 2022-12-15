@@ -1,5 +1,6 @@
 package Service;
 
+import DomainModel.ChiTietDienThoai;
 import DomainModel.QuocGiaDong;
 import DomainModel.ThongSo;
 import ViewModel.ThongSoViewModel;
@@ -19,6 +20,12 @@ public interface AddElementServices {
     List<vts> view(ThongSoViewModel t);
 
     String themThongSo(ThongSo t);
+
+    String suaThongSo(ThongSo t);
+
+    String giaTien1(ChiTietDienThoai t);
+
+    String giaTien2(QuocGiaDong t);
 
     String xoaQG(String id, int tt);
 

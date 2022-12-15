@@ -44,6 +44,35 @@ public class DienThoaiRepon {
         return null;
 
     }
+    
+    public int ton() {
+        String query = "select COUNT(IMEI) from ChiTietDienThoai\n"
+                + "where DATEDIFF(DD,getDate(),ngay_nhap) > 365 and trang_thai =1";
+        int check = 0;
+        try ( Connection conn = new SQLServerConnection().getConnection();  PreparedStatement ps = conn.prepareCall(query);) {
+            ResultSet rs = ps.executeQuery();
+         check =   rs.getInt(1);
+
+            
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return check;
+    }
+    public int moi() {
+        String query = "select COUNT(IMEI) from ChiTietDienThoai\n"
+                + "where DATEDIFF(DD,getDate(),ngay_nhap) < 365 and trang_thai =1";
+        int check = 0;
+        try ( Connection conn = new SQLServerConnection().getConnection();  PreparedStatement ps = conn.prepareCall(query);) {
+            ResultSet rs = ps.executeQuery();
+         check =   rs.getInt(1);
+
+            
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return check;
+    }
 
 
 

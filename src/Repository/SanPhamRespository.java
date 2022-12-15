@@ -10,6 +10,7 @@ import DomainModel.Dong;
 import DomainModel.Hang;
 import DomainModel.HeDieuHanh;
 import DomainModel.QuocGia;
+import DomainModel.QuocGiaDong;
 import DomainModel.ThongSo;
 import Ultilities.SQLServerConnection;
 import ViewModel.SanPhamViewModel;
@@ -35,9 +36,9 @@ public class SanPhamRespository {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-               ct.setMoi(rs.getByte(1));
-               ct.setGiaban(rs.getDouble(2));
-               ct.setGiaNhap(rs.getDouble(3));
+                ct.setMoi(rs.getByte(1));
+                ct.setGiaban(rs.getDouble(2));
+                ct.setGiaNhap(rs.getDouble(3));
             }
 
         } catch (SQLException e) {
@@ -64,6 +65,89 @@ public class SanPhamRespository {
             e.printStackTrace(System.out);
             return "Thất bại";
         }
+
+    }
+
+    public boolean idTS(ChiTietDienThoai id) {
+        String query = "UPDATE [dbo].[ChiTietDienThoai]\n"
+                + "   SET [gia_ban_CT] = ?\n"
+                + "      ,[gia_nhap_CT] = ?\n"
+                + " WHERE imei = ?";
+        int moi = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+
+            ps.setObject(1, id.getGiaban());
+            ps.setObject(2, id.getGiaNhap());
+            ps.setObject(3, id.getIMEI());
+            moi = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+
+        }
+        return moi > 0;
+
+    }
+
+    public boolean idST(QuocGiaDong id) {
+        String query = "UPDATE [dbo].[QuocGiaDong]\n"
+                + "   SET [gia_ban] = ?\n"
+                + "      ,[gia_nhap] = ?\n"
+                + "     \n"
+                + " WHERE id = ? ";
+        int moi = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+
+            ps.setObject(1, id.getGiaBan());
+            ps.setObject(2, id.getGiaNhap());
+            ps.setObject(3, id.getId());
+            moi = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+
+        }
+        return moi > 0;
+
+    }
+
+    public boolean capNhat(ThongSo ts) {
+        String query = "UPDATE [dbo].[ThongSo]\n"
+                + "   SET [id_tien_ich] = ?\n"
+                + "      ,[id_mau] = ?\n"
+                + "      ,[id_bo_nho] = ?\n"
+                + "      ,[id_he_dieu_hanh] = ?\n"
+                + "      ,[id_man_hinh] = ?\n"
+                + "      ,[id_CPU] = ?\n"
+                + "      ,[id_ket_noi] = ?\n"
+                + "      ,[id_thiet_ke] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + "      ,[id_pin] = ?\n"
+                + "      ,[id_camera] = ?\n"
+                + " WHERE id_dong =?";
+        int moi = -1;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+
+            ps.setObject(1, ts.getTienIch());
+            ps.setObject(2, ts.getMauSac());
+            ps.setObject(3, ts.getBoNho());
+            ps.setObject(4, ts.getHeDieuhanh());
+            ps.setObject(5, ts.getManHinh());
+            ps.setObject(6, ts.getCpu());
+            ps.setObject(7, ts.getKetNoi());
+            ps.setObject(8, ts.getThietKe());
+            ps.setObject(9, 1);
+            ps.setObject(10, ts.getPin());
+            ps.setObject(11, ts.getCamera());
+            ps.setObject(12, ts.getIdQuocGiaDong());
+
+            moi = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+
+        }
+        return moi > 0;
 
     }
 

@@ -34,9 +34,10 @@ public class ThemSanPhamRepon {
                 + "           ,[id_ket_noi]\n"
                 + "           ,[id_thiet_ke]\n"
                 + "           ,[trang_thai]\n"
-                + "           ,[id_pin])\n"
+                + "           ,[id_pin],"
+                + "[id_camera])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,? ,? ,? ,? ,?,?,?,?)";
+                + "           (?,?,?,? ,? ,? ,? ,?,?,?,?,?)";
         int sp = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ts.getIdQuocGiaDong());
@@ -50,6 +51,7 @@ public class ThemSanPhamRepon {
             ps.setObject(9, ts.getThietKe());
             ps.setObject(10, 1);
             ps.setObject(11, ts.getPin());
+            ps.setObject(12, ts.getCamera());
 
             sp = ps.executeUpdate();
 

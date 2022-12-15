@@ -4,6 +4,7 @@
  */
 package Service.ServiceImpl;
 
+import DomainModel.ChiTietDienThoai;
 import DomainModel.QuocGiaDong;
 import DomainModel.ThongSo;
 import Repository.SanPhamRespository;
@@ -129,5 +130,29 @@ public class AddElementImpl implements AddElementServices {
     public String xoaCTDT(String id) {
         return new SanPhamRespository().XoaDTCT(id);
     }
+
+    @Override
+    public String suaThongSo(ThongSo t) {
+        if (new SanPhamRespository().capNhat(t)) {
+            return "thành công";
+        }
+        return "thất bại";
+    }
+
+    @Override
+    public String giaTien1(ChiTietDienThoai t) {
+        if (new SanPhamRespository().idTS(t)) {
+            return "thành công";
+        }
+        return "thất bại";
+    }
+
+    @Override
+    public String giaTien2(QuocGiaDong t) {
+   if (new SanPhamRespository().idST(t)) {
+            return "thành công";
+        }
+        return "thất bại";    }
+
 
 }
