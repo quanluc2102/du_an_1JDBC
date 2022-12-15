@@ -200,4 +200,33 @@ public class KhachHangRepository {
         List<KhachHangViewModel> list = repository.getAllKhachHang1();
         list.subList(0, 3);
     }
+
+    public List<KhachHangViewModel> searchKhachSDT(String sdt, int rowOffset) {
+        String query = "SELECT\n"
+                + "      id,[ten_khach_hang]\n"
+                + "      ,[ngay_sinh]\n"
+                + "      ,[sdt]\n"
+                + "      ,[email]\n"
+                + "      ,[dia_chi]\n"
+                + "  FROM [dbo].[KhachHang]"
+                + "where sdt like ?"
+                + "  order by id\n"
+                + "  offset ? rows\n"
+                + "  fetch next 5 rows only  ";
+        List<KhachHangViewModel> list = new ArrayList<>();
+        String a = "%" + sdt + "%";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, a);
+            ps.setObject(2, rowOffset);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                KhachHangViewModel kh = new KhachHangViewModel(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                list.add(kh);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
 }

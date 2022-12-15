@@ -35,6 +35,7 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
     private List<KhachHangViewModel> listSearch = new ArrayList<>();
     private List<KhachHangViewModel> listSearchDiaChi = new ArrayList<>();
     private KhachHangService service = new KhachHangServiceImpl();
+    private List<KhachHangViewModel> listSearchSDT = new ArrayList<>();
     int rowOffset = 0;
     int fetch = 5;
     String name = "";
@@ -284,7 +285,7 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
 
         jLabel8.setText("Tim kiem theo: ");
 
-        cbbSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ten", "Dia Chi" }));
+        cbbSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ten", "Dia Chi", "So dien thoai" }));
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -597,7 +598,20 @@ public class KhachHangViewNhanVien extends javax.swing.JFrame {
                 service.showDataTable(dtm, listSearchDiaChi);
             }
         }
+        if (cbbSearch.getSelectedIndex() == 2) {
+            name = txtSearch.getText();
+            listSearchSDT = service.searchKhachHangSDT(name, rowOffset);
+            listSearch = service.searchKhachHangSDT(name, rowOffset);
+            for (KhachHangViewModel khachHangViewModel : listSearchSDT) {
+                System.out.println(khachHangViewModel.toString());
 
+            }
+            try {
+                service.showDataTable(dtm, listSearchSDT);
+            } catch (Exception e) {
+                service.showDataTable(dtm, listSearchSDT);
+            }
+        }
         if (txtSearch.getText().isEmpty()) {
             listKhachHangView = service.getAllKhachHang(rowOffset);
             service.showDataTable(dtm, listKhachHangView);

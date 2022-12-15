@@ -23,6 +23,8 @@ public interface KhachHangService {
 
     List<KhachHangViewModel> searchKhachHangDiaChi(String diaChiKhachHang, int rowOffset);
 
+    List<KhachHangViewModel> searchKhachHangSDT(String sdt, int rowOffset);
+
     void showDataTable(DefaultTableModel dtm, List<KhachHangViewModel> list);
 
     String addKhachHang(KhachHang kh);

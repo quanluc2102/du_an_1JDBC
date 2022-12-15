@@ -81,4 +81,11 @@ public class KhachHangServiceImpl implements KhachHangService {
         return repo.getAllKhachHang1();
     }
 
+    @Override
+    public List<KhachHangViewModel> searchKhachHangSDT(String sdt, int rowOffset) {
+        List<KhachHangViewModel> listSearch = new ArrayList<>();
+        listSearch = repo.searchKhachSDT(sdt, rowOffset);
+        return listSearch;
+    }
+
 }
