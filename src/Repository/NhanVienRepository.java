@@ -7,6 +7,7 @@ package Repository;
 import DomainModel.NhanVien;
 import Ultilities.SQLServerConnection;
 import ViewModel.CMNDViewModel;
+import ViewModel.CheckSDT;
 import ViewModel.LoginViewModel;
 import ViewModel.NhanVienView;
 import ViewModel.ThongTinNguoiDungView;
@@ -106,12 +107,7 @@ public class NhanVienRepository {
 
     }
 
-    public static void main(String[] args) {
-        List<NhanVienView> l = new NhanVienRepository().getAll();
-        for (NhanVienView nhanVien : l) {
-            System.out.println(nhanVien.toString());
-        }
-    }
+
 
     public boolean chuyenTTNV(String id) {
         String query = "UPDATE [dbo].[NhanVien]\n"
@@ -201,6 +197,53 @@ public class NhanVienRepository {
         }
         return list;
     }
+        public List<NhanVienView> searchNhanVienSDT(String sdt) {
+        String query = "SELECT        dbo.NhanVien.id, dbo.NhanVien.ma_nhan_vien, dbo.NhanVien.ten_nhan_vien, dbo.NhanVien.id_chuc_vu, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.ngay_sinh, dbo.NhanVien.sdt, dbo.NhanVien.email, dbo.NhanVien.dia_chi, \n"
+                + "                         dbo.NhanVien.mat_khau, dbo.NhanVien.trang_thai, dbo.NhanVien.cmnd\n"
+                + "FROM            dbo.NhanVien INNER JOIN\n"
+                + "                         dbo.ChucVu ON dbo.NhanVien.id_chuc_vu = dbo.ChucVu.id where sdt like ?";
+        List<NhanVienView> list = new ArrayList<>();
+        String a = "%" + sdt + "%";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, a);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                NhanVienView nv = new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11), rs.getString(12));
+                list.add(nv);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
+             public List<NhanVienView> searchNhanViencmnd(String cmnd) {
+        String query = "SELECT        dbo.NhanVien.id, dbo.NhanVien.ma_nhan_vien, dbo.NhanVien.ten_nhan_vien, dbo.NhanVien.id_chuc_vu, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.ngay_sinh, dbo.NhanVien.sdt, dbo.NhanVien.email, dbo.NhanVien.dia_chi, \n"
+                + "                         dbo.NhanVien.mat_khau, dbo.NhanVien.trang_thai, dbo.NhanVien.cmnd\n"
+                + "FROM            dbo.NhanVien INNER JOIN\n"
+                + "                         dbo.ChucVu ON dbo.NhanVien.id_chuc_vu = dbo.ChucVu.id where cmnd like ?";
+        List<NhanVienView> list = new ArrayList<>();
+        String a = "%" + cmnd + "%";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, a);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                NhanVienView nv = new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11), rs.getString(12));
+                list.add(nv);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
+            public static void main(String[] args) {
+        List<NhanVienView> l = new NhanVienRepository().searchNhanVienSDT("0");
+        for (NhanVienView nhanVien : l) {
+            System.out.println(nhanVien.toString());
+        }
+    }
+            
 
     public List<ThongTinNguoiDungView> layThongTin(String ma) {
         String query = "SELECT       dbo.NhanVien.ten_nhan_vien, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.ngay_sinh, dbo.NhanVien.sdt, dbo.NhanVien.email, dbo.NhanVien.dia_chi, \n"
@@ -274,6 +317,25 @@ public class NhanVienRepository {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 CMNDViewModel a = new CMNDViewModel(rs.getString(1));
+                list.add(a);
+            }
+            return list;
+        } catch (SQLException s) {
+            s.printStackTrace(System.out);
+        }
+        return null;
+    }
+          public List<CheckSDT> getAllCheckTrungsdt(String sdt) {
+        String query = "SELECT sdt\n"
+                + "\n"
+                + "  FROM [dbo].[NhanVien] where sdt= ?";
+        List<CheckSDT> list = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, sdt);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CheckSDT a = new CheckSDT(rs.getString(1));
                 list.add(a);
             }
             return list;

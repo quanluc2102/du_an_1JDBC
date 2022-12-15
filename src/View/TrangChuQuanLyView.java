@@ -10,6 +10,7 @@ import Service.NhanVienService;
 import Service.ServiceImpl.LoginImpl;
 import Service.ServiceImpl.NhanVienServiceImpl;
 import ViewModel.CMNDViewModel;
+import ViewModel.CheckSDT;
 import ViewModel.ClockThread;
 //import Service.LoginService;
 //import Service.NhanVienService;
@@ -131,16 +132,20 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         impl.checkTrungIMEI(txtMaNV.getText(), list);
         List<CMNDViewModel> listcmnd = new ArrayList<>();
         impl.checkTrungCMND(txtCMND.getText(), listcmnd);
-        
+        List<CheckSDT> listsdt = new ArrayList<>();
+        impl.checkTrungsdt(txtSDT.getText(), listsdt);
+
         if (txtMaNV.getText().isEmpty()) {
             txtRPMa.setText("Mã không được để Trống");
             txtRPMa.setForeground(Color.red);
         } else if (txtMaNV.getText().matches("/^[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]*$/")) {
             txtRPMa.setText("Mã không được chứa kí tự đặc biệt");
             txtRPMa.setForeground(Color.red);
-        }
+        }else
         if (list.size() > 0) {
             JOptionPane.showMessageDialog(rootPane, "Mã nhân viên đã tồn tại");
+            txtRPMa.setText("*");
+            txtRPMa.setForeground(Color.yellow);
         } else {
             txtRPMa.setText("*");
             txtRPMa.setForeground(Color.green);
@@ -211,7 +216,11 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
             txtRPSDT.setText("Sai định dạng số điện thoại");
             txtRPSDT.setForeground(Color.red);
 
-        } else {
+        } else if (listsdt.size() > 0) {
+            JOptionPane.showMessageDialog(rootPane, "Số điện thoại đã tồn tại");
+            txtRPSDT.setText("*");
+            txtRPSDT.setForeground(Color.yellow);
+        }else {
             txtRPSDT.setText("*");
             txtRPSDT.setForeground(Color.GREEN);
 
@@ -229,20 +238,23 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
 
             conf7 = true;
         }
-        if (cbbCV.getSelectedIndex() == -1) {
-            cbbRPCV.setForeground(Color.red);
-            cbbRPCV.setText("Hãy chọn chức vụ");
-        } else {
-            nv.setIdChucVu(idCV.get(cbbCV.getSelectedIndex()));
-            conf8 = true;
-        }
+//        if (cbbCV.getSelectedIndex() == -1) {
+//            cbbRPCV.setForeground(Color.red);
+//            cbbRPCV.setText("Hãy chọn chức vụ");
+//        } else {
+//            nv.setIdChucVu(idCV.get(cbbCV.getSelectedIndex()));
+//            conf8 = true;
+//        }
         if (txtCMND.getText().isEmpty()) {
             txtRPCMND.setText("Mật khậu đang trống");
             txtRPCMND.setForeground(Color.red);
 
-        } if (listcmnd.size() > 0) {
+        }else
+        if (listcmnd.size() > 0) {
             JOptionPane.showMessageDialog(rootPane, "Số CMND đã tồn tại");
-        }else {
+               txtRPCMND.setText("*");
+            txtRPCMND.setForeground(Color.yellow);
+        } else {
             txtRPCMND.setText("*");
             txtRPCMND.setForeground(Color.GREEN);
             nv.setCmnd(txtCMND.getText());
@@ -258,7 +270,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
 
 //        System.out.println(nv.toString());
 //        JOptionPane.showMessageDialog(rootPane, impl.dangKi(nv));
-        if (conf1 == true && conf2 == true && conf3 == true && conf4 == true && conf5 == true && conf6 == true && conf7 == true && conf8 == true && conf9) {
+        if (conf1 == true && conf2 == true && conf3 == true && conf4 == true && conf5 == true && conf6 == true && conf7 == true && conf9==true) {
             nv.setMatKhau(txtPass.getText());
             JOptionPane.showMessageDialog(rootPane, impl.dangKi(nv));
             System.out.println(nv.toString());
@@ -545,7 +557,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         txtSDT.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255), new java.awt.Color(204, 204, 204)));
         jPanel4.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, 221, 30));
         jPanel4.add(txtRPSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 220, 18));
-        jPanel4.add(cbbRPCV, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 220, 20));
+        jPanel4.add(cbbRPCV, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, 220, 20));
 
         jLabel10.setText("Email");
         jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, -1, -1));
@@ -563,7 +575,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         txtPass.setForeground(new java.awt.Color(255, 255, 255));
         txtPass.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jPanel4.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, 220, 30));
-        jPanel4.add(txtRPMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, 221, 22));
+        jPanel4.add(txtRPMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, 221, 20));
 
         jLabel14.setText("Trạng thái");
         jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 350, -1, -1));
@@ -772,12 +784,12 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
 
         jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 0, 40, 30));
 
-        combobox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tên nhân viên", "Mã nhân viên ", "Số điện thoại", "CMND", " " }));
+        combobox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tên nhân viên", "Số điện thoại" }));
         combobox1.setLabeText("Search");
         jPanel4.add(combobox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, 180, 40));
 
         cbbCV.setLabeText("Chức vụ");
-        jPanel4.add(cbbCV, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 180, 40));
+        jPanel4.add(cbbCV, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 180, 40));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 1410, 950));
 
@@ -953,8 +965,16 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
         name = txtSearch.getText();
+        if(combobox1.getSelectedIndex()==0){
         listNV = impl.searchNhanVien(name);
         impl.showData(dtm, listNV);
+    }if(combobox1.getSelectedIndex()==1){
+        listNV = impl.searchsdt(name);
+        impl.showData(dtm, listNV);
+                }
+        
+        
+        
 
     }//GEN-LAST:event_txtSearchKeyReleased
 
@@ -1004,15 +1024,15 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         txttDiaChi.setText(splits[3]);
         txtttGioiTinh.setText(splits[2]);
         String nam = splits[1].substring(4, 8);
-        
+
         String ngay = splits[1].substring(0, 2);
         String thang = splits[1].substring(2, 4);
         String NS = (ngay + "/" + thang + "/" + nam);
         txtttNgaySinh.setText(NS);
         namx = nam;
-        ngayx= ngay;
+        ngayx = ngay;
         thangx = thang;
-        
+
 //        txtTenNV.setText(splits[0]);
 //        txtDiaChiNV.setText(splits[3]);
 
@@ -1099,8 +1119,8 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         txtCMND.setText(txtttSo.getText());
         txtDiaChiNV.setText(txttDiaChi.getText());
-        
-        txtNgaySinhNV.setText(namx+"-"+thangx+"-"+ngayx);
+
+        txtNgaySinhNV.setText(namx + "-" + thangx + "-" + ngayx);
         txtPass.setText(UUID.randomUUID().toString().substring(0, 8));
         txtTenNV.setText(txtttHoTen.getText());
     }//GEN-LAST:event_jButton12ActionPerformed
@@ -1117,7 +1137,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
-        dtm.setRowCount(0);
+listNV = impl.getAll();
         impl.showData(dtm, listNV);
     }//GEN-LAST:event_btnUpdate1ActionPerformed
 

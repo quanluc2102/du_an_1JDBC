@@ -1,5 +1,6 @@
 package combobox;
 
+import combo_suggestion.ScrollBarCustom;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FontMetrics;
@@ -32,7 +33,6 @@ import javax.swing.plaf.basic.ComboPopup;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
-import scrollbar.ScrollBarCustom;
 
 public class Combobox<E> extends JComboBox<E> {
 
