@@ -10,6 +10,7 @@ import Repository.ChucVuRepository;
 import Repository.LoginRepository;
 import Repository.NhanVienRepository;
 import Service.NhanVienService;
+import ViewModel.CMNDViewModel;
 import ViewModel.NhanVienView;
 import ViewModel.ThongTinNguoiDungView;
 import ViewModel.checkTrungManv;
@@ -118,6 +119,11 @@ public class NhanVienServiceImpl implements NhanVienService {
     @Override
     public void checkTrungIMEI(String maHD, List<checkTrungManv> list) {
       list.addAll(Nvrp.getAllHoaDonCheckTrung(maHD));
+    }
+
+    @Override
+    public void checkTrungCMND(String cmnd, List<CMNDViewModel> list) {
+        list.addAll(Nvrp.getAllCheckTrungCMND(cmnd));
     }
     
 }

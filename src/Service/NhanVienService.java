@@ -5,6 +5,7 @@
 package Service;
 
 import DomainModel.NhanVien;
+import ViewModel.CMNDViewModel;
 import ViewModel.NhanVienView;
 import ViewModel.ThongTinNguoiDungView;
 import ViewModel.checkTrungManv;
@@ -40,4 +41,6 @@ public interface NhanVienService {
     List<ThongTinNguoiDungView> layThongTin(String ma);
     
     void checkTrungIMEI(String maHD,List<checkTrungManv> list);
+    
+    void checkTrungCMND(String cmnd,List<CMNDViewModel> list);
 }

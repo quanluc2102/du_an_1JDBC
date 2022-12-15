@@ -6,6 +6,7 @@ package Repository;
  */
 import DomainModel.NhanVien;
 import Ultilities.SQLServerConnection;
+import ViewModel.CMNDViewModel;
 import ViewModel.LoginViewModel;
 import ViewModel.NhanVienView;
 import ViewModel.ThongTinNguoiDungView;
@@ -254,6 +255,25 @@ public class NhanVienRepository {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 checkTrungManv a = new checkTrungManv(rs.getString(1));
+                list.add(a);
+            }
+            return list;
+        } catch (SQLException s) {
+            s.printStackTrace(System.out);
+        }
+        return null;
+    }
+     public List<CMNDViewModel> getAllCheckTrungCMND(String cmnd) {
+        String query = "SELECT cmnd\n"
+                + "\n"
+                + "  FROM [dbo].[NhanVien] where cmnd= ?";
+        List<CMNDViewModel> list = new ArrayList<>();
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, cmnd);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CMNDViewModel a = new CMNDViewModel(rs.getString(1));
                 list.add(a);
             }
             return list;
