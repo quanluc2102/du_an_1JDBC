@@ -1061,7 +1061,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/image/z3946860666735_30f52c7f5e3d1a6b5fd11409bdce2492.jpg"/>
+                      <Image iconType="3" name="/image/inBox.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="L&#x1ea5;y th&#xf4;ng tin"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">

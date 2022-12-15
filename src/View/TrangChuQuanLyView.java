@@ -219,6 +219,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         String vadidateSDT = txtSDT.getText();
         if (txtSDT.getText().isEmpty()) {
             txtRPSDT.setText("Số điện thoại đang trống");
+            txtRPSDT.setForeground(Color.red);
 
         } else if (!vadidateSDT.matches("(84|0[3|5|7|8|9])+([0-9]{8})\\b")) {
             txtRPSDT.setText("Sai định dạng số điện thoại");
@@ -728,7 +729,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
 
         jButton12.setBackground(new java.awt.Color(51, 51, 51));
         jButton12.setForeground(new java.awt.Color(255, 255, 255));
-        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/z3946860666735_30f52c7f5e3d1a6b5fd11409bdce2492.jpg"))); // NOI18N
+        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/inBox.png"))); // NOI18N
         jButton12.setText("Lấy thông tin");
         jButton12.setBorder(null);
         jButton12.addActionListener(new java.awt.event.ActionListener() {
