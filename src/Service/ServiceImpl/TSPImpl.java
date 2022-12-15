@@ -250,12 +250,18 @@ public class TSPImpl implements ThemSPServices {
 
     @Override
     public String suaDong(Dong ha) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (new SanPhamRespository().suaDong(ha)) {
+            return "Sửa thành công";
+        }
+        return "Sửa thất bại";
     }
 
     @Override
     public String xoaDong(Dong ha, int tt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (new SanPhamRespository().xoaDong(ha, tt)) {
+            return "Sửa thành công";
+        }
+        return "Sửa thất bại";
     }
 
     @Override

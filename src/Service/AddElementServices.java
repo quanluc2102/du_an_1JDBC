@@ -19,6 +19,9 @@ public interface AddElementServices {
     List<vts> view(ThongSoViewModel t);
 
     String themThongSo(ThongSo t);
+    
+    
+    
 
     String themQuocGiaDong(QuocGiaDong qgd);
     

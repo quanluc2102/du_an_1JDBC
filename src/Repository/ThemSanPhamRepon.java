@@ -21,7 +21,7 @@ import java.util.List;
  * @author haha
  */
 public class ThemSanPhamRepon {
-    
+
     public boolean ThemSP(ThongSo ts) {
         String query = "INSERT INTO [dbo].[ThongSo]\n"
                 + "           ([id_dong]\n"
@@ -50,15 +50,15 @@ public class ThemSanPhamRepon {
             ps.setObject(9, ts.getThietKe());
             ps.setObject(10, 1);
             ps.setObject(11, ts.getPin());
-            
+
             sp = ps.executeUpdate();
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return sp > 0;
     }
-    
+
     public boolean ThemQGD(QuocGiaDong ts) {
         String query = "INSERT INTO [dbo].[QuocGiaDong]\n"
                 + "           ([id_dong]\n"
@@ -76,9 +76,9 @@ public class ThemSanPhamRepon {
             ps.setObject(3, ts.getGiaBan());
             ps.setObject(4, ts.getGiaNhap());
             ps.setObject(5, ts.getSrcAnh());
-            
+
             sp = ps.executeUpdate();
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
@@ -87,39 +87,40 @@ public class ThemSanPhamRepon {
 
     public List<QuocGiaDong> getQGD() {
         String query = "select * from quocGiaDong";
-        
+
         List<QuocGiaDong> qgd = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 qgd.add(new QuocGiaDong(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getDouble(5), rs.getString(6)));
-                
+
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return qgd;
     }
+
     public List<QuocGiaDong> getQGD2(String id) {
         String query = "select * from quocGiaDong where id =?";
-        
+
         List<QuocGiaDong> qgd = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 qgd.add(new QuocGiaDong(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getDouble(5), rs.getString(6)));
-                
+
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return qgd;
     }
-    
+
     public boolean ThemDT(DienThoai ts) {
         String query = "INSERT INTO [dbo].[DienThoai]\n"
                 + "           ([ma_dien_thoai]\n"
@@ -136,15 +137,15 @@ public class ThemSanPhamRepon {
             ps.setObject(1, ts.getMa());
             ps.setObject(2, ts.getTen());
             ps.setObject(3, ts.getIdHang());
-            
+
             sp = ps.executeUpdate();
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return sp > 0;
     }
-    
+
     public boolean ThemCTDT(ChiTietDienThoai ts) {
         String query = "INSERT INTO [dbo].[ChiTietDienThoai]\n"
                 + "           ([IMEI]\n"
@@ -165,15 +166,15 @@ public class ThemSanPhamRepon {
             ps.setObject(3, ts.getMoi());
             ps.setObject(4, ts.getMoTa());
             ps.setObject(5, ts.getIdQuocGiaDong());
-            
+
             sp = ps.executeUpdate();
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return sp > 0;
     }
-    
+
     public boolean Xoa(String id) {
         String query = "UPDATE [dbo].[ChiTietDienThoai]\n"
                 + "   SET [trang_thai] = 0\n"
@@ -182,13 +183,13 @@ public class ThemSanPhamRepon {
         int sp = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, id);
-            
+
             sp = ps.executeUpdate();
-            
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return sp > 0;
     }
-    
+
 }

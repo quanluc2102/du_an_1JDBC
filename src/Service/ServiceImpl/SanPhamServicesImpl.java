@@ -40,6 +40,7 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public ThongSoViewModel getAllThongSo(String id) {
+        
         return new SanPhamRespository().getAllThongSoView(id);
     }
 

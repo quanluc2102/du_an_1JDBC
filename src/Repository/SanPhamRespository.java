@@ -270,6 +270,45 @@ public class SanPhamRespository {
         return sp > 0;
     }
 
+    public boolean suaDong(Dong hdh) {
+        String query = "UPDATE [dbo].[Dong]\n"
+                + "   SET [ma_dong] = ?\n"
+                + "      ,[ten_dong] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + " WHERE  id = ?";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getMa());
+            ps.setObject(2, hdh.getTen());
+            ps.setObject(3, hdh.getTrangThai());
+            ps.setObject(4, hdh.getId());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+    public boolean xoaDong(Dong hdh,int tt) {
+        String query = "UPDATE [dbo].[Dong]\n"
+                + "   SET [ma_dong] = ?\n"
+                + "      ,[ten_dong] = ?\n"
+                + "      ,[trang_thai] = ?\n"
+                + " WHERE  id = ?";
+        int sp = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hdh.getMa());
+            ps.setObject(2, hdh.getTen());
+            ps.setObject(3, tt);
+            ps.setObject(4, hdh.getId());
+            sp = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return sp > 0;
+    }
+
     public boolean xoaHDH(HeDieuHanh hdh, int tt) {
         String query = "UPDATE [dbo].[HeDieuHanh]\n"
                 + "   SET [ten_he_dieu_hanh] =?\n"

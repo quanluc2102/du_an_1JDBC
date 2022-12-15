@@ -11,7 +11,7 @@ package DomainModel;
 public class ChiTietDienThoai {
 
     private String IMEI;
-    private Boolean trangThai;
+    private int trangThai;
     private int moi;
     private String moTa;
     private String idQuocGiaDong;
@@ -19,7 +19,7 @@ public class ChiTietDienThoai {
     public ChiTietDienThoai() {
     }
 
-    public ChiTietDienThoai(String IMEI, Boolean trangThai, int moi, String moTa, String idQuocGiaDong) {
+    public ChiTietDienThoai(String IMEI, int trangThai, int moi, String moTa, String idQuocGiaDong) {
         this.IMEI = IMEI;
         this.trangThai = trangThai;
         this.moi = moi;
@@ -35,11 +35,11 @@ public class ChiTietDienThoai {
         this.IMEI = IMEI;
     }
 
-    public Boolean getTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(Boolean trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
 
