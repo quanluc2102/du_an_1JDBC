@@ -45,6 +45,16 @@ public class KhuyenMaiViewModel {
         this.trangThai = trangThai;
     }
 
+    public KhuyenMaiViewModel(String ma, Date ngayBatDau, Date ngayKetThuc, double giaGiam, boolean donVi, String moTa) {
+        this.ma = ma;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
+        this.giaGiam = giaGiam;
+        this.donVi = donVi;
+        this.moTa = moTa;
+    }
+    
+
     public String getId() {
         return id;
     }

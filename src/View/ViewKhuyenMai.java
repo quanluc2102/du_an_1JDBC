@@ -4,9 +4,16 @@
  */
 package View;
 
+import DomainModel.KhachHang;
+import Service.Email;
+import Service.KhachHangService;
 import Service.KhuyenMaiService;
+import Service.ServiceImpl.EmailimplGiang;
+import Service.ServiceImpl.KhachHangServiceImpl;
 import Service.ServiceImpl.KhuyenMaiServiceimpl;
+import ViewModel.KhachHangViewModel;
 import ViewModel.KhuyenMaiViewModel;
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,12 +27,17 @@ import javax.swing.table.DefaultTableModel;
  * @author togia
  */
 public class ViewKhuyenMai extends javax.swing.JFrame {
-    
+
     private DefaultTableModel dtm = new DefaultTableModel();
     private DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
     private List<KhuyenMaiViewModel> list = new ArrayList<>();
     private List<String> listcombobox = new ArrayList<>();
     private KhuyenMaiService service = new KhuyenMaiServiceimpl();
+    private List<KhachHangViewModel> listKH = new ArrayList<>();
+    private KhachHangServiceImpl service1 = new KhachHangServiceImpl();
+    private EmailimplGiang email = new EmailimplGiang();
+    private File file = new File("");
+
     int rowOffset = 0;
     int fetch = 5;
     String name = "";
@@ -46,30 +58,33 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
         listcombobox.add("Kết thúc");
         dcbm.addAll(listcombobox);
         dcbm.setSelectedItem("Sắp diễn ra");
+        service.upDateTrangThai();
         service.getAll(list);
-       //list = service.getAllDem(rowOffset);
+        listKH = service1.getAllKhachHang1();
+        //list = service.getAllDem(rowOffset);
         System.out.println(rowOffset);
         o = service.getAllDem(rowOffset).size() / fetch;
+
         loadSoTrang();
-        
+
     }
-    
+
     private void loadSoTrang() {
         lbLoadTrang.setText(index + 1 + "");
     }
-    
+
     private int kk() {
         int n = rowOffset += 5;
         return n;
     }
-    
+
     public void showdataTable(List<KhuyenMaiViewModel> list) {
         dtm.setRowCount(0);
         for (KhuyenMaiViewModel km : list) {
             dtm.addRow(km.toDataRow());
         }
     }
-    
+
     public void fillData(int index) {
         KhuyenMaiViewModel km = list.get(index);
         lbID.setText(km.getId());
@@ -84,7 +99,7 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
         } else {
             radioPhanTram.setSelected(true);
         }
-        
+
     }
 
     /**
@@ -566,15 +581,6 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
         String moTa = txtMoTa.getText();
         boolean donVi = radioTruTien.isSelected();
         Double giaGiam = Double.valueOf(txtGiaGiam.getText());
-        int trangThai = 0;
-        if (cbbTrangThai.getSelectedItem() == "Đang diễn ra") {
-            trangThai = 0;
-            
-        } else if (cbbTrangThai.getSelectedItem() == "Sắp diễn ra") {
-            trangThai = 1;
-        } else {
-            trangThai = 2;
-        }
         String ngayBD = txtNgayBD.getText();
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate1 = LocalDate.parse(ngayBD, formatter1);
@@ -585,15 +591,19 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
         LocalDate localDate2 = LocalDate.parse(ngayKT, formatter2);
         java.sql.Date ngayKTs = java.sql.Date.valueOf(localDate2);
         kh.setNgayKetThuc(ngayKTs);
-        KhuyenMaiViewModel km = new KhuyenMaiViewModel(ma, ngayBDs, ngayKTs, giaGiam, donVi, moTa, trangThai);
+        KhuyenMaiViewModel km = new KhuyenMaiViewModel(ma, ngayBDs, ngayKTs, giaGiam, donVi, moTa);
         JOptionPane.showMessageDialog(rootPane, service.add(km));
         list.removeAll(list);
+        service.upDateTrangThai();     
+        for (KhachHangViewModel khachHangViewModel : listKH) {
+            email.sendEmail1(khachHangViewModel.getEmail(), "Đã thêm mã KM mới","Mời bạn đến cửa hàng để nhận được nhiều ưu đãi");                
+        }
         service.getAll(list);
         showdataTable(list);
     }//GEN-LAST:event_btAddActionPerformed
 
     private void btEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditActionPerformed
-        
+
         KhuyenMaiViewModel km = new KhuyenMaiViewModel();
         String id = lbID.getText();
         km.setMa(txtMaKM.getText());
@@ -605,7 +615,7 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
         int trangThai = 0;
         if (cbbTrangThai.getSelectedItem() == "Đang diễn ra") {
             trangThai = 0;
-            
+
         } else if (cbbTrangThai.getSelectedItem() == "Sắp diễn ra") {
             trangThai = 1;
         } else {
@@ -694,7 +704,7 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
             list = service.getAllDem(rowOffset);
             showdataTable(list);
             loadSoTrang();
-            
+
         }
     }//GEN-LAST:event_btnextActionPerformed
 
@@ -710,7 +720,7 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
     }//GEN-LAST:event_btNexttActionPerformed
 
     private void btSauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSauActionPerformed
-        
+
         if (txtSearch.getText().isEmpty()) {
             index--;
             rowOffset -= 5;
@@ -726,7 +736,7 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
     }//GEN-LAST:event_btSauActionPerformed
 
     private void btSauuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSauuActionPerformed
-      if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
+        if (txtSearch.getText().isEmpty() || txtSearch.getText().isBlank()) {
             index = 0;        // TODO add your handling code here:
             int c = service.getAllDem(rowOffset).size() % fetch;
             rowOffset = 0;
@@ -736,11 +746,11 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
     }//GEN-LAST:event_btSauuActionPerformed
     }
     private void btSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSendActionPerformed
-          ChonEmailView emai = new ChonEmailView(this, rootPaneCheckingEnabled);
-          this.dispose();
-          emai.setVisible(true);
+        ChonEmailView emai = new ChonEmailView(this, rootPaneCheckingEnabled);
+        this.dispose();
+        emai.setVisible(true);
     }//GEN-LAST:event_btSendActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */

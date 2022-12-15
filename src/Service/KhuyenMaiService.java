@@ -35,4 +35,6 @@ public interface KhuyenMaiService {
     List<KhuyenMaiViewModel> listShowDaKT(List<KhuyenMaiViewModel> listKhuyenMais);
 
     void sapXep(List<KhuyenMaiViewModel> list);
+
+    public void upDateTrangThai();
 }

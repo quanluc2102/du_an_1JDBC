@@ -155,4 +155,9 @@ public class KhuyenMaiServiceimpl implements KhuyenMaiService {
 
     }
 
+    @Override
+    public void upDateTrangThai() {
+        rs.upDateTrangThai();
+    }
+
 }

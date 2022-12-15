@@ -13,4 +13,5 @@ import java.io.File;
 public interface EmailGiang {
 
     String sendEmail(String emailSend, String pass, String emailTo, String subJect, String messen,File file);
+    String sendEmail1( String emailTo, String subJect, String messen);
 }

@@ -100,15 +100,16 @@ public class KhuyenMaiResponsitory {
 
     public boolean add(KhuyenMaiViewModel km) {
         String query = "INSERT INTO [dbo].[KhuyenMai]\n"
-                + "           ([ma_khuyen_mai]\n"
+                + "           (\n"
+                + "           [ma_khuyen_mai]\n"
                 + "           ,[ngay_bat_dau]\n"
                 + "           ,[ngay_ket_thuc]\n"
                 + "           ,[gia_giam]\n"
                 + "           ,[don_vi]\n"
                 + "           ,[mo_ta]\n"
-                + "           ,[trang_thai])\n"
+                + ")\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,?,?,?)";
+                + "           (?,?,?,?,?,?)";
         int check = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
 
@@ -118,7 +119,7 @@ public class KhuyenMaiResponsitory {
             ps.setObject(4, km.getGiaGiam());
             ps.setObject(5, km.isDonVi());
             ps.setObject(6, km.getMoTa());
-            ps.setObject(7, km.getTrangThai());
+
             check = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
@@ -164,6 +165,22 @@ public class KhuyenMaiResponsitory {
             e.printStackTrace(System.out);
         }
         return check > 0;
+    }
+
+    public void upDateTrangThai() {
+        String query = "UPDATE [dbo].[KhuyenMai]\n"
+                + "   SET trang_thai= 0 where ngay_bat_dau <=  GETDATE() and ngay_ket_thuc >= GETDATE()\n"
+                + "UPDATE [dbo].[KhuyenMai]\n"
+                + "   SET trang_thai= 1  where ngay_bat_dau > GETDATE()    \n"
+                + " UPDATE [dbo].[KhuyenMai]\n"
+                + "   SET trang_thai= 2  where  ngay_ket_thuc < GETDATE()  ";
+        int check = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            check = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
     }
 
 }
