@@ -208,13 +208,14 @@ DefaultTableModel dtm;
                 int result = ps.executeUpdate();
                 if (result > 0) {
                     insertedRows++;
-                    JOptionPane.showMessageDialog(null, insertedRows + " Du lieu da duoc them");
+
                 }
+
             } catch (Exception e) {
                 e.printStackTrace(System.out);
             }
         }
-
+        JOptionPane.showMessageDialog(null, " Du lieu da duoc them");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

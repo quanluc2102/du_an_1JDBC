@@ -35,6 +35,7 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
     private List<KhachHangViewModel> listSearch = new ArrayList<>();
     private List<KhachHangViewModel> listSearchDiaChi = new ArrayList<>();
     private KhachHangService service = new KhachHangServiceImpl();
+    private List<KhachHangViewModel> listSearchSDT = new ArrayList<>();
     int rowOffset = 0;
     int fetch = 5;
     String name = "";
@@ -632,6 +633,21 @@ public class KhachHangViewQuanLy extends javax.swing.JFrame {
                 service.showDataTable(dtm, listSearchDiaChi);
             } catch (Exception e) {
                 service.showDataTable(dtm, listSearchDiaChi);
+            }
+        }
+
+        if (cbbSearch.getSelectedIndex() == 2) {
+            name = txtSearch.getText();
+            listSearchSDT = service.searchKhachHangSDT(name, rowOffset);
+            listSearch = service.searchKhachHangSDT(name, rowOffset);
+            for (KhachHangViewModel khachHangViewModel : listSearchSDT) {
+                System.out.println(khachHangViewModel.toString());
+
+            }
+            try {
+                service.showDataTable(dtm, listSearchSDT);
+            } catch (Exception e) {
+                service.showDataTable(dtm, listSearchSDT);
             }
         }
 
