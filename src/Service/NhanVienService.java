@@ -40,8 +40,10 @@ public interface NhanVienService {
     List<NhanVienView> searchNhanVien(String tenNhanVien);
 
     List<NhanVienView> searchsdt(String sdt);
-    
+
     List<NhanVienView> searchcmnd(String cmnd);
+
+    List<NhanVienView> searchMaNV(String maNV);
 
     List<ThongTinNguoiDungView> layThongTin(String ma);
 

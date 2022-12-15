@@ -784,7 +784,7 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
 
         jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 0, 40, 30));
 
-        combobox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tên nhân viên", "Số điện thoại" }));
+        combobox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tên nhân viên", "Mã nhân viên", "Số điện thoại", "CMND" }));
         combobox1.setLabeText("Search");
         jPanel4.add(combobox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, 180, 40));
 
@@ -968,8 +968,16 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         if(combobox1.getSelectedIndex()==0){
         listNV = impl.searchNhanVien(name);
         impl.showData(dtm, listNV);
-    }if(combobox1.getSelectedIndex()==1){
+    }if(combobox1.getSelectedIndex()==2){
         listNV = impl.searchsdt(name);
+        impl.showData(dtm, listNV);
+                }
+    if(combobox1.getSelectedIndex()==3){
+        listNV = impl.searchcmnd(name);
+        impl.showData(dtm, listNV);
+                }
+        if(combobox1.getSelectedIndex()==1){
+        listNV = impl.searchMaNV(name);
         impl.showData(dtm, listNV);
                 }
         

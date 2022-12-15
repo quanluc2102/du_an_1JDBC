@@ -217,6 +217,26 @@ public class NhanVienRepository {
         }
         return list;
     }
+             public List<NhanVienView> searchNhanVienMaNV(String maNV) {
+        String query = "SELECT        dbo.NhanVien.id, dbo.NhanVien.ma_nhan_vien, dbo.NhanVien.ten_nhan_vien, dbo.NhanVien.id_chuc_vu, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.ngay_sinh, dbo.NhanVien.sdt, dbo.NhanVien.email, dbo.NhanVien.dia_chi, \n"
+                + "                         dbo.NhanVien.mat_khau, dbo.NhanVien.trang_thai, dbo.NhanVien.cmnd\n"
+                + "FROM            dbo.NhanVien INNER JOIN\n"
+                + "                         dbo.ChucVu ON dbo.NhanVien.id_chuc_vu = dbo.ChucVu.id where ma_nhan_vien like ?";
+        List<NhanVienView> list = new ArrayList<>();
+        String a = "%" + maNV + "%";
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, a);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                NhanVienView nv = new NhanVienView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getInt(11), rs.getString(12));
+                list.add(nv);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
              public List<NhanVienView> searchNhanViencmnd(String cmnd) {
         String query = "SELECT        dbo.NhanVien.id, dbo.NhanVien.ma_nhan_vien, dbo.NhanVien.ten_nhan_vien, dbo.NhanVien.id_chuc_vu, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.ngay_sinh, dbo.NhanVien.sdt, dbo.NhanVien.email, dbo.NhanVien.dia_chi, \n"
                 + "                         dbo.NhanVien.mat_khau, dbo.NhanVien.trang_thai, dbo.NhanVien.cmnd\n"

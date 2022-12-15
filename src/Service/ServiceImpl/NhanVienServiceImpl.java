@@ -133,6 +133,7 @@ public class NhanVienServiceImpl implements NhanVienService {
     public void checkTrungCMND(String cmnd, List<CMNDViewModel> list) {
         list.addAll(Nvrp.getAllCheckTrungCMND(cmnd));
     }
+    
 
     @Override
     public void checkTrungsdt(String sdt, List<CheckSDT> list) {
@@ -144,5 +145,12 @@ public class NhanVienServiceImpl implements NhanVienService {
  List<NhanVienView> listSearch = new ArrayList<>();
         listSearch = Nvrp.searchNhanViencmnd(cmnd);
         return listSearch;    }
+
+    @Override
+    public List<NhanVienView> searchMaNV(String maNV) {
+          List<NhanVienView> listSearch = new ArrayList<>();
+        listSearch = Nvrp.searchNhanVienMaNV(maNV);
+        return listSearch;
+    }
 
 }
