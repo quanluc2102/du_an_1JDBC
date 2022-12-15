@@ -181,7 +181,7 @@ public class NhanVienRepository {
     public List<NhanVienView> searchNhanVien(String name) {
         String query = "SELECT        dbo.NhanVien.id, dbo.NhanVien.ma_nhan_vien, dbo.NhanVien.ten_nhan_vien, dbo.NhanVien.id_chuc_vu, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.ngay_sinh, dbo.NhanVien.sdt, dbo.NhanVien.email, dbo.NhanVien.dia_chi, \n"
                 + "                         dbo.NhanVien.mat_khau, dbo.NhanVien.trang_thai, dbo.NhanVien.cmnd\n"
-                + "FROM            dbo.NhanVien INNER JOIN\n"
+                + "FROM            dbo.NhanVien left JOIN\n"
                 + "                         dbo.ChucVu ON dbo.NhanVien.id_chuc_vu = dbo.ChucVu.id where ten_nhan_vien like ?";
         List<NhanVienView> list = new ArrayList<>();
         String a = "%" + name + "%";
@@ -201,7 +201,7 @@ public class NhanVienRepository {
         public List<NhanVienView> searchNhanVienSDT(String sdt) {
         String query = "SELECT        dbo.NhanVien.id, dbo.NhanVien.ma_nhan_vien, dbo.NhanVien.ten_nhan_vien, dbo.NhanVien.id_chuc_vu, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.ngay_sinh, dbo.NhanVien.sdt, dbo.NhanVien.email, dbo.NhanVien.dia_chi, \n"
                 + "                         dbo.NhanVien.mat_khau, dbo.NhanVien.trang_thai, dbo.NhanVien.cmnd\n"
-                + "FROM            dbo.NhanVien INNER JOIN\n"
+                + "FROM            dbo.NhanVien left JOIN\n"
                 + "                         dbo.ChucVu ON dbo.NhanVien.id_chuc_vu = dbo.ChucVu.id where sdt like ?";
         List<NhanVienView> list = new ArrayList<>();
         String a = "%" + sdt + "%";
@@ -221,7 +221,7 @@ public class NhanVienRepository {
              public List<NhanVienView> searchNhanVienMaNV(String maNV) {
         String query = "SELECT        dbo.NhanVien.id, dbo.NhanVien.ma_nhan_vien, dbo.NhanVien.ten_nhan_vien, dbo.NhanVien.id_chuc_vu, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.ngay_sinh, dbo.NhanVien.sdt, dbo.NhanVien.email, dbo.NhanVien.dia_chi, \n"
                 + "                         dbo.NhanVien.mat_khau, dbo.NhanVien.trang_thai, dbo.NhanVien.cmnd\n"
-                + "FROM            dbo.NhanVien INNER JOIN\n"
+                + "FROM            dbo.NhanVien left JOIN\n"
                 + "                         dbo.ChucVu ON dbo.NhanVien.id_chuc_vu = dbo.ChucVu.id where ma_nhan_vien like ?";
         List<NhanVienView> list = new ArrayList<>();
         String a = "%" + maNV + "%";
@@ -241,7 +241,7 @@ public class NhanVienRepository {
              public List<NhanVienView> searchNhanViencmnd(String cmnd) {
         String query = "SELECT        dbo.NhanVien.id, dbo.NhanVien.ma_nhan_vien, dbo.NhanVien.ten_nhan_vien, dbo.NhanVien.id_chuc_vu, dbo.ChucVu.ten_chuc_vu, dbo.NhanVien.ngay_sinh, dbo.NhanVien.sdt, dbo.NhanVien.email, dbo.NhanVien.dia_chi, \n"
                 + "                         dbo.NhanVien.mat_khau, dbo.NhanVien.trang_thai, dbo.NhanVien.cmnd\n"
-                + "FROM            dbo.NhanVien INNER JOIN\n"
+                + "FROM            dbo.NhanVien left JOIN\n"
                 + "                         dbo.ChucVu ON dbo.NhanVien.id_chuc_vu = dbo.ChucVu.id where cmnd like ?";
         List<NhanVienView> list = new ArrayList<>();
         String a = "%" + cmnd + "%";

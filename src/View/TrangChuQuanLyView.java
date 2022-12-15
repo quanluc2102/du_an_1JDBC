@@ -75,8 +75,8 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
 //        testData();
         txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
         getContentPane().setBackground(new Color(255, 255, 255));
-        combobox1.setSelectedIndex(-1);
-        cbbCV.setSelectedIndex(-1);
+        combobox1.setSelectedIndex(0);
+        cbbCV.setSelectedIndex(0);
     }
 
     public void addCbb() {
@@ -389,8 +389,9 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         btnUpdate1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
-        combobox1 = new combobox.Combobox();
-        cbbCV = new combobox.Combobox();
+        combobox1 = new javax.swing.JComboBox<>();
+        cbbCV = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
         pnMenu = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         txtLayMa = new javax.swing.JLabel();
@@ -793,12 +794,13 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
 
         jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 0, 40, 30));
 
-        combobox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tên nhân viên", "Mã nhân viên", "Số điện thoại", "CMND" }));
-        combobox1.setLabeText("Search");
-        jPanel4.add(combobox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, 180, 40));
+        combobox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tên nhân viên", "Mã nhân viên", "SDT", "CMND" }));
+        jPanel4.add(combobox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 450, 130, 30));
 
-        cbbCV.setLabeText("Chức vụ");
-        jPanel4.add(cbbCV, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 180, 40));
+        jPanel4.add(cbbCV, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 220, 30));
+
+        jLabel9.setText("Chức vụ");
+        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, -1, -1));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 1410, 950));
 
@@ -1178,9 +1180,9 @@ listNV = impl.getAll();
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpdate1;
     private javax.swing.ButtonGroup buttonGroup1;
-    private combobox.Combobox cbbCV;
+    private javax.swing.JComboBox<String> cbbCV;
     private javax.swing.JLabel cbbRPCV;
-    private combobox.Combobox combobox1;
+    private javax.swing.JComboBox<String> combobox1;
     private javax.swing.JLabel id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -1220,6 +1222,7 @@ listNV = impl.getAll();
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
