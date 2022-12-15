@@ -14,7 +14,6 @@ public class SanPhamViewModel {
     private String srcAnh;
     private String ten;
     private String ma;
-    
     private String tenHang;
     private String tenDong;
     private String tenQuocGia;
@@ -78,7 +77,6 @@ public class SanPhamViewModel {
         this.giaBan = giaBan;
         this.giaNhap = giaNhap;
     }
-    
 
     public String getTenDong() {
         return tenDong;

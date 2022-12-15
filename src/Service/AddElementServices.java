@@ -19,12 +19,13 @@ public interface AddElementServices {
     List<vts> view(ThongSoViewModel t);
 
     String themThongSo(ThongSo t);
-    
-    
-    
+
+    String xoaQG(String id, int tt);
+
+    String xoaCTDT(String id);
 
     String themQuocGiaDong(QuocGiaDong qgd);
-    
+
     List<QuocGiaDong> getf(String x);
 
     String idQGD(QuocGiaDong qgd);

@@ -152,13 +152,15 @@ public class ThemSanPhamRepon {
                 + "           ,[trang_thai]\n"
                 + "           ,[moi]\n"
                 + "           ,[mo_ta]\n"
-                + "           ,[id_quoc_gia_dong])\n"
+                + "           ,[id_quoc_gia_dong]\n"
+                + "           ,[ngay_nhap])\n"
                 + "     VALUES\n"
                 + "           (?\n"
                 + "           ,?\n"
                 + "           ,?\n"
                 + "           ,?\n"
-                + "           ,?)";
+                + "           ,GETDATE())\n"
+                + "GO";
         int sp = 0;
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ts.getIMEI());

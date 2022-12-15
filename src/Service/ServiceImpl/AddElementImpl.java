@@ -6,6 +6,7 @@ package Service.ServiceImpl;
 
 import DomainModel.QuocGiaDong;
 import DomainModel.ThongSo;
+import Repository.SanPhamRespository;
 import Repository.ThemSanPhamRepon;
 import Service.AddElementServices;
 import ViewModel.ThongSoViewModel;
@@ -116,6 +117,17 @@ public class AddElementImpl implements AddElementServices {
     @Override
     public List<QuocGiaDong> getf(String x) {
         return new ThemSanPhamRepon().getQGD2(x);
+    }
+
+    @Override
+    public String xoaQG(String id, int tt) {
+        return new SanPhamRespository().XoaQ(id, tt);
+
+    }
+
+    @Override
+    public String xoaCTDT(String id) {
+        return new SanPhamRespository().XoaDTCT(id);
     }
 
 }

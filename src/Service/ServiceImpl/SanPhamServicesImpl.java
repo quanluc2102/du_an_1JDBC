@@ -5,6 +5,7 @@
 package Service.ServiceImpl;
 
 import DomainModel.BoNho;
+import DomainModel.ChiTietDienThoai;
 import DomainModel.Cpu;
 import DomainModel.DienThoai;
 import DomainModel.Dong;
@@ -40,7 +41,7 @@ public class SanPhamServicesImpl implements SanPhamServices {
 
     @Override
     public ThongSoViewModel getAllThongSo(String id) {
-        
+
         return new SanPhamRespository().getAllThongSoView(id);
     }
 
@@ -81,12 +82,12 @@ public class SanPhamServicesImpl implements SanPhamServices {
             return "them thanh cong";
         }
         for (HeDieuHanh heDieuHanh : new SanPhamRespository().getHDH(0)) {
-            if (heDieuHanh.getTenHDH().equalsIgnoreCase(hdh.getTenHDH())&&heDieuHanh.getPhienBan().equalsIgnoreCase(hdh.getTenHDH())) {
+            if (heDieuHanh.getTenHDH().equalsIgnoreCase(hdh.getTenHDH()) && heDieuHanh.getPhienBan().equalsIgnoreCase(hdh.getTenHDH())) {
                 return "Thông tin trùng";
             }
         }
         for (HeDieuHanh heDieuHanh : new SanPhamRespository().getHDH(1)) {
-            if (heDieuHanh.getTenHDH().equalsIgnoreCase(hdh.getTenHDH())&&heDieuHanh.getPhienBan().equalsIgnoreCase(hdh.getTenHDH())) {
+            if (heDieuHanh.getTenHDH().equalsIgnoreCase(hdh.getTenHDH()) && heDieuHanh.getPhienBan().equalsIgnoreCase(hdh.getTenHDH())) {
                 return "Thông tin trùng";
             }
         }
@@ -146,16 +147,16 @@ public class SanPhamServicesImpl implements SanPhamServices {
             return "Không được để trống thông tin";
         }
         for (ThietKe thietKe : new ThongSoReponsitory().getThietKe(0)) {
-            if (thietKe.getMatLung().equalsIgnoreCase(tk.getMatLung())&&
-                    thietKe.getMatTruoc().equalsIgnoreCase(tk.getMatTruoc())&&
-                    thietKe.getVien().equalsIgnoreCase(tk.getVien())) {
+            if (thietKe.getMatLung().equalsIgnoreCase(tk.getMatLung())
+                    && thietKe.getMatTruoc().equalsIgnoreCase(tk.getMatTruoc())
+                    && thietKe.getVien().equalsIgnoreCase(tk.getVien())) {
                 return "Thông tin bi trùng lặp";
             }
         }
         for (ThietKe thietKe : new ThongSoReponsitory().getThietKe(1)) {
-            if (thietKe.getMatLung().equalsIgnoreCase(tk.getMatLung())&&
-                    thietKe.getMatTruoc().equalsIgnoreCase(tk.getMatTruoc())&&
-                    thietKe.getVien().equalsIgnoreCase(tk.getVien())) {
+            if (thietKe.getMatLung().equalsIgnoreCase(tk.getMatLung())
+                    && thietKe.getMatTruoc().equalsIgnoreCase(tk.getMatTruoc())
+                    && thietKe.getVien().equalsIgnoreCase(tk.getVien())) {
                 return "Thông tin bi trùng lặp";
             }
         }
@@ -232,12 +233,12 @@ public class SanPhamServicesImpl implements SanPhamServices {
             return "Không được để trống thông tin";
         }
         for (Cpu cpu : new ThongSoReponsitory().getCpu(0)) {
-            if (cpu.getCPU().equalsIgnoreCase(tk.getCPU())&&cpu.getGPU().equalsIgnoreCase(tk.getGPU())) {
+            if (cpu.getCPU().equalsIgnoreCase(tk.getCPU()) && cpu.getGPU().equalsIgnoreCase(tk.getGPU())) {
                 return "Thông tin bị trùng";
             }
         }
         for (Cpu cpu : new ThongSoReponsitory().getCpu(1)) {
-            if (cpu.getCPU().equalsIgnoreCase(tk.getCPU())&&cpu.getGPU().equalsIgnoreCase(tk.getGPU())) {
+            if (cpu.getCPU().equalsIgnoreCase(tk.getCPU()) && cpu.getGPU().equalsIgnoreCase(tk.getGPU())) {
                 return "Thông tin bị trùng";
             }
         }
@@ -355,7 +356,7 @@ public class SanPhamServicesImpl implements SanPhamServices {
     }
 
     @Override
-    public int moi(String imei) {
+    public ChiTietDienThoai moi(String imei) {
         return new SanPhamRespository().getMoi(imei);
     }
 
@@ -518,6 +519,11 @@ public class SanPhamServicesImpl implements SanPhamServices {
     @Override
     public List<DienThoai> getDT() {
         return new CameraRepon().getDTLisst();
+    }
+
+    @Override
+    public List<SanPhamViewModel> getAlldx() {
+        return new SanPhamRespository().getAll2();
     }
 
 }

@@ -4,6 +4,7 @@
  */
 package Repository;
 
+import DomainModel.ChiTietDienThoai;
 import DomainModel.DienThoai;
 import DomainModel.Dong;
 import DomainModel.Hang;
@@ -26,21 +27,59 @@ import java.util.List;
  */
 public class SanPhamRespository {
 
-    public int getMoi(String imei) {
-        String query = " select moi from chitietdienthoai where imei =? ";
-        int moi = 0;
+    public ChiTietDienThoai getMoi(String imei) {
+        String query = " select moi,gia_ban_CT,gia_nhap_CT from chitietdienthoai where imei =? ";
+        ChiTietDienThoai ct = new ChiTietDienThoai();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, imei);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                moi = rs.getInt(1);
+               ct.setMoi(rs.getByte(1));
+               ct.setGiaban(rs.getDouble(2));
+               ct.setGiaNhap(rs.getDouble(3));
             }
 
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
-        return moi;
+        return ct;
+    }
+
+    public String XoaQ(String id, int tt) {
+        String query = "UPDATE [dbo].[ChiTietDienThoai]\n"
+                + "   SET [trang_thai] = ?\n"
+                + " WHERE id_quoc_gia_dong = ?";
+        int moi = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, tt);
+            ps.setObject(2, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                moi = rs.getInt(1);
+            }
+            return "Thành công";
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+            return "Thất bại";
+        }
+
+    }
+
+    public String XoaDTCT(String imei) {
+        String query = "delete ChiTietDienThoai\n"
+                + "where trang_thai = 1 and IMEI = ?";
+        int moi = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, imei);
+            moi = ps.executeUpdate();
+            return "Thành công";
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+            return "Thất bại";
+        }
+
     }
 
     public List<Hang> getHang() {
@@ -289,7 +328,8 @@ public class SanPhamRespository {
         }
         return sp > 0;
     }
-    public boolean xoaDong(Dong hdh,int tt) {
+
+    public boolean xoaDong(Dong hdh, int tt) {
         String query = "UPDATE [dbo].[Dong]\n"
                 + "   SET [ma_dong] = ?\n"
                 + "      ,[ten_dong] = ?\n"

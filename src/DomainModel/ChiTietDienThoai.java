@@ -15,10 +15,44 @@ public class ChiTietDienThoai {
     private int moi;
     private String moTa;
     private String idQuocGiaDong;
-
+    private double giaban;
+    private double giaNhap;
     public ChiTietDienThoai() {
     }
 
+    public ChiTietDienThoai(String IMEI, int trangThai, int moi, String moTa, String idQuocGiaDong, double giaban, double giaNhap) {
+        this.IMEI = IMEI;
+        this.trangThai = trangThai;
+        this.moi = moi;
+        this.moTa = moTa;
+        this.idQuocGiaDong = idQuocGiaDong;
+        this.giaban = giaban;
+        this.giaNhap = giaNhap;
+    }
+
+    public ChiTietDienThoai(int moi, double giaban, double giaNhap) {
+        this.moi = moi;
+        this.giaban = giaban;
+        this.giaNhap = giaNhap;
+    }
+    
+
+    public double getGiaban() {
+        return giaban;
+    }
+
+    public void setGiaban(double giaban) {
+        this.giaban = giaban;
+    }
+
+    public double getGiaNhap() {
+        return giaNhap;
+    }
+
+    public void setGiaNhap(double giaNhap) {
+        this.giaNhap = giaNhap;
+    }
+    
     public ChiTietDienThoai(String IMEI, int trangThai, int moi, String moTa, String idQuocGiaDong) {
         this.IMEI = IMEI;
         this.trangThai = trangThai;

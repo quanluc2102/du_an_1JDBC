@@ -27,6 +27,7 @@ import Service.ServiceImpl.AddElementImpl;
 import Service.ServiceImpl.SanPhamServicesImpl;
 import Service.ServiceImpl.TSPImpl;
 import Service.ThemSPServices;
+import ViewModel.SanPhamViewModel;
 import ViewModel.ThongSoViewModel;
 import ViewModel.vts;
 import java.awt.Image;
@@ -93,20 +94,13 @@ public class ViewADDSP extends javax.swing.JDialog {
     /**
      * Creates new form ViewADDSP
      */
-    public ViewADDSP(java.awt.Frame parent, boolean modal, String idQGD) {
+    public ViewADDSP(java.awt.Frame parent, boolean modal, SanPhamViewModel idQGD) {
         super(parent, modal);
 
         initComponents();
         modelCBB = (DefaultComboBoxModel) cbbIMEI.getModel();
         modelCBB.removeAllElements();
         modelTT = (DefaultTableModel) tblThongTin.getModel();
-
-        if (idQGD.isBlank() == false) {
-            ts = sps.getAllThongSo(idQGD);
-            idSQGD = idQGD;
-            star();
-        }
-        loadThongSo();
         srcAnh = "source\\No-Image-Placeholder.png";
         try {
             Image im = ImageIO.read(new File(srcAnh));
@@ -115,6 +109,18 @@ public class ViewADDSP extends javax.swing.JDialog {
         } catch (IOException e) {
             System.out.println("lỗi ảnh");
         }
+        if (idQGD != null) {
+            if (idQGD.getId().isBlank() == false) {
+                ts = sps.getAllThongSo(idQGD.getId());
+                idSQGD = idQGD.getId();
+                txtHang.setText(idQGD.getTenHang());
+                txtDT.setText(idQGD.getTen());
+                txtDong.setText(idQGD.getTenDong());
+                txtQuocGia.setText(idQGD.getTenQuocGia());
+                star();
+            }
+        }
+        loadThongSo();
         TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
 
     }
@@ -129,6 +135,7 @@ public class ViewADDSP extends javax.swing.JDialog {
     }
 
     private void star() {
+
         qgd = ae.getf(idSQGD).get(0);
         txtGiaBan.setText(df.format(qgd.getGiaBan()));
         txtGiaNhap.setText(df.format(qgd.getGiaNhap()));
@@ -219,12 +226,13 @@ public class ViewADDSP extends javax.swing.JDialog {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblThongTin = new javax.swing.JTable();
-        cbbIMEI = new javax.swing.JComboBox<>();
+        cbbIMEI = new combo_suggestion.ComboBoxSuggestion();
         jLabel13 = new javax.swing.JLabel();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -631,8 +639,14 @@ public class ViewADDSP extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        cbbIMEI.setEditable(true);
         cbbIMEI.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbbIMEI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IMEI 1", "IMEI 2", "IMEI 3", "IMEI 4" }));
+        cbbIMEI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbIMEIActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setText("Danh sách IMEI");
@@ -652,8 +666,25 @@ public class ViewADDSP extends javax.swing.JDialog {
         });
 
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit-regular-24.png"))); // NOI18N
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/trash-regular-24.png"))); // NOI18N
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
+
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/edit-alt-regular-24.png"))); // NOI18N
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -670,14 +701,16 @@ public class ViewADDSP extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -694,7 +727,8 @@ public class ViewADDSP extends javax.swing.JDialog {
                         .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -941,7 +975,8 @@ public class ViewADDSP extends javax.swing.JDialog {
         System.out.println(ae.themThongSo(tsAdd));
         doMoi = Integer.parseInt(txtDoMoi.getText());
         for (String string : imei) {
-            tsp.themCTDT(new ChiTietDienThoai(string, 1, doMoi, txtMoTa.getText(), ae.idQGD(qgd)));
+            String po = tsp.themCTDT(new ChiTietDienThoai(string, 1, doMoi, txtMoTa.getText(), ae.idQGD(qgd)));
+            JOptionPane.showMessageDialog(rootPane, po);
         }
     }//GEN-LAST:event_jButton15ActionPerformed
 
@@ -972,47 +1007,41 @@ public class ViewADDSP extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtDoMoiKeyReleased
 
+    private void cbbIMEIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbIMEIActionPerformed
+        if (cbbIMEI.getSelectedIndex() > -1) {
+            int o = cbbIMEI.getSelectedIndex();
+            String imei = sps.getImei(idSQGD).get(o);
+            txtDoMoi.setText(sps.moi(imei) + "");
+        }
+    }//GEN-LAST:event_cbbIMEIActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        if (cbbIMEI.getSelectedIndex() > -1) {
+            int o = cbbIMEI.getSelectedIndex();
+            String imei = sps.getImei(idSQGD).get(o);
+            JOptionPane.showMessageDialog(rootPane, ae.xoaCTDT(imei));
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "vui lòng chọn imei");
+        }
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+         Object[] option = {"Sửa Thông số", "Sửa giá bán"}; 
+        int port = JOptionPane.showOptionDialog(this, "Chọn loại sửa", null, 0, 1, null, option, EXIT_ON_CLOSE);
+        if ( port == 0) {
+           JOptionPane.showMessageDialog(rootPane, "Vui lòng xác nhận lại thông tin về hãng");
+        } else {
+           
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewADDSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewADDSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewADDSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewADDSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ViewADDSP dialog = new ViewADDSP(new javax.swing.JFrame(), true, "");
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel anhSanPham;
@@ -1030,6 +1059,7 @@ public class ViewADDSP extends javax.swing.JDialog {
     private javax.swing.JButton btnKetNoi8;
     private javax.swing.JButton btnKetNoi9;
     private javax.swing.JButton btnQuocGia;
+    private javax.swing.JButton btnSua;
     private javax.swing.JComboBox<String> cbbIMEI;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton14;

@@ -5,6 +5,7 @@
 package Service;
 
 import DomainModel.BoNho;
+import DomainModel.ChiTietDienThoai;
 import DomainModel.Cpu;
 import DomainModel.DienThoai;
 import DomainModel.Dong;
@@ -29,6 +30,8 @@ import java.util.List;
 public interface SanPhamServices {
 
     List<SanPhamViewModel> getAll();
+
+    List<SanPhamViewModel> getAlldx();
 
     List<SanPhamViewModel> getTimKiemSanPham(String tk);
 
@@ -122,6 +125,6 @@ public interface SanPhamServices {
 
     List<QuocGia> getQG();
 
-    int moi(String imei);
+    ChiTietDienThoai moi(String imei);
 
 }
