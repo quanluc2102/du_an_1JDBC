@@ -594,10 +594,13 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
         KhuyenMaiViewModel km = new KhuyenMaiViewModel(ma, ngayBDs, ngayKTs, giaGiam, donVi, moTa);
         JOptionPane.showMessageDialog(rootPane, service.add(km));
         list.removeAll(list);
-        service.upDateTrangThai();     
-        for (KhachHangViewModel khachHangViewModel : listKH) {
-            email.sendEmail1(khachHangViewModel.getEmail(), "Đã thêm mã KM mới","Mời bạn đến cửa hàng để nhận được nhiều ưu đãi");                
+        service.upDateTrangThai();
+        for (int i = 0; i < listKH.size(); i++) {
+             email.sendEmail1(listKH.get(index).getEmail(), "Đã thêm mã KM mới","Mời bạn đến cửa hàng để nhận được nhiều ưu đãi");  
         }
+      //  for (KhachHangViewModel khachHangViewModel : listKH) {
+       //     email.sendEmail1(khachHangViewModel.getEmail(), "Đã thêm mã KM mới","Mời bạn đến cửa hàng để nhận được nhiều ưu đãi");                
+      //  }
         service.getAll(list);
         showdataTable(list);
     }//GEN-LAST:event_btAddActionPerformed

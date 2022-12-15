@@ -3,12 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/haha/Desktop/ds/src/Service/ServiceImpl/SanPhamServicesImpl.java</file>
-            <file>file:/C:/Users/haha/Desktop/ds/src/ViewModel/SanPhamViewModel.java</file>
-            <file>file:/C:/Users/haha/Desktop/ds/src/Application/NewMain.java</file>
-            <file>file:/C:/Users/haha/Desktop/ds/src/Service/SanPhamServices.java</file>
-            <file>file:/C:/Users/haha/Desktop/ds/src/View/QuanLySanPhamView.java</file>
-            <file>file:/C:/Users/haha/Desktop/ds/src/Repository/SanPhamRespository.java</file>
+            <file>file:/D:/duan1/src/Ultilities/SQLServerConnection.java</file>
+            <file>file:/D:/duan1/src/Service/ServiceImpl/Email.java</file>
+            <file>file:/D:/duan1/src/Service/ServiceImpl/EmailimplGiang.java</file>
+            <file>file:/D:/duan1/src/Service/ServiceImpl/WriteWordHoaDon.java</file>
+            <file>file:/D:/duan1/src/Repository/KhuyenMaiResponsitory.java</file>
+            <file>file:/D:/duan1/src/Service/ServiceImpl/KhachHangServiceImpl.java</file>
+            <file>file:/D:/duan1/src/Service/KhuyenMaiService.java</file>
+            <file>file:/D:/duan1/src/Repository/KhachHangRepository.java</file>
+            <file>file:/D:/duan1/src/View/KhachHangViewQuanLy.java</file>
+            <file>file:/D:/duan1/src/View/ViewKhuyenMai.java</file>
+            <file>file:/D:/duan1/src/Service/ServiceImpl/Emailmpl.java</file>
+            <file>file:/D:/duan1/src/Service/EmailGiang.java</file>
+            <file>file:/D:/duan1/src/Service/ServiceImpl/LoginImpl.java</file>
+            <file>file:/D:/duan1/src/View/KhachHangViewNhanVien.java</file>
+            <file>file:/D:/duan1/src/ViewModel/KhachHangViewModel.java</file>
+            <file>file:/D:/duan1/src/ViewModel/KhuyenMaiViewModel.java</file>
+            <file>file:/D:/duan1/src/View/TrangChuQuanLyView.java</file>
+            <file>file:/D:/duan1/src/Service/ServiceImpl/KhuyenMaiServiceimpl.java</file>
         </group>
     </open-files>
 </project-private>
