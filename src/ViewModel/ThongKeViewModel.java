@@ -130,7 +130,7 @@ public class ThongKeViewModel {
     public Double ThanhTien() {
         Double tt;
 
-        return tt = giaBan - giaGiam;
+        return tt = giaBan - giaGiam();
 
     }
 

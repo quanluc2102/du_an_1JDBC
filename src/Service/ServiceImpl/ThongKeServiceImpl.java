@@ -54,9 +54,9 @@ public class ThongKeServiceImpl implements ThongKeService {
     }
     
     @Override
-    public List<ThongKeViewModel> searchThang(String Thang, List<ThongKeViewModel> listTKK) {
+    public List<ThongKeViewModel> searchThang(String Thang,String nam, List<ThongKeViewModel> listTKK) {
         List<ThongKeViewModel> listSearch = new ArrayList<>();
-        listSearch = thongKeRopo.searchThang(Thang);
+        listSearch = thongKeRopo.searchThang(Thang,nam);
         return listSearch;
     }
     

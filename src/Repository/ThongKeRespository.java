@@ -21,7 +21,6 @@ import java.util.List;
  */
 public class ThongKeRespository {
 
-    
     public List<HoaDon> searchTheoNgay(String ngay) {
         String query = "SELECT [id]\n"
                 + "      ,[ma_hoa_don]\n"
@@ -68,7 +67,7 @@ public class ThongKeRespository {
 
                 ThongKeViewModel thongKe = new ThongKeViewModel(rs.getString(1), rs.getString(2),
                         rs.getDate(3), rs.getDouble(4), rs.getDouble(5), rs.getDouble(6));
-             
+
                 listthongKe.add(thongKe);
 
             }
@@ -83,8 +82,8 @@ public class ThongKeRespository {
                 + "                FROM HoaDon JOIN HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
                 + "               join ChiTietDienThoai on  ChiTietDienThoai.IMEI =HoaDonChiTiet.IMEI \n"
                 + "                join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_dong = QuocGiaDong.id\n"
-                + "               join  KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id"
-                + "               where  Day(ngay_tao) like ?";
+                + "               join  KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id\n"
+                + " where ngay_tao  = ?";
         List<ThongKeViewModel> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, id);
@@ -102,16 +101,17 @@ public class ThongKeRespository {
         return list;
     }
 
-    public List<ThongKeViewModel> searchThang(String id) {
+    public List<ThongKeViewModel> searchThang(String thang, String nam) {
         String query = "SELECT ChiTietDienThoai.IMEI,ma_hoa_don,ngay_tao,gia_ban,gia_giam,gia_nhap\n"
                 + "                FROM HoaDon JOIN HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
                 + "               join ChiTietDienThoai on  ChiTietDienThoai.IMEI =HoaDonChiTiet.IMEI \n"
                 + "                join QuocGiaDong on ChiTietDienThoai.id_quoc_gia_dong = QuocGiaDong.id\n"
                 + "               join  KhuyenMai on HoaDon.id_khuyen_mai = KhuyenMai.id"
-                + "               where  MONTH(ngay_tao) like ?";
+                + "               where  MONTH(ngay_tao) like ? and year(ngay_tao) = ?";
         List<ThongKeViewModel> list = new ArrayList<>();
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, id);
+            ps.setObject(1, thang);
+            ps.setObject(2, nam);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -149,7 +149,8 @@ public class ThongKeRespository {
         }
         return list;
     }
-     public List<ThongKeViewModel> searchNTN(String id) {
+
+    public List<ThongKeViewModel> searchNTN(String id) {
         String query = "SELECT ChiTietDienThoai.IMEI,ma_hoa_don,ngay_tao,gia_ban,gia_giam,gia_nhap\n"
                 + "                FROM HoaDon JOIN HoaDonChiTiet on HoaDon.id = HoaDonChiTiet.id_hoa_don\n"
                 + "               join ChiTietDienThoai on  ChiTietDienThoai.IMEI =HoaDonChiTiet.IMEI \n"
@@ -172,4 +173,7 @@ public class ThongKeRespository {
         }
         return list;
     }
+//    public static void main(String[] args) {
+//      List <ThongKeViewModel> thongke = new ThongKeRespository().searchNgay("2022-11-11");
+//    }
 }

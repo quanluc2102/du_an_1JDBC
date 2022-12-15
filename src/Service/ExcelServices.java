@@ -5,6 +5,7 @@
 package Service;
 
 import DomainModel.ChucVu;
+import ViewModel.ThongKeViewModel;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public interface ExcelServices {
 
     List<String> getFile(String link);
 
-    String exFileexcel(String link, List<ChucVu> vc);
+   void xuatExecl( List<ThongKeViewModel> tkk, String file);
 
     String barCode(String nhap, String link);
 

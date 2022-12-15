@@ -25,7 +25,7 @@ public interface ThongKeService {
 
     List<ThongKeViewModel> searchNgay(String Ngay, List<ThongKeViewModel> listTK);
 
-    List<ThongKeViewModel> searchThang(String Thang, List<ThongKeViewModel> listTKK);
+    List<ThongKeViewModel> searchThang(String Thang,String nam, List<ThongKeViewModel> listTKK);
 
     List<ThongKeViewModel> searchNam(String Nam, List<ThongKeViewModel> listNam);
 
