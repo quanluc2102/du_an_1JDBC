@@ -441,6 +441,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
     private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
         // TODO add your handling code here:
+
         String nameFile = JOptionPane.showInputDialog("Đặt tên file: ");
         path = "C:\\Users\\PC\\Documents\\du_an_1JDBC\\source\\" + nameFile + ".xlsx";
 
@@ -450,21 +451,39 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
             if (ccbFilter.getSelectedIndex() == 0) {
                 sv.exportExcel(listGetAll, path);
+                JOptionPane.showMessageDialog(this, "Xuất file thành công");
             }
             if (ccbFilter.getSelectedIndex() == 1) {
                 sv.exportExcel(listSearch, path);
+                JOptionPane.showMessageDialog(this, "Xuất file thành công");
             }
             if (ccbFilter.getSelectedIndex() == 2) {
                 sv.exportExcel(listSearch, path);
+                JOptionPane.showMessageDialog(this, "Xuất file thành công");
             }
             if (ccbFilter.getSelectedIndex() == 3) {
                 sv.exportExcel(listSort, path);
+                JOptionPane.showMessageDialog(this, "Xuất file thành công");
             }
             if (ccbFilter.getSelectedIndex() == 4) {
                 sv.exportExcel(listSort, path);
+                JOptionPane.showMessageDialog(this, "Xuất file thành công");
             }
 
         }
+//        String nameFile = JOptionPane.showInputDialog("Đặt tên file: ");
+//        
+//        JFileChooser fileChooser = new JFileChooser();
+//        fileChooser.setCurrentDirectory(new File("."));
+//        int response = fileChooser.showSaveDialog(null);
+//        if (response == JFileChooser.APPROVE_OPTION) {
+//            File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+//            System.out.println(file);
+//            path = file + ".xlsx";
+//        }
+//        if(ccbFilter.getSelectedIndex() == 0){
+//            sv.exportExcel(listGetAll, path);
+//        }
 
 
     }//GEN-LAST:event_btnExcelActionPerformed
@@ -504,22 +523,27 @@ public class ViewHoaDon extends javax.swing.JFrame {
                     row = tlbHoaDon.getSelectedRow();
                     viewhd = listGetAll.get(row);
                     sv.exportWord(viewhd, path);
+                    JOptionPane.showMessageDialog(this, "Xuất file thành công");
                 } else if (ccbFilter.getSelectedIndex() == 1) {
                     row = tlbHoaDon.getSelectedRow();
                     viewhd = listSearch.get(row);
                     sv.exportWord(viewhd, path);
+                    JOptionPane.showMessageDialog(this, "Xuất file thành công");
                 } else if (ccbFilter.getSelectedIndex() == 2) {
                     row = tlbHoaDon.getSelectedRow();
                     viewhd = listSearch.get(row);
                     sv.exportWord(viewhd, path);
+                    JOptionPane.showMessageDialog(this, "Xuất file thành công");
                 } else if (ccbFilter.getSelectedIndex() == 3) {
                     row = tlbHoaDon.getSelectedRow();
                     viewhd = listSort.get(row);
                     sv.exportWord(viewhd, path);
+                    JOptionPane.showMessageDialog(this, "Xuất file thành công");
                 } else if (ccbFilter.getSelectedIndex() == 4) {
                     row = tlbHoaDon.getSelectedRow();
                     viewhd = listSort.get(row);
                     sv.exportWord(viewhd, path);
+                    JOptionPane.showMessageDialog(this, "Xuất file thành công");
                 }
             }
 

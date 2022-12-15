@@ -253,6 +253,7 @@ public class SendEmailHoaDon extends javax.swing.JFrame {
         if (a1 == true && a2 == true && a3 == true) {
             File filePatch = new File(file);
             new Email().sendEmail(userName, passWord, nguoiNhan, "Hóa Đơn Điện Tử", message, filePatch);
+            JOptionPane.showMessageDialog(this, "Gửi email thành công");
         }
 
     }//GEN-LAST:event_btnGuiEmailActionPerformed
