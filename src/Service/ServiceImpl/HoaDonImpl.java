@@ -12,6 +12,9 @@ import javax.swing.table.DefaultTableModel;
 import ViewModel.ViewModelHoaDon;
 import Service.HoaDonService;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 
 /**
  *
@@ -83,12 +86,12 @@ public class HoaDonImpl implements HoaDonService {
 
     @Override
     public void exportExcel(List<ViewModelHoaDon> list, String name) {
-        new WriteExcelHoaDon().exportExcel(list,name);
+        new WriteExcelHoaDon().exportExcel(list, name);
     }
 
     @Override
-    public void exportWord(ViewModelHoaDon hd,String file) {
-        new WriteWordHoaDon().exportWord(hd,file);
+    public void exportWord(ViewModelHoaDon hd, String file) {
+        new WriteWordHoaDon().exportWord(hd, file);
     }
 
     @Override
@@ -100,4 +103,5 @@ public class HoaDonImpl implements HoaDonService {
     public int getSLHoaDonChuaThanhToan() {
         return new HoaDonRespository().getHoaDonChuaThanhToan();
     }
+
 }

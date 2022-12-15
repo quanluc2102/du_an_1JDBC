@@ -208,7 +208,7 @@ public class SendEmailHoaDon extends javax.swing.JFrame {
         boolean a1 = false;
         boolean a2 = false;
         boolean a3 = false;
-        
+
         userName = txtTaiKhoan.getText();
         if (txtTaiKhoan.getText().isEmpty()) {
             tbTaiKhoan.setText("Email nguoi gui dang trong");
@@ -247,7 +247,7 @@ public class SendEmailHoaDon extends javax.swing.JFrame {
             tbEmailNguoiNhan.setForeground(Color.green);
             a3 = true;
         }
-        
+
         message = txtNoiDung.getText();
 
         if (a1 == true && a2 == true && a3 == true) {
