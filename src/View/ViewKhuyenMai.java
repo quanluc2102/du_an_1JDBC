@@ -121,8 +121,6 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
         btEdit = new javax.swing.JButton();
         btDelete = new javax.swing.JButton();
         btClear = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        cbbTrangThai = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         lbID = new javax.swing.JLabel();
         btExit = new javax.swing.JButton();
@@ -201,10 +199,6 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setText("Trạng thái");
-
-        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel9.setText("ID");
 
         btExit.setIcon(new javax.swing.ImageIcon("D:\\abcd\\src\\View\\Hinh\\Hinh\\Log out.png")); // NOI18N
@@ -258,9 +252,6 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -278,7 +269,6 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtMoTa, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lbID, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtMaKM, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -336,11 +326,7 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(radioTruTien)
                     .addComponent(radioPhanTram))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addGap(41, 41, 41)
+                .addGap(95, 95, 95)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btAdd)
                     .addComponent(btEdit)
@@ -596,10 +582,10 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
         list.removeAll(list);
         service.upDateTrangThai();
         for (int i = 0; i < listKH.size(); i++) {
-             email.sendEmail1(listKH.get(index).getEmail(), "Đã thêm mã KM mới","Mời bạn đến cửa hàng để nhận được nhiều ưu đãi");  
+            email.sendEmail1(listKH.get(index).getEmail(), "Đã thêm mã KM mới","Mời bạn đến cửa hàng để nhận được nhiều ưu đãi");  
         }
-      //  for (KhachHangViewModel khachHangViewModel : listKH) {
-       //     email.sendEmail1(khachHangViewModel.getEmail(), "Đã thêm mã KM mới","Mời bạn đến cửa hàng để nhận được nhiều ưu đãi");                
+      // for (KhachHangViewModel khachHangViewModel : listKH) {
+        //   email.sendEmail1(khachHangViewModel.getEmail(), "Đã thêm mã KM mới","Mời bạn đến cửa hàng để nhận được nhiều ưu đãi");                
       //  }
         service.getAll(list);
         showdataTable(list);
@@ -869,11 +855,9 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
     private javax.swing.JButton btTatCa;
     private javax.swing.JButton btnext;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cbbTrangThai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
