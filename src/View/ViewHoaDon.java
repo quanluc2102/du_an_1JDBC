@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author PC
  */
 public class ViewHoaDon extends javax.swing.JFrame {
-    
+
     private DefaultTableModel tableHoaDon = new DefaultTableModel();
     private DefaultTableModel tableSanPhamHD = new DefaultTableModel();
     private DefaultComboBoxModel ccbTim = new DefaultComboBoxModel();
@@ -37,6 +37,8 @@ public class ViewHoaDon extends javax.swing.JFrame {
     String path = "";
     int a;
     int b;
+    String srcFile = "";
+
     public ViewHoaDon() {
         initComponents();
         tlbHoaDon.setModel(tableHoaDon);
@@ -47,31 +49,31 @@ public class ViewHoaDon extends javax.swing.JFrame {
         ccb.add("Theo giá từ cao xuống thấp");
         ccb.add("Chưa Thanh Toán");
         ccb.add("Đã Thanh Toán");
-        
+
         for (String string : ccb) {
             ccbSapXep.addElement(string);
         }
         for (String string : ccbFind) {
             ccbTim.addElement(string);
         }
-        
+
         String[] heaaderHoaDon = {"Mã HD", "Tên NV", "Tên KH", "Ngày Tạo", "Mã Khuyến Mại", "Giá Giảm", "Tổng Tiền", "Trạng Thái", "Tổng số SP"};
         tableHoaDon.setColumnIdentifiers(heaaderHoaDon);
         String[] headerSanPham = {"Mã HD ", "Mã DT", "Tên SP", "Hãng", "Dòng", "Giá Bán", "Độ Mới", "Mô tả"};
         tableSanPhamHD.setColumnIdentifiers(headerSanPham);
-        
+
         listGetAll = sv.getAll(listGetAll);
         listSearch = sv.getAll(listGetAll);
         sv.showData(listGetAll, tableHoaDon);
-        
+
         a = sv.getSLHoaDonChuaThanhToan();
         b = sv.getSLHoaDonThanhToan();
-        
+
         labelHoaDonChuaThanhToan.setText(a + "");
         labelHoaDonDaThanhToan.setText(b + "");
-        
+
         int TrangThai = 0;
-        
+
     }
 
     /**
@@ -337,43 +339,43 @@ public class ViewHoaDon extends javax.swing.JFrame {
     private void tlbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tlbHoaDonMouseClicked
         // TODO add your handling code here:
         int row = 0;
-        
+
         if (ccbFilter.getSelectedIndex() == 0) {
             row = tlbHoaDon.getSelectedRow();
             String mahd = listGetAll.get(row).getMaHD();
             listGetSP = sv.getAllSp(mahd);
             sv.showData1(listGetSP, tableSanPhamHD);
-            
+
         }
         if (ccbFilter.getSelectedIndex() == 1) {
             row = tlbHoaDon.getSelectedRow();
             String mahd = listSearch.get(row).getMaHD();
             listGetSP = sv.getAllSp(mahd);
             sv.showData1(listGetSP, tableSanPhamHD);
-            
+
         }
         if (ccbFilter.getSelectedIndex() == 2) {
             row = tlbHoaDon.getSelectedRow();
             String mahd = listSearch.get(row).getMaHD();
             listGetSP = sv.getAllSp(mahd);
             sv.showData1(listGetSP, tableSanPhamHD);
-            
+
         }
         if (ccbFilter.getSelectedIndex() == 3) {
             row = tlbHoaDon.getSelectedRow();
             String mahd = listSort.get(row).getMaHD();
             listGetSP = sv.getAllSp(mahd);
             sv.showData1(listGetSP, tableSanPhamHD);
-            
+
         }
         if (ccbFilter.getSelectedIndex() == 4) {
             row = tlbHoaDon.getSelectedRow();
             String mahd = listSort.get(row).getMaHD();
             listGetSP = sv.getAllSp(mahd);
             sv.showData1(listGetSP, tableSanPhamHD);
-            
+
         }
-        
+
 
     }//GEN-LAST:event_tlbHoaDonMouseClicked
 
@@ -398,19 +400,19 @@ public class ViewHoaDon extends javax.swing.JFrame {
     private void ccbFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ccbFilterActionPerformed
         // TODO add your handling code here:
         String text = txtTimKiem.getText();
-        
+
         if (ccbFilter.getSelectedIndex() == 0) {
             sv.showData(listGetAll, tableHoaDon);
         } else if (!text.isEmpty()) {
             sv.showData(listSearch, tableHoaDon);
         }
-        
+
         if (ccbFilter.getSelectedIndex() == 1) {
             sv.giaCaoXuongThap(listSearch);
             sv.showData(listSearch, tableHoaDon);
         }
         if (ccbFilter.getSelectedIndex() == 2) {
-            
+
             sv.giaThapLenCao(listSearch);
             sv.showData(listSearch, tableHoaDon);
             ;
@@ -424,9 +426,9 @@ public class ViewHoaDon extends javax.swing.JFrame {
             }
             sv.showData(listSort, tableHoaDon);
         }
-        
+
         if (ccbFilter.getSelectedIndex() == 4) {
-            
+
             listSort.removeAll(listSort);
             for (ViewModelHoaDon viewModelHoaDon : listSearch) {
                 if (viewModelHoaDon.getTrangThai() == 1) {
@@ -441,11 +443,11 @@ public class ViewHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nameFile = JOptionPane.showInputDialog("Đặt tên file: ");
         path = "C:\\Users\\PC\\Documents\\du_an_1JDBC\\source\\" + nameFile + ".xlsx";
-        
+
         if (nameFile.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Hãy nhập tên cho file!!");
         } else {
-            
+
             if (ccbFilter.getSelectedIndex() == 0) {
                 sv.exportExcel(listGetAll, path);
             }
@@ -461,9 +463,9 @@ public class ViewHoaDon extends javax.swing.JFrame {
             if (ccbFilter.getSelectedIndex() == 4) {
                 sv.exportExcel(listSort, path);
             }
-            
+
         }
-        
+
 
     }//GEN-LAST:event_btnExcelActionPerformed
 
@@ -473,7 +475,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
         ViewModelHoaDon viewhd;
         String filePath = "";
         int trangthai = 0;
-        
+
         if (ccbFilter.getSelectedIndex() == 0) {
             row = tlbHoaDon.getSelectedRow();
             trangthai = listGetAll.get(row).getTrangThai();
@@ -490,10 +492,10 @@ public class ViewHoaDon extends javax.swing.JFrame {
             row = tlbHoaDon.getSelectedRow();
             trangthai = listSort.get(row).getTrangThai();
         }
-        
+
         if (trangthai != 0) {
             filePath = JOptionPane.showInputDialog("Nhập tên cho file: ");
-            
+
             if (filePath.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Hay nhap ten cho file!!!");
             } else {
@@ -520,7 +522,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
                     sv.exportWord(viewhd, path);
                 }
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "Hóa đơn chưa thanh toán không thể xuất file");
         }
@@ -532,7 +534,10 @@ public class ViewHoaDon extends javax.swing.JFrame {
 
     private void btnGuiEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiEmailActionPerformed
         // TODO add your handling code here:
-        
+        SendEmailHoaDon view = new SendEmailHoaDon();
+        this.dispose();
+        view.setVisible(true);
+
     }//GEN-LAST:event_btnGuiEmailActionPerformed
 
     /**
