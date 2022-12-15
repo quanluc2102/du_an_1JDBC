@@ -61,7 +61,7 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
         service.upDateTrangThai();
         service.getAll(list);
         listKH = service1.getAllKhachHang1();
-        //list = service.getAllDem(rowOffset);
+        list = service.getAllDem(rowOffset);
         System.out.println(rowOffset);
         o = service.getAllDem(rowOffset).size() / fetch;
 
