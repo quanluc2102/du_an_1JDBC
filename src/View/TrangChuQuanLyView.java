@@ -72,6 +72,9 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
 //        testData();
         txtCMND.setBackground(new java.awt.Color(0, 0, 4, 0));
+        getContentPane().setBackground(new Color(255, 255, 255));
+        combobox1.setSelectedIndex(-1);
+        cbbCV.setSelectedIndex(-1);
     }
 
     public void addCbb() {
@@ -330,8 +333,6 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         txtSDT = new javax.swing.JTextField();
         txtRPSDT = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        cbbCV = new javax.swing.JComboBox<>();
         cbbRPCV = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
@@ -367,7 +368,8 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         btnUpdate1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        combobox1 = new combobox.Combobox();
+        cbbCV = new combobox.Combobox();
         pnMenu = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         txtLayMa = new javax.swing.JLabel();
@@ -527,13 +529,13 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         jPanel4.add(txtRPNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 290, 20));
 
         jLabel7.setText("Địa chỉ");
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 37, -1));
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 37, -1));
 
         txtDiaChiNV.setBackground(new java.awt.Color(102, 102, 102));
         txtDiaChiNV.setForeground(new java.awt.Color(255, 255, 255));
         txtDiaChiNV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255), new java.awt.Color(204, 204, 204)));
-        jPanel4.add(txtDiaChiNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 660, 30));
-        jPanel4.add(txtRPDiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 641, 16));
+        jPanel4.add(txtDiaChiNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 660, 30));
+        jPanel4.add(txtRPDiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 641, 16));
 
         jLabel8.setText("Số điện thoại");
         jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, 74, -1));
@@ -543,36 +545,25 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
         txtSDT.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255), new java.awt.Color(204, 204, 204)));
         jPanel4.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, 221, 30));
         jPanel4.add(txtRPSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 220, 18));
-
-        jLabel9.setText("Chức vụ");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 74, 20));
-
-        cbbCV.setBackground(new java.awt.Color(102, 102, 102));
-        cbbCV.setEditable(true);
-        cbbCV.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        cbbCV.setForeground(new java.awt.Color(255, 255, 255));
-        cbbCV.setAutoscrolls(true);
-        cbbCV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), java.awt.Color.gray, new java.awt.Color(204, 204, 204)));
-        jPanel4.add(cbbCV, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 221, 30));
-        jPanel4.add(cbbRPCV, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 220, 16));
+        jPanel4.add(cbbRPCV, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 220, 20));
 
         jLabel10.setText("Email");
-        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, -1, -1));
+        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, -1, -1));
 
         txtEmail.setBackground(new java.awt.Color(102, 102, 102));
         txtEmail.setForeground(new java.awt.Color(255, 255, 255));
         txtEmail.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255), new java.awt.Color(204, 204, 204)));
-        jPanel4.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 221, 30));
-        jPanel4.add(txtRPEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 220, 22));
+        jPanel4.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 221, 30));
+        jPanel4.add(txtRPEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 150, 220, 22));
 
         jLabel11.setText("Mật khẩu");
-        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, 63, -1));
+        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 63, -1));
 
         txtPass.setBackground(new java.awt.Color(102, 102, 102));
         txtPass.setForeground(new java.awt.Color(255, 255, 255));
         txtPass.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jPanel4.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 220, 30));
-        jPanel4.add(txtRPMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 260, 221, 22));
+        jPanel4.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, 220, 30));
+        jPanel4.add(txtRPMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, 221, 22));
 
         jLabel14.setText("Trạng thái");
         jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 350, -1, -1));
@@ -781,8 +772,12 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
 
         jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 0, 40, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel4.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 452, 80, 30));
+        combobox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tên nhân viên", "Mã nhân viên ", "Số điện thoại", "CMND", " " }));
+        combobox1.setLabeText("Search");
+        jPanel4.add(combobox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, 180, 40));
+
+        cbbCV.setLabeText("Chức vụ");
+        jPanel4.add(cbbCV, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 180, 40));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 1410, 950));
 
@@ -1146,8 +1141,9 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpdate1;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cbbCV;
+    private combobox.Combobox cbbCV;
     private javax.swing.JLabel cbbRPCV;
+    private combobox.Combobox combobox1;
     private javax.swing.JLabel id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -1162,7 +1158,6 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1188,7 +1183,6 @@ public class TrangChuQuanLyView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
